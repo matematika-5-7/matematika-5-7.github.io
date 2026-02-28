@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Процент — обяснение и задачи | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f9ff;
+    --blue: #0ea5e9;
+    --blue-dark: #0369a1;
+    --blue-light: #e0f2fe;
+    --blue-mid: #7dd3fc;
+    --blue-soft: #bae6fd;
+    --yellow: #fbbf24;
+    --yellow-light: #fefce8;
+    --green: #16a34a;
+    --green-light: #f0fdf4;
+    --red: #dc2626;
+    --red-light: #fef2f2;
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --ink: #0c2d48;
+    --ink-light: #5a7a9a;
+    --border: #bae6fd;
+    --surface: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(240,249,255,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 3px solid var(--blue-soft);
+    padding: 0.8rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-size: 1.1rem; font-weight: 900; color: var(--ink); text-decoration: none; }
+  .nav-logo em { color: var(--blue); font-style: normal; }
+  .nav-back {
+    display: flex; align-items: center; gap: 0.4rem;
+    font-size: 0.95rem; font-weight: 800;
+    color: var(--blue-dark); text-decoration: none;
+    background: var(--blue-light); border: 2px solid var(--blue-soft);
+    padding: 0.4rem 1.1rem; border-radius: 20px; transition: all 0.2s;
+  }
+  .nav-back:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 60%, #7dd3fc 100%);
+    padding: 3rem 1.5rem 3.5rem;
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .hero::after {
+    content: '%';
+    position: absolute; right: 1rem; top: -2rem;
+    font-size: 16rem; font-weight: 900;
+    color: rgba(255,255,255,0.09); line-height: 1; pointer-events: none;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 44px;
+    background: var(--bg); clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-star { position: absolute; font-size: 1.5rem; opacity: 0.45; animation: floatUp 3.5s ease-in-out infinite; }
+  @keyframes floatUp { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-14px) rotate(12deg);} }
+  .hero-inner { position: relative; max-width: 700px; margin: 0 auto; }
+  .hero-crumb { font-size: 0.9rem; color: rgba(255,255,255,0.82); margin-bottom: 1rem; }
+  .hero-crumb a { color: rgba(255,255,255,0.82); text-decoration: none; }
+  .hero-crumb a:hover { color: #fff; text-decoration: underline; }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 900; color: #fff;
+    line-height: 1.1; margin-bottom: 0.75rem;
+    text-shadow: 0 3px 18px rgba(3,105,161,0.35);
+  }
+  .hero-desc { font-size: 1.1rem; color: rgba(255,255,255,0.93); max-width: 500px; margin: 0 auto 1.5rem; }
+  .hero-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; padding-bottom: 1.5rem; }
+  .chip {
+    background: rgba(255,255,255,0.22); border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 20px; padding: 0.3rem 1rem; font-size: 0.9rem; font-weight: 700; color: #fff;
+  }
+
+  /* CONTENT */
+  .content { max-width: 800px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
+
+  /* SECTION */
+  .sec-tag {
+    display: inline-block; background: var(--blue); color: #fff;
+    font-size: 0.78rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.28rem 0.9rem; border-radius: 8px; margin-bottom: 0.6rem;
+  }
+  .sec-title { font-size: 1.7rem; font-weight: 900; margin-bottom: 0.5rem; line-height: 1.2; }
+  .sec-desc { color: var(--ink-light); font-size: 1.05rem; margin-bottom: 1.5rem; }
+
+  /* DEF BOX */
+  .def-box {
+    background: linear-gradient(135deg, var(--blue-light), #ecfeff);
+    border: 3px solid var(--blue-soft); border-radius: 20px;
+    padding: 2rem 2rem 1.5rem; margin: 1.5rem 0; position: relative;
+  }
+  .def-label {
+    position: absolute; top: -1rem; left: 1.5rem;
+    background: var(--blue); color: #fff; font-size: 0.82rem; font-weight: 800;
+    padding: 0.3rem 0.95rem; border-radius: 10px;
+  }
+  .def-box p { font-size: 1.08rem; line-height: 1.85; }
+  .def-box strong { color: var(--blue-dark); font-weight: 900; }
+
+  /* FORMULA */
+  .formula-wrap { display: flex; justify-content: center; margin: 2rem 0; }
+  .formula {
+    background: var(--blue); color: #fff; border-radius: 20px;
+    padding: 1.5rem 2.5rem; text-align: center;
+    font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 800;
+    box-shadow: 0 8px 32px rgba(14,165,233,0.38);
+    font-family: 'Playfair Display', serif; font-style: italic;
+  }
+  .formula small {
+    display: block; font-family: 'Nunito', sans-serif; font-style: normal;
+    font-size: 0.82rem; color: rgba(255,255,255,0.75); margin-top: 0.4rem; font-weight: 600;
+  }
+
+  /* TABLE */
+  .tbl { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: 16px; overflow: hidden; margin: 1.5rem 0; font-size: 1rem; }
+  .tbl th { background: var(--blue); color: #fff; padding: 0.9rem 1rem; text-align: center; font-weight: 800; }
+  .tbl td { padding: 0.8rem 1rem; text-align: center; border-bottom: 1px solid var(--border); background: #fff; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl tr:nth-child(even) td { background: var(--blue-light); }
+  .mv { font-family: 'Playfair Display', serif; font-style: italic; color: var(--blue-dark); font-weight: 700; font-size: 1.05rem; }
+  .hl td { background: var(--yellow-light) !important; font-weight: 800; }
+
+  /* TIP */
+  .tip {
+    background: var(--yellow-light); border: 2px solid #fde68a;
+    border-radius: 16px; padding: 1.1rem 1.25rem; margin: 1.25rem 0;
+    display: flex; gap: 0.85rem; align-items: flex-start;
+  }
+  .tip-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .tip-text { font-size: 1rem; color: #713f12; line-height: 1.7; }
+  .tip-text strong { display: block; font-weight: 800; margin-bottom: 0.1rem; }
+
+  /* ═══════════════════════════════════
+     🖊️  АНИМИРАН МОЛИВ КАЛКУЛАТОР
+  ═══════════════════════════════════ */
+  .pencil-wrap {
+    background: #fff; border: 3px solid var(--blue-soft);
+    border-radius: 24px; overflow: hidden; margin: 2rem 0;
+    box-shadow: 0 8px 32px rgba(14,165,233,0.13);
+  }
+  .pencil-head {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+    padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .pencil-head-icon { font-size: 2.2rem; }
+  .pencil-head h4 { font-size: 1.15rem; font-weight: 900; color: #fff; }
+  .pencil-head p { font-size: 0.88rem; color: rgba(255,255,255,0.82); }
+
+  /* Task type selector */
+  .ptype-row {
+    display: flex; background: var(--blue-light);
+    border-bottom: 2px solid var(--border);
+  }
+  .ptype-btn {
+    flex: 1; padding: 0.9rem 0.5rem; text-align: center;
+    font-size: 0.9rem; font-weight: 800; color: var(--ink-light);
+    cursor: pointer; border: none; background: transparent;
+    font-family: 'Nunito', sans-serif;
+    border-bottom: 3px solid transparent; margin-bottom: -2px;
+    transition: all 0.18s;
+  }
+  .ptype-btn:hover { color: var(--blue-dark); }
+  .ptype-btn.on { color: var(--blue-dark); background: #fff; border-bottom-color: var(--blue); }
+
+  .ptype-panel { display: none; padding: 1.5rem; }
+  .ptype-panel.on { display: block; }
+
+  /* Input row */
+  .pc-fields { display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 1.25rem; }
+  .pc-field { display: flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
+  .pc-lbl { font-size: 1rem; font-weight: 700; min-width: 210px; }
+  .pc-inp {
+    width: 120px; padding: 0.65rem 0.85rem;
+    border: 2px solid var(--border); border-radius: 12px;
+    font-size: 1.1rem; font-family: 'Playfair Display', serif; font-style: italic;
+    text-align: center; color: var(--ink); background: var(--bg);
+    outline: none; transition: border 0.15s;
+  }
+  .pc-inp:focus { border-color: var(--blue); background: #fff; }
+  .pc-unit { font-size: 1rem; color: var(--ink-light); font-weight: 600; }
+
+  .solve-btn {
+    background: var(--blue); color: #fff; border: none; border-radius: 14px;
+    padding: 0.85rem 2rem; font-size: 1.05rem; font-weight: 800;
+    cursor: pointer; font-family: 'Nunito', sans-serif;
+    transition: all 0.2s; box-shadow: 0 4px 16px rgba(14,165,233,0.35);
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .solve-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+
+  /* Paper & pencil */
+  .paper {
+    position: relative; margin-top: 1.25rem;
+    background: #fffef5; border: 2px solid #fde68a;
+    border-radius: 16px; padding: 1.25rem 1.5rem 1.5rem;
+    min-height: 60px; display: none; overflow: hidden;
+  }
+  .paper.show { display: block; }
+
+  /* Lined paper */
+  .paper::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      transparent, transparent 40px, #dbeafe 40px, #dbeafe 41px
+    );
+    background-position: 0 18px;
+    pointer-events: none; border-radius: 14px;
+  }
+
+  /* Animated pencil */
+  .pencil-anim {
+    position: absolute;
+    font-size: 1.8rem;
+    transition: top 0.3s ease, left 0.4s linear;
+    z-index: 5; pointer-events: none;
+    transform: rotate(-20deg);
+    line-height: 1;
+  }
+
+  /* Lines of text */
+  .sol-lines { position: relative; z-index: 2; }
+  .sol-line {
+    display: block;
+    font-size: 1.05rem; font-weight: 600; line-height: 2.15;
+    color: var(--ink);
+    opacity: 0; transform: translateX(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .sol-line.show { opacity: 1; transform: none; }
+  .sol-line .hl  { font-family: 'Playfair Display', serif; font-style: italic; color: var(--blue-dark); font-weight: 700; }
+  .sol-line .num { color: var(--blue); font-weight: 900; }
+  .sol-line .res { color: var(--green); font-weight: 900; font-size: 1.1rem; }
+  .sol-line .chk { color: var(--green); }
+
+  /* Final answer bubble */
+  .sol-final {
+    margin-top: 1rem; padding: 0.85rem 1.1rem;
+    background: var(--green-light); border: 2px solid #86efac;
+    border-radius: 14px; font-size: 1.1rem; font-weight: 800; color: var(--green);
+    display: none; position: relative; z-index: 3;
+    animation: popIn 0.4s ease;
+  }
+  .sol-final.show { display: block; }
+  @keyframes popIn { 0%{transform:scale(0.8);opacity:0;} 70%{transform:scale(1.04);} 100%{transform:scale(1);opacity:1;} }
+
+  /* SIMULATOR */
+  .sim-box { background: #fff; border: 3px solid var(--blue-soft); border-radius: 24px; overflow: hidden; margin: 2rem 0; box-shadow: 0 6px 24px rgba(14,165,233,0.1); }
+  .sim-head { background: linear-gradient(135deg, var(--blue), #38bdf8); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 0.85rem; }
+  .sim-head-icon { font-size: 2rem; }
+  .sim-head h4 { font-size: 1.1rem; font-weight: 900; color: #fff; }
+  .sim-head p { font-size: 0.88rem; color: rgba(255,255,255,0.85); }
+  .sim-body { padding: 1.5rem; }
+  .sim-lbl { font-weight: 800; font-size: 1rem; margin-bottom: 0.75rem; }
+  .sim-products { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
+  .sim-prod { border: 3px solid var(--border); border-radius: 16px; padding: 0.9rem 0.6rem; text-align: center; cursor: pointer; transition: all 0.2s; background: var(--bg); user-select: none; }
+  .sim-prod:hover { border-color: var(--blue); transform: translateY(-2px); }
+  .sim-prod.sel { border-color: var(--blue); background: var(--blue-light); }
+  .sim-prod-icon { font-size: 2rem; display: block; margin-bottom: 0.3rem; }
+  .sim-prod-name { font-size: 0.85rem; font-weight: 700; display: block; }
+  .sim-prod-price { font-size: 1rem; font-weight: 900; color: var(--blue-dark); display: block; margin-top: 0.2rem; }
+  .disc-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .disc-lbl { font-weight: 800; font-size: 1rem; white-space: nowrap; }
+  .disc-btns { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .disc-btn { background: var(--blue-light); border: 2px solid var(--blue-soft); border-radius: 12px; padding: 0.5rem 1rem; font-size: 1rem; font-weight: 800; color: var(--ink); cursor: pointer; transition: all 0.18s; font-family: 'Nunito', sans-serif; }
+  .disc-btn:hover { background: var(--blue-soft); }
+  .disc-btn.on { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .sim-result { background: linear-gradient(135deg, var(--blue-light), #ecfeff); border: 2px solid var(--blue-soft); border-radius: 16px; padding: 1.2rem 1.5rem; }
+  .sim-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 1.05rem; }
+  .sim-row:last-of-type { border-top: 2px dashed var(--blue-soft); padding-top: 0.65rem; margin-top: 0.4rem; margin-bottom: 0; }
+  .sim-row-lbl { color: var(--ink-light); font-weight: 600; }
+  .sim-row-val { font-weight: 800; }
+  .val-green { color: var(--green); font-size: 1.1rem; }
+  .val-blue { color: var(--blue-dark); font-size: 1.35rem; }
+  .sim-calc-hint { font-size: 0.88rem; color: var(--ink-light); margin-top: 0.65rem; font-style: italic; }
+
+  /* EXAMPLES */
+  .example { background: #fff; border: 2px solid var(--border); border-radius: 18px; margin-bottom: 1rem; overflow: hidden; transition: box-shadow 0.2s; }
+  .example:hover { box-shadow: 0 4px 20px rgba(14,165,233,0.1); }
+  .ex-head { padding: 1.1rem 1.25rem; cursor: pointer; display: flex; align-items: center; gap: 0.85rem; user-select: none; }
+  .ex-num { width: 40px; height: 40px; border-radius: 12px; background: var(--blue); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.1rem; flex-shrink: 0; }
+  .ex-q { flex: 1; font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+  .ex-tag { font-size: 0.73rem; font-weight: 800; text-transform: uppercase; padding: 0.22rem 0.65rem; border-radius: 8px; flex-shrink: 0; }
+  .et-basic { background: var(--blue-light); color: var(--blue-dark); border: 1px solid var(--blue-soft); }
+  .et-real  { background: var(--green-light); color: var(--green); border: 1px solid #86efac; }
+  .et-find  { background: var(--purple-light); color: var(--purple); border: 1px solid #c4b5fd; }
+  .ex-arrow { font-size: 0.9rem; color: var(--blue); transition: transform 0.25s; flex-shrink: 0; }
+  .example.open .ex-arrow { transform: rotate(180deg); }
+  .ex-body { display: none; padding: 0 1.25rem 1.25rem; border-top: 2px dashed var(--border); }
+  .example.open .ex-body { display: block; }
+  .steps { display: flex; flex-direction: column; gap: 0.65rem; margin-top: 1rem; }
+  .step { display: flex; align-items: flex-start; gap: 0.85rem; background: var(--blue-light); border-radius: 12px; padding: 0.8rem 1rem; font-size: 1rem; }
+  .step-n { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 0.82rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+  .math { font-family: 'Playfair Display', serif; font-style: italic; color: var(--blue-dark); font-size: 1.05rem; }
+  .answer { background: var(--green-light); border: 2px solid #86efac; border-radius: 12px; padding: 0.8rem 1rem; font-size: 1rem; font-weight: 700; color: var(--green); margin-top: 0.8rem; }
+
+  /* TASKS */
+  .task-card { background: #fff; border: 2px solid var(--border); border-radius: 18px; padding: 1.5rem; margin-bottom: 1rem; transition: border-color 0.2s; }
+  .task-card:focus-within { border-color: var(--blue); }
+  .task-badge { display: inline-block; font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: var(--blue-light); color: var(--blue-dark); border: 1px solid var(--blue-soft); padding: 0.2rem 0.7rem; border-radius: 8px; margin-bottom: 0.65rem; }
+  .task-q { font-size: 1.05rem; font-weight: 700; line-height: 1.55; margin-bottom: 1rem; }
+  .task-row { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+  .task-inp { width: 130px; padding: 0.65rem 0.85rem; border: 2px solid var(--border); border-radius: 12px; font-size: 1.1rem; font-family: 'Playfair Display', serif; font-style: italic; text-align: center; color: var(--ink); background: var(--bg); outline: none; transition: border 0.15s; }
+  .task-inp:focus { border-color: var(--blue); background: #fff; }
+  .task-inp.ok { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .task-inp.no { border-color: var(--red); background: var(--red-light); color: var(--red); }
+  .task-unit { font-size: 1rem; color: var(--ink-light); font-weight: 600; }
+  .task-btn { background: var(--blue); color: #fff; border: none; border-radius: 12px; padding: 0.65rem 1.4rem; font-size: 1rem; font-weight: 800; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all 0.15s; box-shadow: 0 4px 14px rgba(14,165,233,0.28); }
+  .task-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+  .task-fb { margin-top: 0.65rem; padding: 0.65rem 1rem; border-radius: 10px; font-size: 1rem; font-weight: 700; display: none; }
+  .task-fb.show { display: block; }
+  .task-fb.ok { background: var(--green-light); color: var(--green); }
+  .task-fb.no { background: var(--red-light); color: var(--red); }
+
+  /* QUIZ */
+  .quiz { margin-top: 2.5rem; border-radius: 24px; overflow: hidden; box-shadow: 0 8px 28px rgba(14,165,233,0.15); }
+  .quiz-head { background: linear-gradient(135deg, var(--blue-dark), var(--blue)); padding: 1.2rem 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+  .quiz-head h3 { font-size: 1.2rem; font-weight: 900; color: #fff; }
+  .quiz-sc-box { background: rgba(255,255,255,0.22); border-radius: 12px; padding: 0.35rem 1rem; text-align: center; }
+  .quiz-sc { font-size: 1.5rem; font-weight: 900; color: #fff; display: block; }
+  .quiz-sc-lbl { font-size: 0.73rem; color: rgba(255,255,255,0.8); font-weight: 700; }
+  .quiz-body { background: #fff; border: 2px solid var(--blue-soft); border-top: none; padding: 1.5rem; }
+  .q-block { margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 2px dashed var(--border); }
+  .q-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .q-num { font-size: 0.76rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 0.4rem; }
+  .q-text { font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; line-height: 1.5; }
+  .q-opts { display: flex; flex-direction: column; gap: 0.55rem; }
+  .q-opt { background: var(--bg); border: 2px solid var(--border); border-radius: 12px; padding: 0.8rem 1.1rem; font-size: 1rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.8rem; transition: all 0.15s; user-select: none; }
+  .q-opt:hover:not(.done) { border-color: var(--blue); background: var(--blue-light); }
+  .q-opt.correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .q-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+  .q-opt.show-correct { background: var(--green-light); border-color: var(--green); color: var(--green); }
+  .q-letter { width: 34px; height: 34px; border-radius: 8px; background: var(--border); font-size: 0.88rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+  .q-opt.correct .q-letter, .q-opt.show-correct .q-letter { background: var(--green); color: #fff; }
+  .q-opt.wrong .q-letter { background: var(--red); color: #fff; }
+  .q-exp { margin-top: 0.7rem; padding: 0.7rem 1rem; background: var(--yellow-light); border: 1px solid #fde68a; border-radius: 10px; font-size: 0.95rem; color: #713f12; display: none; font-weight: 600; }
+  .q-exp.show { display: block; }
+
+  /* SUMMARY */
+  .summary { margin-top: 2.5rem; background: linear-gradient(135deg, var(--blue-dark), var(--blue)); border-radius: 24px; padding: 2rem; box-shadow: 0 8px 28px rgba(14,165,233,0.28); }
+  .summary h2 { font-size: 1.35rem; font-weight: 900; color: #fff; margin-bottom: 1.25rem; }
+  .sum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .sum-card { background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.28); border-radius: 16px; padding: 1rem 1.25rem; }
+  .sum-lbl { font-size: 0.76rem; font-weight: 800; color: rgba(255,255,255,0.75); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.35rem; }
+  .sum-formula { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.15rem; color: #fff; font-weight: 700; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* FOOTER */
+  footer { background: #0c2d48; color: rgba(255,255,255,0.5); padding: 2rem; text-align: center; font-size: 0.95rem; }
+  footer strong { color: rgba(255,255,255,0.9); }
+  .foot-nav { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+  .foot-nav a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .foot-nav a:hover { color: var(--blue-mid); }
+
+  @media (max-width: 580px) {
+    body { font-size: 17px; }
+    .sum-grid { grid-template-columns: 1fr; }
+    .sim-products { grid-template-columns: repeat(3,1fr); gap: 0.4rem; }
+    .task-row { flex-direction: column; align-items: flex-start; }
+    .ptype-row { flex-direction: column; }
+    .ptype-btn { text-align: left; padding: 0.65rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-star" style="left:7%;top:22%;animation-delay:0s">⭐</span>
+  <span class="hero-star" style="left:84%;top:18%;animation-delay:1.2s">✨</span>
+  <span class="hero-star" style="left:68%;top:58%;animation-delay:0.6s">🌟</span>
+  <span class="hero-star" style="left:18%;top:60%;animation-delay:1.8s">⭐</span>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › Процент
+    </div>
+    <h1>Процент (%)</h1>
+    <p class="hero-desc">Какво е процент, как се пресмята и как се прилага в реалния живот — с примери и интерактивни задачи.</p>
+    <div class="hero-chips">
+      <span class="chip">📖 Обяснение</span>
+      <span class="chip">🖊️ Анимиран молив</span>
+      <span class="chip">🛒 Симулатор</span>
+      <span class="chip">🎯 Тест</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ОПРЕДЕЛЕНИЕ -->
+  <div class="reveal" style="margin-top:1rem;">
+    <div class="sec-tag">Основни понятия</div>
+    <h2 class="sec-title">Какво е процент?</h2>
+    <p class="sec-desc">В живота много често се използва <strong>1/100 от дадено количество</strong>. Тя се назовава <strong>процент</strong>.</p>
+
+    <div class="def-box">
+      <div class="def-label">📌 Определение</div>
+      <p><strong>Процент</strong> е <strong>1/100 (едната стота)</strong> от дадено число.<br><br>
+         Записва се с <strong style="font-size:1.35rem;">%</strong><br><br>
+         Думата „процент" идва от латинското <em>„pro centum"</em> — означава <em>„от сто"</em>.</p>
+    </div>
+
+    <div class="formula-wrap">
+      <div class="formula">
+        p% от a = p/100 · a
+        <small>Основна формула за намиране на p% от число a</small>
+      </div>
+    </div>
+
+    <div class="tip reveal">
+      <div class="tip-icon">💡</div>
+      <div class="tip-text">
+        <strong>Как се чете и пресмята:</strong>
+        „25% от 80" = 25/100 · 80 = 1/4 · 80 = <strong>20</strong><br>
+        Замести процента с дроб — така е по-лесно!
+      </div>
+    </div>
+  </div>
+
+  <!-- ТАБЛИЦА -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">Преобразуване</div>
+    <h2 class="sec-title">Процент ↔ Дроб ↔ Десетична дроб</h2>
+    <p class="sec-desc">Запомни тези връзки — пресмятането ще стане много по-лесно!</p>
+    <table class="tbl">
+      <thead><tr><th>Процент</th><th>Обикновена дроб</th><th>Десетична дроб</th></tr></thead>
+      <tbody>
+        <tr><td>1%</td><td class="mv">1/100</td><td class="mv">0,01</td></tr>
+        <tr><td>5%</td><td class="mv">1/20</td><td class="mv">0,05</td></tr>
+        <tr class="hl"><td>10%</td><td class="mv">1/10</td><td class="mv">0,1</td></tr>
+        <tr><td>12%</td><td class="mv">3/25</td><td class="mv">0,12</td></tr>
+        <tr class="hl"><td>20%</td><td class="mv">1/5</td><td class="mv">0,2</td></tr>
+        <tr><td>25%</td><td class="mv">1/4</td><td class="mv">0,25</td></tr>
+        <tr class="hl"><td>50%</td><td class="mv">1/2</td><td class="mv">0,5</td></tr>
+        <tr><td>75%</td><td class="mv">3/4</td><td class="mv">0,75</td></tr>
+        <tr class="hl"><td>100%</td><td class="mv">1</td><td class="mv">1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 🖊️ АНИМИРАН МОЛИВ КАЛКУЛАТОР -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">🖊️ Анимиран молив</div>
+    <h2 class="sec-title">Реши задача — гледай как моливчето пише!</h2>
+    <p class="sec-desc">Въведи числата, избери вида задача и натисни „Реши". Моливчето ще изпише решението стъпка по стъпка!</p>
+
+    <div class="pencil-wrap">
+      <div class="pencil-head">
+        <div class="pencil-head-icon">🖊️</div>
+        <div>
+          <h4>Калкулатор с анимирано решение</h4>
+          <p>Три вида задачи — избери и въведи числата</p>
+        </div>
+      </div>
+
+      <!-- TYPE TABS -->
+      <div class="ptype-row">
+        <button class="ptype-btn on"  onclick="switchType(0)">📊 Намери p% от a</button>
+        <button class="ptype-btn"     onclick="switchType(1)">🔢 Намери числото</button>
+        <button class="ptype-btn"     onclick="switchType(2)">❓ Намери процента</button>
+      </div>
+
+      <!-- PANEL 0 -->
+      <div class="ptype-panel on" id="pp0">
+        <p style="font-size:0.95rem;color:var(--ink-light);margin-bottom:1rem;">
+          <strong>Задача:</strong> Дадено е число <em>a</em> и процент <em>p</em>. Намери <em>p%</em> от <em>a</em>.
+        </p>
+        <div class="pc-fields">
+          <div class="pc-field">
+            <span class="pc-lbl">Процент (p):</span>
+            <input type="number" class="pc-inp" id="f0p" placeholder="напр. 25" min="0" max="100">
+            <span class="pc-unit">%</span>
+          </div>
+          <div class="pc-field">
+            <span class="pc-lbl">Число (a):</span>
+            <input type="number" class="pc-inp" id="f0a" placeholder="напр. 80">
+          </div>
+        </div>
+        <button class="solve-btn" onclick="solve(0)">🖊️ Реши!</button>
+        <div class="paper" id="paper0">
+          <div class="pencil-anim" id="pen0">✏️</div>
+          <div class="sol-lines" id="lines0"></div>
+          <div class="sol-final" id="final0"></div>
+        </div>
+      </div>
+
+      <!-- PANEL 1 -->
+      <div class="ptype-panel" id="pp1">
+        <p style="font-size:0.95rem;color:var(--ink-light);margin-bottom:1rem;">
+          <strong>Задача:</strong> Дадени са процент <em>p</em> и резултатът <em>b</em>. Намери числото <em>x</em>, при което <em>p% от x = b</em>.
+        </p>
+        <div class="pc-fields">
+          <div class="pc-field">
+            <span class="pc-lbl">Процент (p):</span>
+            <input type="number" class="pc-inp" id="f1p" placeholder="напр. 40" min="0" max="100">
+            <span class="pc-unit">%</span>
+          </div>
+          <div class="pc-field">
+            <span class="pc-lbl">Резултатът е (b):</span>
+            <input type="number" class="pc-inp" id="f1b" placeholder="напр. 16">
+          </div>
+        </div>
+        <button class="solve-btn" onclick="solve(1)">🖊️ Реши!</button>
+        <div class="paper" id="paper1">
+          <div class="pencil-anim" id="pen1">✏️</div>
+          <div class="sol-lines" id="lines1"></div>
+          <div class="sol-final" id="final1"></div>
+        </div>
+      </div>
+
+      <!-- PANEL 2 -->
+      <div class="ptype-panel" id="pp2">
+        <p style="font-size:0.95rem;color:var(--ink-light);margin-bottom:1rem;">
+          <strong>Задача:</strong> Дадени са цялото число <em>a</em> и частта <em>b</em>. Намери колко процента е <em>b</em> от <em>a</em>.
+        </p>
+        <div class="pc-fields">
+          <div class="pc-field">
+            <span class="pc-lbl">Цялото число (a):</span>
+            <input type="number" class="pc-inp" id="f2a" placeholder="напр. 40">
+          </div>
+          <div class="pc-field">
+            <span class="pc-lbl">Частта (b):</span>
+            <input type="number" class="pc-inp" id="f2b" placeholder="напр. 10">
+          </div>
+        </div>
+        <button class="solve-btn" onclick="solve(2)">🖊️ Реши!</button>
+        <div class="paper" id="paper2">
+          <div class="pencil-anim" id="pen2">✏️</div>
+          <div class="sol-lines" id="lines2"></div>
+          <div class="sol-final" id="final2"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- СИМУЛАТОР -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">🛒 Интерактивно</div>
+    <h2 class="sec-title">Симулатор на намаление</h2>
+    <p class="sec-desc">Избери продукт и намаление — виж веднага колко спестяваш!</p>
+
+    <div class="sim-box">
+      <div class="sim-head">
+        <div class="sim-head-icon">🏪</div>
+        <div>
+          <h4>Магазин за намаления</h4>
+          <p>Избери продукт и процент — виж изчислението!</p>
+        </div>
+      </div>
+      <div class="sim-body">
+        <p class="sim-lbl">1️⃣ Избери продукт:</p>
+        <div class="sim-products">
+          <div class="sim-prod sel" onclick="selProd(this,'Маратонки',120)">
+            <span class="sim-prod-icon">👟</span>
+            <span class="sim-prod-name">Маратонки</span>
+            <span class="sim-prod-price">120 €</span>
+          </div>
+          <div class="sim-prod" onclick="selProd(this,'Раница',85)">
+            <span class="sim-prod-icon">🎒</span>
+            <span class="sim-prod-name">Раница</span>
+            <span class="sim-prod-price">85 €</span>
+          </div>
+          <div class="sim-prod" onclick="selProd(this,'Книга',24)">
+            <span class="sim-prod-icon">📚</span>
+            <span class="sim-prod-name">Книга</span>
+            <span class="sim-prod-price">24 €</span>
+          </div>
+          <div class="sim-prod" onclick="selProd(this,'Слушалки',200)">
+            <span class="sim-prod-icon">🎧</span>
+            <span class="sim-prod-name">Слушалки</span>
+            <span class="sim-prod-price">200 €</span>
+          </div>
+          <div class="sim-prod" onclick="selProd(this,'Топка',35)">
+            <span class="sim-prod-icon">⚽</span>
+            <span class="sim-prod-name">Топка</span>
+            <span class="sim-prod-price">35 €</span>
+          </div>
+          <div class="sim-prod" onclick="selProd(this,'Пастели',48)">
+            <span class="sim-prod-icon">🎨</span>
+            <span class="sim-prod-name">Пастели</span>
+            <span class="sim-prod-price">48 €</span>
+          </div>
+        </div>
+        <div class="disc-row">
+          <span class="disc-lbl">2️⃣ Намаление:</span>
+          <div class="disc-btns">
+            <button class="disc-btn on" onclick="selDisc(this,10)">10%</button>
+            <button class="disc-btn"    onclick="selDisc(this,15)">15%</button>
+            <button class="disc-btn"    onclick="selDisc(this,20)">20%</button>
+            <button class="disc-btn"    onclick="selDisc(this,25)">25%</button>
+            <button class="disc-btn"    onclick="selDisc(this,30)">30%</button>
+            <button class="disc-btn"    onclick="selDisc(this,50)">50%</button>
+          </div>
+        </div>
+        <div class="sim-result" id="simRes">
+          <div class="sim-row"><span class="sim-row-lbl">Оригинална цена:</span><span class="sim-row-val" id="sOrig">120 €</span></div>
+          <div class="sim-row"><span class="sim-row-lbl">Намалението (спестяваш):</span><span class="sim-row-val val-green" id="sSave">− 12 €</span></div>
+          <div class="sim-row"><span class="sim-row-lbl">🎉 Новата цена:</span><span class="sim-row-val val-blue" id="sNew">108 €</span></div>
+          <div class="sim-calc-hint" id="sCalc">Изчисление: 10% от 120 = 10/100 · 120 = 12 € → 120 − 12 = 108 €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РЕШЕНИ ПРИМЕРИ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">Решени примери</div>
+    <h2 class="sec-title">Основни видове задачи</h2>
+    <p class="sec-desc">Кликни на задачата за да видиш пълното решение стъпка по стъпка.</p>
+
+    <div class="example reveal">
+      <div class="ex-head" onclick="togEx(this)">
+        <div class="ex-num">1</div>
+        <div class="ex-q">Намерете: 20% от 45 · 25% от 80 · 100% от 63</div>
+        <span class="ex-tag et-basic">Основна</span>
+        <span class="ex-arrow">▼</span>
+      </div>
+      <div class="ex-body">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div>20% от 45 = <span class="math">20/100 · 45 = 1/5 · 45 = <strong>9</strong></span></div></div>
+          <div class="step"><div class="step-n">2</div><div>25% от 80 = <span class="math">25/100 · 80 = 1/4 · 80 = <strong>20</strong></span></div></div>
+          <div class="step"><div class="step-n">3</div><div>100% от 63 = <span class="math">100/100 · 63 = 1 · 63 = <strong>63</strong></span></div></div>
+        </div>
+        <div class="answer">✅ Отговори: 9 | 20 | 63. 100% от число = самото число!</div>
+      </div>
+    </div>
+
+    <div class="example reveal">
+      <div class="ex-head" onclick="togEx(this)">
+        <div class="ex-num">2</div>
+        <div class="ex-q">Маратонките от 48 € са намалени с 25%. Колко струват сега?</div>
+        <span class="ex-tag et-real">Практическа</span>
+        <span class="ex-arrow">▼</span>
+      </div>
+      <div class="ex-body">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div>Намалението: <span class="math">25% от 48 = 1/4 · 48 = 12 €</span></div></div>
+          <div class="step"><div class="step-n">2</div><div>Новата цена: <span class="math">48 − 12 = <strong>36 €</strong></span></div></div>
+        </div>
+        <div class="answer">✅ Маратонките сега струват 36 €.</div>
+      </div>
+    </div>
+
+    <div class="example reveal">
+      <div class="ex-head" onclick="togEx(this)">
+        <div class="ex-num">3</div>
+        <div class="ex-q">2% от кое число е 86?</div>
+        <span class="ex-tag et-find">Намери числото</span>
+        <span class="ex-arrow">▼</span>
+      </div>
+      <div class="ex-body">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div>Нека x е търсеното число: <span class="math">2/100 · x = 86</span></div></div>
+          <div class="step"><div class="step-n">2</div><div><span class="math">x = 86 · 100 ÷ 2 = 86 · 50 = <strong>4 300</strong></span></div></div>
+          <div class="step"><div class="step-n">3</div><div>Проверка: <span class="math">2% от 4300 = 0,02 · 4300 = 86 ✓</span></div></div>
+        </div>
+        <div class="answer">✅ Търсеното число е 4 300.</div>
+      </div>
+    </div>
+
+    <div class="example reveal">
+      <div class="ex-head" onclick="togEx(this)">
+        <div class="ex-num">4</div>
+        <div class="ex-q">Колко процента от 10 € са 4 €?</div>
+        <span class="ex-tag et-find">Намери %</span>
+        <span class="ex-arrow">▼</span>
+      </div>
+      <div class="ex-body">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div>Нека p е търсеният процент: <span class="math">p/100 · 10 = 4</span></div></div>
+          <div class="step"><div class="step-n">2</div><div><span class="math">p = 4 · 100 ÷ 10 = <strong>40</strong></span></div></div>
+        </div>
+        <div class="answer">✅ 4 € са 40% от 10 €.</div>
+      </div>
+    </div>
+
+    <div class="example reveal">
+      <div class="ex-head" onclick="togEx(this)">
+        <div class="ex-num">5</div>
+        <div class="ex-q">Цената на кола е 48 000 €, от тях 8 000 € са данък. Какъв процент е данъкът?</div>
+        <span class="ex-tag et-real">Практическа</span>
+        <span class="ex-arrow">▼</span>
+      </div>
+      <div class="ex-body">
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div>Цената без данък: <span class="math">48 000 − 8 000 = 40 000 €</span></div></div>
+          <div class="step"><div class="step-n">2</div><div><span class="math">p/100 · 40 000 = 8 000 → p = 8000 · 100 ÷ 40000 = <strong>20</strong></span></div></div>
+        </div>
+        <div class="answer">✅ Данъкът е 20% от цената без данък.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ЗАДАЧИ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">Реши сам</div>
+    <h2 class="sec-title">Въведи своя отговор</h2>
+    <p class="sec-desc">Пресметни и напиши резултата. Ще разбереш веднага дали е верен!</p>
+
+    <div class="task-card reveal">
+      <div class="task-badge">Задача 1 · Основна</div>
+      <div class="task-q">Намерете 5% от 560.</div>
+      <div class="task-row">
+        <input type="number" class="task-inp" id="t1" placeholder="?">
+        <button class="task-btn" onclick="chk('t1',28,'fb1','5/100 · 560 = 28')">Провери ✓</button>
+      </div>
+      <div class="task-fb" id="fb1"></div>
+    </div>
+
+    <div class="task-card reveal">
+      <div class="task-badge">Задача 2 · Намаление</div>
+      <div class="task-q">Яке струва 250 € и е намалено с 12%. Каква е новата цена?</div>
+      <div class="task-row">
+        <input type="number" class="task-inp" id="t2" placeholder="?">
+        <span class="task-unit">€</span>
+        <button class="task-btn" onclick="chk('t2',220,'fb2','12% от 250 = 30 → 250 − 30 = 220 €')">Провери ✓</button>
+      </div>
+      <div class="task-fb" id="fb2"></div>
+    </div>
+
+    <div class="task-card reveal">
+      <div class="task-badge">Задача 3 · Намери числото</div>
+      <div class="task-q">80% от дадено число е 120. Намерете числото.</div>
+      <div class="task-row">
+        <input type="number" class="task-inp" id="t3" placeholder="?">
+        <button class="task-btn" onclick="chk('t3',150,'fb3','80/100 · x = 120 → x = 120 · 100 ÷ 80 = 150')">Провери ✓</button>
+      </div>
+      <div class="task-fb" id="fb3"></div>
+    </div>
+
+    <div class="task-card reveal">
+      <div class="task-badge">Задача 4 · Намери процента</div>
+      <div class="task-q">Колко процента от 25 са 5?</div>
+      <div class="task-row">
+        <input type="number" class="task-inp" id="t4" placeholder="?">
+        <span class="task-unit">%</span>
+        <button class="task-btn" onclick="chk('t4',20,'fb4','p/100 · 25 = 5 → p = 5 · 100 ÷ 25 = 20%')">Провери ✓</button>
+      </div>
+      <div class="task-fb" id="fb4"></div>
+    </div>
+
+    <div class="task-card reveal">
+      <div class="task-badge">Задача 5 · Увеличение</div>
+      <div class="task-q">Ако увеличим 60 с 45%, колко получаваме?</div>
+      <div class="task-row">
+        <input type="number" class="task-inp" id="t5" placeholder="?">
+        <button class="task-btn" onclick="chk('t5',87,'fb5','45% от 60 = 27 → 60 + 27 = 87')">Провери ✓</button>
+      </div>
+      <div class="task-fb" id="fb5"></div>
+    </div>
+  </div>
+
+  <!-- ТЕСТ -->
+  <div class="quiz reveal">
+    <div class="quiz-head">
+      <h3>🎯 Тест — Процент</h3>
+      <div class="quiz-sc-box">
+        <span class="quiz-sc" id="qSc">0/5</span>
+        <span class="quiz-sc-lbl">точки</span>
+      </div>
+    </div>
+    <div class="quiz-body">
+
+      <div class="q-block" id="q1">
+        <div class="q-num">Въпрос 1</div>
+        <div class="q-text">12% е равно на:</div>
+        <div class="q-opts">
+          <div class="q-opt" onclick="qa(this,'q1','A','A','12% = 12/100 = 0,12')"><div class="q-letter">А</div>0,12</div>
+          <div class="q-opt" onclick="qa(this,'q1','B','A','12% = 12/100 = 0,12')"><div class="q-letter">Б</div>1,2</div>
+          <div class="q-opt" onclick="qa(this,'q1','C','A','12% = 12/100 = 0,12')"><div class="q-letter">В</div>12</div>
+          <div class="q-opt" onclick="qa(this,'q1','D','A','12% = 12/100 = 0,12')"><div class="q-letter">Г</div>0,012</div>
+        </div>
+        <div class="q-exp" id="e_q1"></div>
+      </div>
+
+      <div class="q-block" id="q2">
+        <div class="q-num">Въпрос 2</div>
+        <div class="q-text">25% от 80 е равно на:</div>
+        <div class="q-opts">
+          <div class="q-opt" onclick="qa(this,'q2','A','B','25% = 1/4, затова 1/4 · 80 = 20')"><div class="q-letter">А</div>40</div>
+          <div class="q-opt" onclick="qa(this,'q2','B','B','25% = 1/4, затова 1/4 · 80 = 20')"><div class="q-letter">Б</div>20</div>
+          <div class="q-opt" onclick="qa(this,'q2','C','B','25% = 1/4, затова 1/4 · 80 = 20')"><div class="q-letter">В</div>25</div>
+          <div class="q-opt" onclick="qa(this,'q2','D','B','25% = 1/4, затова 1/4 · 80 = 20')"><div class="q-letter">Г</div>8</div>
+        </div>
+        <div class="q-exp" id="e_q2"></div>
+      </div>
+
+      <div class="q-block" id="q3">
+        <div class="q-num">Въпрос 3</div>
+        <div class="q-text">40% от дадено число са 16. Числото е:</div>
+        <div class="q-opts">
+          <div class="q-opt" onclick="qa(this,'q3','A','C','40/100 · x = 16 → x = 16·100÷40 = 40')"><div class="q-letter">А</div>6,4</div>
+          <div class="q-opt" onclick="qa(this,'q3','B','C','40/100 · x = 16 → x = 16·100÷40 = 40')"><div class="q-letter">Б</div>32</div>
+          <div class="q-opt" onclick="qa(this,'q3','C','C','40/100 · x = 16 → x = 16·100÷40 = 40')"><div class="q-letter">В</div>40</div>
+          <div class="q-opt" onclick="qa(this,'q3','D','C','40/100 · x = 16 → x = 16·100÷40 = 40')"><div class="q-letter">Г</div>56</div>
+        </div>
+        <div class="q-exp" id="e_q3"></div>
+      </div>
+
+      <div class="q-block" id="q4">
+        <div class="q-num">Въпрос 4</div>
+        <div class="q-text">Колко процента от 50 са 10?</div>
+        <div class="q-opts">
+          <div class="q-opt" onclick="qa(this,'q4','A','B','p/100 · 50 = 10 → p = 10·100÷50 = 20%')"><div class="q-letter">А</div>5%</div>
+          <div class="q-opt" onclick="qa(this,'q4','B','B','p/100 · 50 = 10 → p = 10·100÷50 = 20%')"><div class="q-letter">Б</div>20%</div>
+          <div class="q-opt" onclick="qa(this,'q4','C','B','p/100 · 50 = 10 → p = 10·100÷50 = 20%')"><div class="q-letter">В</div>40%</div>
+          <div class="q-opt" onclick="qa(this,'q4','D','B','p/100 · 50 = 10 → p = 10·100÷50 = 20%')"><div class="q-letter">Г</div>10%</div>
+        </div>
+        <div class="q-exp" id="e_q4"></div>
+      </div>
+
+      <div class="q-block" id="q5">
+        <div class="q-num">Въпрос 5</div>
+        <div class="q-text">Цена от 200 € е намалена с 15%. Новата цена е:</div>
+        <div class="q-opts">
+          <div class="q-opt" onclick="qa(this,'q5','A','C','15% от 200 = 30 → 200 − 30 = 170 €')"><div class="q-letter">А</div>185 €</div>
+          <div class="q-opt" onclick="qa(this,'q5','B','C','15% от 200 = 30 → 200 − 30 = 170 €')"><div class="q-letter">Б</div>230 €</div>
+          <div class="q-opt" onclick="qa(this,'q5','C','C','15% от 200 = 30 → 200 − 30 = 170 €')"><div class="q-letter">В</div>170 €</div>
+          <div class="q-opt" onclick="qa(this,'q5','D','C','15% от 200 = 30 → 200 − 30 = 170 €')"><div class="q-letter">Г</div>130 €</div>
+        </div>
+        <div class="q-exp" id="e_q5"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- РЕЗЮМЕ -->
+  <div class="summary reveal">
+    <h2>📌 Запомни основното</h2>
+    <div class="sum-grid">
+      <div class="sum-card">
+        <div class="sum-lbl">Намиране на p% от a</div>
+        <div class="sum-formula">p/100 · a</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-lbl">Намиране на числото</div>
+        <div class="sum-formula">x = b ÷ (p/100)</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-lbl">Намиране на процента</div>
+        <div class="sum-formula">p = b/a · 100</div>
+      </div>
+      <div class="sum-card">
+        <div class="sum-lbl">Намаление с p%</div>
+        <div class="sum-formula">a − p/100 · a</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="klas-6.html">6 клас</a>
+    <a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ── GLOBALS ──
+var prod      = { name:'Маратонки', price:120 };
+var disc      = 10;
+var qScore    = 0;
+var qAnswers  = {};
+
+// ── TYPE TABS ──
+function switchType(idx) {
+  ['pp0','pp1','pp2'].forEach(function(id, i) {
+    document.getElementById(id).classList.toggle('on', i === idx);
+  });
+  document.querySelectorAll('.ptype-btn').forEach(function(b, i) {
+    b.classList.toggle('on', i === idx);
+  });
+}
+
+// ── HELPERS ──
+function r2(n) { return Math.round(n * 100) / 100; }
+
+function niceFrac(p) {
+  var map = {1:'1/100',2:'1/50',4:'1/25',5:'1/20',10:'1/10',12:'3/25',20:'1/5',25:'1/4',50:'1/2',75:'3/4',100:'1'};
+  return map[p] || null;
+}
+
+// Build solution steps per type
+function buildSteps(type) {
+  if (type === 0) {
+    var p = parseFloat(document.getElementById('f0p').value);
+    var a = parseFloat(document.getElementById('f0a').value);
+    if (isNaN(p)||isNaN(a)) return null;
+    var res  = r2(p / 100 * a);
+    var frac = niceFrac(p);
+    var rows = [
+      '📝 Задача: Намери ' + p + '% от ' + a,
+      '① Заместваме: ' + p + '% от ' + a + ' = ' + p + '/100 · ' + a,
+      frac
+        ? '② Опростяваме дробта: ' + p + '/100 = ' + frac
+        : '② Пресмятаме: ' + p + '/100 · ' + a + ' = ' + res,
+      frac
+        ? '③ Умножаваме: ' + frac + ' · ' + a + ' = ' + res
+        : '③ Готово!',
+      '✓ Проверка: ' + p + '% от ' + a + ' = ' + res
+    ];
+    if (!frac) rows.splice(3,1);
+    return { rows: rows, answer: '🎉 Отговор: ' + p + '% от ' + a + ' = ' + res };
+  }
+
+  if (type === 1) {
+    var p = parseFloat(document.getElementById('f1p').value);
+    var b = parseFloat(document.getElementById('f1b').value);
+    if (isNaN(p)||isNaN(b)||p===0) return null;
+    var x   = r2(b * 100 / p);
+    var mul = r2(100 / p);
+    return {
+      rows: [
+        '📝 Задача: ' + p + '% от кое число е ' + b + '?',
+        '① Нека търсеното число е x.',
+        '② Уравнение: ' + p + '/100 · x = ' + b,
+        '③ Умножаваме по 100/' + p + ' (двете страни):',
+        '   x = ' + b + ' · 100 ÷ ' + p,
+        '   x = ' + b + ' · ' + mul + ' = ' + x,
+        '✓ Проверка: ' + p + '% от ' + x + ' = ' + r2(p/100*x) + ' = ' + b + ' ✓'
+      ],
+      answer: '🎉 Отговор: Търсеното число е ' + x
+    };
+  }
+
+  if (type === 2) {
+    var a = parseFloat(document.getElementById('f2a').value);
+    var b = parseFloat(document.getElementById('f2b').value);
+    if (isNaN(a)||isNaN(b)||a===0) return null;
+    var pct = r2(b / a * 100);
+    return {
+      rows: [
+        '📝 Задача: Колко % от ' + a + ' са ' + b + '?',
+        '① Нека търсеният процент е p.',
+        '② Уравнение: p/100 · ' + a + ' = ' + b,
+        '③ Умножаваме по 100 и делим на ' + a + ':',
+        '   p = ' + b + ' · 100 ÷ ' + a,
+        '   p = ' + b*100 + ' ÷ ' + a + ' = ' + pct,
+        '✓ Проверка: ' + pct + '% от ' + a + ' = ' + r2(pct/100*a) + ' = ' + b + ' ✓'
+      ],
+      answer: '🎉 Отговор: ' + b + ' са ' + pct + '% от ' + a
+    };
+  }
+  return null;
+}
+
+// 🖊️ Main solve + animation
+function solve(type) {
+  var data = buildSteps(type);
+
+  var paperId  = 'paper'  + type;
+  var linesId  = 'lines'  + type;
+  var finalId  = 'final'  + type;
+  var penId    = 'pen'    + type;
+
+  var paper  = document.getElementById(paperId);
+  var linesEl= document.getElementById(linesId);
+  var finalEl= document.getElementById(finalId);
+  var penEl  = document.getElementById(penId);
+
+  // Reset
+  paper.classList.add('show');
+  linesEl.innerHTML = '';
+  finalEl.className = 'sol-final';
+  finalEl.textContent = '';
+  penEl.style.top  = '6px';
+  penEl.style.left = '0px';
+
+  if (!data) {
+    var err = document.createElement('span');
+    err.className = 'sol-line show';
+    err.style.color = '#dc2626';
+    err.textContent = '⚠️ Въведи числата!';
+    linesEl.appendChild(err);
+    return;
+  }
+
+  // Create line spans
+  var lineEls = [];
+  data.rows.forEach(function(txt) {
+    var s = document.createElement('span');
+    s.className = 'sol-line';
+    s.textContent = txt;
+    linesEl.appendChild(s);
+    lineEls.push(s);
+  });
+
+  var lineH = 41; // px per line (matches line-height 2.15 × 19px)
+
+  // Animate each line
+  lineEls.forEach(function(el, i) {
+    setTimeout(function() {
+      // Move pencil to this line
+      var topPx  = i * lineH + 4;
+      penEl.style.top  = topPx + 'px';
+      penEl.style.left = '4px';
+
+      // Slide pencil across the line
+      var start = null;
+      var dur   = 550;
+      var maxL  = 220;
+      function slide(ts) {
+        if (!start) start = ts;
+        var prog = Math.min((ts - start) / dur, 1);
+        penEl.style.left = (prog * maxL) + 'px';
+        if (prog < 1) requestAnimationFrame(slide);
+      }
+      requestAnimationFrame(slide);
+
+      // Reveal text slightly after pencil starts
+      setTimeout(function() { el.classList.add('show'); }, 120);
+
+    }, i * 750);
+  });
+
+  // Final answer
+  setTimeout(function() {
+    penEl.style.left = '-80px'; // hide pencil
+    finalEl.textContent = data.answer;
+    finalEl.className = 'sol-final show';
+  }, lineEls.length * 750 + 500);
+}
+
+// ── EXAMPLES ──
+function togEx(hdr) { hdr.parentElement.classList.toggle('open'); }
+
+// ── SIMULATOR ──
+function selProd(el, name, price) {
+  document.querySelectorAll('.sim-prod').forEach(function(p){ p.classList.remove('sel'); });
+  el.classList.add('sel');
+  prod = { name:name, price:price };
+  updateSim();
+}
+function selDisc(el, pct) {
+  document.querySelectorAll('.disc-btn').forEach(function(b){ b.classList.remove('on'); });
+  el.classList.add('on');
+  disc = pct;
+  updateSim();
+}
+function updateSim() {
+  var price   = prod.price;
+  var saving  = r2(price * disc / 100);
+  var newP    = r2(price - saving);
+  document.getElementById('sOrig').textContent = price   + ' €';
+  document.getElementById('sSave').textContent = '− ' + saving + ' €';
+  document.getElementById('sNew' ).textContent = newP    + ' €';
+  document.getElementById('sCalc').textContent =
+    'Изчисление: ' + disc + '% от ' + price + ' = ' + disc + '/100 · ' + price +
+    ' = ' + saving + ' € → ' + price + ' − ' + saving + ' = ' + newP + ' €';
+}
+
+// ── TASKS ──
+function chk(iId, correct, fbId, hint) {
+  var inp = document.getElementById(iId);
+  var fb  = document.getElementById(fbId);
+  var val = parseFloat(inp.value);
+  if (isNaN(val)) { fb.textContent='⚠️ Въведи число!'; fb.className='task-fb show no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    inp.className = 'task-inp ok';
+    fb.innerHTML  = '🎉 Браво! Верен отговор!';
+    fb.className  = 'task-fb show ok';
+  } else {
+    inp.className = 'task-inp no';
+    fb.innerHTML  = '❌ Опитай пак! 💡 ' + hint;
+    fb.className  = 'task-fb show no';
+  }
+}
+
+// ── QUIZ ──
+function qa(el, qId, chosen, correct, explanation) {
+  if (qAnswers[qId]) return;
+  qAnswers[qId] = chosen;
+  var letters = ['A','B','C','D'];
+  el.parentElement.querySelectorAll('.q-opt').forEach(function(opt, i) {
+    opt.classList.add('done');
+    if (letters[i] === correct) opt.classList.add('show-correct');
+  });
+  if (chosen === correct) {
+    el.classList.remove('show-correct');
+    el.classList.add('correct');
+    qScore++;
+  } else {
+    el.classList.add('wrong');
+  }
+  var exp = document.getElementById('e_' + qId);
+  exp.textContent = '💡 ' + explanation;
+  exp.classList.add('show');
+  document.getElementById('qSc').textContent = qScore + '/5';
+}
+
+// ── SCROLL REVEAL ──
+var obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e, i) {
+    if (e.isIntersecting) {
+      setTimeout(function(){ e.target.classList.add('visible'); }, i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06 });
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+// Init
+updateSim();
+</script>
+</body>
+</html>

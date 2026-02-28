@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Математика 5–7 клас — Контент План (по учебна програма)</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;800&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --ink: #1c1c28;
+    --muted: #7a7a8c;
+    --border: #e2ddd6;
+    --c5: #e63946;
+    --c6: #2a9d8f;
+    --c7: #4361ee;
+    --c5-light: #fdecea;
+    --c6-light: #e8f6f5;
+    --c7-light: #eceffe;
+    --gold: #f4a261;
+    --gold-light: #fef3ea;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Karla', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; }
+
+  header {
+    background: var(--ink);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '∑ ∫ π √ ÷ ×';
+    position: absolute;
+    right: 2rem; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: 0.5rem;
+    white-space: nowrap;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .header-tag { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+  header h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 4vw, 2.8rem); font-weight: 800; color: #fff; line-height: 1.15; }
+  header p { margin-top: 0.6rem; color: #888899; font-size: 0.88rem; max-width: 560px; }
+  .badges { display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap; }
+  .badge { padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.78rem; font-weight: 600; }
+  .b5 { background: var(--c5); color: #fff; }
+  .b6 { background: var(--c6); color: #fff; }
+  .b7 { background: var(--c7); color: #fff; }
+  .verified { background: #2d6a4f; color: #fff; }
+
+  .main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 2rem; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; text-align: center; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; display: block; }
+  .stat-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .tabs { display: flex; gap: 0.4rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .tab-btn { background: var(--surface); border: 2px solid var(--border); border-radius: 8px; font-family: 'Karla', sans-serif; font-size: 0.88rem; font-weight: 600; color: var(--muted); padding: 0.55rem 1.1rem; cursor: pointer; transition: all 0.18s; }
+  .tab-btn:hover { color: var(--ink); border-color: #ccc; }
+  .tab-btn.active-5 { background: var(--c5); color: #fff; border-color: var(--c5); }
+  .tab-btn.active-6 { background: var(--c6); color: #fff; border-color: var(--c6); }
+  .tab-btn.active-7 { background: var(--c7); color: #fff; border-color: var(--c7); }
+  .tab-btn.active-ideas { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  .tab-panel { display: none; animation: pop 0.25s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes pop { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+  .class-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding: 1.2rem 1.5rem; border-radius: 12px; border: 1px solid; }
+  .class-num { font-family: 'Syne', sans-serif; font-size: 2.5rem; font-weight: 800; line-height: 1; }
+  .class-info h2 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; }
+  .class-info p { font-size: 0.83rem; margin-top: 0.2rem; opacity: 0.75; }
+  .h5 { background: var(--c5-light); border-color: #f4b0b6; color: var(--c5); }
+  .h6 { background: var(--c6-light); border-color: #9dd6d0; color: var(--c6); }
+  .h7 { background: var(--c7-light); border-color: #b0baff; color: var(--c7); }
+
+  /* CURRICULUM TOPIC GROUP */
+  .curriculum-section { margin-bottom: 2rem; }
+  .curr-header {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: var(--ink); color: #fff;
+    padding: 0.7rem 1rem; border-radius: 8px 8px 0 0;
+    font-family: 'Syne', sans-serif; font-size: 0.88rem; font-weight: 700;
+  }
+  .curr-header .curr-num {
+    background: rgba(255,255,255,0.15); border-radius: 5px;
+    padding: 0.1rem 0.4rem; font-size: 0.75rem;
+  }
+  .curr-body { background: var(--surface); border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; }
+
+  .article-card {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.12s;
+  }
+  .article-card:last-child { border-bottom: none; }
+  .article-card:hover { background: var(--bg); }
+  .article-card.saved { background: #f0faf5; }
+
+  .article-type { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.18rem 0.45rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .type-explain { background: var(--c5-light); color: var(--c5); }
+  .type-summary { background: var(--c6-light); color: var(--c6); }
+  .type-exercise { background: var(--c7-light); color: var(--c7); }
+  .type-tip { background: var(--gold-light); color: #c4660a; }
+  .type-hot { background: #fff3cd; color: #856404; }
+
+  .article-info { flex: 1; }
+  .article-title { font-size: 0.9rem; font-weight: 600; line-height: 1.35; }
+  .article-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+  .article-meta .fire { color: var(--c5); }
+
+  .save-btn { background: none; border: none; font-size: 1rem; cursor: pointer; opacity: 0.3; transition: opacity 0.15s, transform 0.15s; flex-shrink: 0; padding: 0 2px; margin-top: 1px; }
+  .save-btn:hover { opacity: 0.7; transform: scale(1.2); }
+  .article-card.saved .save-btn { opacity: 1; }
+
+  .tips-box { background: var(--gold-light); border: 1px solid #f4c08a; border-radius: 10px; padding: 1.1rem 1.25rem; margin-top: 1.25rem; }
+  .tips-box h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; color: #c4660a; margin-bottom: 0.5rem; }
+  .tips-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .tips-box li { font-size: 0.83rem; color: #7a4510; padding-left: 1rem; position: relative; }
+  .tips-box li::before { content: '✦'; position: absolute; left: 0; font-size: 0.6rem; top: 3px; }
+
+  /* SEO */
+  .seo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .seo-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; }
+  .seo-card h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .seo-card ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+  .seo-card li { font-size: 0.78rem; color: var(--muted); padding-left: 0.75rem; position: relative; }
+  .seo-card li::before { content: '→'; position: absolute; left: 0; color: var(--gold); }
+
+  /* SAVED */
+  .empty-saved { text-align: center; padding: 3rem 1rem; color: var(--muted); font-size: 0.9rem; }
+  .empty-saved .big { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .saved-list { display: flex; flex-direction: column; gap: 0.5rem; }
+  .saved-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+  .saved-item-title { font-size: 0.88rem; font-weight: 500; }
+  .saved-item-meta { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+  .unsave-btn { background: none; border: none; font-size: 0.75rem; color: #cc4444; cursor: pointer; opacity: 0.6; }
+  .unsave-btn:hover { opacity: 1; }
+  .saved-count-badge { background: var(--c5); color: #fff; border-radius: 10px; font-size: 0.7rem; padding: 0.1rem 0.45rem; font-weight: 700; display: inline-block; vertical-align: middle; margin-left: 0.3rem; }
+
+  .grade-label { font-family: 'Syne', sans-serif; font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin: 1rem 0 0.4rem; }
+
+  @media (max-width: 580px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .seo-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-tag">Контент план · По официална учебна програма</div>
+    <h1>Математика 5, 6 и 7 клас<br>— статии по програма</h1>
+    <p>Всяка идея е обвързана с конкретна тема от официалната учебна програма на МОН. Кликни ⭐ за да запазиш.</p>
+    <div class="badges">
+      <span class="badge b5">5 клас</span>
+      <span class="badge b6">6 клас</span>
+      <span class="badge b7">7 клас</span>
+      <span class="badge verified">✓ По учебна програма МОН</span>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+
+  <div class="stats">
+    <div class="stat"><span class="stat-num">51</span><div class="stat-label">Идеи за статии</div></div>
+    <div class="stat"><span class="stat-num" style="color:var(--c5)">5</span><div class="stat-label">Теми за 5 клас</div></div>
+    <div class="stat"><span class="stat-num" style="color:var(--c6)">6</span><div class="stat-label">Теми за 6 клас</div></div>
+    <div class="stat"><span class="stat-num" style="color:var(--c7)">7</span><div class="stat-label">Теми за 7 клас</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active-5" onclick="switchTab('5', this)">🔴 5 клас</button>
+    <button class="tab-btn" onclick="switchTab('6', this)">🟢 6 клас</button>
+    <button class="tab-btn" onclick="switchTab('7', this)">🔵 7 клас</button>
+    <button class="tab-btn" onclick="switchTab('seo', this)">🔍 SEO</button>
+    <button class="tab-btn" onclick="switchTab('saved', this)">⭐ Запазени <span class="saved-count-badge" id="saved-badge">0</span></button>
+  </div>
+
+  <!-- =================== 5 КЛАС =================== -->
+  <div id="tab-5" class="tab-panel active">
+    <div class="class-header h5">
+      <div class="class-num">5</div>
+      <div class="class-info">
+        <h2>Пети клас</h2>
+        <p>Делимост · Обикновени дроби · Десетични дроби · Геометрични фигури · Геометрични тела</p>
+      </div>
+    </div>
+
+    <!-- Тема 1 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 1</span> Делимост</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'5','Делимост — делители, кратни и остатък: обяснение с примери','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Делимост — делители, кратни и остатък: обяснение с примери</div><div class="article-meta">Основни понятия от Тема 1 · Фундаментална статия</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Признаци за делимост на 2, 3 и 5 — как да ги познаем веднага','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Признаци за делимост на 2, 3 и 5 — как да ги познаем веднага</div><div class="article-meta">По учебна програма · <span class="fire">🔥 Много търсено</span></div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Прости и съставни числа — разлика и как да ги разпознаем','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Прости и съставни числа — разлика и как да ги разпознаем</div><div class="article-meta">Прост множител, взаимно прости числа · Нови понятия от програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Степен на число — как се записва произведение на равни множители','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Степен на число — как се записва произведение на равни множители</div><div class="article-meta">Ново понятие: степен · Въведение от 5 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','НОД и НОК — как се намират стъпка по стъпка (с упражнения)','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">НОД и НОК — как се намират стъпка по стъпка (с упражнения)</div><div class="article-meta"><span class="fire">🔥 Топ търсена тема</span> · НОД/НОК на 2 и 3 числа</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 2 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 2</span> Обикновени дроби</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'5','Какво е обикновена дроб — числител, знаменател, видове','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Какво е обикновена дроб — числител, знаменател, видове</div><div class="article-meta">Правилна/неправилна дроб, смесено число · Основна статия</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Основно свойство на дробите — разширяване и съкращаване','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Основно свойство на дробите — разширяване и съкращаване</div><div class="article-meta">Реципрочно число, числов лъч · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Събиране и изваждане на обикновени дроби (с примери)','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Събиране и изваждане на обикновени дроби (с примери)</div><div class="article-meta"><span class="fire">🔥 Най-търсена тема за 5 клас</span> · Еднакъв и различен знаменател</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Умножение и деление на обикновени дроби — правила и задачи','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Умножение и деление на обикновени дроби — правила и задачи</div><div class="article-meta">Реципрочно число при деление · 8 задачи с решения</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Задачи за намиране на част от число (с решения)','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Задачи за намиране на част от число (с решения)</div><div class="article-meta">Практико-приложни задачи от програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 3 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 3</span> Десетични дроби и проценти</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'5','Десетични дроби — четене, записване и сравняване','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Десетични дроби — четене, записване и сравняване</div><div class="article-meta">Крайна и безкрайна периодична дроб · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Закръгляване на десетични дроби — правило и примери','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Закръгляване на десетични дроби — правило и примери</div><div class="article-meta">С определена точност · Честа грешка на учениците</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Какво е процент — обяснение с реални примери (5 клас)','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Какво е процент — обяснение с реални примери (5 клас)</div><div class="article-meta"><span class="fire">🔥 Много търсено</span> · Въвежда се в 5 клас по програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Задачи с десетични дроби от движение и практиката','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Задачи с десетични дроби от движение и практиката</div><div class="article-meta">Скорост, разстояние, части от цяло · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 4 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 4</span> Основни геометрични фигури</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'5','Видове триъгълници и четириъгълници — елементи и свойства','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Видове триъгълници и четириъгълници — елементи и свойства</div><div class="article-meta">Успоредник, трапец, ромб · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Лице на триъгълник, успоредник, ромб и трапец — формули','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Лице на триъгълник, успоредник, ромб и трапец — формули</div><div class="article-meta"><span class="fire">🔥 Много търсено</span> · Всички формули от 5 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Перпендикулярни прави и разстояния — обяснение с чертежи','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Перпендикулярни прави и разстояния — обяснение с чертежи</div><div class="article-meta">Разстояние точка-права, успоредни прави</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 5 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 5</span> Геометрични тела</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'5','Куб и правоъгълен паралелепипед — елементи, лице и обем','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Куб и правоъгълен паралелепипед — елементи, лице и обем</div><div class="article-meta">Лице на повърхнина и обем · Развивки · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'5','Мерни единици за дължина, лице и обем — как се преминава','резюме')">
+          <span class="article-type type-summary">Резюме</span>
+          <div class="article-info"><div class="article-title">Мерни единици за дължина, лице и обем — как се преминава</div><div class="article-meta">m², dm², cm², m³, dm³ · Системни единици на латиница (от 5 клас)</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-box">
+      <h4>💡 Акценти за 5 клас (по програмата)</h4>
+      <ul>
+        <li>Процентите се въвеждат в Тема 3 (Десетични дроби) — напиши статия специално за „процент в 5 клас", тъй като много ученици смятат, че проценти са само 6 клас.</li>
+        <li>Степента като понятие се въвежда за пръв път в 5 клас — добра обяснителна статия ще се класира лесно.</li>
+        <li>От 5 клас мерните единици се изписват на латиница (m, cm, m², dm³) — добър повод за практична статия.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== 6 КЛАС =================== -->
+  <div id="tab-6" class="tab-panel">
+    <div class="class-header h6">
+      <div class="class-num">6</div>
+      <div class="class-info">
+        <h2>Шести клас</h2>
+        <p>Рационални числа · Степенуване · Уравнения · Пропорции · Вероятности · Геометрия</p>
+      </div>
+    </div>
+
+    <!-- Тема 1 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 1</span> Рационални числа</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Рационални и отрицателни числа — какво са и как се сравняват','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Рационални и отрицателни числа — какво са и как се сравняват</div><div class="article-meta">Множество на рационалните числа · Нова тема в 6 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Абсолютна стойност на число — обяснение и задачи','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Абсолютна стойност на число — обяснение и задачи</div><div class="article-meta">|a| — смисъл и пресмятане · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Действия с рационални числа — събиране, изваждане, умножение, деление','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Действия с рационални числа — събиране, изваждане, умножение, деление</div><div class="article-meta"><span class="fire">🔥 Ключова тема</span> · Правила за знаците</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Декартова координатна система — как се построяват точки','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Декартова координатна система — как се построяват точки</div><div class="article-meta">Наредена двойка, 4 квадранта, симетрични точки · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 2 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 2</span> Степенуване</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Степенуване с естествен показател — правила и пресмятане','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Степенуване с естествен показател — правила и пресмятане</div><div class="article-meta">Умножение/деление на степени с равни основи · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Степен с нулев и отрицателен показател — обяснение','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Степен с нулев и отрицателен показател — обяснение</div><div class="article-meta">Стандартен запис на число · Нова тема в 6 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Питагорови тройки — намиране на страна на правоъгълен триъгълник','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Питагорови тройки — намиране на страна на правоъгълен триъгълник</div><div class="article-meta">Въведено в 6 клас, Тема 2 · Подготовка за Питагор в 7 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 3 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 3</span> Уравнения</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Линейно уравнение ax+b=0 — как се решава (с примери)','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Линейно уравнение ax+b=0 — как се решава (с примери)</div><div class="article-meta"><span class="fire">🔥 Много търсено</span> · Свойства на числовите равенства</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Как да съставим уравнение от текстова задача (6 клас)','съвет')">
+          <span class="article-type type-tip">Съвет</span>
+          <div class="article-info"><div class="article-title">Как да съставим уравнение от текстова задача (6 клас)</div><div class="article-meta">Моделиране на ситуации · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 4 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 4</span> Пропорции</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Пропорция — понятие, свойства и приложение','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Пропорция — понятие, свойства и приложение</div><div class="article-meta">Отношение, четвърта пропорционална · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Права и обратна пропорционалност — разлика и примери','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Права и обратна пропорционалност — разлика и примери</div><div class="article-meta"><span class="fire">🔥 Търсено</span> · Коефициент на пропорционалност</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Задачи с проценти и пропорции за 6 клас (с решения)','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Задачи с проценти и пропорции за 6 клас (с решения)</div><div class="article-meta">10+ задачи · Процент, отношение, дроб</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 5 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 5</span> Елементи от вероятности и статистика</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Множества — подмножество, сечение и обединение','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Множества — подмножество, сечение и обединение</div><div class="article-meta">Ново в 6 клас · Нотации и примери</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Вероятност на случайно събитие — обяснение с монета и зарче','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Вероятност на случайно събитие — обяснение с монета и зарче</div><div class="article-meta">Благоприятни изходи / всички изходи · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Средноаритметично — как се смята и какво означава','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Средноаритметично — как се смята и какво означава</div><div class="article-meta">Интерпретиране на данни · Практически примери</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 6 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 6</span> Геометрични фигури и тела</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'6','Окръжност и кръг — елементи, дължина и лице','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Окръжност и кръг — елементи, дължина и лице</div><div class="article-meta">Константата π, централен ъгъл · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'6','Призма, пирамида, цилиндър и конус — лице и обем','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Призма, пирамида, цилиндър и конус — лице и обем</div><div class="article-meta"><span class="fire">🔥 Търсено</span> · Всички тела от 6 клас с формули</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-box">
+      <h4>💡 Акценти за 6 клас (по програмата)</h4>
+      <ul>
+        <li>Рационалните числа и действията с тях са фундамент — трудна тема, добре обяснена статия ще се търси целогодишно.</li>
+        <li>Декартовата координатна система е нова за 6 клас — отлична за визуализация с чертежи.</li>
+        <li>Вероятността се въвежда за пръв път в 6 клас — статия с монети и зарчета ще е много достъпна и споделяна.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== 7 КЛАС =================== -->
+  <div id="tab-7" class="tab-panel">
+    <div class="class-header h7">
+      <div class="class-num">7</div>
+      <div class="class-info">
+        <h2>Седми клас</h2>
+        <p>Цели изрази · Уравнения · Геометрия · Еднакви триъгълници · Неравенства · Успоредник</p>
+      </div>
+    </div>
+
+    <!-- Тема 1 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 1</span> Цели изрази</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Едночлен и многочлен — понятия и нормален вид','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Едночлен и многочлен — понятия и нормален вид</div><div class="article-meta">Константа, променлива, параметър · Нови понятия от 7 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Събиране и изваждане на многочлени — стъпка по стъпка','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Събиране и изваждане на многочлени — стъпка по стъпка</div><div class="article-meta">Подобни членове, скоби · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Формули за съкратено умножение — всички формули с примери','резюме')">
+          <span class="article-type type-summary">Резюме</span>
+          <div class="article-info"><div class="article-title">Формули за съкратено умножение — всички формули с примери</div><div class="article-meta"><span class="fire">🔥 Топ търсена тема</span> · (a±b)², (a+b)(a-b), (a±b)³</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Разлагане на многочлен на множители — методи и примери','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Разлагане на многочлен на множители — методи и примери</div><div class="article-meta">Общ множител, формули, групиране · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 2 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 2</span> Уравнения</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Линейно уравнение с едно неизвестно — видове и решаване','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Линейно уравнение с едно неизвестно — видове и решаване</div><div class="article-meta"><span class="fire">🔥 Много търсено</span> · ax+b=0 и (ax+b)(cx+d)=0</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Модулно уравнение |ax+b|=c — обяснение и примери','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Модулно уравнение |ax+b|=c — обяснение и примери</div><div class="article-meta">Ново в 7 клас · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Задачи за движение, работа и лихва с уравнения (7 клас)','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Задачи за движение, работа и лихва с уравнения (7 клас)</div><div class="article-meta">Проста лихва · Смеси и сплави · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 3 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 3</span> Основни геометрични фигури</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Ъгли при успоредни прави — видове и свойства','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Ъгли при успоредни прави — видове и свойства</div><div class="article-meta">Съответни, прилежащи, кръстни ъгли · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Признаци за успоредност на прави — как да ги разпознаем','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Признаци за успоредност на прави — как да ги разпознаем</div><div class="article-meta">По програмата · С чертежи</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Ъгли в триъгълник — сбор и зависимости','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Ъгли в триъгълник — сбор и зависимости</div><div class="article-meta">Външен ъгъл на триъгълник · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 4 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 4</span> Еднакви триъгълници</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Признаци за еднаквост на триъгълници (с примери и доказателства)','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Признаци за еднаквост на триъгълници (с примери и доказателства)</div><div class="article-meta"><span class="fire">🔥 Много търсено</span> · С-С-С, С-Ъ-С, Ъ-С-Ъ</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Свойства на равнобедрен триъгълник и правоъгълен с ъгъл 30°','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Свойства на равнобедрен триъгълник и правоъгълен с ъгъл 30°</div><div class="article-meta">По програмата · Симетрала и ъглополовяща</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 5 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 5</span> Неравенства</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Линейно неравенство с едно неизвестно — решаване и представяне','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Линейно неравенство с едно неизвестно — решаване и представяне</div><div class="article-meta">Числови интервали, графично представяне · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Неравенство на триъгълника — какво е и защо е важно','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Неравенство на триъгълника — какво е и защо е важно</div><div class="article-meta">Зависимост на страни и ъгли · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 6 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 6</span> Успоредник</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Успоредник — определение, видове, свойства и признаци','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Успоредник — определение, видове, свойства и признаци</div><div class="article-meta">Ромб, правоъгълник, квадрат като успоредници · По програмата</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Тема 7 -->
+    <div class="curriculum-section">
+      <div class="curr-header"><span class="curr-num">Тема 7</span> Елементи от вероятности и статистика</div>
+      <div class="curr-body">
+        <div class="article-card" onclick="toggleSave(this,'7','Кръгови диаграми — как се четат и построяват (7 клас)','обяснение')">
+          <span class="article-type type-explain">Обяснение</span>
+          <div class="article-info"><div class="article-title">Кръгови диаграми — как се четат и построяват (7 клас)</div><div class="article-meta">По програмата · Интерпретиране на данни</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','Вероятност в 7 клас — оценяване на шансове с примери','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">Вероятност в 7 клас — оценяване на шансове с примери</div><div class="article-meta">По програмата · Задачи с решения</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--c7-light);border:1px solid #b0baff;border-radius:10px;padding:1.25rem;margin-top:1.25rem;">
+      <h4 style="font-family:'Syne',sans-serif;font-size:0.9rem;color:var(--c7);margin-bottom:0.6rem;">🎯 НВО по математика — специална рубрика</h4>
+      <div class="curr-body" style="border-radius:8px;border:1px solid #b0baff;">
+        <div class="article-card" onclick="toggleSave(this,'7','Подготовка за НВО по математика 7 клас — пълен план и теми','съвет')">
+          <span class="article-type type-tip">Съвет</span>
+          <div class="article-info"><div class="article-title">Подготовка за НВО по математика 7 клас — пълен план и теми</div><div class="article-meta"><span class="fire">🔥 Огромен трафик всеки май</span> · Покрива всички теми от 5, 6 и 7 клас</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+        <div class="article-card" onclick="toggleSave(this,'7','10 класически задачи за НВО по математика с решения','упражнение')">
+          <span class="article-type type-exercise">Упражнение</span>
+          <div class="article-info"><div class="article-title">10 класически задачи за НВО по математика с решения</div><div class="article-meta">Уравнения, геометрия, вероятност · Смесени</div></div>
+          <button class="save-btn">⭐</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tips-box" style="margin-top:1rem;">
+      <h4>💡 Акценти за 7 клас (по програмата)</h4>
+      <ul>
+        <li>Формулите за съкратено умножение са задължителни за НВО — направи ги своята флагманска статия с много примери.</li>
+        <li>Модулното уравнение е ново за 7 клас и нямат много ресурси онлайн — отлична ниша.</li>
+        <li>Еднаквите триъгълници с признаците им се използват в почти всяка геометрична задача за НВО.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- =================== SEO =================== -->
+  <div id="tab-seo" class="tab-panel">
+    <div style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-weight:600;">SEO стратегия</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.4rem;">Как да намерят тебе учениците</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;">Базирано на темите от официалните учебни програми — за максимален SEO ефект.</p>
+
+    <div class="seo-grid">
+      <div class="seo-card">
+        <h4>🔥 Топ търсения по клас</h4>
+        <ul>
+          <li>5 клас: „НОД НОК", „събиране дроби", „лице триъгълник"</li>
+          <li>5 клас: „признаци делимост", „десетични дроби"</li>
+          <li>6 клас: „рационални числа", „линейно уравнение"</li>
+          <li>6 клас: „права пропорционалност", „лице кръг"</li>
+          <li>7 клас: „формули съкратено умножение"</li>
+          <li>7 клас: „признаци еднаквост триъгълници"</li>
+          <li>7 клас: „НВО математика подготовка"</li>
+        </ul>
+      </div>
+      <div class="seo-card">
+        <h4>✍️ Работещи заглавия</h4>
+        <ul>
+          <li>„[Тема] — обяснение за [N] клас с примери"</li>
+          <li>„Как се [действие] — стъпка по стъпка"</li>
+          <li>„[Формула/правило] — всичко за [N] клас"</li>
+          <li>„[N] задачи по [тема] с пълни решения"</li>
+          <li>„[Тема] за НВО — какво трябва да знаеш"</li>
+        </ul>
+      </div>
+      <div class="seo-card">
+        <h4>📅 Кога да публикуваш</h4>
+        <ul>
+          <li>Септември: теми от 5 клас (нови ученици)</li>
+          <li>Октомври–ноември: всички основни теми</li>
+          <li>Декември–януари: преговор за 1-ви срок</li>
+          <li>Март: старт на интензивна НВО подготовка</li>
+          <li>Април–май: 🔥 пик на НВО трафик (7 клас)</li>
+        </ul>
+      </div>
+      <div class="seo-card">
+        <h4>📝 Структура на статия</h4>
+        <ul>
+          <li>Заглавие с ключова дума + „[N] клас"</li>
+          <li>Кратко въведение (2–3 изречения)</li>
+          <li>Определение / формула — ясно откроено</li>
+          <li>Стъпка по стъпка обяснение с пример</li>
+          <li>Поне 2 решени задачи</li>
+          <li>Задачи за самостоятелна работа</li>
+          <li>Линк към свързана статия от блога</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== SAVED =================== -->
+  <div id="tab-saved" class="tab-panel">
+    <div style="font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;font-weight:600;">Твоят списък</div>
+    <h2 style="font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:0.4rem;">Запазени идеи</h2>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:1.5rem;">Кликни ⭐ върху статия в другите раздели, за да я добавиш тук.</p>
+    <div id="saved-container">
+      <div class="empty-saved"><div class="big">⭐</div>Все още нямаш запазени идеи.<br>Отиди в 5, 6 или 7 клас и кликни ⭐.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const saved = {};
+
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.className = 'tab-btn');
+    document.getElementById('tab-' + name).classList.add('active');
+    if (name === '5') btn.classList.add('active-5');
+    else if (name === '6') btn.classList.add('active-6');
+    else if (name === '7') btn.classList.add('active-7');
+    else btn.classList.add('active-ideas');
+    if (name === 'saved') renderSaved();
+  }
+
+  function toggleSave(card, grade, title, type) {
+    const key = grade + '::' + title;
+    if (saved[key]) {
+      delete saved[key];
+      card.classList.remove('saved');
+    } else {
+      saved[key] = { grade, title, type };
+      card.classList.add('saved');
+    }
+    updateSavedCount();
+  }
+
+  function updateSavedCount() {
+    const count = Object.keys(saved).length;
+    document.getElementById('saved-badge').textContent = count;
+  }
+
+  function renderSaved() {
+    const container = document.getElementById('saved-container');
+    const keys = Object.keys(saved);
+    if (keys.length === 0) {
+      container.innerHTML = '<div class="empty-saved"><div class="big">⭐</div>Все още нямаш запазени идеи.<br>Отиди в 5, 6 или 7 клас и кликни ⭐.</div>';
+      return;
+    }
+    const byGrade = {};
+    keys.forEach(k => {
+      const item = saved[k];
+      if (!byGrade[item.grade]) byGrade[item.grade] = [];
+      byGrade[item.grade].push(item);
+    });
+    let html = '<div class="saved-list">';
+    ['5','6','7'].forEach(g => {
+      if (!byGrade[g]) return;
+      html += `<div class="grade-label">${g} клас</div>`;
+      byGrade[g].forEach(item => {
+        html += `<div class="saved-item">
+          <div><div class="saved-item-title">${item.title}</div><div class="saved-item-meta">${item.type}</div></div>
+          <button class="unsave-btn" onclick="unsaveItem('${g}::${item.title.replace(/'/g,"\\'")}')">✕</button>
+        </div>`;
+      });
+    });
+    html += '</div>';
+    container.innerHTML = html;
+  }
+
+  function unsaveItem(key) {
+    if (!saved[key]) return;
+    const title = saved[key].title;
+    delete saved[key];
+    updateSavedCount();
+    renderSaved();
+    document.querySelectorAll('.article-card.saved').forEach(card => {
+      if (card.querySelector('.article-title').textContent === title) {
+        card.classList.remove('saved');
+        card.querySelector('.save-btn').style.opacity = '0.3';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

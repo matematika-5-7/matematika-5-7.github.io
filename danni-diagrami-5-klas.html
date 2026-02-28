@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Четене на данни. Диаграми | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#f0fdf4; --green:#16a34a; --green-dark:#14532d; --green-mid:#22c55e;
+  --green-light:#dcfce7; --green-soft:#bbf7d0; --green-btn:#15803d;
+  --yellow:#fbbf24; --yellow-light:#fefce8;
+  --red:#dc2626; --red-light:#fef2f2;
+  --blue:#2563eb; --orange:#ea580c; --purple:#7c3aed;
+  --ink:#052e16; --ink-light:#4b7a5e; --border:#86efac; --surface:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:19px;line-height:1.75;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(240,253,244,0.97);backdrop-filter:blur(10px);border-bottom:3px solid var(--green-soft);padding:0.8rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-size:1.1rem;font-weight:900;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--green);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.95rem;font-weight:800;color:var(--green-dark);text-decoration:none;background:var(--green-light);border:2px solid var(--green-soft);padding:0.4rem 1.1rem;border-radius:20px;transition:all 0.2s;}
+.nav-back:hover{background:var(--green-btn);color:#fff;border-color:var(--green-btn);}
+
+.hero{background:linear-gradient(135deg,#16a34a 0%,#22c55e 60%,#4ade80 100%);padding:3rem 1.5rem 3.5rem;position:relative;overflow:hidden;text-align:center;}
+.hero::after{content:'📊';position:absolute;right:1rem;top:0;font-size:14rem;opacity:0.08;line-height:1;pointer-events:none;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:44px;background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-star{position:absolute;font-size:1.4rem;opacity:0.4;animation:floatUp 3.5s ease-in-out infinite;}
+@keyframes floatUp{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(10deg);}}
+.hero-inner{position:relative;max-width:720px;margin:0 auto;}
+.hero-crumb{font-size:0.9rem;color:rgba(255,255,255,0.82);margin-bottom:1rem;}
+.hero-crumb a{color:rgba(255,255,255,0.82);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;text-decoration:underline;}
+.hero h1{font-size:clamp(1.8rem,5vw,3.2rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:0.75rem;text-shadow:0 3px 16px rgba(20,83,45,0.3);}
+.hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.93);max-width:520px;margin:0 auto 1.5rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.5rem;}
+.chip{background:rgba(255,255,255,0.22);border:2px solid rgba(255,255,255,0.4);border-radius:20px;padding:0.3rem 1rem;font-size:0.9rem;font-weight:700;color:#fff;}
+
+.content{max-width:820px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+.sec-tag{display:inline-block;background:var(--green);color:#fff;font-size:0.78rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;padding:0.28rem 0.9rem;border-radius:8px;margin-bottom:0.6rem;}
+.sec-title{font-size:1.65rem;font-weight:900;margin-bottom:0.5rem;line-height:1.2;}
+.sec-desc{color:var(--ink-light);font-size:1.05rem;margin-bottom:1.5rem;}
+
+.def-box{background:linear-gradient(135deg,var(--green-light),#f0fdf4);border:3px solid var(--green-soft);border-radius:20px;padding:1.75rem 1.75rem 1.5rem;margin:1.5rem 0;position:relative;}
+.def-label{position:absolute;top:-1rem;left:1.5rem;background:var(--green);color:#fff;font-size:0.82rem;font-weight:800;padding:0.3rem 0.95rem;border-radius:10px;}
+.def-box p{font-size:1.05rem;line-height:1.85;}
+.def-box strong{color:var(--green-dark);font-weight:900;}
+
+.tip{background:var(--yellow-light);border:2px solid #fde68a;border-radius:16px;padding:1rem 1.25rem;margin:1.25rem 0;display:flex;gap:0.85rem;align-items:flex-start;}
+.tip-icon{font-size:1.5rem;flex-shrink:0;}
+.tip-text{font-size:1rem;color:#713f12;line-height:1.7;}
+.tip-text strong{display:block;font-weight:800;margin-bottom:0.1rem;}
+
+.btn{background:var(--green-btn);color:#fff;border:none;border-radius:12px;padding:0.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.2s;box-shadow:0 4px 14px rgba(21,128,61,0.3);}
+.btn:hover{background:var(--green-dark);transform:translateY(-2px);}
+.btn-sm{padding:0.45rem 1rem;font-size:0.88rem;}
+.btn-outline{background:transparent;color:var(--green-btn);border:2px solid var(--green-btn);box-shadow:none;}
+.btn-outline:hover{background:var(--green-btn);color:#fff;}
+
+/* TABLES */
+.itbl-wrap{background:#fff;border:2px solid var(--border);border-radius:18px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 18px rgba(22,163,74,0.08);}
+.itbl-head{background:linear-gradient(135deg,var(--green),var(--green-mid));padding:1rem 1.5rem;display:flex;align-items:center;gap:0.75rem;}
+.itbl-head h4{font-size:1.05rem;font-weight:900;color:#fff;}
+.itbl-head p{font-size:0.85rem;color:rgba(255,255,255,0.85);}
+.itbl-head-icon{font-size:1.8rem;}
+.itbl-body{padding:1.25rem 1.5rem;}
+.data-table{width:100%;border-collapse:separate;border-spacing:0;border-radius:12px;overflow:hidden;font-size:1rem;margin-bottom:1rem;}
+.data-table th{background:var(--green);color:#fff;padding:0.8rem 0.9rem;text-align:center;font-weight:800;font-size:0.95rem;}
+.data-table td{padding:0.7rem 0.9rem;text-align:center;border-bottom:1px solid var(--green-light);background:#fff;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:var(--green-light);}
+.data-table td.given{font-weight:700;color:var(--green-dark);}
+.cell-inp{width:80px;padding:0.4rem 0.5rem;border:2px solid var(--border);border-radius:8px;font-size:1rem;font-family:'Playfair Display',serif;font-style:italic;text-align:center;color:var(--ink);background:#f0fdf4;outline:none;transition:border 0.15s;}
+.cell-inp:focus{border-color:var(--green);background:#fff;}
+.cell-inp.ok{border-color:#22c55e;background:#dcfce7;color:var(--green-dark);font-weight:800;}
+.cell-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.tbl-feedback{margin-top:0.5rem;padding:0.6rem 1rem;border-radius:10px;font-size:1rem;font-weight:700;display:none;}
+.tbl-feedback.show{display:block;}
+.tbl-feedback.ok{background:var(--green-light);color:var(--green-dark);}
+.tbl-feedback.no{background:var(--red-light);color:var(--red);}
+
+/* CHART CONTAINER */
+.chart-section{background:#fff;border:2px solid var(--border);border-radius:20px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(22,163,74,0.1);}
+.chart-top{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:1.1rem 1.5rem;display:flex;align-items:center;gap:0.85rem;}
+.chart-top-icon{font-size:2rem;}
+.chart-top h4{font-size:1.1rem;font-weight:900;color:#fff;}
+.chart-top p{font-size:0.88rem;color:rgba(255,255,255,0.85);}
+.chart-body{padding:1.5rem;}
+.chart-type-row{display:flex;gap:0.6rem;margin-bottom:1.25rem;flex-wrap:wrap;}
+.ctype-btn{background:var(--green-light);border:2px solid var(--green-soft);border-radius:12px;padding:0.55rem 1.1rem;font-size:0.95rem;font-weight:800;color:var(--ink);cursor:pointer;transition:all 0.18s;font-family:'Nunito',sans-serif;}
+.ctype-btn:hover{background:var(--green-soft);}
+.ctype-btn.on{background:var(--green-btn);border-color:var(--green-btn);color:#fff;}
+
+/* COLOR PALETTE */
+.color-palette{display:flex;gap:0.45rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center;}
+.color-palette span{font-size:0.9rem;font-weight:700;margin-right:0.3rem;}
+.color-swatch{width:32px;height:32px;border-radius:8px;cursor:pointer;border:3px solid transparent;transition:all 0.15s;flex-shrink:0;}
+.color-swatch.active{border-color:var(--ink);transform:scale(1.18);}
+
+/* LOCK */
+.chart-locked{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;gap:0.75rem;}
+.chart-locked .lock-icon{font-size:3rem;}
+.chart-locked p{font-size:1rem;color:var(--ink-light);font-weight:600;max-width:380px;}
+
+/* ═══════════════════════════════════════
+   SVG BAR CHART — proper proportional bars
+═══════════════════════════════════════ */
+.svg-chart-wrap{width:100%;margin:0.5rem 0 1rem;overflow:visible;}
+svg.bar-svg{width:100%;display:block;overflow:visible;}
+/* bar rect gets click handler, label below */
+
+/* ═══════════════════════════════════════
+   SVG PIE — uncolored (white fill, dark stroke)
+═══════════════════════════════════════ */
+.pie-wrap{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin:0.5rem 0 1rem;}
+svg.pie-svg{flex-shrink:0;overflow:visible;}
+.pie-legend{display:flex;flex-direction:column;gap:0.55rem;}
+.legend-item{display:flex;align-items:center;gap:0.55rem;font-size:0.92rem;font-weight:600;}
+.legend-dot{width:20px;height:20px;border-radius:5px;flex-shrink:0;border:2px solid #ccc;}
+
+/* MISC */
+.answer-box{background:var(--green-light);border:2px solid var(--green-soft);border-radius:12px;padding:0.8rem 1rem;font-size:1rem;font-weight:700;color:var(--green-dark);margin-top:0.8rem;}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.5s,transform 0.5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:#052e16;color:rgba(255,255,255,0.5);padding:2rem;text-align:center;font-size:0.95rem;}
+footer strong{color:rgba(255,255,255,0.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:0.75rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
+.foot-nav a:hover{color:var(--green-mid);}
+@media(max-width:580px){body{font-size:17px;}.pie-wrap{flex-direction:column;}.chart-type-row{flex-direction:column;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <span class="hero-star" style="left:7%;top:20%;animation-delay:0s">📊</span>
+  <span class="hero-star" style="left:82%;top:18%;animation-delay:1.2s">📈</span>
+  <span class="hero-star" style="left:65%;top:60%;animation-delay:0.6s">🥧</span>
+  <span class="hero-star" style="left:15%;top:62%;animation-delay:1.8s">📉</span>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › Данни и диаграми
+    </div>
+    <h1>Четене и представяне на данни. Диаграми.</h1>
+    <p class="hero-desc">Как се четат таблици и диаграми, как се представят данни — с интерактивни задачи и собствено оцветяване.</p>
+    <div class="hero-chips">
+      <span class="chip">📋 Таблици</span>
+      <span class="chip">📊 Стълбовидна</span>
+      <span class="chip">📈 Линейна</span>
+      <span class="chip">🥧 Кръгова</span>
+      <span class="chip">🎨 Оцвети сам</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ОПРЕДЕЛЕНИЯ -->
+  <div class="reveal">
+    <div class="sec-tag">Основни понятия</div>
+    <h2 class="sec-title">Какво са данни?</h2>
+    <p class="sec-desc">Всеки ден от телевизията, интернет и вестниците получаваме различна информация. Когато разполагаме с информация от такъв вид, казваме, че разполагаме с <strong>данни</strong>.</p>
+    <div class="def-box">
+      <div class="def-label">📌 Определения</div>
+      <p>
+        <strong>Данни</strong> — информация, която сме събрали и можем да анализираме.<br><br>
+        <strong>Статистика</strong> — математическата дисциплина, която изучава събраната информация чрез анализиране на данните.<br><br>
+        <strong>Диаграма</strong> (от гр. <em>diagramma</em>) — графично изображение на данни. Бива:
+        <strong>точкова, линейна, стълбовидна</strong> и <strong>кръгова</strong>.
+      </p>
+    </div>
+    <div class="tip reveal">
+      <div class="tip-icon">💡</div>
+      <div class="tip-text">
+        <strong>Кой вид диаграма да изберем?</strong>
+        📊 <strong>Стълбовидна</strong> — за сравняване на категории.<br>
+        📈 <strong>Линейна</strong> — за промяна във времето.<br>
+        🥧 <strong>Кръгова</strong> — за дялове от цяло (проценти).<br>
+        🔵 <strong>Точкова</strong> — за отделни измервания.
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 1: УЧЕНИЦИ ПО КЛАСОВЕ
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">Пример 1 · Таблица + Стълбовидна диаграма</div>
+    <h2 class="sec-title">Ученици по класове</h2>
+    <p class="sec-desc">В едно училище учат <strong>550 ученици</strong>. От тях 14% са в 4. клас, 18% са в 5. клас, а 16% са в 6. клас. Изчисли колко ученици учат в кой клас и попълни таблицата!</p>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head">
+        <div class="itbl-head-icon">📋</div>
+        <div><h4>Попълни таблицата</h4><p>Изчисли и въведи броя ученици за всеки клас. После провери!</p></div>
+      </div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Клас</th><th>Процент</th><th>Брой ученици</th></tr></thead>
+          <tbody>
+            <tr><td class="given">4. клас</td><td class="given">14%</td><td><input type="number" class="cell-inp" id="t1c1" placeholder="?"></td></tr>
+            <tr><td class="given">5. клас</td><td class="given">18%</td><td><input type="number" class="cell-inp" id="t1c2" placeholder="?"></td></tr>
+            <tr><td class="given">6. клас</td><td class="given">16%</td><td><input type="number" class="cell-inp" id="t1c3" placeholder="?"></td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;">
+          <button class="btn" onclick="checkTbl1()">✓ Провери таблицата</button>
+          <div class="tbl-feedback" id="fb_tbl1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-section" id="chart1">
+      <div class="chart-top">
+        <div class="chart-top-icon">📊</div>
+        <div><h4>Построи диаграмата</h4><p>Попълни правилно таблицата, за да отключиш оцветяването!</p></div>
+      </div>
+      <div class="chart-body">
+        <div id="chart1-locked" class="chart-locked">
+          <div class="lock-icon">🔒</div>
+          <p>Попълни правилно таблицата, за да построиш и оцветиш диаграмата!</p>
+        </div>
+        <div id="chart1-content" style="display:none;">
+          <div class="chart-type-row">
+            <button class="ctype-btn on" onclick="switchChart('c1','bar',this)">📊 Стълбовидна</button>
+            <button class="ctype-btn" onclick="switchChart('c1','line',this)">📈 Линейна</button>
+          </div>
+          <div class="color-palette">
+            <span>🎨 Цвят:</span>
+            <div class="color-swatch active" style="background:#16a34a;" onclick="setPen(this,'#16a34a')"></div>
+            <div class="color-swatch" style="background:#2563eb;" onclick="setPen(this,'#2563eb')"></div>
+            <div class="color-swatch" style="background:#ea580c;" onclick="setPen(this,'#ea580c')"></div>
+            <div class="color-swatch" style="background:#d97706;" onclick="setPen(this,'#d97706')"></div>
+            <div class="color-swatch" style="background:#7c3aed;" onclick="setPen(this,'#7c3aed')"></div>
+            <div class="color-swatch" style="background:#db2777;" onclick="setPen(this,'#db2777')"></div>
+          </div>
+          <div id="c1-bar"><div class="svg-chart-wrap" id="wrap-c1-bar"></div></div>
+          <div id="c1-line" style="display:none;"><div class="svg-chart-wrap" id="wrap-c1-line"></div></div>
+          <div class="tip" style="margin-top:0.75rem;">
+            <div class="tip-icon">🎨</div>
+            <div class="tip-text">Избери цвят горе и <strong>кликни върху всеки стълб</strong> за да го оцветиш!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="answer-box" id="ans1" style="display:none;">
+      ✅ <strong>Решение:</strong> 14/100·550 = 77 ученици (4. кл.) | 18/100·550 = 99 ученика (5. кл.) | 16/100·550 = 88 ученика (6. кл.)
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 2: ТЕМПЕРАТУРИ + ЛИНЕЙНА
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:3rem;">
+    <div class="sec-tag">Пример 2 · Линейна диаграма</div>
+    <h2 class="sec-title">Температурата през седмицата</h2>
+    <p class="sec-desc">Иван записвал температурата сутринта в 8 ч. за цяла седмица. Отговори на въпросите и разгледай линейната диаграма!</p>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head">
+        <div class="itbl-head-icon">🌡️</div>
+        <div><h4>Таблица с температури</h4><p>Данните са дадени — отговори на въпросите долу.</p></div>
+      </div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Ден</th><th>Пон</th><th>Вт</th><th>Ср</th><th>Чет</th><th>Пет</th><th>Съб</th><th>Нед</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="given">Темп. °C</td>
+              <td class="given">7</td><td class="given">5</td><td class="given">8</td>
+              <td class="given">6</td><td class="given">7</td><td class="given">6</td><td class="given">4</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.75rem;">
+          <div>
+            <p style="font-weight:700;margin-bottom:0.4rem;">а) В кой ден е измерена най-ниската температура?</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2a','Неделя (4°C)')">Понеделник</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2a','Неделя (4°C)')">Вторник</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,true,'q2a','')">Неделя</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2a','Неделя (4°C)')">Сряда</button>
+            </div>
+            <div class="tbl-feedback" id="q2a"></div>
+          </div>
+          <div>
+            <p style="font-weight:700;margin-bottom:0.4rem;">б) В кой ден температурата е най-висока?</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2b','Сряда (8°C)')">Понеделник</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,true,'q2b','')">Сряда</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2b','Сряда (8°C)')">Петък</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'q2b','Сряда (8°C)')">Събота</button>
+            </div>
+            <div class="tbl-feedback" id="q2b"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-top">
+        <div class="chart-top-icon">📈</div>
+        <div><h4>Линейна диаграма на температурите</h4><p>Избери цвят и кликни върху точките!</p></div>
+      </div>
+      <div class="chart-body">
+        <div class="color-palette">
+          <span>🎨 Цвят:</span>
+          <div class="color-swatch active" style="background:#16a34a;" onclick="setPen(this,'#16a34a')"></div>
+          <div class="color-swatch" style="background:#2563eb;" onclick="setPen(this,'#2563eb')"></div>
+          <div class="color-swatch" style="background:#ea580c;" onclick="setPen(this,'#ea580c')"></div>
+          <div class="color-swatch" style="background:#7c3aed;" onclick="setPen(this,'#7c3aed')"></div>
+          <div class="color-swatch" style="background:#db2777;" onclick="setPen(this,'#db2777')"></div>
+        </div>
+        <div class="svg-chart-wrap" id="wrap-temp-line"></div>
+        <div class="tip" style="margin-top:0.75rem;">
+          <div class="tip-icon">🎨</div>
+          <div class="tip-text"><strong>Кликни върху точките</strong> за да ги оцветиш с избрания цвят!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 3: СПОРТ — 3 вида диаграми
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:3rem;">
+    <div class="sec-tag">Пример 3 · Три вида диаграми</div>
+    <h2 class="sec-title">Любим спорт на учениците</h2>
+    <p class="sec-desc">Мария попитала съучениците си кой е любимият им спорт. Данните са в таблицата. Избери вид диаграма и я оцвети!</p>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head">
+        <div class="itbl-head-icon">🏅</div>
+        <div><h4>Данни за любим спорт</h4><p>Таблицата е попълнена — построй диаграма!</p></div>
+      </div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Спорт</th><th>Гимнастика</th><th>Плуване</th><th>Футбол</th><th>Баскетбол</th><th>Тенис</th></tr></thead>
+          <tbody><tr><td class="given">Брой</td><td class="given">4</td><td class="given">3</td><td class="given">10</td><td class="given">2</td><td class="given">5</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-top">
+        <div class="chart-top-icon">🏅</div>
+        <div><h4>Избери вид диаграма и я оцвети!</h4><p>Три вида — кликни за смяна, после оцвети</p></div>
+      </div>
+      <div class="chart-body">
+        <div class="chart-type-row">
+          <button class="ctype-btn on" onclick="switchChart('sport','bar',this)">📊 Стълбовидна</button>
+          <button class="ctype-btn" onclick="switchChart('sport','line',this)">📈 Линейна</button>
+          <button class="ctype-btn" onclick="switchChart('sport','pie',this)">🥧 Кръгова</button>
+        </div>
+        <div class="color-palette">
+          <span>🎨 Цвят:</span>
+          <div class="color-swatch active" style="background:#16a34a;" onclick="setPen(this,'#16a34a')"></div>
+          <div class="color-swatch" style="background:#2563eb;" onclick="setPen(this,'#2563eb')"></div>
+          <div class="color-swatch" style="background:#ea580c;" onclick="setPen(this,'#ea580c')"></div>
+          <div class="color-swatch" style="background:#d97706;" onclick="setPen(this,'#d97706')"></div>
+          <div class="color-swatch" style="background:#7c3aed;" onclick="setPen(this,'#7c3aed')"></div>
+          <div class="color-swatch" style="background:#db2777;" onclick="setPen(this,'#db2777')"></div>
+          <div class="color-swatch" style="background:#0891b2;" onclick="setPen(this,'#0891b2')"></div>
+        </div>
+        <div id="sport-bar"><div class="svg-chart-wrap" id="wrap-sport-bar"></div></div>
+        <div id="sport-line" style="display:none;"><div class="svg-chart-wrap" id="wrap-sport-line"></div></div>
+        <div id="sport-pie" style="display:none;"><div class="pie-wrap" id="wrap-sport-pie"></div></div>
+        <div class="tip" style="margin-top:0.5rem;">
+          <div class="tip-icon">💡</div>
+          <div class="tip-text">При <strong>кръговата диаграма</strong> тя е неоцветена — кликни върху всяко парче за да го оцветиш сам!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 4: ОЦЕНКИ — самостоятелна
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:3rem;">
+    <div class="sec-tag">Самостоятелна задача</div>
+    <h2 class="sec-title">Оценки в 5. клас</h2>
+    <p class="sec-desc">В 5. клас има <strong>48 ученици</strong>. Оценките по математика: 3 — слаб, 6 — среден, 24 — добър, 9 — мн. добър, 6 — отличен. Изчисли процента за всяка оценка!</p>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head">
+        <div class="itbl-head-icon">📝</div>
+        <div><h4>Попълни таблицата</h4><p>Формула: % = брой / 48 · 100</p></div>
+      </div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Оценка</th><th>Брой</th><th>% от 48</th></tr></thead>
+          <tbody>
+            <tr><td class="given">2 (слаб)</td><td class="given">3</td><td><input type="number" class="cell-inp" id="g2p" placeholder="?" step="0.1"></td></tr>
+            <tr><td class="given">3 (среден)</td><td class="given">6</td><td><input type="number" class="cell-inp" id="g3p" placeholder="?" step="0.1"></td></tr>
+            <tr><td class="given">4 (добър)</td><td class="given">24</td><td><input type="number" class="cell-inp" id="g4p" placeholder="?"></td></tr>
+            <tr><td class="given">5 (мн.добър)</td><td class="given">9</td><td><input type="number" class="cell-inp" id="g5p" placeholder="?" step="0.1"></td></tr>
+            <tr><td class="given">6 (отличен)</td><td class="given">6</td><td><input type="number" class="cell-inp" id="g6p" placeholder="?" step="0.1"></td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+          <button class="btn" onclick="checkGrades()">✓ Провери</button>
+          <div class="tbl-feedback" id="fb_grades"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-top"><div class="chart-top-icon">📊</div><div><h4>Диаграма на оценките</h4><p>Попълни правилно таблицата, за да отключиш!</p></div></div>
+      <div class="chart-body">
+        <div id="grades-locked" class="chart-locked">
+          <div class="lock-icon">🔒</div>
+          <p>Попълни правилно процентите в таблицата, за да построиш диаграмата!</p>
+        </div>
+        <div id="grades-content" style="display:none;">
+          <div class="chart-type-row">
+            <button class="ctype-btn on" onclick="switchChart('grades','bar',this)">📊 Стълбовидна</button>
+            <button class="ctype-btn" onclick="switchChart('grades','pie',this)">🥧 Кръгова</button>
+          </div>
+          <div class="color-palette">
+            <span>🎨 Цвят:</span>
+            <div class="color-swatch active" style="background:#16a34a;" onclick="setPen(this,'#16a34a')"></div>
+            <div class="color-swatch" style="background:#dc2626;" onclick="setPen(this,'#dc2626')"></div>
+            <div class="color-swatch" style="background:#2563eb;" onclick="setPen(this,'#2563eb')"></div>
+            <div class="color-swatch" style="background:#d97706;" onclick="setPen(this,'#d97706')"></div>
+            <div class="color-swatch" style="background:#7c3aed;" onclick="setPen(this,'#7c3aed')"></div>
+            <div class="color-swatch" style="background:#0891b2;" onclick="setPen(this,'#0891b2')"></div>
+          </div>
+          <div id="grades-bar"><div class="svg-chart-wrap" id="wrap-grades-bar"></div></div>
+          <div id="grades-pie" style="display:none;"><div class="pie-wrap" id="wrap-grades-pie"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 5: ИЗГЛЕДАНИ ФИЛМИ
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:3rem;">
+    <div class="sec-tag">Задача 5 · Четене от диаграма</div>
+    <h2 class="sec-title">Изгледани филми</h2>
+    <p class="sec-desc">Стълбовидната диаграма показва колко филма са гледали петокласниците за месец. Прочети стойностите от диаграмата и попълни таблицата!</p>
+
+    <div class="chart-section">
+      <div class="chart-top"><div class="chart-top-icon">🎬</div><div><h4>Прочети от диаграмата</h4><p>Внимателно гледай височината на всеки стълб!</p></div></div>
+      <div class="chart-body">
+        <div class="svg-chart-wrap" id="wrap-movies-given"></div>
+      </div>
+    </div>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head"><div class="itbl-head-icon">📋</div><div><h4>Попълни таблицата</h4><p>Въведи броя филми за всеки ученик от диаграмата.</p></div></div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Ученик</th><th>Боби</th><th>Мила</th><th>Ани</th><th>Петя</th><th>Андрей</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="given">Брой филми</td>
+              <td><input type="number" class="cell-inp" id="mv1" placeholder="?" style="width:60px;"></td>
+              <td><input type="number" class="cell-inp" id="mv2" placeholder="?" style="width:60px;"></td>
+              <td><input type="number" class="cell-inp" id="mv3" placeholder="?" style="width:60px;"></td>
+              <td><input type="number" class="cell-inp" id="mv4" placeholder="?" style="width:60px;"></td>
+              <td><input type="number" class="cell-inp" id="mv5" placeholder="?" style="width:60px;"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+          <button class="btn" onclick="checkMovies()">✓ Провери</button>
+          <div class="tbl-feedback" id="fb_movies"></div>
+        </div>
+        <div id="movie-qs" style="display:none;margin-top:1.25rem;display:flex;flex-direction:column;gap:0.75rem;">
+          <div>
+            <p style="font-weight:700;margin-bottom:0.4rem;">б) Колко филма са изгледали децата общо?</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq1','29')">25</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,true,'mq1','')">29</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq1','29')">31</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq1','29')">27</button>
+            </div>
+            <div class="tbl-feedback" id="mq1"></div>
+          </div>
+          <div>
+            <p style="font-weight:700;margin-bottom:0.4rem;">в) Кой е гледал най-много филми?</p>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq2','Андрей (10)')">Петя</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,true,'mq2','')">Андрей</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq2','Андрей (10)')">Мила</button>
+              <button class="btn btn-sm btn-outline" onclick="ansQ(this,false,'mq2','Андрей (10)')">Ани</button>
+            </div>
+            <div class="tbl-feedback" id="mq2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ЗАДАЧА 6: ЛЮБИМ ПРЕДМЕТ (с %)
+  ══════════════════════════════════════ -->
+  <div class="reveal" style="margin-top:3rem;">
+    <div class="sec-tag">Задача 6 · Проценти + Избор на диаграма</div>
+    <h2 class="sec-title">Любим предмет — проценти</h2>
+    <p class="sec-desc">
+      В анкета <strong>200 ученика</strong> посочили любимия си предмет:<br>
+      Математика — <strong>30%</strong>, БЕЛ — <strong>20%</strong>, История — <strong>15%</strong>,
+      Природни науки — <strong>25%</strong>, Изобразително — <strong>10%</strong>.<br>
+      <strong>а)</strong> Изчисли колко ученика предпочитат всеки предмет (% / 100 · 200) и попълни таблицата.<br>
+      <strong>б)</strong> Избери вид диаграма и я оцвети!
+    </p>
+
+    <div class="itbl-wrap">
+      <div class="itbl-head"><div class="itbl-head-icon">🏫</div><div><h4>Попълни таблицата</h4><p>Изчисли: %/100 · 200 = брой ученици</p></div></div>
+      <div class="itbl-body">
+        <table class="data-table">
+          <thead><tr><th>Предмет</th><th>Процент</th><th>Брой от 200</th></tr></thead>
+          <tbody>
+            <tr><td class="given">Математика</td><td class="given">30%</td><td><input type="number" class="cell-inp" id="s1" placeholder="?"></td></tr>
+            <tr><td class="given">БЕЛ</td><td class="given">20%</td><td><input type="number" class="cell-inp" id="s2" placeholder="?"></td></tr>
+            <tr><td class="given">История</td><td class="given">15%</td><td><input type="number" class="cell-inp" id="s3" placeholder="?"></td></tr>
+            <tr><td class="given">Природни науки</td><td class="given">25%</td><td><input type="number" class="cell-inp" id="s4" placeholder="?"></td></tr>
+            <tr><td class="given">Изобразително</td><td class="given">10%</td><td><input type="number" class="cell-inp" id="s5" placeholder="?"></td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;margin-top:0.5rem;">
+          <button class="btn" onclick="checkSubjects()">✓ Провери</button>
+          <span style="font-size:0.9rem;color:var(--ink-light);">Сумата трябва да е 200!</span>
+        </div>
+        <div class="tbl-feedback" id="fb_subj"></div>
+      </div>
+    </div>
+
+    <div class="chart-section">
+      <div class="chart-top"><div class="chart-top-icon">📊</div><div><h4>Избери диаграма и я оцвети!</h4><p>Попълни правилно таблицата, за да отключиш!</p></div></div>
+      <div class="chart-body">
+        <div id="subj-locked" class="chart-locked">
+          <div class="lock-icon">🔒</div>
+          <p>Попълни правилно таблицата, за да построиш диаграмата!</p>
+        </div>
+        <div id="subj-content" style="display:none;">
+          <div class="chart-type-row">
+            <button class="ctype-btn on" onclick="switchChart('subj','bar',this)">📊 Стълбовидна</button>
+            <button class="ctype-btn" onclick="switchChart('subj','pie',this)">🥧 Кръгова</button>
+            <button class="ctype-btn" onclick="switchChart('subj','line',this)">📈 Линейна</button>
+          </div>
+          <div class="color-palette">
+            <span>🎨 Цвят:</span>
+            <div class="color-swatch active" style="background:#16a34a;" onclick="setPen(this,'#16a34a')"></div>
+            <div class="color-swatch" style="background:#2563eb;" onclick="setPen(this,'#2563eb')"></div>
+            <div class="color-swatch" style="background:#ea580c;" onclick="setPen(this,'#ea580c')"></div>
+            <div class="color-swatch" style="background:#d97706;" onclick="setPen(this,'#d97706')"></div>
+            <div class="color-swatch" style="background:#7c3aed;" onclick="setPen(this,'#7c3aed')"></div>
+            <div class="color-swatch" style="background:#db2777;" onclick="setPen(this,'#db2777')"></div>
+            <div class="color-swatch" style="background:#0891b2;" onclick="setPen(this,'#0891b2')"></div>
+          </div>
+          <div id="subj-bar"><div class="svg-chart-wrap" id="wrap-subj-bar"></div></div>
+          <div id="subj-pie" style="display:none;"><div class="pie-wrap" id="wrap-subj-pie"></div></div>
+          <div id="subj-line" style="display:none;"><div class="svg-chart-wrap" id="wrap-subj-line"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="answer-box" id="ans-subj" style="display:none;">
+      ✅ 30%→60 | 20%→40 | 15%→30 | 25%→50 | 10%→20. Сума: 60+40+30+50+20 = 200 ✓
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="klas-6.html">6 клас</a>
+    <a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════
+//  GLOBALS
+// ═══════════════════════════════════════════════════
+var penColor = '#16a34a';
+
+function setPen(el, c) {
+  document.querySelectorAll('.color-swatch').forEach(function(s){ s.classList.remove('active'); });
+  el.classList.add('active');
+  penColor = c;
+}
+
+// ═══════════════════════════════════════════════════
+//  SVG BAR CHART — proper proportional bars
+//  params: containerId, labels[], values[], yLabel
+// ═══════════════════════════════════════════════════
+function drawBar(containerId, labels, values, yLabel) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+
+  var W = 540, H = 260;
+  var padL = 48, padR = 20, padT = 28, padB = 52;
+  var chartW = W - padL - padR;
+  var chartH = H - padT - padB;
+
+  var maxVal = Math.max.apply(null, values);
+  // Round up maxVal to nice number
+  var niceMax = Math.ceil(maxVal / 10) * 10;
+  if (niceMax === 0) niceMax = 10;
+
+  var n = values.length;
+  var barW = Math.floor(chartW / n * 0.55);
+  var gap  = Math.floor(chartW / n);
+
+  // Y-axis gridlines & labels
+  var gridSteps = 5;
+  var step = niceMax / gridSteps;
+  var gridLines = '';
+  var yLabels = '';
+  for (var i = 0; i <= gridSteps; i++) {
+    var val = i * step;
+    var yPos = padT + chartH - (val / niceMax) * chartH;
+    gridLines += '<line x1="'+padL+'" y1="'+yPos.toFixed(1)+'" x2="'+(W-padR)+'" y2="'+yPos.toFixed(1)+'" stroke="#e2e8f0" stroke-width="1"/>';
+    yLabels += '<text x="'+(padL-6)+'" y="'+(yPos+4).toFixed(1)+'" text-anchor="end" font-size="11" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="600">'+Math.round(val)+'</text>';
+  }
+
+  // Bars + labels
+  var bars = '';
+  var xLabels = '';
+  for (var j = 0; j < n; j++) {
+    var v = values[j];
+    var barH = (v / niceMax) * chartH;
+    var x = padL + j * gap + Math.floor((gap - barW) / 2);
+    var y = padT + chartH - barH;
+    var id = containerId + '-bar-' + j;
+    bars += '<rect id="'+id+'" x="'+x+'" y="'+y.toFixed(1)+'" width="'+barW+'" height="'+barH.toFixed(1)+'"'
+          + ' fill="#16a34a" rx="4" ry="4" style="cursor:pointer;" onclick="clickBar(\''+id+'\')" />'
+          + '<text x="'+(x + barW/2).toFixed(1)+'" y="'+(y - 6).toFixed(1)+'" text-anchor="middle" font-size="12" font-weight="800" fill="#052e16" font-family="Nunito,sans-serif">'+v+'</text>';
+    // x-axis label (wrap if long)
+    var lbl = labels[j];
+    xLabels += '<text x="'+(x + barW/2).toFixed(1)+'" y="'+(padT + chartH + 20)+'" text-anchor="middle" font-size="11" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="700">'+lbl+'</text>';
+  }
+
+  // Axes
+  var axes = '<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>'
+           + '<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>';
+
+  // Y-axis label
+  var yAxisLabel = yLabel ? '<text transform="rotate(-90)" x="-'+(padT+chartH/2)+'" y="12" text-anchor="middle" font-size="11" fill="#14532d" font-family="Nunito,sans-serif" font-weight="700">'+yLabel+'</text>' : '';
+
+  container.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:'+W+'px;display:block;overflow:visible;">'
+    + yAxisLabel + gridLines + axes + bars + yLabels + xLabels
+    + '</svg>';
+}
+
+function clickBar(id) {
+  var el = document.getElementById(id);
+  if (el) el.setAttribute('fill', penColor);
+}
+
+// ═══════════════════════════════════════════════════
+//  SVG LINE CHART
+//  params: containerId, labels[], values[], yMax, dotColor
+// ═══════════════════════════════════════════════════
+function drawLine(containerId, labels, values, yMax, dotColor) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  dotColor = dotColor || '#16a34a';
+
+  var W = 540, H = 240;
+  var padL = 44, padR = 20, padT = 28, padB = 48;
+  var chartW = W - padL - padR;
+  var chartH = H - padT - padB;
+  var n = values.length;
+
+  var niceMax = yMax || Math.ceil(Math.max.apply(null,values) / 5) * 5;
+
+  // Grid & Y labels
+  var gridSteps = 5;
+  var step = niceMax / gridSteps;
+  var grid = '', ylbls = '';
+  for (var i = 0; i <= gridSteps; i++) {
+    var v = i * step;
+    var yp = (padT + chartH - (v/niceMax)*chartH).toFixed(1);
+    grid  += '<line x1="'+padL+'" y1="'+yp+'" x2="'+(W-padR)+'" y2="'+yp+'" stroke="#e2e8f0" stroke-width="1"/>';
+    ylbls += '<text x="'+(padL-5)+'" y="'+(parseFloat(yp)+4)+'" text-anchor="end" font-size="11" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="600">'+Math.round(v)+'</text>';
+  }
+
+  // Points
+  var pts = values.map(function(v,i){
+    return {
+      x: padL + (n===1 ? chartW/2 : i/(n-1)*chartW),
+      y: padT + chartH - (v/niceMax)*chartH,
+      v: v
+    };
+  });
+
+  var pathD = pts.map(function(p,i){ return (i===0?'M':'L')+p.x.toFixed(1)+','+p.y.toFixed(1); }).join(' ');
+
+  var dots = pts.map(function(p,i){
+    var id = containerId+'-dot-'+i;
+    return '<circle id="'+id+'" cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="7" fill="'+dotColor+'" stroke="#fff" stroke-width="2.5" style="cursor:pointer;" onclick="clickDot(\''+id+'\')"/>'
+         + '<text x="'+p.x.toFixed(1)+'" y="'+(p.y-14).toFixed(1)+'" text-anchor="middle" font-size="12" font-weight="800" fill="#052e16" font-family="Nunito,sans-serif">'+p.v+'</text>'
+         + '<text x="'+p.x.toFixed(1)+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="11" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="700">'+labels[i]+'</text>';
+  }).join('');
+
+  var axes = '<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>'
+           + '<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>';
+
+  container.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:'+W+'px;display:block;overflow:visible;">'
+    + grid + axes
+    + '<path d="'+pathD+'" fill="none" stroke="'+dotColor+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>'
+    + dots + ylbls
+    + '</svg>';
+}
+
+function clickDot(id) {
+  var el = document.getElementById(id);
+  if (el) el.setAttribute('fill', penColor);
+}
+
+// ═══════════════════════════════════════════════════
+//  SVG PIE CHART — uncolored (white + dark stroke)
+//  Student colors each slice by clicking
+// ═══════════════════════════════════════════════════
+function drawPie(containerId, labels, values) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+
+  var total = values.reduce(function(a,b){return a+b;}, 0);
+  var R = 90; // radius in SVG units
+  var cx = 100, cy = 100;
+  var svgSize = 200;
+
+  var slices = '';
+  var cum = 0;
+  values.forEach(function(v, i) {
+    var frac = v / total;
+    var startAngle = cum * 2 * Math.PI - Math.PI/2;
+    var endAngle   = (cum + frac) * 2 * Math.PI - Math.PI/2;
+    cum += frac;
+
+    var x1 = cx + R * Math.cos(startAngle);
+    var y1 = cy + R * Math.sin(startAngle);
+    var x2 = cx + R * Math.cos(endAngle);
+    var y2 = cy + R * Math.sin(endAngle);
+    var large = frac > 0.5 ? 1 : 0;
+
+    var id = containerId + '-slice-' + i;
+
+    // Label inside slice
+    var midAngle = startAngle + (endAngle - startAngle)/2;
+    var lr = R * 0.65;
+    var lx = cx + lr * Math.cos(midAngle);
+    var ly = cy + lr * Math.sin(midAngle);
+    var pct = Math.round(frac*100);
+
+    slices += '<path id="'+id+'" d="M'+cx+','+cy+' L'+x1.toFixed(2)+','+y1.toFixed(2)+' A'+R+','+R+' 0 '+large+',1 '+x2.toFixed(2)+','+y2.toFixed(2)+' Z"'
+            + ' fill="#ffffff" stroke="#14532d" stroke-width="2" style="cursor:pointer;" onclick="clickSlice(\''+id+'\')" />'
+            + '<text x="'+lx.toFixed(1)+'" y="'+(ly+4).toFixed(1)+'" text-anchor="middle" font-size="10" font-weight="800" fill="#052e16" font-family="Nunito,sans-serif" pointer-events="none">'+pct+'%</text>';
+  });
+
+  // Legend
+  var legendItems = values.map(function(v,i){
+    var id = containerId+'-ldot-'+i;
+    return '<div class="legend-item"><div class="legend-dot" id="'+id+'"></div>'+labels[i]+' ('+v+')</div>';
+  }).join('');
+
+  container.innerHTML =
+    '<svg viewBox="0 0 '+svgSize+' '+svgSize+'" width="200" height="200" style="flex-shrink:0;overflow:visible;">'
+    + slices
+    + '</svg>'
+    + '<div class="pie-legend" style="display:flex;flex-direction:column;gap:0.5rem;">'+legendItems+'</div>';
+
+  // Store legend dot ids for sync coloring
+  container._sliceCount = values.length;
+  container._containerId = containerId;
+}
+
+function clickSlice(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.setAttribute('fill', penColor);
+  // Sync legend dot
+  var parts = id.split('-slice-');
+  if (parts.length === 2) {
+    var ldot = document.getElementById(parts[0] + '-ldot-' + parts[1]);
+    if (ldot) { ldot.style.background = penColor; ldot.style.borderColor = penColor; }
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  CHART TYPE SWITCHER
+// ═══════════════════════════════════════════════════
+var chartData = {
+  c1:     { labels:['4. клас','5. клас','6. клас'], values:[77,99,88], yMax:110 },
+  sport:  { labels:['Гимнастика','Плуване','Футбол','Баскетбол','Тенис'], values:[4,3,10,2,5], yMax:12 },
+  grades: { labels:['2 (слаб)','3 (среден)','4 (добър)','5 (м.добър)','6 (отличен)'], values:[3,6,24,9,6], yMax:26 },
+  subj:   { labels:['Мат.','БЕЛ','История','ПН','Изобр.'], values:[60,40,30,50,20], yMax:70 }
+};
+
+function switchChart(id, type, btn) {
+  btn.parentElement.querySelectorAll('.ctype-btn').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+
+  ['bar','line','pie'].forEach(function(t){
+    var el = document.getElementById(id+'-'+t);
+    if (el) el.style.display = (t===type) ? 'block' : 'none';
+  });
+
+  var d = chartData[id];
+  if (!d) return;
+
+  if (type === 'bar')  drawBar('wrap-'+id+'-bar',  d.labels, d.values, 'Брой');
+  if (type === 'line') drawLine('wrap-'+id+'-line', d.labels, d.values, d.yMax);
+  if (type === 'pie')  drawPie('wrap-'+id+'-pie',  d.labels, d.values);
+}
+
+// ═══════════════════════════════════════════════════
+//  QUESTION BUTTONS
+// ═══════════════════════════════════════════════════
+function ansQ(el, correct, fbId, hint) {
+  var fb = document.getElementById(fbId);
+  if (fb && fb.className.indexOf('ok') !== -1) return;
+  el.parentElement.querySelectorAll('button').forEach(function(b){ b.style.pointerEvents='none'; });
+  if (correct) {
+    el.style.background='var(--green-btn)'; el.style.color='#fff'; el.style.borderColor='var(--green-btn)';
+    fb.textContent='✅ Верно!'; fb.className='tbl-feedback show ok';
+    if (fbId==='fb_movies') { var mq=document.getElementById('movie-qs'); if(mq) mq.style.display='flex'; }
+  } else {
+    el.style.background='#fef2f2'; el.style.color='#dc2626'; el.style.borderColor='#dc2626';
+    fb.textContent='❌ Опитай пак! Верният отговор е: '+hint; fb.className='tbl-feedback show no';
+    el.parentElement.querySelectorAll('button').forEach(function(b){ b.style.pointerEvents='auto'; });
+    el.style.pointerEvents='none';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+//  CHECK FUNCTIONS
+// ═══════════════════════════════════════════════════
+function checkTbl1() {
+  var ok = checkCells([{id:'t1c1',v:77},{id:'t1c2',v:99},{id:'t1c3',v:88}], 0.5);
+  var fb = document.getElementById('fb_tbl1');
+  if (ok) {
+    fb.textContent='🎉 Браво! Всички стойности са верни!'; fb.className='tbl-feedback show ok';
+    document.getElementById('chart1-locked').style.display='none';
+    document.getElementById('chart1-content').style.display='block';
+    document.getElementById('ans1').style.display='block';
+    drawBar('wrap-c1-bar', chartData.c1.labels, chartData.c1.values, 'Брой ученици');
+  } else {
+    fb.textContent='❌ Провери! (14/100·550=77, 18/100·550=99, 16/100·550=88)'; fb.className='tbl-feedback show no';
+  }
+}
+
+function checkGrades() {
+  var ok = checkCells([{id:'g2p',v:6.25},{id:'g3p',v:12.5},{id:'g4p',v:50},{id:'g5p',v:18.75},{id:'g6p',v:12.5}], 0.4);
+  var fb = document.getElementById('fb_grades');
+  if (ok) {
+    fb.textContent='🎉 Отлично! Всички проценти са верни!'; fb.className='tbl-feedback show ok';
+    document.getElementById('grades-locked').style.display='none';
+    document.getElementById('grades-content').style.display='block';
+    drawBar('wrap-grades-bar', chartData.grades.labels, chartData.grades.values, 'Брой ученици');
+  } else {
+    fb.textContent='❌ Провери! Формула: брой/48·100. Напр: 3/48·100≈6.25%'; fb.className='tbl-feedback show no';
+  }
+}
+
+function checkMovies() {
+  var ok = checkCells([{id:'mv1',v:2},{id:'mv2',v:6},{id:'mv3',v:4},{id:'mv4',v:7},{id:'mv5',v:10}], 0.1);
+  var fb = document.getElementById('fb_movies');
+  if (ok) {
+    fb.textContent='🎉 Браво! Прочел си правилно от диаграмата!'; fb.className='tbl-feedback show ok';
+    document.getElementById('movie-qs').style.display='flex';
+  } else {
+    fb.textContent='❌ Провери! Прочети внимателно стойностите от диаграмата.'; fb.className='tbl-feedback show no';
+  }
+}
+
+function checkSubjects() {
+  var ok = checkCells([{id:'s1',v:60},{id:'s2',v:40},{id:'s3',v:30},{id:'s4',v:50},{id:'s5',v:20}], 0.5);
+  var fb = document.getElementById('fb_subj');
+  if (ok) {
+    fb.textContent='🎉 Отлично! Всички са верни! 60+40+30+50+20=200 ✓'; fb.className='tbl-feedback show ok';
+    document.getElementById('subj-locked').style.display='none';
+    document.getElementById('subj-content').style.display='block';
+    document.getElementById('ans-subj').style.display='block';
+    drawBar('wrap-subj-bar', chartData.subj.labels, chartData.subj.values, 'Брой ученици');
+  } else {
+    fb.textContent='❌ Провери! Формула: %/100·200'; fb.className='tbl-feedback show no';
+  }
+}
+
+// Generic cell checker
+function checkCells(spec, tol) {
+  var allOk = true;
+  spec.forEach(function(s){
+    var inp = document.getElementById(s.id);
+    if (!inp) return;
+    var val = parseFloat(inp.value);
+    if (!isNaN(val) && Math.abs(val - s.v) <= tol) { inp.className='cell-inp ok'; }
+    else { inp.className='cell-inp no'; allOk=false; }
+  });
+  return allOk;
+}
+
+// ═══════════════════════════════════════════════════
+//  INIT — draw charts that are always visible
+// ═══════════════════════════════════════════════════
+window.addEventListener('load', function() {
+  // Temperature line (always shown)
+  drawLine('wrap-temp-line',
+    ['Пон','Вт','Ср','Чет','Пет','Съб','Нед'],
+    [7,5,8,6,7,6,4], 10, '#16a34a');
+
+  // Sport bar (default tab)
+  drawBar('wrap-sport-bar', chartData.sport.labels, chartData.sport.values, 'Брой ученици');
+
+  // Movies reference bar (given, not colorable — greyed)
+  drawMoviesGiven();
+});
+
+function drawMoviesGiven() {
+  var container = document.getElementById('wrap-movies-given');
+  if (!container) return;
+  var labels = ['Боби','Мила','Ани','Петя','Андрей'];
+  var values = [2,6,4,7,10];
+  var colors = ['#db2777','#16a34a','#2563eb','#d97706','#7c3aed'];
+
+  var W=540, H=240, padL=44, padR=20, padT=28, padB=48;
+  var chartW=W-padL-padR, chartH=H-padT-padB;
+  var niceMax=12, n=labels.length;
+  var barW=Math.floor(chartW/n*0.55), gap=Math.floor(chartW/n);
+
+  var gridSteps=6, step=niceMax/gridSteps;
+  var grid='', ylbls='';
+  for (var i=0;i<=gridSteps;i++){
+    var val=i*step, yp=(padT+chartH-(val/niceMax)*chartH).toFixed(1);
+    grid  +='<line x1="'+padL+'" y1="'+yp+'" x2="'+(W-padR)+'" y2="'+yp+'" stroke="#e2e8f0" stroke-width="1"/>';
+    ylbls +='<text x="'+(padL-5)+'" y="'+(parseFloat(yp)+4)+'" text-anchor="end" font-size="11" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="600">'+Math.round(val)+'</text>';
+  }
+
+  var bars='', xls='';
+  for (var j=0;j<n;j++){
+    var v=values[j], barH=(v/niceMax)*chartH;
+    var x=padL+j*gap+Math.floor((gap-barW)/2), y=padT+chartH-barH;
+    bars+='<rect x="'+x+'" y="'+y.toFixed(1)+'" width="'+barW+'" height="'+barH.toFixed(1)+'" fill="'+colors[j]+'" rx="4"/>'
+        +'<text x="'+(x+barW/2).toFixed(1)+'" y="'+(y-6).toFixed(1)+'" text-anchor="middle" font-size="13" font-weight="800" fill="#052e16" font-family="Nunito,sans-serif">'+v+'</text>';
+    xls +='<text x="'+(x+barW/2).toFixed(1)+'" y="'+(padT+chartH+20)+'" text-anchor="middle" font-size="12" fill="#4b7a5e" font-family="Nunito,sans-serif" font-weight="700">'+labels[j]+'</text>';
+  }
+
+  var axes='<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>'
+          +'<line x1="'+padL+'" y1="'+(padT+chartH)+'" x2="'+(W-padR)+'" y2="'+(padT+chartH)+'" stroke="#14532d" stroke-width="2.5"/>';
+
+  container.innerHTML='<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:'+W+'px;display:block;overflow:visible;">'+grid+axes+bars+ylbls+xls+'</svg>';
+}
+
+window.addEventListener('resize', function(){
+  drawLine('wrap-temp-line',['Пон','Вт','Ср','Чет','Пет','Съб','Нед'],[7,5,8,6,7,6,4],10,'#16a34a');
+});
+
+// ═══════════════════════════════════════════════════
+//  SCROLL REVEAL
+// ═══════════════════════════════════════════════════
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*70); obs.unobserve(e.target); }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+</script>
+</body>
+</html>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Намиране на неизвестна компонента | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint:#d1fae5; --mint-mid:#6ee7b7; --mint-soft:#ecfdf5; --mint-deep:#a7f3d0;
+  --green:#10b981; --green-dark:#065f46; --green-deep:#022c22; --green-mid:#34d399;
+  --teal:#0d9488; --teal-light:#ccfbf1;
+  --blue:#3b82f6; --blue-light:#dbeafe; --blue-soft:#eff6ff;
+  --purple:#8b5cf6; --purple-light:#ede9fe;
+  --orange:#f97316; --orange-light:#fff7ed;
+  --red:#ef4444; --red-light:#fef2f2;
+  --yellow:#fbbf24; --yellow-light:#fefce8;
+  --ink:#022c22; --ink-mid:#065f46; --ink-soft:#6ee7b7;
+  --border:#a7f3d0; --surface:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--mint-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(236,253,245,.97);backdrop-filter:blur(14px);border-bottom:3px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--green);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--green-dark);text-decoration:none;background:var(--mint);border:2px solid var(--border);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--green);color:#fff;border-color:var(--green);}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--green-deep) 0%,var(--teal) 50%,var(--green-mid) 100%);padding:3rem 1.5rem 4.5rem;position:relative;overflow:hidden;text-align:center;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:56px;background:var(--mint-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-blob{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:blob 7s ease-in-out infinite;}
+@keyframes blob{0%,100%{transform:scale(1) translateY(0);}50%{transform:scale(1.07) translateY(-18px);}}
+.hero-inner{position:relative;max-width:780px;margin:0 auto;}
+.crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.1rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;text-shadow:0 4px 24px rgba(6,95,70,.45);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:600px;margin:0 auto 1.4rem;}
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:2rem;}
+.chip{background:rgba(255,255,255,.16);border:2px solid rgba(255,255,255,.3);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+
+/* ── CONTENT ── */
+.content{max-width:900px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+
+/* section tag */
+.stag{display:inline-flex;align-items:center;gap:.4rem;background:var(--green);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.stag.blue{background:var(--blue);}
+.stag.purple{background:var(--purple);}
+.stag.orange{background:var(--orange);}
+.stag.teal{background:var(--teal);}
+.stitle{font-family:'Baloo 2',sans-serif;font-size:1.65rem;font-weight:800;color:var(--green-dark);margin-bottom:.35rem;line-height:1.15;}
+.sdesc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.3rem;}
+
+/* ── CARD ── */
+.card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 24px rgba(16,185,129,.09);}
+.card-hd{padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.card-hd.mint{background:linear-gradient(135deg,var(--green-dark),var(--teal));}
+.card-hd.blue{background:linear-gradient(135deg,#1e3a5f,var(--blue));}
+.card-hd.purple{background:linear-gradient(135deg,#3b0764,var(--purple));}
+.card-hd.orange{background:linear-gradient(135deg,#7c2d12,var(--orange));}
+.card-hd.teal{background:linear-gradient(135deg,var(--green-deep),var(--teal));}
+.card-em{font-size:2rem;}
+.card-hd h3{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.card-hd p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.card-bd{padding:1.4rem 1.5rem;}
+
+/* ── RULE ── */
+.rule{background:var(--mint);border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-t{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;color:var(--ink);}
+.rule strong{color:var(--green-dark);font-weight:900;}
+
+/* ── FORMULA BOX ── */
+.fbox{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;background:var(--mint-soft);border:2.5px solid var(--border);border-radius:14px;padding:.9rem 1.2rem;margin:.75rem 0;font-size:1.05rem;font-weight:800;font-family:monospace;color:var(--ink);}
+.fbox .x{background:var(--orange);color:#fff;border-radius:8px;padding:.15rem .55rem;font-weight:900;}
+.fbox .eq{color:var(--green-dark);font-size:1.2rem;}
+.fbox .known{color:var(--teal);}
+.fbox .arr{font-size:1.4rem;color:var(--green-mid);}
+
+/* ── WORKED EXAMPLE ── */
+.worked{background:var(--mint-soft);border:2px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;margin:.9rem 0;}
+.worked-t{font-weight:900;font-size:1rem;color:var(--green-dark);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;}
+.steps{display:flex;flex-direction:column;gap:.5rem;}
+.step{display:flex;gap:.75rem;align-items:flex-start;}
+.sn{width:28px;height:28px;border-radius:8px;background:var(--teal);color:#fff;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.18rem;}
+.st{font-size:.97rem;line-height:1.75;color:var(--ink);}
+.st .m{background:var(--mint);padding:.06rem .42rem;border-radius:6px;font-weight:800;color:var(--green-dark);font-family:monospace;}
+.st .x{background:var(--orange);color:#fff;border-radius:5px;padding:.06rem .38rem;font-weight:900;font-family:monospace;}
+.ans-box{margin-top:.8rem;background:var(--green);color:#fff;border-radius:12px;padding:.6rem 1.2rem;font-size:1rem;font-weight:800;display:inline-flex;align-items:center;gap:.5rem;}
+
+/* ── TIP ── */
+.tip{background:var(--yellow-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-i{font-size:1.55rem;flex-shrink:0;}
+.tip-b{font-size:.97rem;color:#713f12;line-height:1.75;}
+.tip-b strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* ── REFERENCE TABLE ── */
+.ref-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.93rem;}
+.ref-table th{padding:.6rem .8rem;text-align:left;font-weight:800;font-size:.85rem;color:#fff;}
+.ref-table td{padding:.55rem .8rem;border-bottom:2px solid var(--mint);line-height:1.6;}
+.ref-table tr:last-child td{border-bottom:none;}
+.ref-table .op-col{font-weight:900;font-family:monospace;font-size:1rem;}
+
+/* ── PRACTICE BOX ── */
+.pbox{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(16,185,129,.1);}
+.pbox-hd{padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.pbox-hd h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.pbox-hd p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.pbox-bd{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--mint-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-lbl{font-size:.88rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem;}
+.ex-prob{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;font-family:monospace;}
+.ex-inp{width:130px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--green);}
+.ex-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--green);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(16,185,129,.28);}
+.btn-main:hover{background:var(--green-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--mint);color:var(--green-dark);border:2px solid var(--border);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--border);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+/* ── GENERATOR ── */
+.gen{background:#fff;border:3px solid var(--border);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(16,185,129,.13);}
+.gen-hd{background:linear-gradient(135deg,var(--green-deep),var(--teal));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-hd-l{display:flex;align-items:center;gap:.8rem;}
+.gen-hd-l h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-hd-l p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-bd{padding:1.5rem;}
+.gen-tabs{display:flex;gap:.5rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+.gtab{background:var(--mint);border:2px solid var(--border);border-radius:11px;padding:.45rem 1rem;font-size:.9rem;font-weight:800;color:var(--ink);cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;}
+.gtab:hover{background:var(--border);}
+.gtab.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.gprobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gcard{background:var(--mint-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;transition:box-shadow .2s;}
+.gcard:hover{box-shadow:0 4px 16px rgba(16,185,129,.15);}
+.glet{font-size:.82rem;font-weight:900;color:var(--green-dark);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.07em;}
+.gq{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;}
+.ginp{width:120px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ginp:focus{border-color:var(--green);}
+.ginp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ginp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.grev{font-size:.85rem;font-weight:700;color:var(--green-dark);margin-top:.4rem;min-height:1.2rem;}
+.srow{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.strk{flex:1;background:var(--mint);border-radius:20px;height:16px;overflow:hidden;}
+.sfill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),var(--teal));transition:width .4s;}
+.slbl{font-size:.95rem;font-weight:800;color:var(--green-dark);white-space:nowrap;}
+
+/* ── COMPLEX TASKS PANEL ── */
+.complex{background:#fff;border:3px solid var(--purple-light);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(139,92,246,.1);}
+.complex-hd{background:linear-gradient(135deg,#3b0764,var(--purple));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.complex-hd-l{display:flex;align-items:center;gap:.8rem;}
+.complex-hd-l h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.complex-hd-l p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.complex-bd{padding:1.5rem;}
+.cprobs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.1rem;margin-bottom:1.2rem;}
+.ccard{background:var(--purple-light);border:2px solid #c4b5fd;border-radius:16px;padding:1.2rem 1.3rem;transition:box-shadow .2s;}
+.ccard:hover{box-shadow:0 4px 18px rgba(139,92,246,.18);}
+.clet{font-size:.82rem;font-weight:900;color:#5b21b6;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.07em;}
+.cq{font-size:.97rem;font-weight:800;color:var(--ink);margin-bottom:.6rem;line-height:1.65;}
+.cinp{width:120px;padding:.42rem .55rem;border:2.5px solid #c4b5fd;border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.cinp:focus{border-color:var(--purple);}
+.cinp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.cinp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.crev{font-size:.85rem;font-weight:700;color:#5b21b6;margin-top:.4rem;min-height:1.2rem;}
+
+/* ── QUIZ ── */
+.quiz{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(16,185,129,.1);}
+.quiz-hd{background:linear-gradient(135deg,var(--green-deep),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.quiz-hd h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.quiz-bd{padding:1.4rem 1.5rem;}
+.qq{font-size:1rem;font-weight:800;color:var(--green-dark);margin-bottom:.8rem;}
+.qopts{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.qbtn{background:var(--mint);border:2.5px solid var(--border);border-radius:12px;padding:.5rem 1.1rem;font-size:.97rem;font-weight:800;cursor:pointer;color:var(--ink);font-family:'Nunito',sans-serif;transition:all .18s;}
+.qbtn:hover:not(:disabled){background:var(--green);color:#fff;border-color:var(--green);}
+.qbtn:disabled{cursor:default;}
+.qbtn.correct{background:#dcfce7;border-color:#22c55e;color:#14532d;}
+.qbtn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.qfb{font-size:.9rem;font-weight:700;min-height:1.4rem;margin-bottom:.5rem;}
+.qprog{height:8px;background:var(--mint);border-radius:10px;overflow:hidden;margin-top:.6rem;}
+.qpfill{height:100%;background:linear-gradient(90deg,var(--green),var(--teal));border-radius:10px;transition:width .4s;}
+.qscr{font-size:.88rem;font-weight:700;color:var(--green-dark);margin-top:.3rem;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--green-mid);}
+
+@media(max-width:600px){body{font-size:19px;}.ex-grid,.gprobs,.cprobs{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-blob" style="width:210px;height:210px;left:-55px;top:-45px;animation-delay:0s;"></div>
+  <div class="hero-blob" style="width:140px;height:140px;right:7%;top:9%;animation-delay:2.2s;"></div>
+  <div class="hero-blob" style="width:90px;height:90px;left:62%;bottom:18%;animation-delay:1.1s;"></div>
+  <div class="hero-inner">
+    <div class="crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema3">Десетични дроби</a> › Неизвестна компонента
+    </div>
+    <h1>Намиране на неизвестна компонента</h1>
+    <p class="hero-sub">Събираемо, умаляемо, умалител, множител, делимо и делител — научи правилата и реши задачите!</p>
+    <div class="chips">
+      <span class="chip">➕ Събиране</span>
+      <span class="chip">➖ Изваждане</span>
+      <span class="chip">✖️ Умножение</span>
+      <span class="chip">➗ Деление</span>
+      <span class="chip">🌀 Сложни задачи</span>
+      <span class="chip">🎲 Генератор</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════════
+  ОБЗОР — СПРАВОЧНА ТАБЛИЦА
+═══════════════════════════════════════ -->
+<div class="reveal">
+  <div class="stag">📋 Справочник</div>
+  <h2 class="stitle">Всички правила накратко</h2>
+  <p class="sdesc">Запомни тази таблица — тя ти трябва за всяка задача с неизвестна компонента!</p>
+
+  <div class="card">
+    <div class="card-hd mint">
+      <div class="card-em">📊</div>
+      <div><h3>Таблица с правила за намиране на неизвестна компонента</h3></div>
+    </div>
+    <div class="card-bd" style="padding:0;overflow-x:auto;">
+      <table class="ref-table">
+        <tr style="background:linear-gradient(135deg,var(--green-dark),var(--teal));">
+          <th style="padding:.7rem 1rem;">Действие</th>
+          <th style="padding:.7rem 1rem;">Равенство</th>
+          <th style="padding:.7rem 1rem;">Неизвестното е...</th>
+          <th style="padding:.7rem 1rem;">Намираме го чрез</th>
+          <th style="padding:.7rem 1rem;">Пример</th>
+        </tr>
+        <!-- СЪБИРАНЕ -->
+        <tr style="background:var(--mint-soft);">
+          <td style="padding:.65rem 1rem;"><span style="background:var(--green);color:#fff;border-radius:8px;padding:.15rem .6rem;font-weight:800;font-size:.9rem;">Събиране</span></td>
+          <td class="op-col" style="padding:.65rem 1rem;">x + b = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">събираемо</td>
+          <td style="padding:.65rem 1rem;background:var(--mint);font-weight:800;color:var(--green-dark);">x = c − b</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">x + 3,2 = 7,5<br><strong>x = 7,5 − 3,2 = 4,3</strong></td>
+        </tr>
+        <!-- ИЗВАЖДАНЕ — умаляемо -->
+        <tr>
+          <td rowspan="2" style="padding:.65rem 1rem;"><span style="background:var(--teal);color:#fff;border-radius:8px;padding:.15rem .6rem;font-weight:800;font-size:.9rem;">Изваждане</span></td>
+          <td class="op-col" style="padding:.65rem 1rem;">x − b = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">умаляемо</td>
+          <td style="padding:.65rem 1rem;background:var(--teal-light);font-weight:800;color:var(--teal);">x = c + b</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">x − 1,5 = 4<br><strong>x = 4 + 1,5 = 5,5</strong></td>
+        </tr>
+        <!-- ИЗВАЖДАНЕ — умалител -->
+        <tr style="background:var(--mint-soft);">
+          <td class="op-col" style="padding:.65rem 1rem;">a − x = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">умалител</td>
+          <td style="padding:.65rem 1rem;background:var(--mint);font-weight:800;color:var(--green-dark);">x = a − c</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">8 − x = 2,5<br><strong>x = 8 − 2,5 = 5,5</strong></td>
+        </tr>
+        <!-- УМНОЖЕНИЕ -->
+        <tr>
+          <td style="padding:.65rem 1rem;"><span style="background:var(--blue);color:#fff;border-radius:8px;padding:.15rem .6rem;font-weight:800;font-size:.9rem;">Умножение</span></td>
+          <td class="op-col" style="padding:.65rem 1rem;">x · b = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">множител</td>
+          <td style="padding:.65rem 1rem;background:var(--blue-light);font-weight:800;color:#1d4ed8;">x = c : b</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">x · 4 = 12,8<br><strong>x = 12,8 : 4 = 3,2</strong></td>
+        </tr>
+        <!-- ДЕЛЕНИЕ — делимо -->
+        <tr style="background:var(--mint-soft);">
+          <td rowspan="2" style="padding:.65rem 1rem;"><span style="background:var(--orange);color:#fff;border-radius:8px;padding:.15rem .6rem;font-weight:800;font-size:.9rem;">Деление</span></td>
+          <td class="op-col" style="padding:.65rem 1rem;">x : b = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">делимо</td>
+          <td style="padding:.65rem 1rem;background:var(--orange-light);font-weight:800;color:var(--orange);">x = c · b</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">x : 5 = 3,4<br><strong>x = 3,4 · 5 = 17</strong></td>
+        </tr>
+        <!-- ДЕЛЕНИЕ — делител -->
+        <tr>
+          <td class="op-col" style="padding:.65rem 1rem;">a : x = c</td>
+          <td style="padding:.65rem 1rem;font-weight:700;">делител</td>
+          <td style="padding:.65rem 1rem;background:var(--orange-light);font-weight:800;color:var(--orange);">x = a : c</td>
+          <td style="padding:.65rem 1rem;font-family:monospace;font-size:.92rem;">15 : x = 2,5<br><strong>x = 15 : 2,5 = 6</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="tip">
+    <div class="tip-i">💡</div>
+    <div class="tip-b"><strong>Как да запомниш правилата?</strong>
+    Мисли за „обратното действие": ако не знаеш събираемото — извади; ако не знаеш множителя — раздели; ако не знаеш делимото — умножи. Правилото е винаги: <em>правим обратното действие с известните числа!</em></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  РАЗДЕЛ 1: НЕИЗВЕСТНО СЪБИРАЕМО / УМАЛЯЕМО / УМАЛИТЕЛ
+═══════════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="stag">📌 Раздел 1</div>
+  <h2 class="stitle">Събиране и изваждане — неизвестна компонента</h2>
+
+  <div class="card">
+    <div class="card-hd mint">
+      <div class="card-em">➕➖</div>
+      <div><h3>Неизвестно събираемо, умаляемо и умалител</h3><p>3 формули — 3 примера</p></div>
+    </div>
+    <div class="card-bd">
+
+      <!-- СЪБИРАЕМО -->
+      <div class="rule">
+        <div class="rule-t">➕ Неизвестно събираемо: x + b = c → x = c − b</div>
+        <ul>
+          <li>Ако <strong>x + b = c</strong>, то <strong>x = c − b</strong> (изваждаме известното събираемо от сумата)</li>
+          <li>Пример: x + 3,2 = 7,5 → x = 7,5 − 3,2 = <strong>4,3</strong></li>
+        </ul>
+      </div>
+
+      <!-- УМАЛЯЕМО -->
+      <div class="rule">
+        <div class="rule-t">➖ Неизвестно умаляемо: x − b = c → x = c + b</div>
+        <ul>
+          <li>Ако <strong>x − b = c</strong>, то <strong>x = c + b</strong> (прибавяме умалителя към разликата)</li>
+          <li>Пример: x − 1,5 = 4 → x = 4 + 1,5 = <strong>5,5</strong></li>
+        </ul>
+      </div>
+
+      <!-- УМАЛИТЕЛ -->
+      <div class="rule">
+        <div class="rule-t">➖ Неизвестен умалител: a − x = c → x = a − c</div>
+        <ul>
+          <li>Ако <strong>a − x = c</strong>, то <strong>x = a − c</strong> (изваждаме разликата от умаляемото)</li>
+          <li>Пример: 8 − x = 2,5 → x = 8 − 2,5 = <strong>5,5</strong></li>
+        </ul>
+      </div>
+
+      <!-- WORKED EXAMPLES -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 1 — Неизвестно събираемо</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="x">x</span> + <span class="m">4,7</span> = <span class="m">9,2</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Събираемото намираме: x = 9,2 − 4,7</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">4,5</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 4,5 + 4,7 = 9,2 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 4,5</div>
+        </div>
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 2 — Неизвестно умаляемо</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="x">x</span> − <span class="m">3,6</span> = <span class="m">5,1</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Умаляемото намираме: x = 5,1 + 3,6</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">8,7</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 8,7 − 3,6 = 5,1 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 8,7</div>
+        </div>
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 3 — Неизвестен умалител</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="m">12,5</span> − <span class="x">x</span> = <span class="m">4,8</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Умалителят: x = 12,5 − 4,8</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">7,7</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 12,5 − 7,7 = 4,8 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 7,7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE 1 -->
+  <div class="pbox">
+    <div class="pbox-hd" style="background:linear-gradient(135deg,var(--green-dark),var(--teal));">
+      <div style="font-size:1.8rem;">✏️</div>
+      <div><h4>Провери се — Събиране и изваждане</h4><p>Намери неизвестната компонента x</p></div>
+    </div>
+    <div class="pbox-bd">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-lbl">а) Неизвестно събираемо</div>
+          <div class="ex-prob">x + 5,3 = 11,8</div>
+          <input class="ex-inp" id="p1a" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">б) Неизвестно събираемо</div>
+          <div class="ex-prob">2,4 + x = 9</div>
+          <input class="ex-inp" id="p1b" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">в) Неизвестно умаляемо</div>
+          <div class="ex-prob">x − 3,7 = 6,2</div>
+          <input class="ex-inp" id="p1c" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">г) Неизвестен умалител</div>
+          <div class="ex-prob">15 − x = 6,5</div>
+          <input class="ex-inp" id="p1d" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">д) Неизвестно умаляемо</div>
+          <div class="ex-prob">x − 0,75 = 4,25</div>
+          <input class="ex-inp" id="p1e" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">е) Неизвестен умалител</div>
+          <div class="ex-prob">20,4 − x = 8,9</div>
+          <input class="ex-inp" id="p1f" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h1f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="chk1()">✓ Провери</button>
+        <div class="fb" id="fb1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  РАЗДЕЛ 2: УМНОЖЕНИЕ И ДЕЛЕНИЕ
+═══════════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="stag blue">📌 Раздел 2</div>
+  <h2 class="stitle">Умножение и деление — неизвестна компонента</h2>
+
+  <div class="card">
+    <div class="card-hd blue">
+      <div class="card-em">✖️➗</div>
+      <div><h3>Неизвестен множител, делимо и делител</h3><p>3 формули — 3 примера</p></div>
+    </div>
+    <div class="card-bd">
+
+      <div class="rule" style="background:var(--blue-light);border-color:var(--blue-light);">
+        <div class="rule-t" style="color:#1d4ed8;">✖️ Неизвестен множител: x · b = c → x = c : b</div>
+        <ul>
+          <li>Ако <strong>x · b = c</strong>, то <strong>x = c : b</strong> (делим произведението на известния множител)</li>
+          <li>Пример: x · 4 = 12,8 → x = 12,8 : 4 = <strong>3,2</strong></li>
+        </ul>
+      </div>
+
+      <div class="rule" style="background:var(--orange-light);border-color:#fed7aa;">
+        <div class="rule-t" style="color:var(--orange);">➗ Неизвестно делимо: x : b = c → x = c · b</div>
+        <ul>
+          <li>Ако <strong>x : b = c</strong>, то <strong>x = c · b</strong> (умножаваме частното по делителя)</li>
+          <li>Пример: x : 5 = 3,4 → x = 3,4 · 5 = <strong>17</strong></li>
+        </ul>
+      </div>
+
+      <div class="rule" style="background:var(--orange-light);border-color:#fed7aa;">
+        <div class="rule-t" style="color:var(--orange);">➗ Неизвестен делител: a : x = c → x = a : c</div>
+        <ul>
+          <li>Ако <strong>a : x = c</strong>, то <strong>x = a : c</strong> (делим делимото на частното)</li>
+          <li>Пример: 15 : x = 2,5 → x = 15 : 2,5 = <strong>6</strong></li>
+        </ul>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 4 — Неизвестен множител</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="x">x</span> · <span class="m">3</span> = <span class="m">16,5</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Множителят: x = 16,5 : 3</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">5,5</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 5,5 · 3 = 16,5 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 5,5</div>
+        </div>
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 5 — Неизвестно делимо</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="x">x</span> : <span class="m">0,4</span> = <span class="m">15</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Делимото: x = 15 · 0,4</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">6</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 6 : 0,4 = 15 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 6</div>
+        </div>
+
+        <div class="worked">
+          <div class="worked-t">📝 Пример 6 — Неизвестен делител</div>
+          <div class="steps">
+            <div class="step"><div class="sn">1</div><div class="st">Дадено: <span class="m">24</span> : <span class="x">x</span> = <span class="m">3,2</span></div></div>
+            <div class="step"><div class="sn">2</div><div class="st">Делителят: x = 24 : 3,2</div></div>
+            <div class="step"><div class="sn">3</div><div class="st">Смятаме: x = <span class="m">7,5</span></div></div>
+            <div class="step"><div class="sn">✓</div><div class="st">Проверка: 24 : 7,5 = 3,2 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 7,5</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE 2 -->
+  <div class="pbox">
+    <div class="pbox-hd" style="background:linear-gradient(135deg,#1e3a5f,var(--blue));">
+      <div style="font-size:1.8rem;">✏️</div>
+      <div><h4>Провери се — Умножение и деление</h4><p>Намери неизвестната компонента x</p></div>
+    </div>
+    <div class="pbox-bd">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-lbl">а) Неизвестен множител</div>
+          <div class="ex-prob">x · 6 = 21,6</div>
+          <input class="ex-inp" id="p2a" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">б) Неизвестен множител</div>
+          <div class="ex-prob">0,5 · x = 4,5</div>
+          <input class="ex-inp" id="p2b" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">в) Неизвестно делимо</div>
+          <div class="ex-prob">x : 4 = 6,25</div>
+          <input class="ex-inp" id="p2c" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">г) Неизвестен делител</div>
+          <div class="ex-prob">18 : x = 4,5</div>
+          <input class="ex-inp" id="p2d" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">д) Неизвестно делимо</div>
+          <div class="ex-prob">x : 0,2 = 35</div>
+          <input class="ex-inp" id="p2e" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-lbl">е) Неизвестен делител</div>
+          <div class="ex-prob">9,6 : x = 1,2</div>
+          <input class="ex-inp" id="p2f" type="number" step="any" placeholder="x = ?">
+          <div class="ex-hint" id="h2f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="chk2()">✓ Провери</button>
+        <div class="fb" id="fb2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  ГЕНЕРАТОР — ПРОСТИ ЗАДАЧИ
+═══════════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="stag teal">🎲 Генератор</div>
+  <h2 class="stitle">Генератор на задачи с неизвестна компонента</h2>
+
+  <div class="gen">
+    <div class="gen-hd">
+      <div class="gen-hd-l">
+        <div style="font-size:2rem;">🎲</div>
+        <div><h4>Случайни задачи — всеки път нови!</h4><p>Избери вид действие и провери себе си</p></div>
+      </div>
+      <button class="btn-ghost" onclick="genAll()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-bd">
+      <div class="gen-tabs">
+        <button class="gtab on"  onclick="swTab('gs','this_btn')" id="gtb-gs">➕➖ Събиране/Изваждане</button>
+        <button class="gtab"     onclick="swTab('gm','this_btn')" id="gtb-gm">✖️➗ Умножение/Деление</button>
+        <button class="gtab"     onclick="swTab('ga','this_btn')" id="gtb-ga">🌀 Всички видове</button>
+      </div>
+
+      <div id="gp-gs"><div class="gprobs" id="gpr-gs"></div>
+        <div class="btn-row"><button class="btn-main" onclick="chkGen('gs')">✓ Провери</button><button class="btn-ghost" onclick="genTab('gs')">🔄 Нови</button><div class="fb" id="fb-gs"></div></div>
+        <div class="srow"><div class="strk"><div class="sfill" id="sf-gs" style="width:0%"></div></div><div class="slbl" id="sl-gs">0 / 6</div></div>
+      </div>
+      <div id="gp-gm" style="display:none;"><div class="gprobs" id="gpr-gm"></div>
+        <div class="btn-row"><button class="btn-main" onclick="chkGen('gm')">✓ Провери</button><button class="btn-ghost" onclick="genTab('gm')">🔄 Нови</button><div class="fb" id="fb-gm"></div></div>
+        <div class="srow"><div class="strk"><div class="sfill" id="sf-gm" style="width:0%"></div></div><div class="slbl" id="sl-gm">0 / 6</div></div>
+      </div>
+      <div id="gp-ga" style="display:none;"><div class="gprobs" id="gpr-ga"></div>
+        <div class="btn-row"><button class="btn-main" onclick="chkGen('ga')">✓ Провери</button><button class="btn-ghost" onclick="genTab('ga')">🔄 Нови</button><div class="fb" id="fb-ga"></div></div>
+        <div class="srow"><div class="strk"><div class="sfill" id="sf-ga" style="width:0%"></div></div><div class="slbl" id="sl-ga">0 / 6</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  СЛОЖНИ ЗАДАЧИ С НЯКОЛКО ДЕЙСТВИЯ
+═══════════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="stag purple">🌀 Напреднало ниво</div>
+  <h2 class="stitle">Сложни задачи с няколко действия</h2>
+  <p class="sdesc">Тук x се крие зад повече действия — трябва да „разопаковаш" израза стъпка по стъпка!</p>
+
+  <div class="card">
+    <div class="card-hd purple">
+      <div class="card-em">🧩</div>
+      <div><h3>Как решаваме по-сложни уравнения?</h3><p>Пример с обяснение на всяка стъпка</p></div>
+    </div>
+    <div class="card-bd">
+      <div class="rule" style="background:var(--purple-light);border-color:#c4b5fd;">
+        <div class="rule-t" style="color:#5b21b6;">📋 Стратегия за сложни задачи</div>
+        <ol>
+          <li>Пресмятаме всичко, което <strong>може да се пресметне</strong> (известните части).</li>
+          <li>Получаваме по-просто уравнение с <strong>x</strong>.</li>
+          <li>Прилагаме <strong>правилото за съответната компонента</strong>.</li>
+          <li>Правим <strong>проверка</strong>!</li>
+        </ol>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:1rem;">
+
+        <div class="worked" style="border-color:#c4b5fd;background:var(--purple-light);">
+          <div class="worked-t" style="color:#5b21b6;">🧩 Пример А — два сбора с x</div>
+          <div class="steps">
+            <div class="step"><div class="sn" style="background:#7c3aed;">1</div><div class="st">Дадено: <span class="x">x</span> + <span class="m">2,3</span> + <span class="m">1,7</span> = <span class="m">12</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">2</div><div class="st">Пресмятаме известното: 2,3 + 1,7 = <span class="m">4</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">3</div><div class="st">Получаваме: x + 4 = 12</div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">4</div><div class="st">Намираме x: x = 12 − 4 = <span class="m">8</span></div></div>
+            <div class="step"><div class="sn" style="background:var(--green);">✓</div><div class="st">Проверка: 8 + 2,3 + 1,7 = 12 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 8</div>
+        </div>
+
+        <div class="worked" style="border-color:#c4b5fd;background:var(--purple-light);">
+          <div class="worked-t" style="color:#5b21b6;">🧩 Пример Б — умножение и събиране</div>
+          <div class="steps">
+            <div class="step"><div class="sn" style="background:#7c3aed;">1</div><div class="st">Дадено: <span class="x">x</span> · <span class="m">3</span> + <span class="m">4,5</span> = <span class="m">19,5</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">2</div><div class="st">Намираме x · 3: x · 3 = 19,5 − 4,5 = <span class="m">15</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">3</div><div class="st">Намираме x: x = 15 : 3 = <span class="m">5</span></div></div>
+            <div class="step"><div class="sn" style="background:var(--green);">✓</div><div class="st">Проверка: 5 · 3 + 4,5 = 15 + 4,5 = 19,5 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 5</div>
+        </div>
+
+        <div class="worked" style="border-color:#c4b5fd;background:var(--purple-light);">
+          <div class="worked-t" style="color:#5b21b6;">🧩 Пример В — деление и изваждане</div>
+          <div class="steps">
+            <div class="step"><div class="sn" style="background:#7c3aed;">1</div><div class="st">Дадено: <span class="x">x</span> : <span class="m">4</span> − <span class="m">2,5</span> = <span class="m">5</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">2</div><div class="st">Намираме x : 4: x : 4 = 5 + 2,5 = <span class="m">7,5</span></div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">3</div><div class="st">Намираме x: x = 7,5 · 4 = <span class="m">30</span></div></div>
+            <div class="step"><div class="sn" style="background:var(--green);">✓</div><div class="st">Проверка: 30 : 4 − 2,5 = 7,5 − 2,5 = 5 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ x = 30</div>
+        </div>
+
+        <div class="worked" style="border-color:#c4b5fd;background:var(--purple-light);">
+          <div class="worked-t" style="color:#5b21b6;">🧩 Пример Г — задача от живота</div>
+          <div class="steps">
+            <div class="step"><div class="sn" style="background:#7c3aed;">1</div><div class="st">Иван купил 3 еднакви книги и платил общо 25,5 лв. Колко струва 1 книга?</div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">2</div><div class="st">Уравнение: <span class="x">x</span> · 3 = 25,5</div></div>
+            <div class="step"><div class="sn" style="background:#7c3aed;">3</div><div class="st">x = 25,5 : 3 = <span class="m">8,5</span></div></div>
+            <div class="step"><div class="sn" style="background:var(--green);">✓</div><div class="st">Проверка: 8,5 · 3 = 25,5 ✅</div></div>
+          </div>
+          <div class="ans-box">✓ 1 книга = 8,5 лв.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPLEX GENERATOR -->
+  <div class="complex">
+    <div class="complex-hd">
+      <div class="complex-hd-l">
+        <div style="font-size:2rem;">🌀</div>
+        <div><h4>Генератор на сложни задачи с няколко действия</h4><p>Различни задачи при всяко зареждане</p></div>
+      </div>
+      <button class="btn-ghost" onclick="genComplex()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="complex-bd">
+      <div class="cprobs" id="cprobs"></div>
+      <div class="btn-row">
+        <button class="btn-main" style="background:var(--purple);" onclick="chkComplex()">✓ Провери</button>
+        <div class="fb" id="fb-c"></div>
+      </div>
+      <div class="srow">
+        <div class="strk"><div class="sfill" id="sf-c" style="width:0%;background:linear-gradient(90deg,var(--purple),var(--teal));"></div></div>
+        <div class="slbl" id="sl-c">0 / 6</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+  ФИНАЛЕН ТЕСТ
+═══════════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="quiz">
+    <div class="quiz-hd">
+      <div style="font-size:1.8rem;">🏆</div>
+      <div><h4>Финален тест — 7 въпроса</h4></div>
+    </div>
+    <div class="quiz-bd" id="quiz-bd"></div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="desetichni-drobi-chetene-5-klas.html">Четене и записване</a>
+    <a href="zakraglyavane-5-klas.html">Закръгляване</a>
+    <a href="deistviya-desetichni-5-klas.html">Действия с дроби</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ─── helpers ─────────────────────────────────────────
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function r1(){return ri(1,99)/10;}   // 0,1..9,9
+function r2(){return ri(10,99)/10;}  // 1,0..9,9
+function fmt(n){return String(parseFloat(n.toFixed(4))).replace('.',',');}
+function near(a,b,t){return Math.abs(a-b)<=(t||0.001);}
+
+var LETTERS = ['а','б','в','г','д','е'];
+
+// ─── SECTION 1 check ────────────────────────────────
+var s1=[
+  {id:'p1a',ans:6.5, hint:'11,8 − 5,3 = 6,5'},
+  {id:'p1b',ans:6.6, hint:'9 − 2,4 = 6,6'},
+  {id:'p1c',ans:9.9, hint:'6,2 + 3,7 = 9,9'},
+  {id:'p1d',ans:8.5, hint:'15 − 6,5 = 8,5'},
+  {id:'p1e',ans:5.0, hint:'4,25 + 0,75 = 5'},
+  {id:'p1f',ans:11.5,hint:'20,4 − 8,9 = 11,5'},
+];
+function chk1(){chkSet(s1,'fb1','h1');}
+
+// ─── SECTION 2 check ────────────────────────────────
+var s2=[
+  {id:'p2a',ans:3.6, hint:'21,6 : 6 = 3,6'},
+  {id:'p2b',ans:9.0, hint:'4,5 : 0,5 = 9'},
+  {id:'p2c',ans:25.0,hint:'6,25 · 4 = 25'},
+  {id:'p2d',ans:4.0, hint:'18 : 4,5 = 4'},
+  {id:'p2e',ans:7.0, hint:'35 · 0,2 = 7'},
+  {id:'p2f',ans:8.0, hint:'9,6 : 1,2 = 8'},
+];
+function chk2(){chkSet(s2,'fb2','h2');}
+
+function chkSet(spec,fbId,hpfx){
+  var ok=0;
+  spec.forEach(function(s,i){
+    var inp=document.getElementById(s.id);
+    var h=document.getElementById(hpfx+LETTERS[i]);
+    var v=parseFloat(inp.value);
+    if(near(v,s.ans)){inp.className='ex-inp ok';h.textContent='✅ Правилно!';ok++;}
+    else{inp.className='ex-inp no';h.textContent=inp.value===''?'⚠️ Въведи отговор':'❌ '+s.hint;}
+  });
+  var fb=document.getElementById(fbId);
+  if(ok===spec.length){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent='❌ '+ok+' от '+spec.length+' верни.';fb.className='fb show no';}
+}
+
+// ─── GENERATOR — simple ─────────────────────────────
+var genStore={};
+
+function mkAddSubProbs(){
+  var probs=[];
+  var types=['x+b=c','b+x=c','x-b=c','a-x=c'];
+  for(var i=0;i<6;i++){
+    var t=types[ri(0,types.length-1)];
+    var a,b,c,q,ans;
+    if(t==='x+b=c'){ b=r1();ans=r1();c=parseFloat((ans+b).toFixed(2));q='x + '+fmt(b)+' = '+fmt(c); }
+    else if(t==='b+x=c'){ b=r1();ans=r1();c=parseFloat((ans+b).toFixed(2));q=fmt(b)+' + x = '+fmt(c); }
+    else if(t==='x-b=c'){ b=r1();ans=r2();c=parseFloat((ans-b).toFixed(2));q='x − '+fmt(b)+' = '+fmt(c); }
+    else { a=r2();ans=r1();c=parseFloat((a-ans).toFixed(2));q=fmt(a)+' − x = '+fmt(c); }
+    probs.push({q:q+' → x = ?', ans:parseFloat(ans.toFixed(4))});
+  }
+  return probs;
+}
+
+function mkMulDivProbs(){
+  var probs=[];
+  var types=['x*b=c','b*x=c','x/b=c','a/x=c'];
+  for(var i=0;i<6;i++){
+    var t=types[ri(0,types.length-1)];
+    var b,c,q,ans;
+    if(t==='x*b=c'){ b=ri(2,9);ans=r1();c=parseFloat((ans*b).toFixed(2));q='x · '+b+' = '+fmt(c); }
+    else if(t==='b*x=c'){ b=ri(2,9);ans=r1();c=parseFloat((ans*b).toFixed(2));q=b+' · x = '+fmt(c); }
+    else if(t==='x/b=c'){ b=ri(2,8);ans=r1();c=parseFloat((ans/b).toFixed(4));q='x : '+b+' = '+fmt(c); ans=parseFloat((c*b).toFixed(4)); }
+    else { b=ri(2,8);ans=r1();var a=parseFloat((ans*b).toFixed(2));c=ans;q=fmt(a)+' : x = '+fmt(c);ans=b; }
+    probs.push({q:q+' → x = ?', ans:parseFloat(ans.toFixed(4))});
+  }
+  return probs;
+}
+
+function mkAllProbs(){
+  var s=mkAddSubProbs().slice(0,3);
+  var m=mkMulDivProbs().slice(0,3);
+  return s.concat(m);
+}
+
+function renderGen(tabId,probs){
+  genStore[tabId]=probs;
+  var c=document.getElementById('gpr-'+tabId);
+  if(!c)return;
+  c.innerHTML=probs.map(function(p,i){
+    return '<div class="gcard"><div class="glet">'+LETTERS[i]+')</div>'
+      +'<div class="gq">'+p.q+'</div>'
+      +'<input class="ginp" id="gi-'+tabId+'-'+i+'" type="number" step="any" placeholder="x = ?">'
+      +'<div class="grev" id="gr-'+tabId+'-'+i+'"></div></div>';
+  }).join('');
+  document.getElementById('sf-'+tabId).style.width='0%';
+  document.getElementById('sl-'+tabId).textContent='0 / 6';
+  var fb=document.getElementById('fb-'+tabId);
+  fb.textContent='';fb.className='fb';
+}
+
+function genTab(id){
+  var probs;
+  if(id==='gs')probs=mkAddSubProbs();
+  else if(id==='gm')probs=mkMulDivProbs();
+  else probs=mkAllProbs();
+  renderGen(id,probs);
+}
+
+function genAll(){['gs','gm','ga'].forEach(function(id){genTab(id);});}
+
+function chkGen(id){
+  var probs=genStore[id];if(!probs)return;
+  var ok=0;
+  probs.forEach(function(p,i){
+    var inp=document.getElementById('gi-'+id+'-'+i);
+    var rev=document.getElementById('gr-'+id+'-'+i);
+    if(!inp)return;
+    var v=parseFloat(inp.value);
+    if(!isNaN(v)&&near(v,p.ans,0.01)){inp.className='ginp ok';if(rev)rev.textContent='✅';ok++;}
+    else{inp.className='ginp no';if(rev)rev.textContent=inp.value===''?'⚠️':'❌ x = '+fmt(p.ans);}
+  });
+  document.getElementById('sf-'+id).style.width=(ok/probs.length*100)+'%';
+  document.getElementById('sl-'+id).textContent=ok+' / '+probs.length;
+  var fb=document.getElementById('fb-'+id);
+  if(ok===probs.length){fb.textContent='🎉 Отлично!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+probs.length+' верни.';fb.className='fb show no';}
+}
+
+function swTab(id,_){
+  ['gs','gm','ga'].forEach(function(t){
+    document.getElementById('gp-'+t).style.display=(t===id?'block':'none');
+    document.getElementById('gtb-'+t).classList.remove('on');
+  });
+  document.getElementById('gtb-'+id).classList.add('on');
+}
+
+// fix onclick to pass real id
+document.querySelectorAll('.gtab').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var id=btn.id.replace('gtb-','');
+    swTab(id,null);
+    // update all gtab classes
+    document.querySelectorAll('.gtab').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+  });
+});
+
+// ─── COMPLEX GENERATOR ──────────────────────────────
+var complexStore=[];
+
+function mkComplexProbs(){
+  var probs=[];
+  var templates=[
+    // x * a + b = c  →  x = (c-b)/a
+    function(){
+      var a=ri(2,6), b=r1(), x=r1();
+      var c=parseFloat((x*a+b).toFixed(2));
+      return {q:'x · '+a+' + '+fmt(b)+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x·'+a+' = '+fmt(c)+' − '+fmt(b)+' = '+fmt(c-b)+';  x = '+fmt(x)};
+    },
+    // x * a - b = c  →  x = (c+b)/a
+    function(){
+      var a=ri(2,6), b=r1(), x=r1();
+      var c=parseFloat((x*a-b).toFixed(2));
+      return {q:'x · '+a+' − '+fmt(b)+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x·'+a+' = '+fmt(c)+' + '+fmt(b)+' = '+fmt(c+b)+';  x = '+fmt(x)};
+    },
+    // x / a + b = c  →  x = (c-b)*a
+    function(){
+      var a=ri(2,5), b=r1(), x=r2();
+      var c=parseFloat((x/a+b).toFixed(2));
+      return {q:'x : '+a+' + '+fmt(b)+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x:'+a+' = '+fmt(c)+' − '+fmt(b)+' = '+fmt(c-b)+';  x = '+fmt(x)};
+    },
+    // x / a - b = c  →  x = (c+b)*a
+    function(){
+      var a=ri(2,5), b=r1(), x=r2();
+      var c=parseFloat((x/a-b).toFixed(2));
+      return {q:'x : '+a+' − '+fmt(b)+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x:'+a+' = '+fmt(c)+' + '+fmt(b)+' = '+fmt(c+b)+';  x = '+fmt(x)};
+    },
+    // (x + b) * a = c  →  x = c/a - b
+    function(){
+      var a=ri(2,5), b=r1(), x=r1();
+      var c=parseFloat(((x+b)*a).toFixed(2));
+      return {q:'(x + '+fmt(b)+') · '+a+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x + '+fmt(b)+' = '+fmt(c)+' : '+a+' = '+fmt(c/a)+';  x = '+fmt(x)};
+    },
+    // (x - b) * a = c  →  x = c/a + b
+    function(){
+      var a=ri(2,5), b=r1(), x=r2();
+      var c=parseFloat(((x-b)*a).toFixed(2));
+      return {q:'(x − '+fmt(b)+') · '+a+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x − '+fmt(b)+' = '+fmt(c)+' : '+a+' = '+fmt(c/a)+';  x = '+fmt(x)};
+    },
+    // a - x * b = c  →  x = (a-c)/b
+    function(){
+      var a, b=ri(2,5), x=r1(), c;
+      x=parseFloat((ri(1,5)/b).toFixed(2));
+      c=r1();
+      a=parseFloat((c+x*b).toFixed(2));
+      return {q:fmt(a)+' − x · '+b+' = '+fmt(c)+'  →  x = ?', ans:x, hint:'x · '+b+' = '+fmt(a)+' − '+fmt(c)+' = '+fmt(a-c)+';  x = '+fmt(x)};
+    },
+    // задача от живота: купил N еднакви неща, дал M лева, останали R лева
+    function(){
+      var n=ri(2,6), x=r1(), total=parseFloat((n*x).toFixed(2));
+      var paid=parseFloat((total+r1()).toFixed(2));
+      var rest=parseFloat((paid-total).toFixed(2));
+      return {q:'Купил '+n+' еднакви предмета. Дал '+fmt(paid)+' лв., получил ресто '+fmt(rest)+' лв. Каква е цената на 1 предмет?', ans:x, hint:'Платено = '+fmt(paid)+' − '+fmt(rest)+' = '+fmt(total)+';  цена = '+fmt(total)+' : '+n+' = '+fmt(x)};
+    },
+  ];
+
+  // shuffle and pick 6
+  var shuffled=templates.slice().sort(function(){return Math.random()-.5;}).slice(0,6);
+  shuffled.forEach(function(fn){probs.push(fn());});
+  return probs;
+}
+
+function genComplex(){
+  var probs=mkComplexProbs();
+  complexStore=probs;
+  var c=document.getElementById('cprobs');
+  c.innerHTML=probs.map(function(p,i){
+    return '<div class="ccard"><div class="clet">'+LETTERS[i]+')</div>'
+      +'<div class="cq">'+p.q+'</div>'
+      +'<input class="cinp" id="ci-'+i+'" type="number" step="any" placeholder="x = ?">'
+      +'<div class="crev" id="cr-'+i+'"></div></div>';
+  }).join('');
+  document.getElementById('sf-c').style.width='0%';
+  document.getElementById('sl-c').textContent='0 / 6';
+  var fb=document.getElementById('fb-c');
+  fb.textContent='';fb.className='fb';
+}
+
+function chkComplex(){
+  var probs=complexStore;if(!probs||!probs.length)return;
+  var ok=0;
+  probs.forEach(function(p,i){
+    var inp=document.getElementById('ci-'+i);
+    var rev=document.getElementById('cr-'+i);
+    if(!inp)return;
+    var v=parseFloat(inp.value);
+    if(!isNaN(v)&&near(v,p.ans,0.05)){inp.className='cinp ok';if(rev)rev.textContent='✅';ok++;}
+    else{inp.className='cinp no';if(rev)rev.textContent=inp.value===''?'⚠️':'❌ '+p.hint;}
+  });
+  document.getElementById('sf-c').style.width=(ok/probs.length*100)+'%';
+  document.getElementById('sl-c').textContent=ok+' / '+probs.length;
+  var fb=document.getElementById('fb-c');
+  if(ok===probs.length){fb.textContent='🎉 Отлично! Майстор си!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+probs.length+' верни. Виж подсказките!';fb.className='fb show no';}
+}
+
+// ─── QUIZ ────────────────────────────────────────────
+var QS=[
+  {q:'Ако x + 4,5 = 10, тогава x = ?', opts:['5,5','14,5','4,5','6'], ans:0},
+  {q:'Ако x − 2,3 = 5,7, тогава x = ?', opts:['3,4','8','8,0','7,4'], ans:1},
+  {q:'Ако 9 − x = 3,5, тогава x = ?', opts:['12,5','5,5','6,5','5'], ans:1},
+  {q:'Ако x · 5 = 17,5, тогава x = ?', opts:['3,5','12,5','87,5','3'], ans:0},
+  {q:'Ако x : 4 = 3,2, тогава x = ?', opts:['0,8','12,8','7,2','6,4'], ans:1},
+  {q:'Ако 20 : x = 4, тогава x = ?', opts:['80','16','4','5'], ans:3},
+  {q:'x · 3 + 1,5 = 13,5. Колко е x?', opts:['4','5','4,5','3,5'], ans:0},
+];
+var qScore=0,qDone=[];
+function renderQuiz(){
+  qScore=0;qDone=[];
+  var html='';
+  QS.forEach(function(q,qi){
+    html+='<div style="margin-bottom:1.3rem;padding-bottom:1.1rem;border-bottom:2px solid var(--mint);">';
+    html+='<div class="qq">'+(qi+1)+'. '+q.q+'</div>';
+    html+='<div class="qopts">';
+    q.opts.forEach(function(o,oi){
+      html+='<button class="qbtn" id="qb-'+qi+'-'+oi+'" onclick="qAns('+qi+','+oi+')">'+o+'</button>';
+    });
+    html+='</div><div class="qfb" id="qfb-'+qi+'"></div></div>';
+  });
+  html+='<div class="qprog"><div class="qpfill" id="qpf" style="width:0%"></div></div>';
+  html+='<div class="qscr" id="qscr">0 / '+QS.length+' верни</div>';
+  document.getElementById('quiz-bd').innerHTML=html;
+}
+function qAns(qi,oi){
+  if(qDone.indexOf(qi)>=0)return;
+  qDone.push(qi);
+  var q=QS[qi],fb=document.getElementById('qfb-'+qi);
+  q.opts.forEach(function(_,k){
+    var b=document.getElementById('qb-'+qi+'-'+k);
+    b.disabled=true;
+    if(k===q.ans)b.classList.add('correct');
+  });
+  if(oi===q.ans){qScore++;fb.textContent='✅ Правилно!';fb.style.color='#14532d';}
+  else{document.getElementById('qb-'+qi+'-'+oi).classList.add('wrong');fb.textContent='❌ Правилно: '+q.opts[q.ans];fb.style.color='var(--red)';}
+  document.getElementById('qpf').style.width=(qScore/QS.length*100)+'%';
+  document.getElementById('qscr').textContent=qScore+' / '+QS.length+' верни';
+}
+
+// ─── SCROLL REVEAL ───────────────────────────────────
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*60);obs.unobserve(e.target);}
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// ─── INIT ────────────────────────────────────────────
+window.addEventListener('load',function(){
+  genAll();
+  genComplex();
+  renderQuiz();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Математика 7 клас — безплатни учебни материали по официалната програма на МОН. Цели изрази, уравнения, неравенства, геометрия, подготовка за НВО.">
+<title>Математика 7 клас | Учебни материали</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #1a1714;
+    --ink-light: #5a5650;
+    --c7: #1e3a8a;
+    --c7-dark: #162d6e;
+    --c7-light: #eef2fc;
+    --c7-mid: #8faad6;
+    --c5: #c0392b;
+    --c6: #1a7a5e;
+    --gold: #c8942a;
+    --gold-light: #fdf6e3;
+    --border: #e8e2d6;
+    --surface: #ffffff;
+    --nvo: #7c3aed;
+    --nvo-light: #f5f3ff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse at 15% 25%, rgba(30,58,138,0.05) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 75%, rgba(30,58,138,0.03) 0%, transparent 50%);
+    pointer-events: none; z-index: 0;
+  }
+
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(250,248,243,0.94); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.85rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .nav-logo em { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 0.4rem; list-style: none; }
+  .nav-links a { padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--ink-light); transition: all 0.2s; }
+  .nav-links a:hover { background: var(--border); color: var(--ink); }
+  .nav-links .active { background: var(--c7-light); color: var(--c7); font-weight: 700; }
+  .nav-links .n5:hover { background: #fdf0ee; color: var(--c5); }
+  .nav-links .n6:hover { background: #edf7f3; color: var(--c6); }
+
+  .hero { position: relative; z-index: 1; background: var(--c7); padding: 3.5rem 2rem 3rem; overflow: hidden; }
+  .hero::before { content: '7'; position: absolute; right: -2rem; top: -2rem; font-family: 'Playfair Display', serif; font-size: 18rem; font-weight: 900; color: rgba(255,255,255,0.06); line-height: 1; pointer-events: none; }
+  .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: var(--bg); clip-path: ellipse(55% 100% at 50% 100%); }
+  .hero-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .hero-breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 1.25rem; }
+  .hero-breadcrumb a { color: rgba(255,255,255,0.6); text-decoration: none; }
+  .hero-breadcrumb a:hover { color: #fff; }
+  .hero-breadcrumb span { color: rgba(255,255,255,0.35); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 0.3rem 0.9rem; font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.9); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 0.75rem; }
+  .hero h1 em { font-style: italic; color: rgba(255,255,255,0.8); }
+  .hero-desc { font-size: 1rem; color: rgba(255,255,255,0.75); max-width: 500px; line-height: 1.7; margin-bottom: 2rem; }
+  .hero-stats { display: flex; gap: 2rem; flex-wrap: wrap; padding-bottom: 2rem; }
+  .h-stat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: #fff; display: block; }
+  .h-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 0.1rem; }
+
+  /* NVO BANNER */
+  .nvo-banner {
+    background: linear-gradient(135deg, var(--nvo), #5b21b6);
+    border-radius: 16px; padding: 1.25rem 1.75rem;
+    display: flex; align-items: center; gap: 1.25rem;
+    margin-bottom: 2.5rem; color: #fff;
+  }
+  .nvo-icon { font-size: 2rem; flex-shrink: 0; }
+  .nvo-text h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+  .nvo-text p { font-size: 0.82rem; opacity: 0.8; line-height: 1.5; }
+  .nvo-link { margin-left: auto; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600; color: #fff; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+  .nvo-link:hover { background: rgba(255,255,255,0.3); }
+
+  .main { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem 5rem; position: relative; z-index: 1; }
+  .quick-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 3rem; }
+  .quick-link { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.4rem 1rem; font-size: 0.82rem; font-weight: 500; color: var(--ink-light); text-decoration: none; transition: all 0.18s; white-space: nowrap; }
+  .quick-link:hover { background: var(--c7-light); color: var(--c7); border-color: var(--c7-mid); }
+
+  .topic-section { margin-bottom: 3.5rem; }
+  .topic-header { display: flex; align-items: flex-start; gap: 1.25rem; margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 2px solid var(--c7-light); }
+  .topic-num { width: 52px; height: 52px; flex-shrink: 0; background: var(--c7); color: #fff; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; }
+  .topic-info h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .topic-info p { font-size: 0.85rem; color: var(--ink-light); line-height: 1.6; }
+
+  .articles-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+  .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; text-decoration: none; color: inherit; transition: all 0.2s; position: relative; overflow: hidden; }
+  .article-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c7); border-radius: 4px 0 0 4px; transform: scaleY(0); transition: transform 0.2s; }
+  .article-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(30,58,138,0.08); border-color: var(--c7-mid); }
+  .article-card:hover::before { transform: scaleY(1); }
+  .article-card.nvo-card::before { background: var(--nvo); }
+  .article-card.nvo-card:hover { box-shadow: 0 4px 20px rgba(124,58,237,0.1); border-color: #c4b5fd; }
+
+  .article-icon { width: 44px; height: 44px; flex-shrink: 0; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
+  .icon-explain { background: var(--c7-light); }
+  .icon-exercise { background: #fdf0ee; }
+  .icon-summary { background: #edf7f3; }
+  .icon-tip { background: var(--gold-light); }
+  .icon-nvo { background: var(--nvo-light); }
+
+  .article-body { flex: 1; }
+  .article-type { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c7); margin-bottom: 0.25rem; }
+  .t-ex { color: var(--c5); }
+  .t-sum { color: var(--c6); }
+  .t-tip { color: var(--gold); }
+  .t-nvo { color: var(--nvo); }
+  .article-title { font-size: 0.95rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.2rem; }
+  .article-desc { font-size: 0.78rem; color: var(--ink-light); line-height: 1.5; }
+  .article-arrow { color: var(--c7-mid); font-size: 1rem; flex-shrink: 0; transition: transform 0.2s; }
+  .article-card:hover .article-arrow { transform: translateX(4px); }
+  .coming-card { background: var(--bg); border: 2px dashed var(--border); border-radius: 14px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; color: var(--ink-light); font-size: 0.85rem; }
+  .hot-badge { background: #fff3cd; color: #92400e; font-size: 0.62rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.5rem; vertical-align: middle; }
+  .nvo-badge { background: var(--nvo-light); color: var(--nvo); font-size: 0.62rem; font-weight: 700; padding: 0.15rem 0.45rem; border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.5rem; vertical-align: middle; }
+
+  .exam-box { background: var(--ink); border-radius: 20px; padding: 2.5rem; margin-top: 3rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+  .exam-box h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .exam-box p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+  .exam-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .exam-tag { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 0.3rem 0.8rem; font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .exam-num { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--c7); opacity: 0.4; line-height: 1; white-space: nowrap; }
+
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 2rem; text-align: center; font-size: 0.82rem; position: relative; z-index: 1; }
+  footer strong { color: rgba(255,255,255,0.9); }
+  footer a { color: var(--gold); text-decoration: none; }
+  .footer-nav { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .footer-nav a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; }
+  .footer-nav a:hover { color: #fff; }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    nav .nav-links { display: none; }
+    .exam-box { grid-template-columns: 1fr; }
+    .exam-num { display: none; }
+    .nvo-link { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <ul class="nav-links">
+    <li><a href="klas-5.html" class="n5">5 клас</a></li>
+    <li><a href="klas-6.html" class="n6">6 клас</a></li>
+    <li><a href="klas-7.html" class="active">7 клас</a></li>
+    <li><a href="content-plan.html">Всички теми</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="index.html">Начало</a><span>›</span><span>7 клас</span>
+    </div>
+    <div class="hero-tag">✦ Седми клас</div>
+    <h1>Математика<br><em>седми клас</em></h1>
+    <p class="hero-desc">Цели изрази, уравнения, неравенства и геометрия — по официалната програма на МОН. Включва подготовка за НВО.</p>
+    <div class="hero-stats">
+      <div><span class="h-stat-num">7</span><div class="h-stat-label">Основни теми</div></div>
+      <div><span class="h-stat-num">24+</span><div class="h-stat-label">Статии и задачи</div></div>
+      <div><span class="h-stat-num">НВО</span><div class="h-stat-label">Подготовка включена</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- NVO BANNER -->
+  <div class="nvo-banner reveal">
+    <div class="nvo-icon">🎯</div>
+    <div class="nvo-text">
+      <h4>Подготовка за НВО по математика</h4>
+      <p>7 клас завършва с Национално външно оценяване. Намери всички материали за подготовка в раздел „НВО" по-долу.</p>
+    </div>
+    <a href="#nvo" class="nvo-link">Към НВО →</a>
+  </div>
+
+  <div class="quick-nav reveal">
+    <a href="#tema1" class="quick-link">📌 Цели изрази</a>
+    <a href="#tema2" class="quick-link">📌 Уравнения</a>
+    <a href="#tema3" class="quick-link">📌 Геометрични фигури</a>
+    <a href="#tema4" class="quick-link">📌 Еднакви триъгълници</a>
+    <a href="#tema5" class="quick-link">📌 Неравенства</a>
+    <a href="#tema6" class="quick-link">📌 Успоредник</a>
+    <a href="#tema7" class="quick-link">📌 Вероятности</a>
+    <a href="#nvo" class="quick-link">🎯 НВО</a>
+  </div>
+
+  <!-- ТЕМА 1 -->
+  <div class="topic-section reveal" id="tema1">
+    <div class="topic-header">
+      <div class="topic-num">1</div>
+      <div class="topic-info">
+        <h2>Цели изрази</h2>
+        <p>Едночлени, многочлени, формули за съкратено умножение и разлагане на множители.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Едночлен и многочлен — понятия и нормален вид</div>
+          <div class="article-desc">Константа, променлива, параметър — новите понятия в 7 клас.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Събиране и изваждане на многочлени — стъпка по стъпка</div>
+          <div class="article-desc">Подобни членове, скоби, правила за знаците.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-summary">📋</div>
+        <div class="article-body">
+          <div class="article-type t-sum">Резюме</div>
+          <div class="article-title">Формули за съкратено умножение — всички с примери <span class="hot-badge">🔥 Топ</span></div>
+          <div class="article-desc">(a±b)², (a+b)(a-b), (a±b)³ — конспект + задачи.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Разлагане на многочлен на множители — методи и примери</div>
+          <div class="article-desc">Общ множител, формули, групиране — по програмата.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: 10 задачи с цели изрази с решения</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 2 -->
+  <div class="topic-section reveal" id="tema2">
+    <div class="topic-header">
+      <div class="topic-num">2</div>
+      <div class="topic-info">
+        <h2>Уравнения</h2>
+        <p>Линейни, модулни уравнения и задачи за движение, работа и лихва.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Линейно уравнение с едно неизвестно — видове и решаване <span class="hot-badge">🔥 Търсено</span></div>
+          <div class="article-desc">ax+b=0 и (ax+b)(cx+d)=0 — еквивалентни преобразувания.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Модулно уравнение |ax+b|=c — обяснение и примери</div>
+          <div class="article-desc">Ново в 7 клас — два случая, стъпка по стъпка.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-exercise">✏️</div>
+        <div class="article-body">
+          <div class="article-type t-ex">Упражнение</div>
+          <div class="article-title">Задачи за движение, работа и лихва с уравнения</div>
+          <div class="article-desc">Проста лихва, смеси и сплави — по програмата на МОН.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: 12 задачи с уравнения с пълни решения</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 3 -->
+  <div class="topic-section reveal" id="tema3">
+    <div class="topic-header">
+      <div class="topic-num">3</div>
+      <div class="topic-info">
+        <h2>Основни геометрични фигури</h2>
+        <p>Ъгли при успоредни прави, зависимости в триъгълник, признаци за успоредност.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Ъгли при успоредни прави — видове и свойства</div>
+          <div class="article-desc">Съответни, прилежащи, кръстни ъгли — по програмата.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Признаци за успоредност на прави — как да ги разпознаем</div>
+          <div class="article-desc">С чертежи и примери — по официалната програма.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Ъгли в триъгълник — сбор, зависимости и външен ъгъл</div>
+          <div class="article-desc">Сбор на ъглите = 180°, външен ъгъл на триъгълник.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: Построителни задачи — ъгъл, успоредна права</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 4 -->
+  <div class="topic-section reveal" id="tema4">
+    <div class="topic-header">
+      <div class="topic-num">4</div>
+      <div class="topic-info">
+        <h2>Еднакви триъгълници</h2>
+        <p>Три признака за еднаквост, свойства на равнобедрен триъгълник, симетрала и ъглополовяща.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Признаци за еднаквост на триъгълници <span class="hot-badge">🔥 Търсено</span></div>
+          <div class="article-desc">С-С-С, С-Ъ-С, Ъ-С-Ъ — с доказателства и примери.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Свойства на равнобедрен триъгълник и триъгълник с ъгъл 30°</div>
+          <div class="article-desc">Симетрала на отсечка, ъглополовяща — по програмата.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: Задачи с еднакви триъгълници с решения</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 5 -->
+  <div class="topic-section reveal" id="tema5">
+    <div class="topic-header">
+      <div class="topic-num">5</div>
+      <div class="topic-info">
+        <h2>Неравенства</h2>
+        <p>Линейни неравенства, числови интервали и неравенство на триъгълника.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Линейно неравенство с едно неизвестно — решаване и представяне</div>
+          <div class="article-desc">Числови интервали, графично представяне — по програмата.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Неравенство на триъгълника — какво е и защо е важно</div>
+          <div class="article-desc">Зависимост на страни и ъгли в триъгълник.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: 8 задачи с неравенства с решения</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 6 -->
+  <div class="topic-section reveal" id="tema6">
+    <div class="topic-header">
+      <div class="topic-num">6</div>
+      <div class="topic-info">
+        <h2>Успоредник</h2>
+        <p>Определение, видове, свойства и признаци на успоредниците.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Успоредник — определение, видове, свойства и признаци</div>
+          <div class="article-desc">Ромб, правоъгълник, квадрат като видове успоредник.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: Задачи с успоредници с решения</span></div>
+    </div>
+  </div>
+
+  <!-- ТЕМА 7 -->
+  <div class="topic-section reveal" id="tema7">
+    <div class="topic-header">
+      <div class="topic-num">7</div>
+      <div class="topic-info">
+        <h2>Елементи от вероятности и статистика</h2>
+        <p>Кръгови диаграми, вероятност и интерпретиране на данни.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Кръгови диаграми — как се четат и построяват (7 клас)</div>
+          <div class="article-desc">Интерпретиране на данни, построяване по данни.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card">
+        <div class="article-icon icon-exercise">✏️</div>
+        <div class="article-body">
+          <div class="article-type t-ex">Упражнение</div>
+          <div class="article-title">Вероятност в 7 клас — оценяване на шансове с примери</div>
+          <div class="article-desc">Задачи с решения — по програмата.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- НВО SECTION -->
+  <div class="topic-section reveal" id="nvo">
+    <div class="topic-header" style="border-bottom-color: var(--nvo-light);">
+      <div class="topic-num" style="background: var(--nvo);">🎯</div>
+      <div class="topic-info">
+        <h2>Подготовка за НВО</h2>
+        <p>Националното външно оценяване по математика в 7 клас включва задачи от 5, 6 и 7 клас. Тук ще намериш всичко необходимо.</p>
+      </div>
+    </div>
+    <div class="articles-grid">
+      <a href="#" class="article-card nvo-card">
+        <div class="article-icon icon-nvo">🎯</div>
+        <div class="article-body">
+          <div class="article-type t-nvo">НВО Подготовка</div>
+          <div class="article-title">Подготовка за НВО по математика 7 клас — пълен план <span class="hot-badge">🔥 Топ</span></div>
+          <div class="article-desc">Кои теми да учиш, кога и как — стратегия стъпка по стъпка.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card nvo-card">
+        <div class="article-icon icon-nvo">✏️</div>
+        <div class="article-body">
+          <div class="article-type t-nvo">НВО Упражнение</div>
+          <div class="article-title">10 класически задачи за НВО по математика с решения</div>
+          <div class="article-desc">Уравнения, геометрия, вероятност — смесени задачи от НВО формат.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <a href="#" class="article-card nvo-card">
+        <div class="article-icon icon-nvo">📋</div>
+        <div class="article-body">
+          <div class="article-type t-nvo">НВО Резюме</div>
+          <div class="article-title">Всички формули за НВО на едно място — конспект</div>
+          <div class="article-desc">5, 6 и 7 клас — формули, правила и определения за бързо повторение.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+      <div class="coming-card"><span>⏳</span><span>Скоро: Примерни тестове за НВО с решения</span></div>
+    </div>
+  </div>
+
+  <div class="exam-box reveal">
+    <div>
+      <h3>НВО по математика — 7 клас</h3>
+      <p>Националното външно оценяване е важен изпит. Използвай материалите в раздел НВО за системна подготовка.</p>
+      <div class="exam-tags">
+        <span class="exam-tag">Цели изрази</span>
+        <span class="exam-tag">Уравнения</span>
+        <span class="exam-tag">Неравенства</span>
+        <span class="exam-tag">Геометрия</span>
+        <span class="exam-tag">НВО формат</span>
+      </div>
+    </div>
+    <div class="exam-num">7</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="klas-6.html">6 клас</a>
+    <a href="klas-7.html">7 клас</a>
+    <a href="content-plan.html">Всички теми</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Десетични дроби — четене, записване и сравнение | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep:#1e3a5f; --blue-dark:#1d4ed8; --blue:#3b82f6;
+  --blue-mid:#60a5fa; --blue-light:#dbeafe; --blue-soft:#eff6ff;
+  --sky:#0ea5e9; --sky-light:#e0f2fe;
+  --green:#10b981; --green-dark:#065f46; --green-light:#d1fae5;
+  --teal:#0d9488;
+  --ink:#0f172a; --ink-mid:#1e3a5f; --ink-light:#93c5fd;
+  --yellow:#fbbf24; --yellow-light:#fefce8;
+  --red:#ef4444; --red-light:#fef2f2;
+  --border:#bfdbfe; --surface:#fff;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--blue-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--border);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--blue);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--blue-dark);text-decoration:none;background:var(--blue-light);border:2px solid var(--border);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue-dark) 50%,var(--sky) 100%);padding:3rem 1.5rem 4.5rem;position:relative;overflow:hidden;text-align:center;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:56px;background:var(--blue-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-deco{position:absolute;border-radius:50%;background:rgba(255,255,255,0.06);animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-20px) scale(1.05);}}
+.hero-inner{position:relative;max-width:760px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.7);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;text-shadow:0 4px 24px rgba(30,58,95,0.5);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:580px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:2rem;}
+.chip{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+
+/* CONTENT */
+.content{max-width:880px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+
+/* SECTION TAGS */
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--blue-dark);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;color:var(--blue-deep);margin-bottom:.35rem;line-height:1.15;}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.3rem;}
+
+/* CARD */
+.card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 24px rgba(59,130,246,.09);}
+.card-head{background:linear-gradient(135deg,var(--blue-deep),var(--blue-dark));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.card-head.green{background:linear-gradient(135deg,var(--green-dark),var(--green));}
+.card-head.teal{background:linear-gradient(135deg,var(--teal),var(--sky));}
+.card-emoji{font-size:2rem;}
+.card-head h3{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.card-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.card-body{padding:1.4rem 1.5rem;}
+
+/* RULE */
+.rule{background:var(--blue-light);border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--blue-deep);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.7;color:var(--ink);}
+.rule strong{color:var(--blue-deep);font-weight:900;}
+.rule.green-rule{background:var(--green-light);border-color:#a7f3d0;}
+.rule.green-rule .rule-title{color:var(--green-dark);}
+.rule.green-rule strong{color:var(--green-dark);}
+
+/* TIP */
+.tip{background:var(--yellow-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#713f12;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* PLACE VALUE TABLE */
+.pv-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem;}
+.pv-table th{background:var(--blue-dark);color:#fff;padding:.6rem .8rem;text-align:center;font-weight:800;font-size:.88rem;}
+.pv-table td{padding:.55rem .8rem;text-align:center;border:2px solid var(--border);background:#fff;}
+.pv-table tr:nth-child(even) td{background:var(--blue-soft);}
+.pv-table .hl{background:var(--blue-light)!important;font-weight:900;color:var(--blue-dark);}
+.pv-table .hl-green{background:var(--green-light)!important;font-weight:900;color:var(--green-dark);}
+
+/* NUMBER VISUAL */
+.num-visual{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;margin:.9rem 0;overflow-x:auto;}
+.num-visual h5{font-size:.92rem;font-weight:800;color:var(--blue-deep);margin-bottom:.8rem;}
+.num-row{display:flex;gap:0;margin-bottom:.6rem;align-items:stretch;flex-wrap:nowrap;}
+.num-cell{border:2.5px solid var(--border);padding:.5rem .6rem;text-align:center;min-width:52px;background:#fff;}
+.num-cell:first-child{border-radius:10px 0 0 10px;}
+.num-cell:last-child{border-radius:0 10px 10px 0;}
+.num-cell.comma{background:var(--blue-deep);color:#fff;font-weight:900;border-color:var(--blue-deep);min-width:24px;padding:.5rem .2rem;}
+.num-cell.int-part{background:var(--blue-light);border-color:var(--blue-dark);}
+.num-cell.dec-part{background:var(--green-light);border-color:#6ee7b7;}
+.num-cell .digit{font-size:1.3rem;font-weight:900;line-height:1.2;font-family:monospace;}
+.num-cell .label{font-size:.62rem;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.04em;}
+
+/* COMPARISON INTERACTIVE */
+.cmp-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(59,130,246,.1);}
+.cmp-head{background:linear-gradient(135deg,var(--blue-deep),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.cmp-head-icon{font-size:1.8rem;}
+.cmp-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.cmp-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.cmp-body{padding:1.4rem 1.5rem;}
+
+.cmp-pair{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;flex-wrap:wrap;}
+.cmp-num{font-size:1.3rem;font-weight:900;color:var(--blue-deep);background:var(--blue-light);border:2.5px solid var(--border);border-radius:12px;padding:.4rem .9rem;font-family:monospace;min-width:80px;text-align:center;}
+.cmp-select{font-size:1.2rem;font-weight:800;border:2.5px solid var(--border);border-radius:12px;padding:.4rem .7rem;background:#fff;color:var(--ink);cursor:pointer;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.cmp-select:focus{border-color:var(--blue-dark);}
+.cmp-select.ok{border-color:#22c55e;background:#dcfce7;}
+.cmp-select.no{border-color:var(--red);background:var(--red-light);}
+.cmp-explain{font-size:.88rem;color:var(--ink-mid);margin-left:.5rem;min-height:1.3rem;}
+
+/* READING INTERACTIVE */
+.read-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(59,130,246,.1);}
+.read-head{background:linear-gradient(135deg,var(--blue-dark),var(--sky));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.read-head-icon{font-size:1.8rem;}
+.read-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.read-body{padding:1.4rem 1.5rem;}
+.read-card{background:var(--blue-soft);border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;margin:.7rem 0;display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;}
+.read-num{font-size:1.6rem;font-weight:900;color:var(--blue-deep);font-family:monospace;min-width:90px;}
+.read-content{flex:1;}
+.read-q{font-size:.95rem;font-weight:700;color:var(--ink-mid);margin-bottom:.4rem;}
+.read-inp{width:100%;max-width:380px;padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:600;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.read-inp:focus{border-color:var(--blue-dark);}
+.read-inp.ok{border-color:#22c55e;background:#dcfce7;}
+.read-inp.no{border-color:var(--red);background:var(--red-light);}
+.read-ans{font-size:.88rem;margin-top:.35rem;min-height:1.2rem;font-weight:700;}
+
+/* PRACTICE BOX */
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(59,130,246,.1);}
+.practice-head{background:linear-gradient(135deg,var(--blue-deep),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.88rem;font-weight:800;color:var(--blue-deep);margin-bottom:.4rem;}
+.ex-problem{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;font-family:monospace;}
+.ex-inp{width:130px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--blue-dark);}
+.ex-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--blue-dark);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.25);}
+.btn-main:hover{background:var(--blue-deep);transform:translateY(-2px);}
+.btn-ghost{background:var(--blue-light);color:var(--blue-deep);border:2px solid var(--border);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--border);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+/* ORDERING GAME */
+.order-box{background:#fff;border:3px solid var(--green-light);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(16,185,129,.1);}
+.order-head{background:linear-gradient(135deg,var(--green-dark),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.order-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.order-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.order-body{padding:1.4rem 1.5rem;}
+.order-tiles{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.1rem;min-height:56px;border:2.5px dashed var(--border);border-radius:14px;padding:.5rem;}
+.order-tile{background:var(--blue-light);border:2.5px solid var(--blue-dark);border-radius:10px;padding:.4rem .9rem;font-size:1.1rem;font-weight:900;color:var(--blue-deep);font-family:monospace;cursor:grab;user-select:none;transition:all .18s;box-shadow:0 2px 8px rgba(59,130,246,.15);}
+.order-tile:hover{background:var(--blue-dark);color:#fff;transform:translateY(-2px);}
+.order-tile.placed{background:var(--green-light);border-color:var(--green);color:var(--green-dark);cursor:default;}
+.order-slots{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.9rem;min-height:56px;}
+.order-slot{background:var(--blue-soft);border:2.5px dashed var(--border);border-radius:10px;padding:.4rem .9rem;font-size:1.1rem;font-weight:900;color:#94a3b8;font-family:monospace;min-width:80px;text-align:center;transition:all .18s;}
+.order-slot.filled{background:var(--green-light);border-color:var(--green);color:var(--green-dark);}
+.order-slot.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+
+/* QUIZ */
+.quiz-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(59,130,246,.1);}
+.quiz-head{background:linear-gradient(135deg,var(--blue-deep),var(--blue-dark));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.quiz-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.quiz-body{padding:1.4rem 1.5rem;}
+.quiz-q{font-size:1rem;font-weight:800;color:var(--blue-deep);margin-bottom:.8rem;}
+.quiz-opts{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.quiz-btn{background:var(--blue-light);border:2.5px solid var(--border);border-radius:12px;padding:.5rem 1.1rem;font-size:1rem;font-weight:800;cursor:pointer;color:var(--ink);font-family:'Nunito',sans-serif;transition:all .18s;}
+.quiz-btn:hover:not(:disabled){background:var(--blue-dark);color:#fff;border-color:var(--blue-dark);}
+.quiz-btn:disabled{cursor:default;}
+.quiz-btn.correct{background:#dcfce7;border-color:#22c55e;color:#14532d;}
+.quiz-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.quiz-fb{font-size:.9rem;font-weight:700;min-height:1.4rem;margin-bottom:.6rem;}
+.quiz-prog{height:8px;background:var(--blue-light);border-radius:10px;overflow:hidden;margin-top:.6rem;}
+.quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--blue-dark),var(--teal));border-radius:10px;transition:width .4s;}
+.quiz-score{font-size:.88rem;font-weight:700;color:var(--blue-deep);margin-top:.3rem;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+
+footer{background:var(--blue-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--blue-mid);}
+
+@media(max-width:600px){body{font-size:19px;}.ex-grid{grid-template-columns:1fr;}.num-cell{min-width:38px;}.num-cell .digit{font-size:1rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-deco" style="width:200px;height:200px;left:-50px;top:-50px;animation-delay:0s;"></div>
+  <div class="hero-deco" style="width:130px;height:130px;right:8%;top:8%;animation-delay:1.8s;"></div>
+  <div class="hero-deco" style="width:80px;height:80px;left:65%;bottom:18%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema3">Десетични дроби</a> › Четене и записване
+    </div>
+    <h1>Десетични дроби</h1>
+    <p class="hero-sub">Четене, записване и сравнение — с цветни примери, таблици и интерактивни упражнения!</p>
+    <div class="hero-chips">
+      <span class="chip">📖 Четене</span>
+      <span class="chip">✏️ Записване</span>
+      <span class="chip">⚖️ Сравнение</span>
+      <span class="chip">🎯 Наредба</span>
+      <span class="chip">❓ Тест</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 1: КАКВО Е ДЕСЕТИЧНА ДРОБ?
+═══════════════════════════════════ -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Какво е десетична дроб?</h2>
+  <p class="sec-desc">Десетичната дроб е начин да запишем числа, които не са цели — с дроб от 10, 100, 1000...</p>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-emoji">💡</div>
+      <div><h3>Основна идея</h3><p>Разбиваме числото на цяла и дробна част</p></div>
+    </div>
+    <div class="card-body">
+      <div class="rule">
+        <div class="rule-title">📋 Строеж на десетичната дроб</div>
+        <ul>
+          <li>Вляво от запетаята е <strong>цялата част</strong> — обикновено цяло число.</li>
+          <li>Вдясно от запетаята е <strong>дробната част</strong> — десети, стотни, хилядни...</li>
+          <li>Запетаята разделя двете части.</li>
+        </ul>
+      </div>
+
+      <!-- Place value visual for 345,678 -->
+      <div class="num-visual">
+        <h5>🔍 Пример: числото 345,678</h5>
+        <div class="num-row">
+          <div class="num-cell int-part"><div class="digit">3</div><div class="label">стотици</div></div>
+          <div class="num-cell int-part"><div class="digit">4</div><div class="label">десетици</div></div>
+          <div class="num-cell int-part"><div class="digit">5</div><div class="label">единици</div></div>
+          <div class="num-cell comma"><div class="digit">,</div><div class="label">&nbsp;</div></div>
+          <div class="num-cell dec-part"><div class="digit">6</div><div class="label">десети</div></div>
+          <div class="num-cell dec-part"><div class="digit">7</div><div class="label">стотни</div></div>
+          <div class="num-cell dec-part"><div class="digit">8</div><div class="label">хилядни</div></div>
+        </div>
+        <div style="margin-top:.7rem;font-size:.9rem;color:var(--ink-mid);">
+          <span style="background:var(--blue-light);border-radius:6px;padding:.1rem .5rem;font-weight:700;color:var(--blue-deep);">345</span> — цяла част &nbsp;|&nbsp;
+          <span style="background:var(--green-light);border-radius:6px;padding:.1rem .5rem;font-weight:700;color:var(--green-dark);">678</span> — дробна част
+        </div>
+      </div>
+
+      <!-- Place value table -->
+      <div style="overflow-x:auto;margin-top:1rem;">
+        <table class="pv-table">
+          <tr>
+            <th>Разряд</th>
+            <th>Стотици</th>
+            <th>Десетици</th>
+            <th>Единици</th>
+            <th style="background:var(--blue-deep);">,</th>
+            <th style="background:#065f46;">Десетни</th>
+            <th style="background:#065f46;">Стотни</th>
+            <th style="background:#065f46;">Хилядни</th>
+          </tr>
+          <tr>
+            <td><strong>Стойност</strong></td>
+            <td>100</td><td>10</td><td>1</td>
+            <td style="background:var(--blue-deep);color:#fff;">•</td>
+            <td class="hl-green">1/10</td><td class="hl-green">1/100</td><td class="hl-green">1/1000</td>
+          </tr>
+          <tr>
+            <td><strong>345,678</strong></td>
+            <td class="hl">3</td><td class="hl">4</td><td class="hl">5</td>
+            <td style="background:var(--blue-deep);color:#fff;font-weight:900;">,</td>
+            <td class="hl-green">6</td><td class="hl-green">7</td><td class="hl-green">8</td>
+          </tr>
+          <tr>
+            <td><strong>0,05</strong></td>
+            <td>0</td><td>0</td><td>0</td>
+            <td style="background:var(--blue-deep);color:#fff;">,</td>
+            <td class="hl-green">0</td><td class="hl-green">5</td><td>–</td>
+          </tr>
+          <tr>
+            <td><strong>12,3</strong></td>
+            <td>0</td><td>1</td><td>2</td>
+            <td style="background:var(--blue-deep);color:#fff;">,</td>
+            <td class="hl-green">3</td><td>–</td><td>–</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 2: ЧЕТЕНЕ И ЗАПИСВАНЕ
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Как четем и записваме десетични дроби?</h2>
+
+  <div class="card">
+    <div class="card-head green">
+      <div class="card-emoji">📖</div>
+      <div><h3>Правило за четене</h3><p>Лесно в 2 стъпки</p></div>
+    </div>
+    <div class="card-body">
+      <div class="rule green-rule">
+        <div class="rule-title">📋 Как четем десетична дроб</div>
+        <ol>
+          <li>Четем <strong>цялата част</strong> като обикновено число.</li>
+          <li>Казваме „запетая" и четем <strong>дробната част</strong> — броим колко цифри има и казваме разряда на последната: десети, стотни, хилядни...</li>
+        </ol>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem;">
+          <div style="font-size:1.4rem;font-weight:900;color:var(--blue-dark);font-family:monospace;margin-bottom:.4rem;">0,3</div>
+          <div style="font-size:.92rem;color:var(--ink-mid);">Четем: „нула цяло и три <strong style='color:var(--green-dark);'>десети</strong>"<br>Или: „нула цяло три"</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem;">
+          <div style="font-size:1.4rem;font-weight:900;color:var(--blue-dark);font-family:monospace;margin-bottom:.4rem;">5,47</div>
+          <div style="font-size:.92rem;color:var(--ink-mid);">Четем: „пет цяло и четиридесет и седем <strong style='color:var(--green-dark);'>стотни</strong>"</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem;">
+          <div style="font-size:1.4rem;font-weight:900;color:var(--blue-dark);font-family:monospace;margin-bottom:.4rem;">12,005</div>
+          <div style="font-size:.92rem;color:var(--ink-mid);">Четем: „дванадесет цяло и пет <strong style='color:var(--green-dark);'>хилядни</strong>"</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem;">
+          <div style="font-size:1.4rem;font-weight:900;color:var(--blue-dark);font-family:monospace;margin-bottom:.4rem;">100,08</div>
+          <div style="font-size:.92rem;color:var(--ink-mid);">Четем: „сто цяло и осем <strong style='color:var(--green-dark);'>стотни</strong>"</div>
+        </div>
+      </div>
+
+      <div class="tip" style="margin-top:1rem;">
+        <div class="tip-icon">⚠️</div>
+        <div class="tip-body"><strong>Внимание с нулите!</strong>
+        0,3 и 0,30 и 0,300 са едно и също число! Нулите накрая <em>след</em> последната ненулева цифра не променят стойността. Но 0,3 ≠ 0,03 — тук нулата е <em>преди</em> тройката!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE READING -->
+  <div class="read-box">
+    <div class="read-head">
+      <div class="read-head-icon">🎤</div>
+      <div><h4>Провери четенето — напиши как се чете числото</h4></div>
+    </div>
+    <div class="read-body">
+      <p style="font-size:.95rem;color:var(--ink-mid);margin-bottom:.9rem;">Погледни числото и избери правилния отговор:</p>
+
+      <div id="read-cards"></div>
+
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkReading()">✓ Провери</button>
+        <button class="btn-ghost" onclick="newReadingSet()">🔄 Нови числа</button>
+        <div class="fb" id="fb-read"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 3: СРАВНЕНИЕ
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 3</div>
+  <h2 class="sec-title">Сравнение на десетични дроби</h2>
+  <p class="sec-desc">Кое число е по-голямо? Сравняваме цифра по цифра — отляво надясно!</p>
+
+  <div class="card">
+    <div class="card-head teal">
+      <div class="card-emoji">⚖️</div>
+      <div><h3>Правило за сравнение</h3><p>Стъпка по стъпка</p></div>
+    </div>
+    <div class="card-body">
+      <div class="rule">
+        <div class="rule-title">📋 Как сравняваме</div>
+        <ol>
+          <li>Сравняваме <strong>целите части</strong> — по-голямото цяло число дава по-голяма десетична дроб.</li>
+          <li>Ако целите части са равни — сравняваме <strong>десетите цифри</strong>.</li>
+          <li>Ако и те са равни — сравняваме <strong>стотните</strong>, после <strong>хилядните</strong>...</li>
+          <li><strong>Нулите накрая не играят роля</strong> — 1,50 = 1,5</li>
+        </ol>
+      </div>
+
+      <!-- Visual comparison examples -->
+      <div style="display:flex;flex-direction:column;gap:.8rem;margin-top:1rem;">
+        <!-- Example 1 -->
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+          <div style="font-family:monospace;font-size:1.2rem;font-weight:900;color:var(--blue-deep);">3,45 <span style="color:var(--green);font-size:1.4rem;">></span> 2,99</div>
+          <div style="font-size:.88rem;color:var(--ink-mid);">Целите части: <strong>3 > 2</strong> — веднага ясно!</div>
+        </div>
+        <!-- Example 2 -->
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+          <div style="font-family:monospace;font-size:1.2rem;font-weight:900;color:var(--blue-deep);">5,<span style="color:var(--red);">7</span>3 <span style="color:var(--green);font-size:1.4rem;">></span> 5,<span style="color:var(--red);">3</span>9</div>
+          <div style="font-size:.88rem;color:var(--ink-mid);">Цели части равни (5=5), сравняваме десетите: <strong>7 > 3</strong></div>
+        </div>
+        <!-- Example 3 -->
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+          <div style="font-family:monospace;font-size:1.2rem;font-weight:900;color:var(--blue-deep);">4,5<span style="color:var(--red);">6</span> <span style="color:var(--green);font-size:1.4rem;">></span> 4,5<span style="color:var(--red);">1</span></div>
+          <div style="font-size:.88rem;color:var(--ink-mid);">Цели и десети са равни, сравняваме стотните: <strong>6 > 1</strong></div>
+        </div>
+        <!-- Example 4 -->
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+          <div style="font-family:monospace;font-size:1.2rem;font-weight:900;color:var(--blue-deep);">7,50 <span style="color:var(--blue);font-size:1.4rem;">=</span> 7,5</div>
+          <div style="font-size:.88rem;color:var(--ink-mid);">Нулата накрая не променя стойността — числата са равни!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE COMPARISON -->
+  <div class="cmp-box">
+    <div class="cmp-head">
+      <div class="cmp-head-icon">⚖️</div>
+      <div><h4>Сравни числата — избери знака</h4><p>Избери &lt;, = или &gt; между двете числа</p></div>
+    </div>
+    <div class="cmp-body">
+      <div id="cmp-pairs"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkComparisons()">✓ Провери</button>
+        <button class="btn-ghost" onclick="newComparisons()">🔄 Нови числа</button>
+        <div class="fb" id="fb-cmp"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 4: НАРЕДБА
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 4</div>
+  <h2 class="sec-title">Наредба на десетични дроби</h2>
+  <p class="sec-desc">Подреди числата от най-малко до най-голямо — натисни върху тях!</p>
+
+  <div class="order-box">
+    <div class="order-head">
+      <div style="font-size:1.8rem;">🏆</div>
+      <div><h4>Подреди от най-малко до най-голямо</h4><p>Натисни числата в правилния ред</p></div>
+    </div>
+    <div class="order-body">
+      <p style="font-size:.92rem;color:var(--ink-mid);margin-bottom:.8rem;">Натисни числата в реда: <strong>най-малко → най-голямо</strong></p>
+      <div style="margin-bottom:.6rem;font-size:.9rem;font-weight:700;color:var(--blue-deep);">Числа за наредба:</div>
+      <div class="order-tiles" id="order-tiles"></div>
+      <div style="margin-bottom:.6rem;font-size:.9rem;font-weight:700;color:var(--green-dark);">Твоята наредба:</div>
+      <div class="order-slots" id="order-slots"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkOrder()">✓ Провери</button>
+        <button class="btn-ghost" onclick="resetOrder()">↩ Започни отново</button>
+        <button class="btn-ghost" onclick="newOrder()">🔄 Нови числа</button>
+        <div class="fb" id="fb-order"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 5: ЗАПИШИ КАТО ДРОБ
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 5</div>
+  <h2 class="sec-title">Запиши десетичната дроб като обикновена</h2>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-emoji">↔️</div>
+      <div><h3>Връзка между двата записа</h3><p>Десетична ↔ Обикновена дроб</p></div>
+    </div>
+    <div class="card-body">
+      <div class="rule">
+        <div class="rule-title">📋 Правило</div>
+        <ul>
+          <li><strong>0,1 = 1/10</strong> — 1 десетна → знаменател 10</li>
+          <li><strong>0,01 = 1/100</strong> — 2 цифри → знаменател 100</li>
+          <li><strong>0,001 = 1/1000</strong> — 3 цифри → знаменател 1000</li>
+          <li>Броят на цифрите след запетаята = брой нули в знаменателя!</li>
+        </ul>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.8rem;margin-top:1rem;">
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:900;font-family:monospace;color:var(--blue-dark);">0,7</div>
+          <div style="font-size:1.4rem;color:#94a3b8;">↕</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--green-dark);">7/10</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:900;font-family:monospace;color:var(--blue-dark);">0,35</div>
+          <div style="font-size:1.4rem;color:#94a3b8;">↕</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--green-dark);">35/100</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:900;font-family:monospace;color:var(--blue-dark);">3,14</div>
+          <div style="font-size:1.4rem;color:#94a3b8;">↕</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--green-dark);">314/100</div>
+        </div>
+        <div style="background:var(--blue-soft);border:2px solid var(--border);border-radius:12px;padding:.8rem;text-align:center;">
+          <div style="font-size:1.2rem;font-weight:900;font-family:monospace;color:var(--blue-dark);">0,125</div>
+          <div style="font-size:1.4rem;color:#94a3b8;">↕</div>
+          <div style="font-size:1.1rem;font-weight:800;color:var(--green-dark);">125/1000</div>
+        </div>
+      </div>
+
+      <div class="practice-box" style="margin-top:1.4rem;">
+        <div class="practice-head">
+          <div class="practice-head-icon">✏️</div>
+          <div><h4>Провери се</h4><p>Колко цифри след запетаята — толкова нули в знаменателя</p></div>
+        </div>
+        <div class="practice-body">
+          <div class="ex-grid">
+            <div class="ex-item">
+              <div class="ex-label">а) Запиши като дроб с числител и знаменател</div>
+              <div class="ex-problem">0,6 = ?/10</div>
+              <input class="ex-inp" id="f1a" type="number" placeholder="числител" style="width:90px;">
+              <div class="ex-hint" id="hf1a"></div>
+            </div>
+            <div class="ex-item">
+              <div class="ex-label">б) Запиши като дроб</div>
+              <div class="ex-problem">0,48 = ?/100</div>
+              <input class="ex-inp" id="f1b" type="number" placeholder="числител" style="width:90px;">
+              <div class="ex-hint" id="hf1b"></div>
+            </div>
+            <div class="ex-item">
+              <div class="ex-label">в) Запиши като дроб</div>
+              <div class="ex-problem">2,5 = ?/10</div>
+              <input class="ex-inp" id="f1c" type="number" placeholder="числител" style="width:90px;">
+              <div class="ex-hint" id="hf1c"></div>
+            </div>
+            <div class="ex-item">
+              <div class="ex-label">г) Запиши като десетична дроб</div>
+              <div class="ex-problem">47/100 = 0,?</div>
+              <input class="ex-inp" id="f1d" type="number" step="any" placeholder="0,??" style="width:100px;">
+              <div class="ex-hint" id="hf1d"></div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn-main" onclick="checkFractions()">✓ Провери</button>
+            <div class="fb" id="fb-frac"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="quiz-box">
+    <div class="quiz-head">
+      <div style="font-size:1.8rem;">🎯</div>
+      <div><h4>Финален тест — 6 въпроса</h4></div>
+    </div>
+    <div class="quiz-body" id="quiz-body">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="zakraglyavane-5-klas.html">Закръгляване</a>
+    <a href="deistviya-desetichni-5-klas.html">Действия с дроби</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// READING INTERACTIVE
+// ═══════════════════════════════════════
+var readSets = [
+  {num:'0,3', opts:['нула цяло три десети','нула цяло три стотни','нула цяло тридесет'], ans:0},
+  {num:'5,47', opts:['пет цяло четиридесет и седем десети','пет цяло четиридесет и седем стотни','петдесет и четири цяло седем'], ans:1},
+  {num:'12,005', opts:['дванадесет цяло пет десети','дванадесет цяло пет стотни','дванадесет цяло пет хилядни'], ans:2},
+  {num:'0,08', opts:['нула цяло осем десети','нула цяло осем стотни','нула цяло осем хилядни'], ans:1},
+  {num:'100,1', opts:['сто цяло едно десетна','сто цяло една стотна','сто цяло единадесет'], ans:0},
+  {num:'3,14', opts:['три цяло четиринадесет стотни','три цяло четиринадесет десети','три цяло сто и четиридесет хилядни'], ans:0},
+  {num:'0,001', opts:['нула цяло едно стотна','нула цяло едно десетна','нула цяло едно хилядна'], ans:2},
+  {num:'7,50', opts:['седем цяло петдесет','седем цяло пет десети','седем цяло петстотин'], ans:1},
+];
+var currentRead = [];
+function shuffle(arr){return arr.slice().sort(function(){return Math.random()-.5;});}
+function newReadingSet(){
+  var pool = shuffle(readSets).slice(0,4);
+  currentRead = pool;
+  renderReading();
+  var fb=document.getElementById('fb-read');
+  fb.textContent=''; fb.className='fb';
+}
+function renderReading(){
+  var html='';
+  currentRead.forEach(function(item,i){
+    html+='<div class="read-card"><div class="read-num">'+item.num+'</div><div class="read-content">';
+    html+='<div class="read-q">Как се чете това число?</div>';
+    html+='<select class="ex-inp" id="rs-'+i+'" style="width:100%;max-width:420px;height:auto;padding:.45rem .7rem;font-size:.95rem;">';
+    html+='<option value="">— Избери —</option>';
+    item.opts.forEach(function(o,oi){
+      html+='<option value="'+oi+'">'+o+'</option>';
+    });
+    html+='</select>';
+    html+='<div class="ex-hint" id="rh-'+i+'"></div>';
+    html+='</div></div>';
+  });
+  document.getElementById('read-cards').innerHTML=html;
+}
+function checkReading(){
+  var ok=0;
+  currentRead.forEach(function(item,i){
+    var sel=document.getElementById('rs-'+i);
+    var hint=document.getElementById('rh-'+i);
+    if(!sel)return;
+    var v=parseInt(sel.value);
+    if(!isNaN(v)&&v===item.ans){
+      sel.className='ex-inp ok';
+      hint.textContent='✅ Правилно!';
+      ok++;
+    } else {
+      sel.className='ex-inp no';
+      hint.textContent=sel.value===''?'⚠️ Избери отговор':'❌ Правилно: '+item.opts[item.ans];
+    }
+  });
+  var fb=document.getElementById('fb-read');
+  if(ok===currentRead.length){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent='❌ '+ok+' от '+currentRead.length+' верни.';fb.className='fb show no';}
+}
+
+// ═══════════════════════════════════════
+// COMPARISON INTERACTIVE
+// ═══════════════════════════════════════
+var cmpPool=[
+  {a:3.45,b:2.99,sign:'>'},
+  {a:5.73,b:5.39,sign:'>'},
+  {a:4.56,b:4.51,sign:'>'},
+  {a:7.50,b:7.5,sign:'='},
+  {a:0.3,b:0.30,sign:'='},
+  {a:1.2,b:1.20,sign:'='},
+  {a:0.08,b:0.8,sign:'<'},
+  {a:2.3,b:2.4,sign:'<'},
+  {a:10.1,b:10.09,sign:'>'},
+  {a:0.005,b:0.05,sign:'<'},
+  {a:6.71,b:6.79,sign:'<'},
+  {a:3.0,b:2.99,sign:'>'},
+  {a:4.4,b:4.40,sign:'='},
+  {a:9.9,b:9.99,sign:'<'},
+];
+function fmt(n){return String(n).replace('.',',');}
+function newComparisons(){
+  var pool=shuffle(cmpPool).slice(0,5);
+  window._cmpCurrent=pool;
+  var html='';
+  pool.forEach(function(p,i){
+    html+='<div class="cmp-pair"><span class="cmp-num">'+fmt(p.a)+'</span>';
+    html+='<select class="cmp-select" id="cmp-'+i+'"><option value="">?</option>';
+    html+='<option value="<">&lt;</option><option value="=">=</option><option value=">">&gt;</option>';
+    html+='</select>';
+    html+='<span class="cmp-num">'+fmt(p.b)+'</span>';
+    html+='<span class="cmp-explain" id="ce-'+i+'"></span></div>';
+  });
+  document.getElementById('cmp-pairs').innerHTML=html;
+  var fb=document.getElementById('fb-cmp');
+  fb.textContent='';fb.className='fb';
+}
+function checkComparisons(){
+  var pool=window._cmpCurrent||[];
+  var ok=0;
+  pool.forEach(function(p,i){
+    var sel=document.getElementById('cmp-'+i);
+    var exp=document.getElementById('ce-'+i);
+    if(!sel)return;
+    if(sel.value===p.sign){sel.className='cmp-select ok';exp.textContent='✅';ok++;}
+    else if(sel.value===''){sel.className='cmp-select no';exp.textContent='⚠️ Избери';}
+    else{sel.className='cmp-select no';exp.textContent='❌ Трябва '+p.sign;}
+  });
+  var fb=document.getElementById('fb-cmp');
+  if(ok===pool.length){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent='❌ '+ok+' от '+pool.length+' верни.';fb.className='fb show no';}
+}
+
+// ═══════════════════════════════════════
+// ORDERING GAME
+// ═══════════════════════════════════════
+var orderSets=[
+  [0.3,1.2,0.08,2.5,0.95],
+  [3.14,3.1,3.4,3.04,3.41],
+  [0.001,0.01,0.1,1.0,0.101],
+  [10.5,9.99,10.05,10.50,9.9],
+  [7.7,7.07,7.77,7.007,7.0],
+];
+var orderCurrent=[],orderPlaced=[];
+function newOrder(){
+  var set=orderSets[Math.floor(Math.random()*orderSets.length)].slice();
+  orderCurrent=shuffle(set);
+  orderPlaced=[];
+  renderOrder();
+  var fb=document.getElementById('fb-order');
+  fb.textContent='';fb.className='fb';
+}
+function renderOrder(){
+  var tilesEl=document.getElementById('order-tiles');
+  var slotsEl=document.getElementById('order-slots');
+  tilesEl.innerHTML=orderCurrent.map(function(n,i){
+    var placed=orderPlaced.indexOf(n)>=0;
+    return '<div class="order-tile'+(placed?' placed':'')+'" onclick="placeNum('+n+',this)" data-val="'+n+'">'+fmt(n)+'</div>';
+  }).join('');
+  slotsEl.innerHTML=orderPlaced.map(function(n){
+    return '<div class="order-slot filled">'+fmt(n)+'</div>';
+  }).join('') + (orderPlaced.length<orderCurrent.length?'<div class="order-slot">?</div>':'');
+}
+function placeNum(n,el){
+  if(orderPlaced.indexOf(n)>=0)return;
+  orderPlaced.push(n);
+  renderOrder();
+  if(orderPlaced.length===orderCurrent.length){
+    // auto check
+    checkOrder();
+  }
+}
+function checkOrder(){
+  var sorted=orderCurrent.slice().sort(function(a,b){return a-b;});
+  var slotsEl=document.getElementById('order-slots');
+  var ok=JSON.stringify(orderPlaced)===JSON.stringify(sorted);
+  var slots=slotsEl.querySelectorAll('.order-slot.filled');
+  var sortedPlaced=orderPlaced.slice();
+  slots.forEach(function(s,i){
+    var v=parseFloat(orderPlaced[i]);
+    if(v===sorted[i]){s.classList.add('filled');s.classList.remove('wrong');}
+    else{s.classList.add('wrong');s.classList.remove('filled');}
+  });
+  var fb=document.getElementById('fb-order');
+  if(ok){fb.textContent='🎉 Браво! Правилна наредба!';fb.className='fb show ok';}
+  else{fb.textContent='❌ Не е точно. Провери реда — отляво надясно, сравни цифра по цифра!';fb.className='fb show no';}
+}
+function resetOrder(){
+  orderPlaced=[];
+  renderOrder();
+  var fb=document.getElementById('fb-order');
+  fb.textContent='';fb.className='fb';
+}
+
+// ═══════════════════════════════════════
+// FRACTIONS
+// ═══════════════════════════════════════
+function checkFractions(){
+  var s=[
+    {id:'f1a',ans:6,tol:0,hint:'0,6 = 6/10'},
+    {id:'f1b',ans:48,tol:0,hint:'0,48 = 48/100'},
+    {id:'f1c',ans:25,tol:0,hint:'2,5 = 25/10'},
+    {id:'f1d',ans:0.47,tol:0.001,hint:'47/100 = 0,47'},
+  ];
+  var ok=0;
+  s.forEach(function(item,i){
+    var inp=document.getElementById(item.id);
+    var h=document.getElementById('hf1'+String.fromCharCode(97+i));
+    var v=parseFloat(inp.value);
+    if(Math.abs(v-item.ans)<=item.tol){inp.className='ex-inp ok';h.textContent='✅';ok++;}
+    else{inp.className='ex-inp no';h.textContent=inp.value===''?'⚠️':'❌ '+item.hint;}
+  });
+  var fb=document.getElementById('fb-frac');
+  if(ok===s.length){fb.textContent='🎉 Отлично!';fb.className='fb show ok';}
+  else{fb.textContent='❌ '+ok+'/4 верни.';fb.className='fb show no';}
+}
+
+// ═══════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════
+var quizQs=[
+  {q:'Коя цифра е в разряда на стотните в числото 3,472?',opts:['3','4','7','2'],ans:2},
+  {q:'Кое число е по-голямо?',opts:['0,8','0,08','0,80','0,008'],ans:0},
+  {q:'Как се записва „пет цяло и седем стотни" като десетична дроб?',opts:['5,7','5,07','50,7','0,57'],ans:1},
+  {q:'Равни ли са 0,50 и 0,5?',opts:['Да, равни са','Не, 0,50 е по-голямо','Не, 0,5 е по-голямо','Зависи от контекста'],ans:0},
+  {q:'Кое е вярното равенство?',opts:['0,3 = 3/100','0,03 = 3/100','0,3 = 3/1000','0,003 = 3/10'],ans:1},
+  {q:'Наредени от най-малко до най-голямо: 0,5 | 0,05 | 5,0 | 0,005',opts:['0,005 < 0,05 < 0,5 < 5,0','0,05 < 0,005 < 0,5 < 5,0','0,5 < 0,05 < 0,005 < 5,0','5,0 < 0,5 < 0,05 < 0,005'],ans:0},
+];
+var quizScore=0,quizDone=[];
+function renderQuiz(){
+  quizScore=0; quizDone=[];
+  var html='';
+  quizQs.forEach(function(q,qi){
+    html+='<div style="margin-bottom:1.3rem;padding-bottom:1.1rem;border-bottom:2px solid var(--border);">';
+    html+='<div class="quiz-q">'+((qi+1)+'. '+q.q)+'</div>';
+    html+='<div class="quiz-opts">';
+    q.opts.forEach(function(o,oi){
+      html+='<button class="quiz-btn" id="qb-'+qi+'-'+oi+'" onclick="qAnswer('+qi+','+oi+')">'+o+'</button>';
+    });
+    html+='</div><div class="quiz-fb" id="qfb-'+qi+'"></div></div>';
+  });
+  html+='<div class="quiz-prog"><div class="quiz-prog-fill" id="quiz-fill" style="width:0%"></div></div>';
+  html+='<div class="quiz-score" id="quiz-score">0 / '+quizQs.length+' верни</div>';
+  document.getElementById('quiz-body').innerHTML=html;
+}
+function qAnswer(qi,oi){
+  if(quizDone.indexOf(qi)>=0)return;
+  quizDone.push(qi);
+  var q=quizQs[qi];
+  var fb=document.getElementById('qfb-'+qi);
+  q.opts.forEach(function(_,k){
+    var btn=document.getElementById('qb-'+qi+'-'+k);
+    btn.disabled=true;
+    if(k===q.ans)btn.classList.add('correct');
+  });
+  if(oi===q.ans){
+    quizScore++;
+    fb.textContent='✅ Правилно!';
+    fb.style.color='#14532d';
+  } else {
+    document.getElementById('qb-'+qi+'-'+oi).classList.add('wrong');
+    fb.textContent='❌ Правилният отговор е: '+q.opts[q.ans];
+    fb.style.color='var(--red)';
+  }
+  document.getElementById('quiz-fill').style.width=(quizScore/quizQs.length*100)+'%';
+  document.getElementById('quiz-score').textContent=quizScore+' / '+quizQs.length+' верни';
+}
+
+// ═══════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*60);obs.unobserve(e.target);}
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+// INIT
+window.addEventListener('load',function(){
+  newReadingSet();
+  newComparisons();
+  newOrder();
+  renderQuiz();
+});
+</script>
+</body>
+</html>

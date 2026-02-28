@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Действия с десетични дроби | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mint:#d1fae5; --mint-mid:#a7f3d0; --mint-soft:#ecfdf5;
+  --green:#10b981; --green-dark:#065f46; --green-deep:#022c22;
+  --green-btn:#059669; --green-mid:#34d399;
+  --teal:#0d9488; --teal-light:#ccfbf1;
+  --lime:#84cc16; --lime-light:#f7fee7;
+  --yellow:#fbbf24; --yellow-light:#fefce8;
+  --red:#ef4444; --red-light:#fef2f2;
+  --blue:#3b82f6; --blue-light:#eff6ff;
+  --orange:#f97316;
+  --ink:#052e16; --ink-mid:#065f46; --ink-light:#6ee7b7;
+  --surface:#fff; --border:#a7f3d0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--mint-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(236,253,245,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--mint-mid);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--green);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--green-dark);text-decoration:none;background:var(--mint);border:2px solid var(--mint-mid);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--green-btn);color:#fff;border-color:var(--green-btn);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--green-dark) 0%,var(--green) 55%,var(--green-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--mint-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,0.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.72);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.72);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;text-shadow:0 4px 20px rgba(6,95,70,0.4);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.32);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+
+/* CONTENT */
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+
+/* SECTION */
+.sec-tag{display:inline-flex;align-items:center;gap:0.4rem;background:var(--green);color:#fff;font-size:0.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--green-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+
+/* EXPLAIN CARD */
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(16,185,129,.08);}
+.explain-head{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:0.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+
+/* RULE */
+.rule{background:var(--mint);border:2.5px solid var(--mint-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;position:relative;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.7;color:var(--ink);}
+.rule strong{color:var(--green-dark);font-weight:900;}
+
+/* TIP */
+.tip{background:var(--yellow-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#713f12;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* WORKED EXAMPLE */
+.worked{background:var(--mint-soft);border:2px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;margin:.9rem 0;}
+.worked-title{font-weight:900;font-size:1rem;color:var(--green-dark);margin-bottom:.7rem;}
+.steps{display:flex;flex-direction:column;gap:.5rem;}
+.step{display:flex;gap:.8rem;align-items:flex-start;}
+.step-n{width:28px;height:28px;border-radius:8px;background:var(--green);color:#fff;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.18rem;}
+.step-t{font-size:.97rem;line-height:1.7;color:var(--ink);}
+.step-t .m{background:var(--mint);padding:.08rem .45rem;border-radius:6px;font-weight:800;color:var(--green-dark);font-family:monospace;}
+.result-box{margin-top:.75rem;background:var(--green);color:#fff;border-radius:12px;padding:.6rem 1.1rem;font-size:1rem;font-weight:800;display:inline-block;}
+
+/* VISUAL alignment boxes */
+.align-box{background:#fff;border:2px solid var(--border);border-radius:14px;padding:1.1rem 1.4rem;margin:.9rem 0;overflow-x:auto;}
+.align-box h5{font-size:.92rem;font-weight:800;color:var(--green-dark);margin-bottom:.7rem;}
+.align-grid{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.column-calc{font-family:monospace;font-size:1.1rem;line-height:1.9;color:var(--ink);background:var(--mint-soft);border-radius:10px;padding:.7rem 1rem;border-left:4px solid var(--green);}
+.column-calc .line-sep{border-top:2.5px solid var(--green-dark);margin:.2rem 0;display:block;}
+.column-calc .ans{color:var(--green-dark);font-weight:900;}
+.column-calc .carry{color:var(--orange);font-size:.78rem;vertical-align:super;}
+
+/* INTERACTIVE CHECKER */
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(16,185,129,.1);}
+.practice-head{background:linear-gradient(135deg,var(--green-dark),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--mint-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.88rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;}
+.ex-problem{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;font-family:monospace;}
+.ex-inp{width:120px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--green);background:var(--mint-soft);}
+.ex-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--green-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(5,150,105,.28);}
+.btn-main:hover{background:var(--green-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--mint);color:var(--green-dark);border:2px solid var(--mint-mid);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--mint-mid);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+/* GENERATOR */
+.generator{background:#fff;border:3px solid var(--green-mid);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(16,185,129,.14);}
+.gen-head{background:linear-gradient(135deg,var(--green-deep),var(--green-dark));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-head-left{display:flex;align-items:center;gap:.8rem;}
+.gen-head-icon{font-size:2rem;}
+.gen-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-head p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-body{padding:1.5rem;}
+
+.gen-tabs{display:flex;gap:.5rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+.gen-tab{background:var(--mint);border:2px solid var(--mint-mid);border-radius:11px;padding:.45rem 1rem;font-size:.92rem;font-weight:800;color:var(--ink);cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;}
+.gen-tab:hover{background:var(--mint-mid);}
+.gen-tab.on{background:var(--green-btn);border-color:var(--green-btn);color:#fff;}
+
+.gen-problems{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gen-card{background:var(--mint-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;transition:box-shadow .2s;}
+.gen-card:hover{box-shadow:0 4px 16px rgba(16,185,129,.15);}
+.gen-letter{font-size:.82rem;font-weight:900;color:var(--green-dark);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em;}
+.gen-q{font-size:1.15rem;font-weight:800;color:var(--ink);margin-bottom:.55rem;font-family:monospace;}
+.gen-inp{width:110px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.gen-inp:focus{border-color:var(--green);}
+.gen-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.gen-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.gen-reveal{font-size:.88rem;font-weight:700;color:var(--green-dark);margin-top:.4rem;min-height:1.2rem;}
+
+.score-row{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.score-track{flex:1;background:var(--mint);border-radius:20px;height:16px;overflow:hidden;}
+.score-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--green),var(--teal));transition:width .4s ease;}
+.score-lbl{font-size:.95rem;font-weight:800;color:var(--green-dark);white-space:nowrap;}
+
+/* PROPERTY VISUAL */
+.prop-visual{display:flex;gap:1rem;flex-wrap:wrap;margin:1rem 0;}
+.prop-card{flex:1;min-width:220px;background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;}
+.prop-card h5{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--green-dark);margin-bottom:.55rem;}
+.prop-card .formula{font-size:1rem;color:var(--ink);background:var(--mint);border-radius:8px;padding:.4rem .7rem;font-weight:700;margin-bottom:.5rem;font-family:monospace;}
+.prop-card .example{font-size:.9rem;color:var(--ink-mid);line-height:1.7;}
+
+/* DIVIDING VISUAL */
+.div-visual{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;margin:.9rem 0;overflow-x:auto;}
+.div-visual h5{font-size:.92rem;font-weight:800;color:var(--green-dark);margin-bottom:.75rem;}
+.div-scheme{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:flex-start;}
+.div-box{background:var(--mint-soft);border-radius:12px;padding:.8rem 1rem;border-left:4px solid var(--green);font-size:.95rem;line-height:1.8;font-family:monospace;}
+.div-box .hl{color:var(--green-dark);font-weight:900;background:var(--mint);border-radius:4px;padding:.0rem .3rem;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+
+footer{background:var(--green-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--green-mid);}
+@media(max-width:600px){body{font-size:19px;}.gen-problems{grid-template-columns:1fr;}.ex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;left:-40px;top:-40px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:120px;height:120px;right:5%;top:10%;animation-delay:1.5s;"></div>
+  <div class="hero-bubble" style="width:90px;height:90px;left:60%;bottom:15%;animation-delay:.8s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema3">Десетични дроби</a> › Действия
+    </div>
+    <h1>Действия с десетични дроби</h1>
+    <p class="hero-sub">Събиране, изваждане, умножение и деление — лесно и разбираемо, с примери от реалния живот!</p>
+    <div class="hero-chips">
+      <span class="chip">➕ Събиране</span>
+      <span class="chip">➖ Изваждане</span>
+      <span class="chip">✖️ Умножение</span>
+      <span class="chip">➗ Деление</span>
+      <span class="chip">🎲 Генератор</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════
+     РАЗДЕЛ 1: СЪБИРАНЕ И ИЗВАЖДАНЕ
+══════════════════════════════════ -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Събиране и изваждане на десетични дроби</h2>
+  <p class="sec-desc">Точно като при обикновените числа — само трябва да <strong>наредим запетаите</strong> една под друга!</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">📏</div>
+      <div><h3>Главното правило: запетаята под запетаята!</h3><p>3 лесни стъпки</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="rule">
+        <div class="rule-title">📋 Как се събират/изваждат десетични дроби</div>
+        <ol>
+          <li>Записваме числата едно под друго така, че <strong>запетаите да са точно наредени</strong> (хилядни под хилядни, стотни под стотни, десетни под десетни).</li>
+          <li>Числата се събират или изваждат <strong>така, както се събират цели числа</strong>.</li>
+          <li>В резултата <strong>поставяме запетаята</strong> точно под другите запетаи.</li>
+        </ol>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-body"><strong>Лесен трик!</strong>
+        Ако числата имат различен брой цифри след запетаята — допишем нули отдясно, за да ги изравним! Например: 12,8 + 1,4 = 12,8 + 1,4 ✓ но 12,76 − 10,1 → пишем 12,76 − 10,10</div>
+      </div>
+
+      <!-- COLUMN CALCULATIONS VISUAL -->
+      <div class="align-box">
+        <h5>📐 Виж как изглежда в колона:</h5>
+        <div class="align-grid">
+          <div>
+            <div style="font-size:.85rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem;">а) 12,8 + 1,4</div>
+            <div class="column-calc">
+              &nbsp;&nbsp;12,8<br>
+              +&nbsp;&nbsp;1,4<br>
+              <span class="line-sep"></span>
+              <span class="ans">&nbsp;&nbsp;14,2</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.85rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem;">б) 6,21 − 3,256 + 98,2</div>
+            <div class="column-calc">
+              &nbsp;&nbsp;6,210<br>
+              −&nbsp;&nbsp;3,256<br>
+              <span class="line-sep"></span>
+              &nbsp;&nbsp;2,954<br>
+              +98,200<br>
+              <span class="line-sep"></span>
+              <span class="ans">101,154</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.85rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem;">в) 12,76 − 10,1</div>
+            <div class="column-calc">
+              &nbsp;&nbsp;12,76<br>
+              −&nbsp;10,10<br>
+              <span class="line-sep"></span>
+              <span class="ans">&nbsp;&nbsp;&nbsp;2,66</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:.85rem;font-weight:800;color:var(--green-dark);margin-bottom:.4rem;">г) 5,3 + 127 + 5,3</div>
+            <div class="column-calc">
+              &nbsp;&nbsp;&nbsp;5,3<br>
+              +127,0<br>
+              +&nbsp;&nbsp;5,3<br>
+              <span class="line-sep"></span>
+              <span class="ans">137,6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Свойства -->
+      <div class="tip" style="margin-top:1rem;">
+        <div class="tip-icon">🔄</div>
+        <div class="tip-body"><strong>Разместително и съдружително свойство</strong>
+        При <em>събиране</em> можем да разменяме и групираме числата по удобен начин:<br>
+        <span style="font-family:monospace;font-weight:700;">a + b + c = (a + b) + c = a + (b + c)</span><br>
+        Пример: 101,3 + 14,23 + 9,7 + 0,77 = (101,3 + 9,7) + (14,23 + 0,77) = 111 + 15 = <strong>126</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICE: събиране/изваждане -->
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">✏️</div>
+      <div><h4>Провери се — Събиране и изваждане</h4><p>Пресметни и въведи отговора</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">Задача а)</div>
+          <div class="ex-problem">0,009 + 8 = ?</div>
+          <input class="ex-inp" id="p1a" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h1a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача б)</div>
+          <div class="ex-problem">12,8 + 1,4 = ?</div>
+          <input class="ex-inp" id="p1b" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h1b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача в)</div>
+          <div class="ex-problem">12,76 − 10,1 = ?</div>
+          <input class="ex-inp" id="p1c" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h1c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача г)</div>
+          <div class="ex-problem">6,21 − 3,256 + 98,2 = ?</div>
+          <input class="ex-inp" id="p1d" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h1d"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection1()">✓ Провери</button>
+        <div class="fb" id="fb1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     РАЗДЕЛ 2: УМНОЖЕНИЕ
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Умножение на десетични дроби</h2>
+  <p class="sec-desc">Умножаваме като цели числа — после броим цифрите след запетаята!</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">✖️</div>
+      <div><h3>Как се умножава?</h3><p>Правилото е лесно!</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="rule">
+        <div class="rule-title">📋 Правило за умножение</div>
+        <ol>
+          <li>Умножаваме числата <strong>без да гледаме запетаите</strong> — като цели числа.</li>
+          <li>Броим колко цифри има след запетаята <strong>в двете числа заедно</strong>.</li>
+          <li>В произведението отброяваме <strong>толкова цифри отдясно</strong> и поставяме запетаята.</li>
+        </ol>
+      </div>
+
+      <div class="align-box">
+        <h5>🔍 Примери стъпка по стъпка:</h5>
+        <div class="align-grid">
+          <div class="worked">
+            <div class="worked-title">а) 23,1 · 5</div>
+            <div class="steps">
+              <div class="step"><div class="step-n">1</div><div class="step-t">Умножаваме: <span class="m">231 · 5 = 1155</span></div></div>
+              <div class="step"><div class="step-n">2</div><div class="step-t">В 23,1 има <span class="m">1</span> цифра след запетаята</div></div>
+              <div class="step"><div class="step-n">3</div><div class="step-t">Отброяваме 1 цифра отдясно</div></div>
+            </div>
+            <div class="result-box">23,1 · 5 = 115,5</div>
+          </div>
+          <div class="worked">
+            <div class="worked-title">б) 0,98 · 2</div>
+            <div class="steps">
+              <div class="step"><div class="step-n">1</div><div class="step-t">Умножаваме: <span class="m">98 · 2 = 196</span></div></div>
+              <div class="step"><div class="step-n">2</div><div class="step-t">В 0,98 има <span class="m">2</span> цифри след запетаята</div></div>
+              <div class="step"><div class="step-n">3</div><div class="step-t">Отброяваме 2 цифри: 1,96</div></div>
+            </div>
+            <div class="result-box">0,98 · 2 = 1,96</div>
+          </div>
+          <div class="worked">
+            <div class="worked-title">в) 2,1 · 0,2</div>
+            <div class="steps">
+              <div class="step"><div class="step-n">1</div><div class="step-t">Умножаваме: <span class="m">21 · 2 = 42</span></div></div>
+              <div class="step"><div class="step-n">2</div><div class="step-t">2,1 → 1 цифра; 0,2 → 1 цифра. Общо: <span class="m">2</span></div></div>
+              <div class="step"><div class="step-n">3</div><div class="step-t">Отброяваме 2 цифри от 42: 0,42</div></div>
+            </div>
+            <div class="result-box">2,1 · 0,2 = 0,42</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- РАЗПРЕДЕЛИТЕЛНО СВОЙСТВО -->
+      <div class="tip">
+        <div class="tip-icon">🧮</div>
+        <div class="tip-body"><strong>Разпределително свойство — много полезно!</strong>
+        Понякога е по-лесно да разбием едно число: <span style="font-family:monospace;">(a + b) · c = a · c + b · c</span><br>
+        Пример: (5,25 + 4,5) · 0,2 = 5,25 · 0,2 + 4,5 · 0,2 = 1,05 + 0,9 = <strong>1,95</strong></div>
+      </div>
+
+      <div class="prop-visual">
+        <div class="prop-card">
+          <h5>Разместително</h5>
+          <div class="formula">a · b = b · a</div>
+          <div class="example">2,3 · 4,5 = 4,5 · 2,3 = 10,35</div>
+        </div>
+        <div class="prop-card">
+          <h5>Съдружително</h5>
+          <div class="formula">(a · b) · c = a · (b · c)</div>
+          <div class="example">(2,1 · 3) · 0,2 = 2,1 · (3 · 0,2)</div>
+        </div>
+        <div class="prop-card">
+          <h5>Разпределително</h5>
+          <div class="formula">(a ± b) · c = a·c ± b·c</div>
+          <div class="example">(3,56 − 1,23) · 0,2 = 3,56·0,2 − 1,23·0,2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">✖️</div>
+      <div><h4>Провери се — Умножение</h4><p>Пресметни и въведи отговора</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">Задача а)</div>
+          <div class="ex-problem">23,1 · 5 = ?</div>
+          <input class="ex-inp" id="p2a" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача б)</div>
+          <div class="ex-problem">0,98 · 2 = ?</div>
+          <input class="ex-inp" id="p2b" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача в)</div>
+          <div class="ex-problem">3,2 · 0,4 = ?</div>
+          <input class="ex-inp" id="p2c" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача г)</div>
+          <div class="ex-problem">1,8 · 8,6 = ?</div>
+          <input class="ex-inp" id="p2d" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача д) — с разпределително</div>
+          <div class="ex-problem">(5,25 + 4,5) · 0,2 = ?</div>
+          <input class="ex-inp" id="p2e" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача е)</div>
+          <div class="ex-problem">3,48 · 2,564 = ?</div>
+          <input class="ex-inp" id="p2f" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h2f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection2()">✓ Провери</button>
+        <div class="fb" id="fb2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     РАЗДЕЛ 3: ДЕЛЕНИЕ
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 3</div>
+  <h2 class="sec-title">Деление на десетични дроби</h2>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">➗</div>
+      <div><h3>Два вида деление</h3><p>Десетична : цяло число и Десетична : Десетична</p></div>
+    </div>
+    <div class="explain-body">
+
+      <!-- ДЕЛЕНИЕ НА ЦЯЛО -->
+      <div style="margin-bottom:1.5rem;">
+        <div class="rule">
+          <div class="rule-title">📋 Деление на десетична дроб с цяло число</div>
+          <ol>
+            <li>Делим цифра по цифра отляво надясно — точно като при цели числа.</li>
+            <li>Когато минем <strong>запетаята в делимото</strong> → веднага поставяме <strong>запетая в частното</strong>.</li>
+            <li>Продължаваме да делим до края.</li>
+          </ol>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">🇧🇬</div>
+          <div class="tip-body"><strong>Как се записва делението в България — стълбичка!</strong>
+          Пише се горният ред с равенството, после под него — всяко изваждане с черта, докато стигнем 0. Запетаята в частното слагаме точно когато я минем в делимото.</div>
+        </div>
+
+        <!-- SVG Bulgarian DIVISION — exact style from photo: only top equality row, then minus rows with line -->
+        <div class="align-box" style="padding:1.4rem 1.8rem 1.8rem;">
+          <h5 style="margin-bottom:1.6rem;">📐 Примери — стълбичка (точно така се прави в България):</h5>
+          <div style="display:flex;gap:4rem;flex-wrap:wrap;align-items:flex-start;">
+
+            <!-- а) 4,14 : 3 = 1,38 — exact copy of photo style -->
+            <div>
+              <svg width="170" height="230" viewBox="0 0 170 230" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <!-- top row: full equation -->
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">4,14 : 3 = <tspan fill="#059669" font-weight="900">1,38</tspan></text>
+                <!-- step 1: -3 -->
+                <text x="8"  y="58"  font-size="20" fill="#052e16">− 3</text>
+                <line x1="4"  y1="64"  x2="60"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <!-- remainder 11 -->
+                <text x="20" y="90"  font-size="20" fill="#052e16">11</text>
+                <!-- step 2: -9 -->
+                <text x="8"  y="122" font-size="20" fill="#052e16">− 9</text>
+                <line x1="4"  y1="128" x2="60"  y2="128" stroke="#052e16" stroke-width="2.2"/>
+                <!-- remainder 24 -->
+                <text x="12" y="154" font-size="20" fill="#052e16">24</text>
+                <!-- step 3: -24 -->
+                <text x="0"  y="186" font-size="20" fill="#052e16">− 24</text>
+                <line x1="4"  y1="192" x2="60"  y2="192" stroke="#052e16" stroke-width="2.2"/>
+                <!-- result 0 -->
+                <text x="28" y="218" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+            <!-- б) 13 : 4 = 3,25 -->
+            <div>
+              <svg width="155" height="230" viewBox="0 0 155 230" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">13 : 4 = <tspan fill="#059669" font-weight="900">3,25</tspan></text>
+                <!-- -12 -->
+                <text x="2"  y="58"  font-size="20" fill="#052e16">− 12</text>
+                <line x1="4"  y1="64"  x2="60"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <!-- 10 (добавяме ,0 от делимото) -->
+                <text x="18" y="90"  font-size="20" fill="#052e16">10</text>
+                <!-- -8 -->
+                <text x="8"  y="122" font-size="20" fill="#052e16">− 8</text>
+                <line x1="4"  y1="128" x2="60"  y2="128" stroke="#052e16" stroke-width="2.2"/>
+                <!-- 20 -->
+                <text x="14" y="154" font-size="20" fill="#052e16">20</text>
+                <!-- -20 -->
+                <text x="2"  y="186" font-size="20" fill="#052e16">− 20</text>
+                <line x1="4"  y1="192" x2="60"  y2="192" stroke="#052e16" stroke-width="2.2"/>
+                <!-- 0 -->
+                <text x="28" y="218" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+            <!-- в) 0,13 : 4 = 0,0325 -->
+            <div>
+              <svg width="210" height="270" viewBox="0 0 210 270" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">0,13 : 4 = <tspan fill="#059669" font-weight="900">0,0325</tspan></text>
+                <!-- запетаята е веднага след 0 → частното 0,0... -->
+                <!-- 13 : 4: опит 3 · 4 = 12 -->
+                <text x="2"  y="58"  font-size="20" fill="#052e16">− 12</text>
+                <line x1="4"  y1="64"  x2="60"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <!-- 10 -->
+                <text x="18" y="90"  font-size="20" fill="#052e16">10</text>
+                <!-- -8 -->
+                <text x="8"  y="122" font-size="20" fill="#052e16">− 8</text>
+                <line x1="4"  y1="128" x2="60"  y2="128" stroke="#052e16" stroke-width="2.2"/>
+                <!-- 20 -->
+                <text x="14" y="154" font-size="20" fill="#052e16">20</text>
+                <!-- -20 -->
+                <text x="2"  y="186" font-size="20" fill="#052e16">− 20</text>
+                <line x1="4"  y1="192" x2="60"  y2="192" stroke="#052e16" stroke-width="2.2"/>
+                <!-- 0 -->
+                <text x="28" y="218" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+          </div><!-- /flex row -->
+
+          <!-- COLOUR LEGEND -->
+          <div style="margin-top:1rem;background:var(--mint);border-radius:12px;padding:.75rem 1rem;font-size:.88rem;color:var(--ink-mid);line-height:1.75;">
+            <strong style="color:var(--green-dark);">🔍 Как четем стълбичката:</strong><br>
+            1. Горният ред е пълното равенство: делимо : делител = <span style="color:#059669;font-weight:900;">частно</span><br>
+            2. Всеки ред с „−" показва колко изваждаме<br>
+            3. Чертата показва края на едно изваждане<br>
+            4. Под чертата — следващото число за делене<br>
+            5. Накрая стигаме до <strong>0</strong> — делението е точно!
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">💡</div>
+          <div class="tip-body"><strong>Кога поставяме запетаята в частното?</strong>
+          Точно когато я минем в делимото!<br>
+          При <strong>13 : 4</strong> — 13 е цяло, делим, стигаме до 1 (остатък), добавяме <strong>0</strong> → 10, тогава слагаме запетая в частното → <strong>3,...</strong><br>
+          При <strong>0,13 : 4</strong> — запетаята е веднага след 0, затова в частното пишем <strong>0,0...</strong></div>
+        </div>
+      </div>
+
+      <!-- ДЕЛЕНИЕ НА ДЕСЕТИЧНА -->
+      <div>
+        <div class="rule">
+          <div class="rule-title">📋 Деление на десетична дроб с десетична дроб</div>
+          <ol>
+            <li>Преместваме запетаята в делителя <strong>докрай вдясно</strong> — той трябва да стане цяло число.</li>
+            <li>С <strong>толкова места надясно</strong> преместваме запетаята и в делимото.</li>
+            <li>Делим по вече познатото правило с цяло число — стълбичка!</li>
+          </ol>
+        </div>
+
+        <div class="align-box" style="padding:1.4rem 1.8rem;">
+          <h5 style="margin-bottom:1.4rem;">📐 Примери: Десетична : Десетична → превръщаме в : цяло число</h5>
+          <div style="display:flex;gap:3rem;flex-wrap:wrap;align-items:flex-start;">
+
+            <!-- 5,13 : 0,3 = 17,1 -->
+            <div>
+              <div style="font-size:.88rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;">5,13 : 0,3 → местим с 1 → 51,3 : 3</div>
+              <svg width="180" height="230" viewBox="0 0 180 230" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">51,3 : 3 = <tspan fill="#059669" font-weight="900">17,1</tspan></text>
+                <text x="2"  y="58"  font-size="20" fill="#052e16">− 3</text>
+                <line x1="4"  y1="64"  x2="55"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <text x="14" y="90"  font-size="20" fill="#052e16">21</text>
+                <text x="2"  y="122" font-size="20" fill="#052e16">− 21</text>
+                <line x1="4"  y1="128" x2="55"  y2="128" stroke="#052e16" stroke-width="2.2"/>
+                <text x="16" y="154" font-size="20" fill="#052e16">03</text>
+                <text x="8"  y="186" font-size="20" fill="#052e16">− 3</text>
+                <line x1="4"  y1="192" x2="55"  y2="192" stroke="#052e16" stroke-width="2.2"/>
+                <text x="26" y="218" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+            <!-- 0,28 : 0,007 = 40 -->
+            <div>
+              <div style="font-size:.88rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;">0,28 : 0,007 → местим с 3 → 280 : 7</div>
+              <svg width="180" height="160" viewBox="0 0 180 160" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">280 : 7 = <tspan fill="#059669" font-weight="900">40</tspan></text>
+                <text x="2"  y="58"  font-size="20" fill="#052e16">− 28</text>
+                <line x1="4"  y1="64"  x2="60"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <text x="18" y="90"  font-size="20" fill="#052e16">00</text>
+                <line x1="4"  y1="96"  x2="60"  y2="96"  stroke="#052e16" stroke-width="2.2"/>
+                <text x="28" y="122" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+            <!-- 2,88 : 0,24 = 12 -->
+            <div>
+              <div style="font-size:.88rem;font-weight:800;color:var(--green-dark);margin-bottom:.5rem;">2,88 : 0,24 → местим с 2 → 288 : 24</div>
+              <svg width="185" height="165" viewBox="0 0 185 165" style="font-family:'Nunito',sans-serif;display:block;overflow:visible;">
+                <text x="0" y="26" font-size="20" font-weight="800" fill="#052e16">288 : 24 = <tspan fill="#059669" font-weight="900">12</tspan></text>
+                <text x="2"  y="58"  font-size="20" fill="#052e16">− 24</text>
+                <line x1="4"  y1="64"  x2="60"  y2="64"  stroke="#052e16" stroke-width="2.2"/>
+                <text x="16" y="90"  font-size="20" fill="#052e16">48</text>
+                <text x="2"  y="122" font-size="20" fill="#052e16">− 48</text>
+                <line x1="4"  y1="128" x2="60"  y2="128" stroke="#052e16" stroke-width="2.2"/>
+                <text x="26" y="154" font-size="20" fill="#052e16">0</text>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">✅</div>
+          <div class="tip-body"><strong>Проверка на делението!</strong>
+          Винаги можеш да провериш: <span style="font-family:monospace;font-weight:700;">частно · делител = делимо</span><br>
+          Пример: 12 · 0,24 = 2,88 ✓ &nbsp;|&nbsp; 40 · 0,007 = 0,28 ✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">➗</div>
+      <div><h4>Провери се — Деление</h4><p>Пресметни и въведи отговора</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">Задача а)</div>
+          <div class="ex-problem">6,4 : 5 = ?</div>
+          <input class="ex-inp" id="p3a" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача б)</div>
+          <div class="ex-problem">6,4 : 2 = ?</div>
+          <input class="ex-inp" id="p3b" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача в)</div>
+          <div class="ex-problem">16 : 5 = ?</div>
+          <input class="ex-inp" id="p3c" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача г)</div>
+          <div class="ex-problem">5,13 : 0,3 = ?</div>
+          <input class="ex-inp" id="p3d" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача д)</div>
+          <div class="ex-problem">0,28 : 0,007 = ?</div>
+          <input class="ex-inp" id="p3e" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача е)</div>
+          <div class="ex-problem">2,88 : 0,24 = ?</div>
+          <input class="ex-inp" id="p3f" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="h3f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection3()">✓ Провери</button>
+        <div class="fb" id="fb3"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ГЕНЕРАТОР НА ЗАДАЧИ
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="generator">
+    <div class="gen-head">
+      <div class="gen-head-left">
+        <div class="gen-head-icon">🎲</div>
+        <div><h4>Генератор на случайни задачи</h4><p>Всеки път получаваш нови задачи — опитай колкото пъти искаш!</p></div>
+      </div>
+      <button class="btn-ghost" onclick="generateAll()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-body">
+      <div class="gen-tabs">
+        <button class="gen-tab on" onclick="switchGenTab('gen-add',this)">➕ Събиране / Изваждане</button>
+        <button class="gen-tab" onclick="switchGenTab('gen-mul',this)">✖️ Умножение</button>
+        <button class="gen-tab" onclick="switchGenTab('gen-div',this)">➗ Деление</button>
+        <button class="gen-tab" onclick="switchGenTab('gen-mix',this)">🌀 Смесени</button>
+      </div>
+
+      <!-- ADD/SUB panel -->
+      <div id="gen-add">
+        <div class="gen-problems" id="gen-add-problems"></div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkGen('gen-add')">✓ Провери</button>
+          <button class="btn-ghost" onclick="generateTab('gen-add')">🔄 Нови</button>
+          <div class="fb" id="fb-gen-add"></div>
+        </div>
+        <div class="score-row">
+          <div class="score-track"><div class="score-fill" id="sf-gen-add" style="width:0%"></div></div>
+          <div class="score-lbl" id="sl-gen-add">0 / 6</div>
+        </div>
+      </div>
+      <!-- MUL panel -->
+      <div id="gen-mul" style="display:none;">
+        <div class="gen-problems" id="gen-mul-problems"></div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkGen('gen-mul')">✓ Провери</button>
+          <button class="btn-ghost" onclick="generateTab('gen-mul')">🔄 Нови</button>
+          <div class="fb" id="fb-gen-mul"></div>
+        </div>
+        <div class="score-row">
+          <div class="score-track"><div class="score-fill" id="sf-gen-mul" style="width:0%"></div></div>
+          <div class="score-lbl" id="sl-gen-mul">0 / 6</div>
+        </div>
+      </div>
+      <!-- DIV panel -->
+      <div id="gen-div" style="display:none;">
+        <div class="gen-problems" id="gen-div-problems"></div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkGen('gen-div')">✓ Провери</button>
+          <button class="btn-ghost" onclick="generateTab('gen-div')">🔄 Нови</button>
+          <div class="fb" id="fb-gen-div"></div>
+        </div>
+        <div class="score-row">
+          <div class="score-track"><div class="score-fill" id="sf-gen-div" style="width:0%"></div></div>
+          <div class="score-lbl" id="sl-gen-div">0 / 6</div>
+        </div>
+      </div>
+      <!-- MIX panel -->
+      <div id="gen-mix" style="display:none;">
+        <div class="gen-problems" id="gen-mix-problems"></div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkGen('gen-mix')">✓ Провери</button>
+          <button class="btn-ghost" onclick="generateTab('gen-mix')">🔄 Нови</button>
+          <div class="fb" id="fb-gen-mix"></div>
+        </div>
+        <div class="score-row">
+          <div class="score-track"><div class="score-fill" id="sf-gen-mix" style="width:0%"></div></div>
+          <div class="score-lbl" id="sl-gen-mix">0 / 6</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="klas-6.html">6 клас</a>
+    <a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+function rnd(min, max, decimals) {
+  var mult = Math.pow(10, decimals);
+  return Math.round((Math.random() * (max - min) + min) * mult) / mult;
+}
+function fix(n, d) {
+  // Return fixed but remove trailing zeros safely
+  var s = parseFloat(n.toFixed(d)).toString();
+  return s;
+}
+function checkAns(inp, correct, tol) {
+  var v = parseFloat(inp.value);
+  if (isNaN(v)) return false;
+  return Math.abs(v - correct) <= tol;
+}
+
+// ═══════════════════════════════════════════════
+// SECTION 1 CHECKER
+// ═══════════════════════════════════════════════
+var s1 = [
+  {id:'p1a', ans:8.009, tol:0.0001, hint:'0,009 + 8,000 = 8,009'},
+  {id:'p1b', ans:14.2,  tol:0.001,  hint:'12,8 + 1,4 = 14,2'},
+  {id:'p1c', ans:2.66,  tol:0.001,  hint:'12,76 − 10,10 = 2,66'},
+  {id:'p1d', ans:101.154, tol:0.001,hint:'6,210 − 3,256 + 98,200 = 101,154'},
+];
+function checkSection1() { checkSet(s1,'fb1','h1'); }
+
+// ═══════════════════════════════════════════════
+// SECTION 2 CHECKER
+// ═══════════════════════════════════════════════
+var s2 = [
+  {id:'p2a', ans:115.5,  tol:0.01, hint:'231·5=1155 → 1 цифра → 115,5'},
+  {id:'p2b', ans:1.96,   tol:0.001,hint:'98·2=196 → 2 цифри → 1,96'},
+  {id:'p2c', ans:1.28,   tol:0.001,hint:'32·4=128 → 2 цифри → 1,28'},
+  {id:'p2d', ans:15.48,  tol:0.01, hint:'18·86=1548 → 2 цифри → 15,48'},
+  {id:'p2e', ans:1.95,   tol:0.001,hint:'9,75·0,2=1,95 (или разпредели)'},
+  {id:'p2f', ans:8.92272,tol:0.001,hint:'348·2564=892272 → 5 цифри → 8,92272'},
+];
+function checkSection2() { checkSet(s2,'fb2','h2'); }
+
+// ═══════════════════════════════════════════════
+// SECTION 3 CHECKER
+// ═══════════════════════════════════════════════
+var s3 = [
+  {id:'p3a', ans:1.28, tol:0.001, hint:'640:5=128 → 1,28'},
+  {id:'p3b', ans:3.2,  tol:0.001, hint:'64:2=32 → 3,2'},
+  {id:'p3c', ans:3.2,  tol:0.001, hint:'16:5=3,2'},
+  {id:'p3d', ans:17.1, tol:0.001, hint:'513:3=171 → 17,1'},
+  {id:'p3e', ans:40,   tol:0.001, hint:'280:7=40'},
+  {id:'p3f', ans:12,   tol:0.001, hint:'288:24=12'},
+];
+function checkSection3() { checkSet(s3,'fb3','h3'); }
+
+function checkSet(spec, fbId, hPrefix) {
+  var ok = 0;
+  spec.forEach(function(s, i) {
+    var inp = document.getElementById(s.id);
+    var hEl = document.getElementById(hPrefix + (String.fromCharCode(97+i)));
+    if (!inp) return;
+    if (checkAns(inp, s.ans, s.tol)) {
+      inp.className = 'ex-inp ok';
+      if (hEl) hEl.textContent = '✅ Правилно!';
+      ok++;
+    } else {
+      inp.className = 'ex-inp no';
+      if (hEl) hEl.textContent = inp.value === '' ? '⚠️ Въведи отговор' : '❌ ' + s.hint;
+    }
+  });
+  var fb = document.getElementById(fbId);
+  if (ok === spec.length) {
+    fb.textContent = '🎉 Браво! Всички отговори са верни!';
+    fb.className = 'fb show ok';
+  } else {
+    fb.textContent = '❌ ' + ok + ' от ' + spec.length + ' верни. Виж подсказките!';
+    fb.className = 'fb show no';
+  }
+}
+
+// ═══════════════════════════════════════════════
+// GENERATOR
+// ═══════════════════════════════════════════════
+var genData = {};  // stores {tabId: [{q, ans}]}
+
+function r1() { return rnd(0.1, 9.9, 1); }
+function r2() { return rnd(0.10, 9.99, 2); }
+function ri(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+// Format number for Bulgarian display: decimal point → comma
+function fmt(n) { return String(n).replace('.', ','); }
+
+function genAddProblems() {
+  var probs = [];
+  for (var i = 0; i < 6; i++) {
+    var type = ri(0,3);
+    var a, b, q, ans;
+    if (type === 0) { a=r1(); b=r1(); q=fmt(a)+' + '+fmt(b); ans=parseFloat((a+b).toFixed(2)); }
+    else if (type === 1) { a=r2(); b=r1(); q=fmt(a)+' + '+fmt(b); ans=parseFloat((a+b).toFixed(2)); }
+    else if (type === 2) { a=r1(); b=r1(); while(b>a) b=r1(); q=fmt(a)+' − '+fmt(b); ans=parseFloat((a-b).toFixed(2)); }
+    else { a=r2(); b=r2(); while(b>a) b=r2(); q=fmt(a)+' − '+fmt(b); ans=parseFloat((a-b).toFixed(2)); }
+    probs.push({q:q+' = ?', ans:ans});
+  }
+  return probs;
+}
+
+function genMulProblems() {
+  var probs = [];
+  for (var i = 0; i < 6; i++) {
+    var type = ri(0,3);
+    var a, b, q, ans;
+    if (type === 0) { a=r1(); b=ri(2,9); q=fmt(a)+' · '+b; ans=parseFloat((a*b).toFixed(4)); }
+    else if (type === 1) { a=r2(); b=ri(2,9); q=fmt(a)+' · '+b; ans=parseFloat((a*b).toFixed(4)); }
+    else if (type === 2) { a=r1(); b=r1(); q=fmt(a)+' · '+fmt(b); ans=parseFloat((a*b).toFixed(4)); }
+    else { a=r2(); b=r1(); q=fmt(a)+' · '+fmt(b); ans=parseFloat((a*b).toFixed(4)); }
+    probs.push({q:q+' = ?', ans:ans});
+  }
+  return probs;
+}
+
+function genDivProblems() {
+  var probs = [];
+  for (var i = 0; i < 6; i++) {
+    var type = ri(0,2);
+    var a, b, q, ans;
+    if (type === 0) {
+      // decimal : whole — ensure clean result
+      b = ri(2, 5);
+      ans = r1();
+      a = parseFloat((ans * b).toFixed(2));
+      q = fmt(a) + ' : ' + b;
+    } else if (type === 1) {
+      // decimal : 0,1  0,2  0,5
+      var divs = [0.1, 0.2, 0.5, 0.25];
+      b = divs[ri(0, divs.length-1)];
+      a = r1();
+      ans = parseFloat((a/b).toFixed(4));
+      q = fmt(a) + ' : ' + fmt(b);
+    } else {
+      // whole : decimal
+      b = ri(2,9);
+      var mult = [0.1,0.2,0.5][ri(0,2)];
+      a = parseFloat((b * mult * ri(2,5)).toFixed(1));
+      ans = parseFloat((a/b).toFixed(4));
+      q = fmt(a) + ' : ' + b;
+    }
+    probs.push({q:q+' = ?', ans:ans});
+  }
+  return probs;
+}
+
+function genMixProblems() {
+  var probs = [];
+  var ops = [
+    function(){ var a=r1(),b=r1(),c=r1(); return {q:fmt(a)+' + '+fmt(b)+' − '+fmt(c)+' = ?', ans:parseFloat((a+b-c).toFixed(3))}; },
+    function(){ var a=r2(),b=ri(2,5); return {q:fmt(a)+' · '+b+' = ?', ans:parseFloat((a*b).toFixed(4))}; },
+    function(){ var b=ri(2,5),ans=r1(),a=parseFloat((ans*b).toFixed(2)); return {q:fmt(a)+' : '+b+' = ?', ans:ans}; },
+    function(){ var a=r1(),b=r1(); return {q:'('+fmt(a)+' + '+fmt(b)+') · 0,2 = ?', ans:parseFloat(((a+b)*0.2).toFixed(4))}; },
+    function(){ var a=r2(),b=ri(2,9); return {q:fmt(a)+' · '+b+' = ?', ans:parseFloat((a*b).toFixed(4))}; },
+    function(){ var a=r1(),b=r1(),c=ri(2,4); return {q:'('+fmt(a)+' − '+fmt(b)+') · '+c+' = ?', ans:parseFloat(((a-b)*c).toFixed(4))}; },
+  ];
+  for (var i = 0; i < 6; i++) {
+    probs.push(ops[i]());
+  }
+  return probs;
+}
+
+var letters = ['а','б','в','г','д','е'];
+
+function renderProblems(tabId, probs) {
+  genData[tabId] = probs;
+  var container = document.getElementById(tabId+'-problems');
+  if (!container) return;
+  container.innerHTML = probs.map(function(p, i) {
+    return '<div class="gen-card">'
+      + '<div class="gen-letter">'+letters[i]+')</div>'
+      + '<div class="gen-q">'+p.q+'</div>'
+      + '<input class="gen-inp" id="ginp-'+tabId+'-'+i+'" type="number" step="any" placeholder="?">'
+      + '<div class="gen-reveal" id="grev-'+tabId+'-'+i+'"></div>'
+      + '</div>';
+  }).join('');
+  // Reset score
+  var sf = document.getElementById('sf-'+tabId);
+  var sl = document.getElementById('sl-'+tabId);
+  if (sf) sf.style.width = '0%';
+  if (sl) sl.textContent = '0 / 6';
+  var fb = document.getElementById('fb-'+tabId);
+  if (fb) { fb.textContent=''; fb.className='fb'; }
+}
+
+function generateTab(tabId) {
+  var probs;
+  if (tabId === 'gen-add') probs = genAddProblems();
+  else if (tabId === 'gen-mul') probs = genMulProblems();
+  else if (tabId === 'gen-div') probs = genDivProblems();
+  else probs = genMixProblems();
+  renderProblems(tabId, probs);
+}
+
+function generateAll() {
+  generateTab('gen-add');
+  generateTab('gen-mul');
+  generateTab('gen-div');
+  generateTab('gen-mix');
+}
+
+function checkGen(tabId) {
+  var probs = genData[tabId];
+  if (!probs) return;
+  var ok = 0;
+  probs.forEach(function(p, i) {
+    var inp = document.getElementById('ginp-'+tabId+'-'+i);
+    var rev = document.getElementById('grev-'+tabId+'-'+i);
+    if (!inp) return;
+    var v = parseFloat(inp.value);
+    var correct = p.ans;
+    var tol = Math.abs(correct) < 1 ? 0.001 : Math.abs(correct) < 10 ? 0.01 : 0.1;
+    if (!isNaN(v) && Math.abs(v - correct) <= tol) {
+      inp.className = 'gen-inp ok';
+      if (rev) rev.textContent = '✅';
+      ok++;
+    } else {
+      inp.className = 'gen-inp no';
+      if (rev) rev.textContent = inp.value==='' ? '⚠️' : '❌ = ' + String(correct).replace('.', ',');
+    }
+  });
+  var sf = document.getElementById('sf-'+tabId);
+  var sl = document.getElementById('sl-'+tabId);
+  if (sf) sf.style.width = (ok/probs.length*100)+'%';
+  if (sl) sl.textContent = ok + ' / ' + probs.length;
+  var fb = document.getElementById('fb-'+tabId);
+  if (fb) {
+    if (ok===probs.length) { fb.textContent='🎉 Отлично! Всички верни!'; fb.className='fb show ok'; }
+    else { fb.textContent=ok+' от '+probs.length+' верни.'; fb.className='fb show no'; }
+  }
+}
+
+function switchGenTab(tabId, btn) {
+  ['gen-add','gen-mul','gen-div','gen-mix'].forEach(function(t){
+    var el = document.getElementById(t);
+    if (el) el.style.display = (t===tabId) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.gen-tab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+}
+
+// ═══════════════════════════════════════════════
+// SCROLL REVEAL
+// ═══════════════════════════════════════════════
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){
+      setTimeout(function(){ e.target.classList.add('visible'); }, i*60);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+// ═══════════════════════════════════════════════
+// INIT — generate on load
+// ═══════════════════════════════════════════════
+window.addEventListener('load', function(){
+  generateAll();
+});
+</script>
+</body>
+</html>

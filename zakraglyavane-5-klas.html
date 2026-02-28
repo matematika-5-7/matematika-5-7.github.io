@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Закръгляване на десетични дроби | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue-deep:#1e3a5f; --blue-dark:#1d4ed8; --blue:#3b82f6;
+  --blue-mid:#60a5fa; --blue-light:#dbeafe; --blue-soft:#eff6ff;
+  --green:#10b981; --green-dark:#065f46; --green-deep:#022c22;
+  --green-mid:#34d399; --green-light:#d1fae5; --green-soft:#ecfdf5;
+  --teal:#0d9488; --teal-light:#ccfbf1;
+  --ink:#0f172a; --ink-mid:#1e3a5f;
+  --yellow:#fbbf24; --yellow-light:#fefce8;
+  --red:#ef4444; --red-light:#fef2f2;
+  --orange:#f97316;
+  --border:#bfdbfe; --border-green:#a7f3d0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(160deg,var(--blue-soft) 0%,var(--green-soft) 100%);background-attachment:fixed;color:var(--ink);font-size:22px;line-height:1.75;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--border);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--green);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--blue-dark);text-decoration:none;background:var(--blue-light);border:2px solid var(--border);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--blue-dark);color:#fff;border-color:var(--blue-dark);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--blue-deep) 0%,var(--teal) 45%,var(--green) 100%);padding:3rem 1.5rem 4.5rem;position:relative;overflow:hidden;text-align:center;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:56px;background:var(--blue-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-deco{position:absolute;border-radius:50%;background:rgba(255,255,255,0.07);animation:float 6s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:760px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.7);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;text-shadow:0 4px 24px rgba(6,95,70,0.4);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:580px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:2rem;}
+.chip{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.3);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+
+/* CONTENT */
+.content{max-width:880px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--teal);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;color:var(--blue-deep);margin-bottom:.35rem;line-height:1.15;}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.3rem;}
+
+/* CARD */
+.card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 24px rgba(59,130,246,.09);}
+.card-head{background:linear-gradient(135deg,var(--blue-deep),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.card-head.green{background:linear-gradient(135deg,var(--green-dark),var(--teal));}
+.card-emoji{font-size:2rem;}
+.card-head h3{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.card-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.card-body{padding:1.4rem 1.5rem;}
+
+/* RULE */
+.rule{background:var(--blue-light);border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--blue-deep);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.7;color:var(--ink);}
+.rule strong{color:var(--blue-deep);font-weight:900;}
+.rule.green-rule{background:var(--green-light);border-color:var(--border-green);}
+.rule.green-rule .rule-title{color:var(--green-dark);}
+.rule.green-rule strong{color:var(--green-dark);}
+
+/* TIP */
+.tip{background:var(--yellow-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#713f12;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* NUMBER LINE VISUAL */
+.nline-wrap{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.5rem 1.4rem;margin:1.2rem 0;overflow-x:auto;}
+.nline-wrap h5{font-size:.92rem;font-weight:800;color:var(--blue-deep);margin-bottom:1.2rem;}
+.nline{position:relative;height:80px;margin:0 auto;max-width:580px;}
+.nline-track{position:absolute;top:38px;left:0;right:0;height:4px;background:var(--border);border-radius:4px;}
+.nline-fill{position:absolute;top:38px;height:4px;background:linear-gradient(90deg,var(--blue-dark),var(--teal));border-radius:4px;}
+.nline-tick{position:absolute;top:26px;width:2px;height:28px;background:var(--blue-deep);border-radius:2px;}
+.nline-tick-lbl{position:absolute;top:58px;transform:translateX(-50%);font-size:.82rem;font-weight:800;color:var(--blue-deep);font-family:monospace;white-space:nowrap;}
+.nline-point{position:absolute;top:26px;width:18px;height:18px;border-radius:50%;transform:translateX(-50%);border:3px solid var(--orange);background:#fff;transition:all .3s;}
+.nline-point.left{background:var(--blue-light);border-color:var(--blue-dark);}
+.nline-point.right{background:var(--green-light);border-color:var(--green);}
+.nline-arrow{position:absolute;top:8px;font-size:1.4rem;font-weight:900;transform:translateX(-50%);}
+.nline-arrow.left{color:var(--blue-dark);}
+.nline-arrow.right{color:var(--green);}
+
+/* INTERACTIVE ROUNDER */
+.rounder-box{background:#fff;border:3px solid var(--border);border-radius:24px;overflow:hidden;margin:2rem 0;box-shadow:0 8px 32px rgba(59,130,246,.12);}
+.rounder-head{background:linear-gradient(135deg,var(--blue-deep),var(--teal));padding:1.1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.rounder-head-icon{font-size:2rem;}
+.rounder-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.rounder-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.rounder-body{padding:1.5rem;}
+.rounder-input-row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.2rem;}
+.rounder-label{font-size:.95rem;font-weight:800;color:var(--blue-deep);}
+.rounder-inp{width:140px;padding:.55rem .75rem;border:2.5px solid var(--border);border-radius:12px;font-size:1.2rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:monospace;transition:border .15s;}
+.rounder-inp:focus{border-color:var(--blue-dark);}
+.rounder-sel{padding:.55rem .75rem;border:2.5px solid var(--border);border-radius:12px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;cursor:pointer;}
+.rounder-sel:focus{border-color:var(--blue-dark);}
+.rounder-result{background:linear-gradient(135deg,var(--green-soft),var(--blue-soft));border:2.5px solid var(--border-green);border-radius:18px;padding:1.2rem 1.4rem;margin-top:.8rem;min-height:80px;}
+.rounder-result-title{font-size:.88rem;font-weight:800;color:var(--teal);margin-bottom:.5rem;text-transform:uppercase;letter-spacing:.06em;}
+.rounder-steps{display:flex;flex-direction:column;gap:.4rem;font-size:.97rem;color:var(--ink);}
+.rounder-steps .step-r{display:flex;gap:.6rem;align-items:flex-start;}
+.step-r-n{width:24px;height:24px;border-radius:7px;background:var(--teal);color:#fff;font-weight:900;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.2rem;}
+.rounder-final{margin-top:.7rem;background:var(--green);color:#fff;border-radius:12px;padding:.6rem 1.2rem;font-size:1.05rem;font-weight:800;display:inline-block;}
+
+/* PRACTICE */
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(59,130,246,.1);}
+.practice-head{background:linear-gradient(135deg,var(--blue-dark),var(--teal));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--blue-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.88rem;font-weight:800;color:var(--blue-deep);margin-bottom:.4rem;}
+.ex-problem{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;font-family:monospace;}
+.ex-inp{width:120px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--blue-dark);}
+.ex-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--teal);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(13,148,136,.25);}
+.btn-main:hover{background:var(--blue-deep);transform:translateY(-2px);}
+.btn-green{background:var(--green);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(16,185,129,.25);}
+.btn-green:hover{background:var(--green-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--blue-light);color:var(--blue-deep);border:2px solid var(--border);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--border);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+/* GENERATOR */
+.generator{background:#fff;border:3px solid var(--border-green);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(16,185,129,.12);}
+.gen-head{background:linear-gradient(135deg,var(--green-deep),var(--teal));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-head-left{display:flex;align-items:center;gap:.8rem;}
+.gen-head-icon{font-size:2rem;}
+.gen-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-head p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-body{padding:1.5rem;}
+.gen-tabs{display:flex;gap:.5rem;margin-bottom:1.3rem;flex-wrap:wrap;}
+.gen-tab{background:var(--blue-light);border:2px solid var(--border);border-radius:11px;padding:.45rem 1rem;font-size:.92rem;font-weight:800;color:var(--ink);cursor:pointer;transition:all .18s;font-family:'Nunito',sans-serif;}
+.gen-tab:hover{background:var(--border);}
+.gen-tab.on{background:var(--teal);border-color:var(--teal);color:#fff;}
+.gen-problems{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gen-card{background:var(--blue-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;transition:box-shadow .2s;}
+.gen-card:hover{box-shadow:0 4px 16px rgba(59,130,246,.15);}
+.gen-letter{font-size:.82rem;font-weight:900;color:var(--blue-deep);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em;}
+.gen-q{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.55rem;}
+.gen-inp{width:110px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.gen-inp:focus{border-color:var(--teal);}
+.gen-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.gen-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.gen-reveal{font-size:.88rem;font-weight:700;color:var(--green-dark);margin-top:.4rem;min-height:1.2rem;}
+.score-row{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.score-track{flex:1;background:var(--blue-light);border-radius:20px;height:16px;overflow:hidden;}
+.score-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--teal),var(--green));transition:width .4s ease;}
+.score-lbl{font-size:.95rem;font-weight:800;color:var(--green-dark);white-space:nowrap;}
+
+/* QUIZ */
+.quiz-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 28px rgba(59,130,246,.1);}
+.quiz-head{background:linear-gradient(135deg,var(--blue-deep),var(--green-dark));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.quiz-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.quiz-body{padding:1.4rem 1.5rem;}
+.quiz-q{font-size:1rem;font-weight:800;color:var(--blue-deep);margin-bottom:.8rem;}
+.quiz-opts{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.quiz-btn{background:var(--blue-light);border:2.5px solid var(--border);border-radius:12px;padding:.5rem 1.1rem;font-size:1rem;font-weight:800;cursor:pointer;color:var(--ink);font-family:'Nunito',sans-serif;transition:all .18s;}
+.quiz-btn:hover:not(:disabled){background:var(--teal);color:#fff;border-color:var(--teal);}
+.quiz-btn:disabled{cursor:default;}
+.quiz-btn.correct{background:#dcfce7;border-color:#22c55e;color:#14532d;}
+.quiz-btn.wrong{background:var(--red-light);border-color:var(--red);color:var(--red);}
+.quiz-fb{font-size:.9rem;font-weight:700;min-height:1.4rem;margin-bottom:.6rem;}
+.quiz-prog{height:8px;background:var(--blue-light);border-radius:10px;overflow:hidden;margin-top:.6rem;}
+.quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--green));border-radius:10px;transition:width .4s;}
+.quiz-score{font-size:.88rem;font-weight:700;color:var(--green-dark);margin-top:.3rem;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+
+footer{background:var(--blue-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--green-mid);}
+
+@media(max-width:600px){body{font-size:19px;}.ex-grid{grid-template-columns:1fr;}.gen-problems{grid-template-columns:1fr;}.rounder-input-row{flex-direction:column;align-items:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-deco" style="width:220px;height:220px;left:-60px;top:-50px;animation-delay:0s;"></div>
+  <div class="hero-deco" style="width:140px;height:140px;right:6%;top:10%;animation-delay:2s;"></div>
+  <div class="hero-deco" style="width:85px;height:85px;left:60%;bottom:20%;animation-delay:1s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema3">Десетични дроби</a> › Закръгляване
+    </div>
+    <h1>Закръгляване на десетични дроби</h1>
+    <p class="hero-sub">Правило, примери, числова ос и интерактивен инструмент за закръгляване — всичко на едно място!</p>
+    <div class="hero-chips">
+      <span class="chip">📏 Правило</span>
+      <span class="chip">🔢 Примери</span>
+      <span class="chip">🎯 Инструмент за закръгляване</span>
+      <span class="chip">🎲 Генератор</span>
+      <span class="chip">❓ Тест</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 1: КАКВО Е ЗАКРЪГЛЯВАНЕ?
+═══════════════════════════════════ -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Какво е закръгляване и защо го ползваме?</h2>
+  <p class="sec-desc">Понякога не ни трябват всички цифри — достатъчно е приблизително число!</p>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="card-emoji">🎯</div>
+      <div><h3>Идеята на закръгляването</h3><p>Намираме по-прост запис на числото</p></div>
+    </div>
+    <div class="card-body">
+      <div class="tip">
+        <div class="tip-icon">🌍</div>
+        <div class="tip-body"><strong>Пример от живота!</strong>
+        Цената на хляба е 2,47 лв. Ако закръглим до стотинки — 2,47. Но ако приближено казваме „около 2,5 лв." — закръгляме до десети. Ако казваме „около 2 лв." — закръгляме до единици.</div>
+      </div>
+
+      <!-- NUMBER LINE — 3.47 rounded to 3.5 -->
+      <div class="nline-wrap">
+        <h5>📐 Числова ос: 3,47 — по-близо ли е до 3,4 или до 3,5?</h5>
+        <div class="nline">
+          <div class="nline-track"></div>
+          <!-- fill from 3.4 to 3.47 -->
+          <div class="nline-fill" style="left:0%;width:49%;"></div>
+          <!-- ticks -->
+          <div class="nline-tick" style="left:0%;"></div>
+          <div class="nline-tick-lbl" style="left:0%;">3,4</div>
+          <div class="nline-tick" style="left:50%;"></div>
+          <div class="nline-tick-lbl" style="left:50%;">3,45</div>
+          <div class="nline-tick" style="left:100%;"></div>
+          <div class="nline-tick-lbl" style="left:100%;">3,5</div>
+          <!-- point at 3.47 = 70% of range -->
+          <div class="nline-point" style="left:70%;background:var(--orange);border-color:var(--orange);"></div>
+          <div class="nline-arrow right" style="left:70%;">↑<br><span style="font-size:.7rem;font-family:monospace;font-weight:900;">3,47</span></div>
+        </div>
+        <div style="margin-top:1rem;font-size:.92rem;color:var(--ink-mid);">
+          3,47 е <strong>над 3,45</strong> → закръгляме <strong style="color:var(--green-dark);">нагоре</strong> → <strong>≈ 3,5</strong>
+        </div>
+      </div>
+
+      <!-- NUMBER LINE 2 — 3.42 -->
+      <div class="nline-wrap">
+        <h5>📐 Числова ос: 3,42 — по-близо ли е до 3,4 или до 3,5?</h5>
+        <div class="nline">
+          <div class="nline-track"></div>
+          <div class="nline-fill" style="left:0%;width:40%;background:var(--blue-mid);"></div>
+          <div class="nline-tick" style="left:0%;"></div>
+          <div class="nline-tick-lbl" style="left:0%;">3,4</div>
+          <div class="nline-tick" style="left:50%;"></div>
+          <div class="nline-tick-lbl" style="left:50%;">3,45</div>
+          <div class="nline-tick" style="left:100%;"></div>
+          <div class="nline-tick-lbl" style="left:100%;">3,5</div>
+          <div class="nline-point" style="left:40%;background:var(--blue-dark);border-color:var(--blue-dark);"></div>
+          <div class="nline-arrow left" style="left:40%;">↑<br><span style="font-size:.7rem;font-family:monospace;font-weight:900;">3,42</span></div>
+        </div>
+        <div style="margin-top:1rem;font-size:.92rem;color:var(--ink-mid);">
+          3,42 е <strong>под 3,45</strong> → закръгляме <strong style="color:var(--blue-dark);">надолу</strong> → <strong>≈ 3,4</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 2: ПРАВИЛОТО
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Правилото за закръгляване</h2>
+
+  <div class="card">
+    <div class="card-head green">
+      <div class="card-emoji">📏</div>
+      <div><h3>Ключова стъпка — "следващата цифра"</h3><p>Само едно правило за всички случаи!</p></div>
+    </div>
+    <div class="card-body">
+
+      <!-- BIG RULE BOX -->
+      <div style="background:linear-gradient(135deg,var(--blue-light),var(--green-light));border:3px solid var(--teal);border-radius:20px;padding:1.4rem 1.6rem;margin:0 0 1.2rem;text-align:center;">
+        <div style="font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--blue-deep);margin-bottom:.7rem;">🔑 ПРАВИЛОТО</div>
+        <div style="font-size:1.05rem;line-height:1.9;color:var(--ink);">
+          Гледаме цифрата <strong>веднага след</strong> разряда, до който закръгляме.<br>
+          <span style="display:inline-block;margin-top:.4rem;">
+            ▸ Ако е <strong style="color:var(--green-dark);font-size:1.1rem;">0, 1, 2, 3 или 4</strong> → закръгляме <strong style="color:var(--blue-dark);">надолу</strong> (цифрата остава)<br>
+            ▸ Ако е <strong style="color:var(--red);font-size:1.1rem;">5, 6, 7, 8 или 9</strong> → закръгляме <strong style="color:var(--green);">нагоре</strong> (цифрата се увеличава с 1)
+          </span>
+        </div>
+      </div>
+
+      <!-- EXAMPLES TABLE -->
+      <div style="overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:.95rem;margin:1rem 0;">
+          <tr style="background:linear-gradient(135deg,var(--blue-dark),var(--teal));color:#fff;">
+            <th style="padding:.6rem .8rem;text-align:left;font-weight:800;">Число</th>
+            <th style="padding:.6rem .8rem;text-align:center;font-weight:800;">До единици</th>
+            <th style="padding:.6rem .8rem;text-align:center;font-weight:800;">До десети</th>
+            <th style="padding:.6rem .8rem;text-align:center;font-weight:800;">До стотни</th>
+          </tr>
+          <tr style="border-bottom:2px solid var(--border);">
+            <td style="padding:.55rem .8rem;font-family:monospace;font-weight:800;font-size:1.05rem;">3,456</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 3</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 3,5</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 3,46</td>
+          </tr>
+          <tr style="border-bottom:2px solid var(--border);background:var(--green-soft);">
+            <td style="padding:.55rem .8rem;font-family:monospace;font-weight:800;font-size:1.05rem;">7,341</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 7</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 7,3</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 7,34</td>
+          </tr>
+          <tr style="border-bottom:2px solid var(--border);">
+            <td style="padding:.55rem .8rem;font-family:monospace;font-weight:800;font-size:1.05rem;">12,985</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 13</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 13,0</td>
+            <td style="padding:.55rem;text-align:center;background:var(--blue-soft);font-weight:800;color:var(--blue-dark);">≈ 12,99</td>
+          </tr>
+          <tr style="border-bottom:2px solid var(--border);background:var(--green-soft);">
+            <td style="padding:.55rem .8rem;font-family:monospace;font-weight:800;font-size:1.05rem;">0,074</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 0</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 0,1</td>
+            <td style="padding:.55rem;text-align:center;background:var(--green-light);font-weight:800;color:var(--green-dark);">≈ 0,07</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- WORKED EXAMPLE: step by step -->
+      <div style="background:var(--blue-soft);border:2.5px solid var(--border);border-radius:16px;padding:1.2rem 1.4rem;margin-top:1.2rem;">
+        <div style="font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--blue-deep);margin-bottom:.8rem;">🔍 Подробен пример: Закръгли 12,985 до стотни</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <div style="display:flex;gap:.7rem;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:7px;background:var(--teal);color:#fff;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;">1</div>
+            <div style="font-size:.97rem;">Намираме разряда <strong>стотни</strong>: цифрата 8 в 12,9<strong style="color:var(--orange);font-size:1.1rem;">8</strong>5</div>
+          </div>
+          <div style="display:flex;gap:.7rem;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:7px;background:var(--teal);color:#fff;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;">2</div>
+            <div style="font-size:.97rem;">Гледаме <strong>следващата цифра</strong>: хилядните = <strong style="color:var(--red);font-size:1.1rem;">5</strong></div>
+          </div>
+          <div style="display:flex;gap:.7rem;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:7px;background:var(--teal);color:#fff;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;">3</div>
+            <div style="font-size:.97rem;">5 ≥ 5 → закръгляме <strong style="color:var(--green-dark);">нагоре</strong>: 8 + 1 = 9</div>
+          </div>
+          <div style="display:flex;gap:.7rem;align-items:flex-start;">
+            <div style="width:26px;height:26px;border-radius:7px;background:var(--green);color:#fff;font-weight:900;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;">✓</div>
+            <div style="font-size:.97rem;font-weight:800;color:var(--green-dark);">12,985 ≈ 12,99</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">⚠️</div>
+        <div class="tip-body"><strong>Внимание при „пренасяне"!</strong>
+        Ако след увеличаване получим 10 — пренасяме: напр. 3,996 закръглено до стотни → гледаме хилядните = 6 ≥ 5 → 9 + 1 = 10 → пренасяме → 3,996 ≈ 4,00</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 3: ИНТЕРАКТИВЕН ЗАКРЪГЛЯТОР
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">🛠️ Инструмент</div>
+  <h2 class="sec-title">Интерактивен инструмент за закръгляване</h2>
+  <p class="sec-desc">Въведи произволно число и виж как се закръглява стъпка по стъпка!</p>
+
+  <div class="rounder-box">
+    <div class="rounder-head">
+      <div class="rounder-head-icon">🎯</div>
+      <div><h4>Инструмент за закръгляване с обяснение</h4><p>Виж всяка стъпка от правилото</p></div>
+    </div>
+    <div class="rounder-body">
+      <div class="rounder-input-row">
+        <span class="rounder-label">Число:</span>
+        <input class="rounder-inp" id="round-num" type="text" value="4,735" placeholder="напр. 4,735">
+        <span class="rounder-label">Закръгли до:</span>
+        <select class="rounder-sel" id="round-to">
+          <option value="0">единици</option>
+          <option value="1" selected>десети</option>
+          <option value="2">стотни</option>
+          <option value="3">хилядни</option>
+        </select>
+        <button class="btn-green" onclick="doRound()">📐 Закръгли!</button>
+      </div>
+      <div class="rounder-result" id="round-result">
+        <div class="rounder-result-title">Резултат</div>
+        <div style="color:var(--ink-mid);font-size:.95rem;">Въведи число и натисни „Закръгли!"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  РАЗДЕЛ 4: ПРОВЕРИ СЕ
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">✏️ Раздел 4</div>
+  <h2 class="sec-title">Провери се</h2>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">✏️</div>
+      <div><h4>Задачи за закръгляване</h4><p>Закръгли всяко число до посочения разряд</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">а) До единици</div>
+          <div class="ex-problem">3,72 ≈ ?</div>
+          <input class="ex-inp" id="r1a" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">б) До десети</div>
+          <div class="ex-problem">5,463 ≈ ?</div>
+          <input class="ex-inp" id="r1b" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">в) До стотни</div>
+          <div class="ex-problem">12,985 ≈ ?</div>
+          <input class="ex-inp" id="r1c" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">г) До десети</div>
+          <div class="ex-problem">0,074 ≈ ?</div>
+          <input class="ex-inp" id="r1d" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">д) До единици</div>
+          <div class="ex-problem">9,999 ≈ ?</div>
+          <input class="ex-inp" id="r1e" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">е) До стотни</div>
+          <div class="ex-problem">7,996 ≈ ?</div>
+          <input class="ex-inp" id="r1f" type="number" step="any" placeholder="Отговор">
+          <div class="ex-hint" id="hr1f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkRound1()">✓ Провери</button>
+        <div class="fb" id="fb-r1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+  ГЕНЕРАТОР
+═══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="generator">
+    <div class="gen-head">
+      <div class="gen-head-left">
+        <div class="gen-head-icon">🎲</div>
+        <div><h4>Генератор на случайни задачи</h4><p>Всеки път нови числа за закръгляване!</p></div>
+      </div>
+      <button class="btn-ghost" onclick="genAll()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-body">
+      <div class="gen-tabs">
+        <button class="gen-tab on" onclick="switchTab('gt-unit',this)">До единици</button>
+        <button class="gen-tab" onclick="switchTab('gt-tenth',this)">До десети</button>
+        <button class="gen-tab" onclick="switchTab('gt-hun',this)">До стотни</button>
+        <button class="gen-tab" onclick="switchTab('gt-mix',this)">🌀 Смесени</button>
+      </div>
+
+      <div id="gt-unit"><div class="gen-problems" id="gp-unit"></div>
+        <div class="btn-row"><button class="btn-main" onclick="checkGen('unit')">✓ Провери</button><button class="btn-ghost" onclick="genTab('unit')">🔄 Нови</button><div class="fb" id="fb-gunit"></div></div>
+        <div class="score-row"><div class="score-track"><div class="score-fill" id="sf-unit" style="width:0%"></div></div><div class="score-lbl" id="sl-unit">0 / 6</div></div>
+      </div>
+      <div id="gt-tenth" style="display:none;"><div class="gen-problems" id="gp-tenth"></div>
+        <div class="btn-row"><button class="btn-main" onclick="checkGen('tenth')">✓ Провери</button><button class="btn-ghost" onclick="genTab('tenth')">🔄 Нови</button><div class="fb" id="fb-gtenth"></div></div>
+        <div class="score-row"><div class="score-track"><div class="score-fill" id="sf-tenth" style="width:0%"></div></div><div class="score-lbl" id="sl-tenth">0 / 6</div></div>
+      </div>
+      <div id="gt-hun" style="display:none;"><div class="gen-problems" id="gp-hun"></div>
+        <div class="btn-row"><button class="btn-main" onclick="checkGen('hun')">✓ Провери</button><button class="btn-ghost" onclick="genTab('hun')">🔄 Нови</button><div class="fb" id="fb-ghun"></div></div>
+        <div class="score-row"><div class="score-track"><div class="score-fill" id="sf-hun" style="width:0%"></div></div><div class="score-lbl" id="sl-hun">0 / 6</div></div>
+      </div>
+      <div id="gt-mix" style="display:none;"><div class="gen-problems" id="gp-mix"></div>
+        <div class="btn-row"><button class="btn-main" onclick="checkGen('mix')">✓ Провери</button><button class="btn-ghost" onclick="genTab('mix')">🔄 Нови</button><div class="fb" id="fb-gmix"></div></div>
+        <div class="score-row"><div class="score-track"><div class="score-fill" id="sf-mix" style="width:0%"></div></div><div class="score-lbl" id="sl-mix">0 / 6</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="quiz-box">
+    <div class="quiz-head">
+      <div style="font-size:1.8rem;">🏆</div>
+      <div><h4>Финален тест — 6 въпроса</h4></div>
+    </div>
+    <div class="quiz-body" id="quiz-body"></div>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a>
+    <a href="klas-5.html">5 клас</a>
+    <a href="desetichni-drobi-chetenе-5-klas.html">Четене и записване</a>
+    <a href="deistviya-desetichni-5-klas.html">Действия с дроби</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════
+// ROUNDER
+// ═══════════════════════════════════════
+function roundTo(n, places) {
+  return parseFloat(n.toFixed(places));
+}
+function fmtN(n) { return String(n).replace('.', ','); }
+
+function doRound() {
+  var rawVal = document.getElementById('round-num').value.replace(',','.');
+  var n = parseFloat(rawVal);
+  var places = parseInt(document.getElementById('round-to').value);
+  var resultEl = document.getElementById('round-result');
+
+  if (isNaN(n)) {
+    resultEl.innerHTML = '<div class="rounder-result-title">Грешка</div><div style="color:var(--red);">⚠️ Въведи валидно число! Пример: 4,735</div>';
+    return;
+  }
+
+  var rounded = roundTo(n, places);
+  var placeNames = ['единици','десети','стотни','хилядни'];
+  var placeName = placeNames[places];
+
+  // Get the digit we're looking at and the next one
+  var nStr = n.toFixed(4);
+  var parts = nStr.split('.');
+  var intPart = parts[0];
+  var decPart = (parts[1]||'0000').padEnd(4,'0');
+
+  var lookDigit, keepDigits;
+  if (places === 0) {
+    lookDigit = parseInt(decPart[0]);
+    keepDigits = intPart;
+  } else {
+    lookDigit = parseInt(decPart[places]) || 0;
+    keepDigits = fmtN(parseFloat(n.toFixed(places-1+1)).toFixed(places));
+  }
+
+  var direction = lookDigit >= 5 ? 'нагоре ↑' : 'надолу ↓';
+  var dirColor = lookDigit >= 5 ? 'var(--green-dark)' : 'var(--blue-dark)';
+
+  var html = '<div class="rounder-result-title">Резултат — закръгляване до ' + placeName + '</div>';
+  html += '<div class="rounder-steps">';
+  html += '<div class="step-r"><div class="step-r-n">1</div><div>Числото: <strong style="font-family:monospace;">' + fmtN(n) + '</strong></div></div>';
+  html += '<div class="step-r"><div class="step-r-n">2</div><div>Гледаме цифрата <em>след</em> разряда ' + placeName + ': <strong style="color:' + (lookDigit>=5?'var(--red)':'var(--green-dark)') + ';font-size:1.1rem;">' + lookDigit + '</strong></div></div>';
+  html += '<div class="step-r"><div class="step-r-n">3</div><div>' + lookDigit + (lookDigit>=5?' ≥ 5 → закръгляме ':' < 5 → закръгляме ') + '<strong style="color:'+dirColor+';">' + direction + '</strong></div></div>';
+  html += '</div>';
+  html += '<div class="rounder-final">' + fmtN(n) + ' ≈ ' + fmtN(rounded) + '</div>';
+  resultEl.innerHTML = html;
+}
+
+// ═══════════════════════════════════════
+// SECTION CHECKER
+// ═══════════════════════════════════════
+function checkRound1() {
+  var s = [
+    {id:'r1a', ans:4, tol:0.001, hint:'3,72 → гледаме 7 ≥ 5 → нагоре → 4'},
+    {id:'r1b', ans:5.5, tol:0.001, hint:'5,463 → гледаме 6 ≥ 5 → нагоре → 5,5'},
+    {id:'r1c', ans:12.99, tol:0.001, hint:'12,985 → гледаме 5 ≥ 5 → нагоре → 12,99'},
+    {id:'r1d', ans:0.1, tol:0.001, hint:'0,074 → гледаме 7 ≥ 5 → нагоре → 0,1'},
+    {id:'r1e', ans:10, tol:0.001, hint:'9,999 → гледаме 9 ≥ 5 → нагоре → 10'},
+    {id:'r1f', ans:8.0, tol:0.001, hint:'7,996 → гледаме 6 ≥ 5 → нагоре → 8,00'},
+  ];
+  var ok = 0;
+  s.forEach(function(item, i) {
+    var inp = document.getElementById(item.id);
+    var h = document.getElementById('hr1' + String.fromCharCode(97+i));
+    var v = parseFloat(inp.value);
+    if (Math.abs(v - item.ans) <= item.tol) {
+      inp.className = 'ex-inp ok'; h.textContent = '✅ Правилно!'; ok++;
+    } else {
+      inp.className = 'ex-inp no';
+      h.textContent = inp.value === '' ? '⚠️ Въведи отговор' : '❌ ' + item.hint;
+    }
+  });
+  var fb = document.getElementById('fb-r1');
+  if (ok === s.length) { fb.textContent = '🎉 Браво! Всички верни!'; fb.className = 'fb show ok'; }
+  else { fb.textContent = '❌ ' + ok + ' от ' + s.length + ' верни.'; fb.className = 'fb show no'; }
+}
+
+// ═══════════════════════════════════════
+// GENERATOR
+// ═══════════════════════════════════════
+var genStore = {};
+var letters = ['а','б','в','г','д','е'];
+
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function rndDec(dec){
+  var n = ri(10,999) / Math.pow(10, dec);
+  // add one more decimal place for variety
+  return parseFloat(n.toFixed(dec+1));
+}
+
+function makeProbs(mode) {
+  var probs = [];
+  for (var i = 0; i < 6; i++) {
+    var places, label;
+    if (mode === 'unit') { places = 0; label = 'до единици'; }
+    else if (mode === 'tenth') { places = 1; label = 'до десети'; }
+    else if (mode === 'hun') { places = 2; label = 'до стотни'; }
+    else {
+      var opts = [0,1,2];
+      places = opts[ri(0,2)];
+      label = ['до единици','до десети','до стотни'][places];
+    }
+    var n = rndDec(places+1);
+    var ans = parseFloat(n.toFixed(places));
+    probs.push({q: fmtN(n) + ' (' + label + ')', ans: ans, places: places});
+  }
+  return probs;
+}
+
+function renderGen(mode) {
+  var probs = makeProbs(mode);
+  genStore[mode] = probs;
+  var container = document.getElementById('gp-' + mode);
+  if (!container) return;
+  container.innerHTML = probs.map(function(p, i) {
+    return '<div class="gen-card">'
+      + '<div class="gen-letter">'+letters[i]+')</div>'
+      + '<div class="gen-q">'+p.q+' ≈ ?</div>'
+      + '<input class="gen-inp" id="gi-'+mode+'-'+i+'" type="number" step="any" placeholder="?">'
+      + '<div class="gen-reveal" id="gr-'+mode+'-'+i+'"></div>'
+      + '</div>';
+  }).join('');
+  var sf=document.getElementById('sf-'+mode);
+  var sl=document.getElementById('sl-'+mode);
+  if(sf)sf.style.width='0%';
+  if(sl)sl.textContent='0 / 6';
+  var fb=document.getElementById('fb-g'+mode);
+  if(fb){fb.textContent='';fb.className='fb';}
+}
+
+function genTab(mode){renderGen(mode);}
+function genAll(){['unit','tenth','hun','mix'].forEach(function(m){renderGen(m);});}
+
+function checkGen(mode) {
+  var probs = genStore[mode];
+  if (!probs) return;
+  var ok = 0;
+  probs.forEach(function(p, i) {
+    var inp = document.getElementById('gi-'+mode+'-'+i);
+    var rev = document.getElementById('gr-'+mode+'-'+i);
+    if (!inp) return;
+    var v = parseFloat(inp.value);
+    var tol = 0.0005;
+    if (!isNaN(v) && Math.abs(v - p.ans) <= tol) {
+      inp.className = 'gen-inp ok';
+      if (rev) rev.textContent = '✅';
+      ok++;
+    } else {
+      inp.className = 'gen-inp no';
+      if (rev) rev.textContent = inp.value === '' ? '⚠️' : '❌ = ' + fmtN(p.ans);
+    }
+  });
+  var sf=document.getElementById('sf-'+mode);
+  var sl=document.getElementById('sl-'+mode);
+  if(sf)sf.style.width=(ok/probs.length*100)+'%';
+  if(sl)sl.textContent=ok+' / '+probs.length;
+  var fb=document.getElementById('fb-g'+mode);
+  if(fb){
+    if(ok===probs.length){fb.textContent='🎉 Отлично!';fb.className='fb show ok';}
+    else{fb.textContent=ok+' от '+probs.length+' верни.';fb.className='fb show no';}
+  }
+}
+
+function switchTab(panelId, btn) {
+  ['gt-unit','gt-tenth','gt-hun','gt-mix'].forEach(function(t){
+    var el=document.getElementById(t);
+    if(el)el.style.display=(t===panelId)?'block':'none';
+  });
+  document.querySelectorAll('.gen-tab').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+}
+
+// ═══════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════
+var quizQs = [
+  {q:'Закръгли 3,72 до единици.',opts:['3','4','3,7','3,8'],ans:1},
+  {q:'Закръгли 5,463 до десети.',opts:['5,4','5,5','5,46','5,47'],ans:1},
+  {q:'Закръгли 0,074 до стотни.',opts:['0,07','0,08','0,1','0,0'],ans:0},
+  {q:'Кои числа се закръгляват НАГОРЕ?',opts:['Тези с цифра 0–4 след разряда','Тези с цифра 5–9 след разряда','Тези с четна следваща цифра','Тези с нечетна следваща цифра'],ans:1},
+  {q:'Закръгли 9,999 до единици.',opts:['9','10','9,9','9,99'],ans:1},
+  {q:'Закръгли 7,996 до стотни.',opts:['7,99','7,99','8,00','7,9'],ans:2},
+];
+var qScore=0,qDone=[];
+function renderQuiz(){
+  qScore=0;qDone=[];
+  var html='';
+  quizQs.forEach(function(q,qi){
+    html+='<div style="margin-bottom:1.3rem;padding-bottom:1.1rem;border-bottom:2px solid var(--border);">';
+    html+='<div class="quiz-q">'+(qi+1)+'. '+q.q+'</div>';
+    html+='<div class="quiz-opts">';
+    q.opts.forEach(function(o,oi){
+      html+='<button class="quiz-btn" id="qb-'+qi+'-'+oi+'" onclick="qAns('+qi+','+oi+')">'+o+'</button>';
+    });
+    html+='</div><div class="quiz-fb" id="qfb-'+qi+'"></div></div>';
+  });
+  html+='<div class="quiz-prog"><div class="quiz-prog-fill" id="qfill" style="width:0%"></div></div>';
+  html+='<div class="quiz-score" id="qscr">0 / '+quizQs.length+' верни</div>';
+  document.getElementById('quiz-body').innerHTML=html;
+}
+function qAns(qi,oi){
+  if(qDone.indexOf(qi)>=0)return;
+  qDone.push(qi);
+  var q=quizQs[qi];
+  var fb=document.getElementById('qfb-'+qi);
+  q.opts.forEach(function(_,k){
+    var btn=document.getElementById('qb-'+qi+'-'+k);
+    btn.disabled=true;
+    if(k===q.ans)btn.classList.add('correct');
+  });
+  if(oi===q.ans){qScore++;fb.textContent='✅ Правилно!';fb.style.color='#14532d';}
+  else{document.getElementById('qb-'+qi+'-'+oi).classList.add('wrong');fb.textContent='❌ '+q.opts[q.ans];fb.style.color='var(--red)';}
+  document.getElementById('qfill').style.width=(qScore/quizQs.length*100)+'%';
+  document.getElementById('qscr').textContent=qScore+' / '+quizQs.length+' верни';
+}
+
+// ═══════════════════════════════════════
+// SCROLL REVEAL + INIT
+// ═══════════════════════════════════════
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*60);obs.unobserve(e.target);}
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+window.addEventListener('load',function(){
+  genAll();
+  renderQuiz();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Безплатни учебни материали по математика за 5, 6 и 7 клас. Обяснения, задачи с решения и конспекти по официалната учебна програма.">
+<title>Математика 5–7 клас | Учебни материали</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --ink: #1a1714;
+    --ink-light: #5a5650;
+    --c5: #c0392b;
+    --c5-light: #fdf0ee;
+    --c5-mid: #e8998f;
+    --c6: #1a7a5e;
+    --c6-light: #edf7f3;
+    --c6-mid: #7ec4a8;
+    --c7: #1e3a8a;
+    --c7-light: #eef2fc;
+    --c7-mid: #8faad6;
+    --gold: #c8942a;
+    --gold-light: #fdf6e3;
+    --border: #e8e2d6;
+    --surface: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── GEOMETRIC BACKGROUND ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 10% 20%, rgba(192,57,43,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(30,58,138,0.04) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(26,122,94,0.03) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── MATH SYMBOLS FLOATING ── */
+  .math-bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .math-sym {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    color: rgba(26,23,20,0.04);
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-style: italic;
+    user-select: none;
+    animation: float linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.03; }
+    50% { opacity: 0.06; }
+    100% { transform: translateY(-30px) rotate(5deg); opacity: 0.03; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,243,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+
+  .nav-logo em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex; gap: 0.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--ink-light);
+    transition: all 0.2s;
+  }
+
+  .nav-links a:hover { background: var(--border); color: var(--ink); }
+  .nav-links .n5:hover { background: var(--c5-light); color: var(--c5); }
+  .nav-links .n6:hover { background: var(--c6-light); color: var(--c6); }
+  .nav-links .n7:hover { background: var(--c7-light); color: var(--c7); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 92vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--gold-light);
+    border: 1px solid #e8d5a0;
+    border-radius: 30px;
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before { content: '✦'; }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    max-width: 800px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 .line2 {
+    color: var(--gold);
+    font-style: italic;
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
+    color: var(--ink-light);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+    margin-bottom: 4rem;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: #fff;
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+
+  .btn-primary:hover { background: #333; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    padding: 0.85rem 2rem;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--border);
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+  /* ── HERO STATS ── */
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .h-stat { text-align: center; }
+  .h-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    display: block;
+  }
+  .h-stat-label { font-size: 0.78rem; color: var(--ink-light); margin-top: 0.2rem; }
+
+  /* ── SECTION SHARED ── */
+  section { position: relative; z-index: 1; padding: 5rem 2rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+
+  .sec-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .sec-desc {
+    color: var(--ink-light);
+    font-size: 1rem;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  /* ── CLASS CARDS ── */
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .class-card {
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: block;
+    position: relative;
+  }
+
+  .class-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  }
+
+  .card-top {
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-top::after {
+    content: attr(data-sym);
+    position: absolute;
+    right: -10px; bottom: -20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 8rem;
+    font-style: italic;
+    font-weight: 900;
+    opacity: 0.07;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .c5 .card-top { background: var(--c5); }
+  .c6 .card-top { background: var(--c6); }
+  .c7 .card-top { background: var(--c7); }
+
+  .card-klas {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .card-bottom {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .card-topics {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-topics li {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .card-topics li::before {
+    content: '→';
+    position: absolute; left: 0;
+    font-size: 0.7rem;
+  }
+
+  .c5 .card-topics li::before { color: var(--c5); }
+  .c6 .card-topics li::before { color: var(--c6); }
+  .c7 .card-topics li::before { color: var(--c7); }
+
+  .card-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .c5 .card-link { color: var(--c5); }
+  .c6 .card-link { color: var(--c6); }
+  .c7 .card-link { color: var(--c7); }
+
+  /* ── HOW IT WORKS ── */
+  .how-bg {
+    background: var(--ink);
+    border-radius: 24px;
+    padding: 3rem;
+    color: #fff;
+  }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .how-step { text-align: center; }
+
+  .how-num {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 auto 1rem;
+  }
+
+  .how-step h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .how-step p { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  /* ── LATEST ARTICLES ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .article-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .article-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .article-card.a5::before { background: var(--c5); }
+  .article-card.a6::before { background: var(--c6); }
+  .article-card.a7::before { background: var(--c7); }
+
+  .article-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .article-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .a5 .article-tag { color: var(--c5); }
+  .a6 .article-tag { color: var(--c6); }
+  .a7 .article-tag { color: var(--c7); }
+
+  .article-card h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.4rem;
+  }
+
+  .article-card p {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  .coming-soon {
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    color: var(--ink-light);
+    font-size: 0.85rem;
+    grid-column: span 2;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-box {
+    background: var(--gold-light);
+    border: 1px solid #e8d5a0;
+    border-radius: 20px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .about-box p {
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .about-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .about-features li {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.88rem; font-weight: 500;
+  }
+  .about-features li::before { content: '✓'; color: var(--c6); font-weight: 800; }
+
+  .about-visual {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  .formula-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .formula-box span { font-family: 'Plus Jakarta Sans', sans-serif; font-style: normal; font-size: 0.72rem; color: var(--ink-light); font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.82rem;
+    position: relative; z-index: 1;
+  }
+
+  footer strong { color: rgba(255,255,255,0.9); }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .class-grid { grid-template-columns: 1fr; }
+    .how-grid { grid-template-columns: repeat(2, 1fr); }
+    .articles-grid { grid-template-columns: 1fr; }
+    .about-box { grid-template-columns: 1fr; gap: 2rem; }
+    .coming-soon { grid-column: span 1; }
+    nav .nav-links { display: none; }
+    .hero h1 { font-size: 2.5rem; }
+    .how-bg { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- FLOATING MATH SYMBOLS -->
+<div class="math-bg">
+  <div class="math-sym" style="left:5%; top:15%; animation-duration:8s; animation-delay:0s;">π</div>
+  <div class="math-sym" style="left:88%; top:10%; animation-duration:10s; animation-delay:1s;">∑</div>
+  <div class="math-sym" style="left:75%; top:55%; animation-duration:9s; animation-delay:2s;">√</div>
+  <div class="math-sym" style="left:15%; top:70%; animation-duration:11s; animation-delay:0.5s;">∫</div>
+  <div class="math-sym" style="left:50%; top:85%; animation-duration:7s; animation-delay:1.5s;">÷</div>
+  <div class="math-sym" style="left:92%; top:75%; animation-duration:12s; animation-delay:3s;">×</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <ul class="nav-links">
+    <li><a href="klas-5.html" class="n5">5 клас</a></li>
+    <li><a href="klas-6.html" class="n6">6 клас</a></li>
+    <li><a href="klas-7.html" class="n7">7 клас</a></li>
+    <li><a href="content-plan.html">Всички теми</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Безплатни учебни материали</div>
+  <h1>
+    Математиката
+    <span class="line2">вече е лесна</span>
+  </h1>
+  <p class="hero-sub">Ясни обяснения, решени задачи и конспекти по официалната учебна програма за 5, 6 и 7 клас.</p>
+  <div class="hero-cta">
+    <a href="#klasove" class="btn-primary">Избери клас →</a>
+    <a href="content-plan.html" class="btn-ghost">Всички теми</a>
+  </div>
+  <div class="hero-stats">
+    <div class="h-stat">
+      <span class="h-stat-num">3</span>
+      <div class="h-stat-label">Класа покрити</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-num">50+</span>
+      <div class="h-stat-label">Теми по програма</div>
+    </div>
+    <div class="h-stat">
+      <span class="h-stat-num">100%</span>
+      <div class="h-stat-label">Безплатно</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLASS CARDS -->
+<section id="klasove" style="padding-top:2rem;">
+  <div class="container">
+    <div class="sec-label reveal">Избери своя клас</div>
+    <h2 class="sec-title reveal">По кой клас учиш?</h2>
+    <p class="sec-desc reveal">Всички материали са наредени по официалната учебна програма на МОН — точно в реда, по който ги учите в училище.</p>
+
+    <div class="class-grid">
+
+      <!-- 5 клас -->
+      <a href="klas-5.html" class="class-card c5 reveal">
+        <div class="card-top" data-sym="½">
+          <div class="card-klas">Пети клас</div>
+          <div class="card-num">5</div>
+          <div class="card-title">Дроби, делимост и геометрия</div>
+        </div>
+        <div class="card-bottom">
+          <ul class="card-topics">
+            <li>Делимост, НОД и НОК</li>
+            <li>Обикновени дроби</li>
+            <li>Десетични дроби и проценти</li>
+            <li>Геометрични фигури и тела</li>
+          </ul>
+          <span class="card-link">Виж материалите →</span>
+        </div>
+      </a>
+
+      <!-- 6 клас -->
+      <a href="klas-6.html" class="class-card c6 reveal">
+        <div class="card-top" data-sym="x²">
+          <div class="card-klas">Шести клас</div>
+          <div class="card-num">6</div>
+          <div class="card-title">Рационални числа и уравнения</div>
+        </div>
+        <div class="card-bottom">
+          <ul class="card-topics">
+            <li>Рационални числа</li>
+            <li>Степенуване</li>
+            <li>Уравнения и пропорции</li>
+            <li>Окръжност и геометрични тела</li>
+          </ul>
+          <span class="card-link">Виж материалите →</span>
+        </div>
+      </a>
+
+      <!-- 7 клас -->
+      <a href="klas-7.html" class="class-card c7 reveal">
+        <div class="card-top" data-sym="=">
+          <div class="card-klas">Седми клас</div>
+          <div class="card-num">7</div>
+          <div class="card-title">Алгебра и геометрия за НВО</div>
+        </div>
+        <div class="card-bottom">
+          <ul class="card-topics">
+            <li>Цели изрази и многочлени</li>
+            <li>Уравнения и неравенства</li>
+            <li>Еднакви триъгълници</li>
+            <li>Подготовка за НВО</li>
+          </ul>
+          <span class="card-link">Виж материалите →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="container">
+    <div class="how-bg reveal">
+      <div class="sec-label" style="color:rgba(200,148,42,0.8);">Как работи сайтът</div>
+      <h2 class="sec-title" style="color:#fff; margin-bottom:0;">Учи по-лесно, стъпка по стъпка</h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <h4>Избери тема</h4>
+          <p>Намери темата, която учите в момента в училище.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <h4>Прочети обяснението</h4>
+          <p>Ясно, кратко и с примери — без излишна теория.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <h4>Реши задачите</h4>
+          <p>Практикувай с решени примери и провери сам себе си.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <h4>Повтори преди изпит</h4>
+          <p>Използвай конспектите за бързо повторение.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST ARTICLES -->
+<section>
+  <div class="container">
+    <div class="sec-label reveal">Статии</div>
+    <h2 class="sec-title reveal">Последно добавени</h2>
+    <p class="sec-desc reveal">Нови материали се добавят редовно по учебната програма.</p>
+
+    <div class="articles-grid">
+      <a href="klas-5.html" class="article-card a5 reveal">
+        <div class="article-tag">5 клас · Делимост</div>
+        <h3>НОД и НОК — как се намират стъпка по стъпка</h3>
+        <p>Пълно обяснение с алгоритъм и 5 решени задачи.</p>
+      </a>
+      <a href="klas-5.html" class="article-card a5 reveal">
+        <div class="article-tag">5 клас · Дроби</div>
+        <h3>Събиране и изваждане на обикновени дроби</h3>
+        <p>С еднакъв и различен знаменател — стъпка по стъпка.</p>
+      </a>
+      <a href="klas-6.html" class="article-card a6 reveal">
+        <div class="article-tag">6 клас · Рационални числа</div>
+        <h3>Действия с рационални числа — правила за знаците</h3>
+        <p>Събиране, изваждане, умножение и деление с примери.</p>
+      </a>
+      <a href="klas-7.html" class="article-card a7 reveal">
+        <div class="article-tag">7 клас · Цели изрази</div>
+        <h3>Формули за съкратено умножение — всички с примери</h3>
+        <p>(a±b)², (a+b)(a-b), (a±b)³ — обяснение и задачи.</p>
+      </a>
+      <div class="coming-soon reveal">
+        ✦ Нови статии се добавят всяка седмица
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section>
+  <div class="container">
+    <div class="about-box reveal">
+      <div>
+        <div class="sec-label">За сайта</div>
+        <h2>Математика, обяснена на разбираем език</h2>
+        <p>Всеки материал е написан така, сякаш учителят обяснява лично на ученика — ясно, с примери от реалния живот и без излишна теория.</p>
+        <ul class="about-features">
+          <li>По официалната учебна програма на МОН</li>
+          <li>Подходящо за самостоятелна подготовка</li>
+          <li>Решени задачи за самопроверка</li>
+          <li>Конспекти за бързо повторение преди изпит</li>
+          <li>Напълно безплатно, без реклами</li>
+        </ul>
+      </div>
+      <div class="about-visual">
+        <div class="formula-box">a² + b² = c² <span>Питагорова теорема</span></div>
+        <div class="formula-box">(a + b)² = a² + 2ab + b² <span>Съкратено умножение</span></div>
+        <div class="formula-box">S = (a · h) / 2 <span>Лице на триъгълник</span></div>
+        <div class="formula-box">НОД · НОК = a · b <span>Делимост</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+  <p style="margin-top:0.5rem;">Имаш въпрос или предложение? <a href="mailto:">Свържи се с нас</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
