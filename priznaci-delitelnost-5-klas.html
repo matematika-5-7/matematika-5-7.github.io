@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Признаци за делимост на 2, 3, 5, 9, 10 и 6 — как да познаем веднага без да делим. Обяснение, примери и задачи. Математика 5 клас.">
+<title>Признаци за делимост — 2, 3, 5, 9, 10 | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --amber:#d1fae5; --amber-mid:#a7f3d0; --amber-soft:#ecfdf5;
+  --gold:#059669; --gold-dark:#065f46; --gold-deep:#022c22;
+  --gold-btn:#047857; --gold-mid:#10b981;
+  --orange:#0d9488; --orange-light:#ccfbf1;
+  --red:#ef4444; --red-light:#fef2f2;
+  --ink:#022c22; --ink-mid:#065f46;
+  --surface:#fff; --border:#a7f3d0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--amber-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(236,253,245,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--amber-mid);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--gold-dark);text-decoration:none;background:var(--amber);border:2px solid var(--amber-mid);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--gold-btn);color:#fff;border-color:var(--gold-btn);}
+
+.hero{background:linear-gradient(135deg,var(--gold-deep) 0%,var(--gold) 55%,var(--gold-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--amber-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,0.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.72);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.72);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;text-shadow:0 4px 20px rgba(146,64,14,0.4);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.32);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--amber);border:2px solid var(--amber-mid);color:var(--gold-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--gold-btn);color:#fff;border-color:var(--gold-btn);}
+.topic-nav-links a.current{background:var(--gold-dark);color:#fff;border-color:var(--gold-dark);}
+
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+
+.sec-tag{display:inline-flex;align-items:center;gap:0.4rem;background:var(--gold);color:#fff;font-size:0.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--gold-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(217,119,6,.09);}
+.explain-head{background:linear-gradient(135deg,var(--gold-deep),var(--gold));padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:0.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+
+.rule{background:var(--amber);border:2.5px solid var(--amber-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--gold-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.7;} .rule strong{color:var(--gold-dark);font-weight:900;}
+
+.tip{background:#f0fdf4;border:2px solid #bbf7d0;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#14532d;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* ПРИЗНАЦИ КАРТИ */
+.sign-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin:1.25rem 0;}
+.sign-card{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.2rem 1.3rem;transition:box-shadow .2s;}
+.sign-card:hover{box-shadow:0 6px 20px rgba(217,119,6,.15);}
+.sign-num{font-family:'Baloo 2',sans-serif;font-size:2.4rem;font-weight:800;color:var(--gold);line-height:1;}
+.sign-divider{height:3px;background:linear-gradient(90deg,var(--gold),var(--amber-mid));border-radius:2px;margin:.55rem 0;}
+.sign-rule{font-size:.92rem;color:var(--ink);line-height:1.65;margin-bottom:.5rem;}
+.sign-rule strong{color:var(--gold-dark);font-weight:900;}
+.sign-examples{font-size:.82rem;color:var(--ink-mid);font-family:monospace;line-height:1.75;}
+.sign-ok{color:#16a34a;font-weight:700;}
+.sign-no{color:#ef4444;font-weight:700;}
+
+/* ИНТЕРАКТИВЕН ТЕСТ ЗА ПРИЗНАЦИТЕ */
+.sign-test{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;}
+.sign-test-head{background:linear-gradient(135deg,var(--gold-deep),var(--orange));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.sign-test-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.sign-test-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.sign-test-body{padding:1.4rem 1.5rem;}
+
+.check-row{background:var(--amber-soft);border:2px solid var(--border);border-radius:14px;padding:.9rem 1.1rem;margin-bottom:.75rem;}
+.check-q{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.6rem;}
+.check-boxes{display:flex;gap:.5rem;flex-wrap:wrap;}
+.check-btn{background:#fff;border:2px solid var(--amber-mid);border-radius:10px;padding:.35rem .8rem;font-size:.9rem;font-weight:800;cursor:pointer;color:var(--ink-mid);transition:all .18s;font-family:'Nunito',sans-serif;}
+.check-btn:hover{border-color:var(--gold);color:var(--gold-dark);}
+.check-btn.sel{background:var(--gold);border-color:var(--gold);color:#fff;}
+.check-btn.correct{background:#16a34a;border-color:#16a34a;color:#fff;}
+.check-btn.wrong{background:#ef4444;border-color:#ef4444;color:#fff;}
+.check-result{font-size:.85rem;margin-top:.5rem;min-height:1.2rem;font-weight:700;}
+
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(217,119,6,.1);}
+.practice-head{background:linear-gradient(135deg,var(--gold-deep),var(--orange));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--amber-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.88rem;font-weight:800;color:var(--gold-dark);margin-bottom:.5rem;}
+.ex-problem{font-size:1.1rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;font-family:monospace;}
+.ex-inp{width:120px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--gold);}
+.ex-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--gold-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(180,83,9,.28);}
+.btn-main:hover{background:var(--gold-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--amber);color:var(--gold-dark);border:2px solid var(--amber-mid);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--amber-mid);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+.generator{background:#fff;border:3px solid var(--gold-mid);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(217,119,6,.14);}
+.gen-head{background:linear-gradient(135deg,var(--gold-deep),var(--gold-dark));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-head-left{display:flex;align-items:center;gap:.8rem;}
+.gen-head-icon{font-size:2rem;}
+.gen-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-head p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-body{padding:1.5rem;}
+.gen-problems{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gen-card{background:var(--amber-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;}
+.gen-letter{font-size:.82rem;font-weight:900;color:var(--gold-dark);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em;}
+.gen-q{font-size:1rem;font-weight:800;color:var(--ink);margin-bottom:.55rem;}
+.gen-inp{width:80px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.gen-inp:focus{border-color:var(--gold);}
+.gen-inp.ok{border-color:#22c55e;background:#dcfce7;color:#14532d;}
+.gen-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.gen-reveal{font-size:.85rem;font-weight:700;color:var(--gold-dark);margin-top:.4rem;min-height:1.2rem;}
+.score-row{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.score-track{flex:1;background:var(--amber);border-radius:20px;height:16px;overflow:hidden;}
+.score-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--gold),var(--orange));transition:width .4s ease;}
+.score-lbl{font-size:.95rem;font-weight:800;color:var(--gold-dark);white-space:nowrap;}
+
+.next-article{background:linear-gradient(135deg,var(--gold-deep),var(--gold-dark));border-radius:20px;padding:1.5rem 1.75rem;margin-top:3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;text-decoration:none;}
+.next-label{font-size:.8rem;font-weight:800;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.3rem;}
+.next-title{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;line-height:1.2;}
+.next-arrow{font-size:2rem;color:rgba(255,255,255,.7);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--gold-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--gold-mid);}
+@media(max-width:600px){body{font-size:19px;}.sign-grid{grid-template-columns:1fr;}.gen-problems{grid-template-columns:1fr;}.ex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;left:-40px;top:-40px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:110px;height:110px;right:6%;top:12%;animation-delay:1.2s;"></div>
+  <div class="hero-bubble" style="width:80px;height:80px;left:55%;bottom:18%;animation-delay:.7s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema1">Делимост</a> › Признаци
+    </div>
+    <h1>Признаци за делимост — 2, 3, 5, 9 и 10</h1>
+    <p class="hero-sub">Без да делиш — веднага познаваш дали числото се дели! Научи 6 признака с лесни примери.</p>
+    <div class="hero-chips">
+      <span class="chip">÷ 2</span>
+      <span class="chip">÷ 3</span>
+      <span class="chip">÷ 5</span>
+      <span class="chip">÷ 9</span>
+      <span class="chip">÷ 10</span>
+      <span class="chip">÷ 6</span>
+      <span class="chip">🎲 Генератор</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 1 — Делимост (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="delitelnost-5-klas.html">1. Делители и кратни</a>
+      <a href="priznaci-delitelnost-5-klas.html" class="current">2. Признаци за делимост</a>
+      <a href="prosti-chisla-5-klas.html">3. Прости и съставни числа</a>
+      <a href="stepen-5-klas.html">4. Степен на число</a>
+      <a href="nod-nok-5-klas.html">5. НОД и НОК</a>
+    </div>
+  </div>
+
+<!-- ══════════════════════════════════
+     ВСИЧКИ 6 ПРИЗНАКА
+══════════════════════════════════ -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Шестте признака за делимост</h2>
+  <p class="sec-desc">Запомни ги веднъж — и ще ги използваш цял живот!</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">📏</div>
+      <div><h3>Как работят признаците?</h3><p>Проверяваме само цифрите — без да делим цялото число!</p></div>
+    </div>
+    <div class="explain-body">
+
+      <div class="sign-grid">
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 2</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 2, ако <strong>последната му цифра е четна</strong> — тоест 0, 2, 4, 6 или 8.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 348</span> → посл. цифра 8 (четна)<br>
+            <span class="sign-ok">✅ 1 270</span> → посл. цифра 0<br>
+            <span class="sign-no">❌ 135</span> → посл. цифра 5 (нечетна)<br>
+            <span class="sign-no">❌ 4 309</span> → посл. цифра 9
+          </div>
+        </div>
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 3</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 3, ако <strong>сборът на всички цифри се дели на 3</strong>.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 312</span> → 3+1+2 = 6, 6÷3 ✓<br>
+            <span class="sign-ok">✅ 5 145</span> → 5+1+4+5 = 15÷3 ✓<br>
+            <span class="sign-no">❌ 314</span> → 3+1+4 = 8, 8÷3 ✗<br>
+            <span class="sign-no">❌ 200</span> → 2+0+0 = 2, ÷3 ✗
+          </div>
+        </div>
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 5</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 5, ако <strong>последната му цифра е 0 или 5</strong>.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 345</span> → завършва на 5<br>
+            <span class="sign-ok">✅ 1 230</span> → завършва на 0<br>
+            <span class="sign-no">❌ 344</span> → завършва на 4<br>
+            <span class="sign-no">❌ 1 231</span> → завършва на 1
+          </div>
+        </div>
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 9</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 9, ако <strong>сборът на всички цифри се дели на 9</strong>.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 729</span> → 7+2+9 = 18, 18÷9 ✓<br>
+            <span class="sign-ok">✅ 5 184</span> → 5+1+8+4 = 18÷9 ✓<br>
+            <span class="sign-no">❌ 723</span> → 7+2+3 = 12, ÷9 ✗<br>
+            <span class="sign-no">❌ 100</span> → 1+0+0 = 1, ÷9 ✗
+          </div>
+        </div>
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 10</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 10, ако <strong>последната му цифра е 0</strong>.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 350</span> → завършва на 0<br>
+            <span class="sign-ok">✅ 12 400</span> → завършва на 0<br>
+            <span class="sign-no">❌ 355</span> → завършва на 5<br>
+            <span class="sign-no">❌ 101</span> → завършва на 1
+          </div>
+        </div>
+
+        <div class="sign-card">
+          <div class="sign-num">÷ 6</div>
+          <div class="sign-divider"></div>
+          <div class="sign-rule">Числото се дели на 6, ако се дели <strong>едновременно на 2 и на 3</strong> — защото 6 = 2 · 3.</div>
+          <div class="sign-examples">
+            <span class="sign-ok">✅ 312</span> → чет. (÷2) и 3+1+2=6 (÷3)<br>
+            <span class="sign-ok">✅ 4 260</span> → чет. и 4+2+6+0=12 (÷3)<br>
+            <span class="sign-no">❌ 314</span> → четно, НО 3+1+4=8 (÷3✗)<br>
+            <span class="sign-no">❌ 315</span> → 3+1+5=9 (÷3✓), НО нечетно
+          </div>
+        </div>
+
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">🧮</div>
+        <div class="tip-body"><strong>Пример: 2 340 — на кои числа от 2 до 10 се дели?</strong><br>
+        ÷ 2: посл. цифра 0 (четна) → ✅<br>
+        ÷ 3: 2+3+4+0 = 9, дели се на 3 → ✅<br>
+        ÷ 5: посл. цифра 0 → ✅<br>
+        ÷ 9: сборът е 9, дели се на 9 → ✅<br>
+        ÷ 10: посл. цифра 0 → ✅<br>
+        ÷ 6: дели се и на 2 и на 3 → ✅<br>
+        <strong>2 340 се дели на 2, 3, 5, 6, 9 и 10!</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     РАЗДЕЛ 2: ЗАЩО РАБОТЯТ?
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Защо работят признаците?</h2>
+  <p class="sec-desc">Не просто ги помни — разбери защо са верни!</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">🔍</div>
+      <div><h3>Идеята зад признаците</h3><p>Кратко обяснение за любопитните</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="rule">
+        <div class="rule-title">💡 Признак за ÷2 и ÷5 — защо само последната цифра?</div>
+        <ul>
+          <li>Всяко число може да се запише като: <strong>a = 10·q + r</strong>, където r е последната цифра.</li>
+          <li>10 = 2 · 5, т.е. 10 се дели и на 2 и на 5.</li>
+          <li>Значи 10·q <strong>винаги</strong> се дели на 2 (и на 5).</li>
+          <li>Остава само r — затова проверяваме <strong>само последната цифра</strong>!</li>
+        </ul>
+      </div>
+      <div class="rule">
+        <div class="rule-title">💡 Признак за ÷3 и ÷9 — защо сборът на цифрите?</div>
+        <ul>
+          <li>10 = 9 + 1 → 10 дава остатък 1 при деление на 9.</li>
+          <li>100 = 99 + 1 → 100 дава остатък 1 при деление на 9.</li>
+          <li>Значи остатъкът на цялото число = остатъкът на <strong>сбора на цифрите</strong>!</li>
+          <li>Същото важи за 3, защото 3 | 9.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     РАЗДЕЛ 3: ИНТЕРАКТИВЕН ТЕСТ
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 3</div>
+  <h2 class="sec-title">Приложи признаците</h2>
+  <p class="sec-desc">На кои числа се дели? Избери всички верни отговори!</p>
+
+  <div class="sign-test">
+    <div class="sign-test-head">
+      <div style="font-size:1.8rem;">🎯</div>
+      <div><h4>Интерактивен тест — признаци</h4><p>Избери на кои числа се дели всяко число</p></div>
+    </div>
+    <div class="sign-test-body" id="sign-test-body">
+      <!-- генерира се от JS -->
+    </div>
+    <div style="padding:0 1.5rem 1.5rem;">
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSignTest()">✓ Провери всички</button>
+        <button class="btn-ghost" onclick="generateSignTest()">🔄 Нови числа</button>
+        <div class="fb" id="fb-sign"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ПРОВЕРИ СЕ — КЛАСИЧЕСКИ ЗАДАЧИ
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="sec-tag">📌 Раздел 4</div>
+  <h2 class="sec-title">Провери се</h2>
+  <p class="sec-desc">Запиши 1 ако числото се дели, 0 ако не се дели.</p>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">✏️</div>
+      <div><h4>Провери се — Признаци за делимост</h4><p>1 = да се дели, 0 = не се дели</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">Задача а)</div>
+          <div class="ex-problem">5 184 ÷ 9 → (1/0)?</div>
+          <input class="ex-inp" id="p1a" type="number" placeholder="1 или 0">
+          <div class="ex-hint" id="h1a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача б)</div>
+          <div class="ex-problem">3 741 ÷ 3 → (1/0)?</div>
+          <input class="ex-inp" id="p1b" type="number" placeholder="1 или 0">
+          <div class="ex-hint" id="h1b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача в)</div>
+          <div class="ex-problem">4 260 ÷ 6 → (1/0)?</div>
+          <input class="ex-inp" id="p1c" type="number" placeholder="1 или 0">
+          <div class="ex-hint" id="h1c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача г)</div>
+          <div class="ex-problem">7 315 ÷ 2 → (1/0)?</div>
+          <input class="ex-inp" id="p1d" type="number" placeholder="1 или 0">
+          <div class="ex-hint" id="h1d"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача д)</div>
+          <div class="ex-problem">8 100 ÷ 9 → (1/0)?</div>
+          <input class="ex-inp" id="p1e" type="number" placeholder="1 или 0">
+          <div class="ex-hint" id="h1e"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">Задача е)</div>
+          <div class="ex-problem">2 345 ÷ 5 → (1/0)?</div>
+          <input class="ex-inp" id="p1f" type="number" placeholder="1 eller 0">
+          <div class="ex-hint" id="h1f"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection1()">✓ Провери</button>
+        <div class="fb" id="fb1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     ГЕНЕРАТОР
+══════════════════════════════════ -->
+<div class="reveal" style="margin-top:2.8rem;">
+  <div class="generator">
+    <div class="gen-head">
+      <div class="gen-head-left">
+        <div class="gen-head-icon">🎲</div>
+        <div><h4>Генератор — Признаци за делимост</h4><p>Произволни числа, всеки път нови!</p></div>
+      </div>
+      <button class="btn-ghost" onclick="generateGenProblems()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-body">
+      <p style="font-size:.9rem;color:var(--ink-mid);margin-bottom:1rem;">За всяко число въведи <strong>1</strong> (дели се) или <strong>0</strong> (не се дели).</p>
+      <div class="gen-problems" id="gen-problems"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkGenProblems()">✓ Провери</button>
+        <button class="btn-ghost" onclick="generateGenProblems()">🔄 Нови</button>
+        <div class="score-row" style="flex:1;margin-top:0;">
+          <div class="score-track"><div class="score-fill" id="sf-gen" style="width:0%"></div></div>
+          <div class="score-lbl" id="sl-gen">0 / 6</div>
+        </div>
+      </div>
+      <div class="fb" id="fb-gen"></div>
+    </div>
+  </div>
+</div>
+
+<a href="prosti-chisla-5-klas.html" class="next-article reveal">
+  <div>
+    <div class="next-label">Следваща статия в темата →</div>
+    <div class="next-title">Прости и съставни числа — разлика и как да ги разпознаем</div>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+</div>
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+function ri(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+
+function isDivBy(n,d){ return n%d===0; }
+
+// SECTION 1
+function checkSection1(){
+  // 5184÷9: 5+1+8+4=18 ÷9→1; 3741÷3: 3+7+4+1=15 ÷3→1; 4260÷6: чет+12÷3→1; 7315÷2: нечетно→0; 8100÷9: 9→1; 2345÷5: посл.5→1
+  var ans=[1,1,1,0,1,1];
+  var ids=['p1a','p1b','p1c','p1d','p1e','p1f'];
+  var ok=0;
+  ids.forEach(function(id,i){
+    var inp=document.getElementById(id);
+    var hint=document.getElementById('h'+id.slice(1));
+    var v=parseInt(inp.value);
+    if(!isNaN(v) && v===ans[i]){ inp.className='ex-inp ok'; hint.textContent='✅ Правилно!'; ok++; }
+    else { inp.className='ex-inp no'; hint.textContent='❌ Отговорът е '+ans[i]; }
+  });
+  var fb=document.getElementById('fb1');
+  if(ok===6){ fb.textContent='🎉 Браво! Всички верни!'; fb.className='fb show ok'; }
+  else { fb.textContent=ok+' от 6 верни.'; fb.className='fb show no'; }
+}
+
+// SIGN TEST
+var signTestData=[];
+var signDivisors=[2,3,5,9,10,6];
+
+function generateSignTest(){
+  signTestData=[];
+  var numbers=[ri(1000,9999),ri(1000,9999),ri(1000,9999)];
+  var html='';
+  numbers.forEach(function(n,idx){
+    var correct=signDivisors.filter(function(d){ return n%d===0; });
+    signTestData.push({n:n, correct:correct, selected:[]});
+    html+='<div class="check-row" id="crow-'+idx+'">';
+    html+='<div class="check-q">На кои числа се дели <strong style="color:var(--gold-dark);">'+n+'</strong>?</div>';
+    html+='<div class="check-boxes">';
+    signDivisors.forEach(function(d){
+      html+='<button class="check-btn" id="cb-'+idx+'-'+d+'" onclick="toggleSign('+idx+','+d+',this)">÷ '+d+'</button>';
+    });
+    html+='</div><div class="check-result" id="cr-'+idx+'"></div>';
+    html+='</div>';
+  });
+  document.getElementById('sign-test-body').innerHTML=html;
+  document.getElementById('fb-sign').className='fb';
+  document.getElementById('fb-sign').textContent='';
+}
+
+function toggleSign(idx,d,btn){
+  btn.classList.toggle('sel');
+  var arr=signTestData[idx].selected;
+  var pos=arr.indexOf(d);
+  if(pos===-1) arr.push(d); else arr.splice(pos,1);
+}
+
+function checkSignTest(){
+  var totalOk=0;
+  signTestData.forEach(function(item,idx){
+    var correct=item.correct.slice().sort(function(a,b){return a-b;});
+    var selected=item.selected.slice().sort(function(a,b){return a-b;});
+    var ok=JSON.stringify(correct)===JSON.stringify(selected);
+    // color the buttons
+    signDivisors.forEach(function(d){
+      var btn=document.getElementById('cb-'+idx+'-'+d);
+      if(!btn) return;
+      var isCorrect=correct.indexOf(d)!==-1;
+      var isSelected=selected.indexOf(d)!==-1;
+      btn.classList.remove('sel','correct','wrong');
+      if(isCorrect) btn.classList.add('correct');
+      else if(isSelected) btn.classList.add('wrong');
+    });
+    var cr=document.getElementById('cr-'+idx);
+    if(ok){ cr.textContent='✅ Правилно!'; cr.style.color='#16a34a'; totalOk++; }
+    else {
+      var corrStr=correct.length ? correct.map(function(d){return '÷'+d;}).join(', ') : 'нито едно';
+      cr.textContent='❌ Правилно: '+corrStr; cr.style.color='#ef4444';
+    }
+  });
+  var fb=document.getElementById('fb-sign');
+  if(totalOk===signTestData.length){ fb.textContent='🎉 Всички верни!'; fb.className='fb show ok'; }
+  else { fb.textContent=totalOk+' от '+signTestData.length+' верни.'; fb.className='fb show no'; }
+}
+
+// GENERATOR
+var genData=[];
+var divisorTests=[ [2,'последна цифра'],[3,'сбор цифри'],[5,'последна цифра'],[9,'сбор цифри'],[10,'последна цифра'],[6,'÷2 и ÷3'] ];
+
+function generateGenProblems(){
+  genData=[];
+  var letters=['а','б','в','г','д','е'];
+  var html='';
+  for(var i=0;i<6;i++){
+    var n=ri(1000,9999);
+    var dt=divisorTests[i];
+    var d=dt[0];
+    var ans=isDivBy(n,d)?1:0;
+    genData.push({n:n,d:d,ans:ans});
+    html+='<div class="gen-card">'
+      +'<div class="gen-letter">'+letters[i]+')</div>'
+      +'<div class="gen-q">'+n+' ÷ '+d+' се дели?</div>'
+      +'<input class="gen-inp" id="ginp-'+i+'" type="number" min="0" max="1" placeholder="1/0">'
+      +'<div class="gen-reveal" id="grev-'+i+'"></div>'
+      +'</div>';
+  }
+  document.getElementById('gen-problems').innerHTML=html;
+  document.getElementById('sf-gen').style.width='0%';
+  document.getElementById('sl-gen').textContent='0 / 6';
+  var fb=document.getElementById('fb-gen');
+  fb.textContent=''; fb.className='fb';
+}
+
+function checkGenProblems(){
+  var ok=0;
+  genData.forEach(function(item,i){
+    var inp=document.getElementById('ginp-'+i);
+    var rev=document.getElementById('grev-'+i);
+    if(!inp) return;
+    var v=parseInt(inp.value);
+    if(!isNaN(v) && v===item.ans){
+      inp.className='gen-inp ok'; rev.textContent='✅'; ok++;
+    } else {
+      inp.className='gen-inp no';
+      rev.textContent=inp.value==='' ? '⚠️' : '❌ = '+(item.ans===1?'Да':'Не');
+    }
+  });
+  document.getElementById('sf-gen').style.width=(ok/6*100)+'%';
+  document.getElementById('sl-gen').textContent=ok+' / 6';
+  var fb=document.getElementById('fb-gen');
+  if(ok===6){ fb.textContent='🎉 Отлично! Всички верни!'; fb.className='fb show ok'; }
+  else { fb.textContent=ok+' от 6 верни.'; fb.className='fb show no'; }
+}
+
+// REVEAL
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){
+    if(e.isIntersecting){ setTimeout(function(){ e.target.classList.add('visible'); },i*60); obs.unobserve(e.target); }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
+
+window.addEventListener('load', function(){
+  generateSignTest();
+  generateGenProblems();
+});
+</script>
+</body>
+</html>
