@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Намиране на част от число — задачи с решения | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--c:#d1fae5;--c-mid:#a7f3d0;--c-soft:#ecfdf5;--main:#059669;--main-dark:#065f46;--main-deep:#022c22;--main-btn:#047857;--main-mid:#10b981;--acc:#0d9488;--acc-light:#ccfbf1;--red:#ef4444;--red-light:#fef2f2;--ink:#022c22;--ink-mid:#065f46;--surface:#fff;--border:#a7f3d0;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 3px;font-size:.9em;line-height:1.3;}
+.frac .num{border-bottom:2.5px solid currentColor;padding:0 5px;text-align:center;font-weight:800;}
+.frac .den{padding:0 5px;text-align:center;font-weight:800;}
+.frac-lg{font-size:1.15em;}
+nav{position:sticky;top:0;z-index:100;background:rgba(236,253,245,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,0.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.72);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.32);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:0.4rem;background:var(--main);color:#fff;font-size:0.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(5,150,105,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:0.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--acc-light);border:2px solid #99f6e4;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#134e4a;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.task-card{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1rem 0;}
+.task-head{background:var(--c);padding:.75rem 1.2rem;display:flex;align-items:center;gap:.6rem;}
+.task-head-icon{font-size:1.4rem;}
+.task-head h5{font-family:'Baloo 2',sans-serif;font-size:.95rem;font-weight:800;color:var(--main-dark);}
+.task-body{padding:1.1rem 1.3rem;}
+.task-text{font-size:1rem;color:var(--ink);line-height:1.75;margin-bottom:1rem;background:var(--c-soft);border-radius:10px;padding:.7rem 1rem;border-left:4px solid var(--main);}
+.steps{display:flex;flex-direction:column;gap:.5rem;}
+.step{display:flex;gap:.8rem;align-items:flex-start;}
+.step-n{width:28px;height:28px;border-radius:8px;background:var(--main);color:#fff;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.18rem;}
+.step-t{font-size:.97rem;line-height:1.75;color:var(--ink);}
+.step-t .m{background:var(--c);padding:.08rem .45rem;border-radius:6px;font-weight:800;color:var(--main-dark);}
+.result-box{margin-top:.75rem;background:var(--main);color:#fff;border-radius:12px;padding:.6rem 1.1rem;font-size:1rem;font-weight:800;display:inline-flex;align-items:center;gap:.5rem;}
+.formula-box{background:var(--main-deep);color:#fff;border-radius:16px;padding:1.2rem 1.5rem;margin:1.2rem 0;text-align:center;}
+.formula-box h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:rgba(255,255,255,.75);margin-bottom:.5rem;}
+.formula-big{font-size:1.3rem;font-weight:900;color:#fff;display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;}
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(5,150,105,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.task-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.2rem;margin-bottom:1rem;}
+.task-item .task-q{font-size:.97rem;color:var(--ink);line-height:1.75;margin-bottom:.6rem;}
+.task-item .task-q strong{color:var(--main-dark);}
+.ex-inp{width:120px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(4,120,87,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.generator{background:#fff;border:3px solid var(--main-mid);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(5,150,105,.14);}
+.gen-head{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-head-left{display:flex;align-items:center;gap:.8rem;}
+.gen-head-icon{font-size:2rem;}
+.gen-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-head p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-body{padding:1.5rem;}
+.gen-problems{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gen-card{background:var(--c-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;}
+.gen-letter{font-size:.82rem;font-weight:900;color:var(--main-dark);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em;}
+.gen-q{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.9;}
+.gen-inp{width:110px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.gen-inp:focus{border-color:var(--main);}
+.gen-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.gen-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.gen-reveal{font-size:.88rem;font-weight:700;color:var(--main-dark);margin-top:.4rem;min-height:1.2rem;}
+.score-row{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.score-track{flex:1;background:var(--c);border-radius:20px;height:16px;overflow:hidden;}
+.score-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--main),var(--acc));transition:width .4s ease;}
+.score-lbl{font-size:.95rem;font-weight:800;color:var(--main-dark);white-space:nowrap;}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+@media(max-width:600px){body{font-size:19px;}.gen-problems{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;left:-40px;top:-40px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:110px;height:110px;right:6%;top:12%;animation-delay:1.2s;"></div>
+  <div class="hero-bubble" style="width:85px;height:85px;left:58%;bottom:16%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema2">Обикновени дроби</a> › Намиране на част</div>
+    <h1>Намиране на част от число</h1>
+    <p class="hero-sub">Как намираме дробна част от число — формула, решени задачи от живота и генератор!</p>
+    <div class="hero-chips">
+      <span class="chip">📐 Формула</span><span class="chip">🧩 Решени задачи</span><span class="chip">🔄 Обратна задача</span><span class="chip">🎲 Генератор</span>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 2 — Обикновени дроби (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="kakvo-e-drob-5-klas.html">1. Какво е дроб</a>
+      <a href="osnovno-svoistvo-drobi-5-klas.html">2. Основно свойство</a>
+      <a href="sabirane-izvazdane-drobi-5-klas.html">3. Събиране и изваждане</a>
+      <a href="umnozhenie-delenie-drobi-5-klas.html">4. Умножение и деление</a>
+      <a href="chast-ot-chislo-5-klas.html" class="current">5. Намиране на част</a>
+    </div>
+  </div>
+
+<!-- РАЗДЕЛ 1: Формула -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Формула за намиране на част</h2>
+  <p class="sec-desc">Дробна част от число = умножаваме числото по дробта.</p>
+  <div class="explain-card">
+    <div class="explain-head"><div class="explain-emoji">📐</div><div><h3>Основна формула</h3><p>Прилага се в задачи от реалния живот!</p></div></div>
+    <div class="explain-body">
+      <div class="formula-box">
+        <h4>Намиране на дробна част от число</h4>
+        <div class="formula-big">
+          <span class="frac" style="color:#fff;font-size:1.2em"><span class="num">m</span><span class="den">n</span></span>
+          <span>от A</span>
+          <span>=</span>
+          <span>A ·</span>
+          <span class="frac" style="color:#fff;font-size:1.2em"><span class="num">m</span><span class="den">n</span></span>
+          <span>=</span>
+          <span class="frac" style="color:#fff;font-size:1.2em"><span class="num">A · m</span><span class="den">n</span></span>
+        </div>
+      </div>
+      <div class="rule">
+        <div class="rule-title">📋 Как работи?</div>
+        <ul>
+          <li>„<span class="frac"><span class="num">m</span><span class="den">n</span></span> от A" означава: делим A на n равни части и вземаме m от тях.</li>
+          <li>На практика: <strong>умножаваме A по дробта</strong> <span class="frac"><span class="num">m</span><span class="den">n</span></span>.</li>
+          <li>Или: делим A на n, после умножаваме по m.</li>
+        </ul>
+      </div>
+      <div class="tip"><div class="tip-icon">🍰</div><div class="tip-body"><strong>Пример от живота:</strong> Торта е разрязана на 8 парчета. <span class="frac"><span class="num">3</span><span class="den">4</span></span> от 8 парчета = 8 · <span class="frac"><span class="num">3</span><span class="den">4</span></span> = <span class="frac"><span class="num">24</span><span class="den">4</span></span> = 6 парчета.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- РАЗДЕЛ 2: Решени задачи -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Решени задачи</h2>
+  <p class="sec-desc">Пет типа задачи, срещани в учебника и на контролни.</p>
+
+  <div class="task-card">
+    <div class="task-head"><div class="task-head-icon">🧩</div><h5>Задача 1 — Пряка задача</h5></div>
+    <div class="task-body">
+      <div class="task-text">В клас има 24 ученика. <strong><span class="frac"><span class="num">3</span><span class="den">8</span></span> от учениците</strong> са отсъстващи. Колко ученика отсъстват?</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Намираме <span class="frac"><span class="num">3</span><span class="den">8</span></span> от 24: &nbsp; 24 · <span class="frac"><span class="num">3</span><span class="den">8</span></span> = <span class="frac"><span class="num">24 · 3</span><span class="den">8</span></span> = <span class="m"><span class="frac"><span class="num">72</span><span class="den">8</span></span> = 9</span></div></div>
+      </div>
+      <div class="result-box">Отсъстват 9 ученика</div>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <div class="task-head"><div class="task-head-icon">🧩</div><h5>Задача 2 — С намиране на остатъка</h5></div>
+    <div class="task-body">
+      <div class="task-text">Магазин имал 60 кг ябълки. Продал <strong><span class="frac"><span class="num">2</span><span class="den">5</span></span> от тях</strong>. Колко кг останали?</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Продадените: 60 · <span class="frac"><span class="num">2</span><span class="den">5</span></span> = <span class="m"><span class="frac"><span class="num">120</span><span class="den">5</span></span> = 24 кг</span></div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Останали: 60 − 24 = <span class="m">36 кг</span></div></div>
+      </div>
+      <div class="result-box">Останали 36 кг</div>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <div class="task-head"><div class="task-head-icon">🧩</div><h5>Задача 3 — Обратна задача (намиране на цялото)</h5></div>
+    <div class="task-body">
+      <div class="task-text"><strong><span class="frac"><span class="num">3</span><span class="den">4</span></span> от едно число</strong> е 15. Намери числото.</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Ако <span class="frac"><span class="num">3</span><span class="den">4</span></span> от числото = 15, тогава <span class="frac"><span class="num">1</span><span class="den">4</span></span> от числото = 15 ÷ 3 = <span class="m">5</span></div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Цялото число = 5 · 4 = <span class="m">20</span></div></div>
+        <div class="step"><div class="step-n">—</div><div class="step-t" style="color:var(--ink-mid);font-size:.9rem;">Проверка: <span class="frac"><span class="num">3</span><span class="den">4</span></span> от 20 = 15 ✓</div></div>
+      </div>
+      <div class="result-box">Числото е 20</div>
+    </div>
+  </div>
+
+  <div class="task-card">
+    <div class="task-head"><div class="task-head-icon">🧩</div><h5>Задача 4 — Дробна част от пари</h5></div>
+    <div class="task-body">
+      <div class="task-text">Иван имал 120 лв. Похарчил <strong><span class="frac"><span class="num">5</span><span class="den">6</span></span> от парите</strong> си. Колко лв. му останали?</div>
+      <div class="steps">
+        <div class="step"><div class="step-n">1</div><div class="step-t">Похарчил: 120 · <span class="frac"><span class="num">5</span><span class="den">6</span></span> = <span class="frac"><span class="num">600</span><span class="den">6</span></span> = <span class="m">100 лв.</span></div></div>
+        <div class="step"><div class="step-n">2</div><div class="step-t">Останали: 120 − 100 = <span class="m">20 лв.</span></div></div>
+      </div>
+      <div class="result-box">Останали 20 лв.</div>
+    </div>
+  </div>
+</div>
+
+<!-- РАЗДЕЛ 3: Упражнения -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="sec-tag">📌 Раздел 3</div>
+  <h2 class="sec-title">Упражни се</h2>
+  <p class="sec-desc">Реши задачите и провери резултата!</p>
+  <div class="practice-box">
+    <div class="practice-head"><div class="practice-head-icon">🧩</div><div><h4>Задачи за самостоятелна работа</h4><p>Запиши числовия отговор</p></div></div>
+    <div class="practice-body">
+      <div class="task-item">
+        <div class="task-q">а) Намери <strong><span class="frac"><span class="num">2</span><span class="den">3</span></span> от 18</strong>.</div>
+        <input class="ex-inp" id="p1a" type="number" placeholder="отговор">
+        <div class="ex-hint" id="h1a"></div>
+      </div>
+      <div class="task-item">
+        <div class="task-q">б) Намери <strong><span class="frac"><span class="num">3</span><span class="den">5</span></span> от 40</strong>.</div>
+        <input class="ex-inp" id="p1b" type="number" placeholder="отговор">
+        <div class="ex-hint" id="h1b"></div>
+      </div>
+      <div class="task-item">
+        <div class="task-q">в) В кошница има 30 плода. <strong><span class="frac"><span class="num">2</span><span class="den">6</span></span> от тях</strong> са портокали. Колко портокала има?</div>
+        <input class="ex-inp" id="p1c" type="number" placeholder="отговор">
+        <div class="ex-hint" id="h1c"></div>
+      </div>
+      <div class="task-item">
+        <div class="task-q">г) <strong><span class="frac"><span class="num">5</span><span class="den">8</span></span> от едно число</strong> е 20. Намери числото.</div>
+        <input class="ex-inp" id="p1d" type="number" placeholder="отговор">
+        <div class="ex-hint" id="h1d"></div>
+      </div>
+      <div class="btn-row"><button class="btn-main" onclick="checkSection1()">✓ Провери</button><div class="fb" id="fb1"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ГЕНЕРАТОР -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="generator">
+    <div class="gen-head">
+      <div class="gen-head-left"><div class="gen-head-icon">🎲</div><div><h4>Генератор на задачи</h4><p>Намиране на дробна част от число</p></div></div>
+      <button class="btn-ghost" onclick="generateAll()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-body">
+      <div class="gen-problems" id="gen-problems"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkGen()">✓ Провери</button>
+        <button class="btn-ghost" onclick="generateAll()">🔄 Нови</button>
+        <div class="score-row" style="flex:1;margin-top:0;"><div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div><div class="score-lbl" id="score-lbl">0 / 6</div></div>
+      </div>
+      <div class="fb" id="fb-gen"></div>
+    </div>
+  </div>
+</div>
+
+<div class="finish-card reveal">
+  <h3>🎉 Завърши Тема 2 — Обикновени дроби!</h3>
+  <p>Научи всичко за дробите в 5 клас. Следва Тема 3 — Десетични дроби!</p>
+  <div class="finish-links">
+    <a href="klas-5.html#tema3" class="finish-link">→ Тема 3: Десетични дроби</a>
+    <a href="umnozhenie-delenie-drobi-5-klas.html" class="finish-link">← Умножение и деление</a>
+    <a href="klas-5.html#tema2" class="finish-link">↑ Всички статии за дроби</a>
+  </div>
+</div>
+</div>
+
+<footer>
+  <div class="foot-nav"><a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a></div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function fH(n,d){return '<span class="frac"><span class="num">'+n+'</span><span class="den">'+d+'</span></span>';}
+var letters=['а','б','в','г','д','е'];
+var genProblems=[];
+
+function chk(id,correct,hid){
+  var inp=document.getElementById(id);var hint=document.getElementById(hid);
+  var v=parseInt(inp.value);
+  if(isNaN(v)){inp.className='ex-inp';if(hint)hint.textContent='';return false;}
+  if(v===correct){inp.className='ex-inp ok';if(hint)hint.textContent='✅ Правилно!';return true;}
+  else{inp.className='ex-inp no';if(hint)hint.textContent='❌ = '+correct;return false;}
+}
+function showFb(id,ok,total){
+  var fb=document.getElementById(id);if(!fb)return;
+  if(ok===total){fb.textContent='🎉 Браво!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+total+' верни.';fb.className='fb show no';}
+}
+function checkSection1(){
+  var ok=0;
+  if(chk('p1a',12,'h1a'))ok++;
+  if(chk('p1b',24,'h1b'))ok++;
+  if(chk('p1c',10,'h1c'))ok++;
+  if(chk('p1d',32,'h1d'))ok++;
+  showFb('fb1',ok,4);
+}
+
+function generateAll(){
+  genProblems=[];
+  var denominators=[2,3,4,5,6,8,10];
+  for(var i=0;i<6;i++){
+    var d=denominators[ri(0,denominators.length-1)];
+    var n=ri(1,d-1);
+    var whole=d*ri(2,8); // кратно на d
+    var ans=whole*n/d;
+    genProblems.push({n:n,d:d,whole:whole,ans:ans});
+  }
+  var c=document.getElementById('gen-problems');if(!c)return;
+  c.innerHTML=genProblems.map(function(p,i){
+    return '<div class="gen-card"><div class="gen-letter">'+letters[i]+')</div>'
+      +'<div class="gen-q">Намери '+fH(p.n,p.d)+' от <strong>'+p.whole+'</strong></div>'
+      +'<input class="gen-inp" id="ginp-'+i+'" type="number" placeholder="отговор">'
+      +'<div class="gen-reveal" id="grev-'+i+'"></div></div>';
+  }).join('');
+  document.getElementById('score-fill').style.width='0%';
+  document.getElementById('score-lbl').textContent='0 / 6';
+  var fb=document.getElementById('fb-gen');fb.textContent='';fb.className='fb';
+}
+
+function checkGen(){
+  var ok=0;
+  genProblems.forEach(function(p,i){
+    var inp=document.getElementById('ginp-'+i);var rev=document.getElementById('grev-'+i);
+    if(!inp)return;var v=parseInt(inp.value);
+    if(!isNaN(v)&&v===p.ans){inp.className='gen-inp ok';if(rev)rev.textContent='✅';ok++;}
+    else{inp.className='gen-inp no';if(rev)rev.textContent=inp.value===''?'⚠️':'❌ = '+p.ans;}
+  });
+  document.getElementById('score-fill').style.width=(ok/genProblems.length*100)+'%';
+  document.getElementById('score-lbl').textContent=ok+' / '+genProblems.length;
+  var fb=document.getElementById('fb-gen');
+  if(ok===genProblems.length){fb.textContent='🎉 Отлично!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+genProblems.length+' верни.';fb.className='fb show no';}
+}
+
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*60);obs.unobserve(e.target);}});},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+window.addEventListener('load',function(){generateAll();});
+</script>
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Какво е обикновена дроб — числител, знаменател, видове дроби, смесено число. Обяснение с примери и интерактивни задачи. Математика 5 клас.">
+<title>Какво е обикновена дроб — числител, знаменател, видове | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --c:#dbeafe; --c-mid:#bfdbfe; --c-soft:#eff6ff;
+  --main:#2563eb; --main-dark:#1e3a8a; --main-deep:#172554;
+  --main-btn:#1d4ed8; --main-mid:#3b82f6;
+  --acc:#7c3aed; --acc-light:#ede9fe;
+  --red:#ef4444; --red-light:#fef2f2;
+  --ink:#172554; --ink-mid:#1e3a8a;
+  --surface:#fff; --border:#bfdbfe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+
+/* ДРОБИ с хоризонтална черта */
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 3px;font-size:.9em;line-height:1.3;}
+.frac .num{border-bottom:2.5px solid currentColor;padding:0 5px;text-align:center;font-weight:800;}
+.frac .den{padding:0 5px;text-align:center;font-weight:800;}
+.frac-lg{font-size:1.1em;}
+.frac-inline{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 4px;line-height:1.25;}
+.frac-inline .num{border-bottom:2.5px solid currentColor;padding:0 6px;font-weight:800;}
+.frac-inline .den{padding:0 6px;font-weight:800;}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,0.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:0.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{display:flex;align-items:center;gap:0.4rem;font-size:0.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:0.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,0.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:0.85rem;color:rgba(255,255,255,0.72);margin-bottom:0.9rem;}
+.hero-crumb a{color:rgba(255,255,255,0.72);text-decoration:none;}
+.hero-crumb a:hover{color:#fff;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:0.7rem;text-shadow:0 4px 20px rgba(23,37,84,0.4);}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,0.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.32);border-radius:20px;padding:0.28rem 1rem;font-size:0.88rem;font-weight:700;color:#fff;}
+
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:0.4rem;background:var(--main);color:#fff;font-size:0.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:0.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:0.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ol,.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.7;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+
+.tip{background:var(--acc-light);border:2px solid #c4b5fd;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#4c1d95;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+.worked{background:var(--c-soft);border:2px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;margin:.9rem 0;}
+.worked-title{font-weight:900;font-size:1rem;color:var(--main-dark);margin-bottom:.7rem;}
+.steps{display:flex;flex-direction:column;gap:.5rem;}
+.step{display:flex;gap:.8rem;align-items:flex-start;}
+.step-n{width:28px;height:28px;border-radius:8px;background:var(--main);color:#fff;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.18rem;}
+.step-t{font-size:.97rem;line-height:1.7;color:var(--ink);}
+.step-t .m{background:var(--c);padding:.08rem .45rem;border-radius:6px;font-weight:800;color:var(--main-dark);}
+.result-box{margin-top:.75rem;background:var(--main);color:#fff;border-radius:12px;padding:.6rem 1.1rem;font-size:1rem;font-weight:800;display:inline-flex;align-items:center;gap:.5rem;}
+
+/* Визуална схема на дроб */
+.frac-visual{display:flex;gap:2rem;flex-wrap:wrap;margin:1.2rem 0;align-items:center;}
+.frac-diagram{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.5rem 2rem;text-align:center;min-width:180px;}
+.frac-big{font-size:3rem;font-weight:900;color:var(--main-dark);line-height:1;display:flex;flex-direction:column;align-items:center;}
+.frac-big .n{color:var(--main);border-bottom:4px solid var(--main-dark);padding:0 12px 4px;font-size:3rem;}
+.frac-big .d{padding:4px 12px 0;font-size:3rem;color:var(--main-dark);}
+.frac-label{font-size:.85rem;color:var(--ink-mid);margin-top:.5rem;}
+.frac-parts{display:flex;flex-direction:column;gap:.5rem;justify-content:center;}
+.frac-part-row{display:flex;align-items:center;gap:.75rem;font-size:.97rem;}
+.frac-part-arrow{color:var(--main);font-size:1.2rem;}
+.frac-part-text{background:var(--c);border-radius:8px;padding:.3rem .8rem;font-weight:800;color:var(--main-dark);}
+
+/* Видове дроби таблица */
+.types-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1rem;margin:1rem 0;}
+.type-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;}
+.type-card h5{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;}
+.type-card .example{font-size:1.3rem;color:var(--main);font-weight:900;margin-bottom:.35rem;display:flex;align-items:center;gap:.5rem;}
+.type-card .desc{font-size:.88rem;color:var(--ink-mid);line-height:1.6;}
+.type-card.highlight{background:var(--c);border-color:var(--main);}
+
+/* Числова ос */
+.num-line{background:#fff;border:2px solid var(--border);border-radius:14px;padding:1.2rem 1.5rem;margin:1rem 0;overflow-x:auto;}
+.num-line h5{font-size:.92rem;font-weight:800;color:var(--main-dark);margin-bottom:1rem;}
+.line-wrap{position:relative;height:60px;min-width:500px;}
+.line-track{position:absolute;top:24px;left:20px;right:20px;height:4px;background:var(--c-mid);border-radius:2px;}
+.line-tick{position:absolute;top:14px;width:2px;height:24px;background:var(--main-dark);border-radius:1px;}
+.line-label{position:absolute;top:44px;font-size:.88rem;font-weight:800;color:var(--main-dark);transform:translateX(-50%);}
+.line-dot{position:absolute;top:18px;width:12px;height:12px;border-radius:50%;background:var(--main);border:3px solid var(--main-dark);transform:translateX(-50%);}
+.line-frac-label{position:absolute;top:0px;font-size:.82rem;font-weight:800;color:var(--main);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;}
+
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(37,99,235,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.88rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;}
+.ex-problem{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.5rem;line-height:2;}
+.ex-inp{width:130px;padding:.45rem .6rem;border:2.5px solid var(--border);border-radius:10px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:13px;padding:.65rem 1.3rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+
+.generator{background:#fff;border:3px solid var(--main-mid);border-radius:24px;overflow:hidden;margin:2.5rem 0;box-shadow:0 8px 32px rgba(37,99,235,.14);}
+.gen-head{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));padding:1.1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;}
+.gen-head-left{display:flex;align-items:center;gap:.8rem;}
+.gen-head-icon{font-size:2rem;}
+.gen-head h4{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;}
+.gen-head p{font-size:.83rem;color:rgba(255,255,255,.8);}
+.gen-body{padding:1.5rem;}
+.gen-problems{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:1.2rem;}
+.gen-card{background:var(--c-soft);border:2px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;}
+.gen-letter{font-size:.82rem;font-weight:900;color:var(--main-dark);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.07em;}
+.gen-q{font-size:1.05rem;font-weight:800;color:var(--ink);margin-bottom:.55rem;line-height:2;}
+.gen-inp{width:110px;padding:.42rem .55rem;border:2.5px solid var(--border);border-radius:9px;font-size:1.05rem;font-weight:800;text-align:center;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;}
+.gen-inp:focus{border-color:var(--main);}
+.gen-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.gen-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.gen-reveal{font-size:.88rem;font-weight:700;color:var(--main-dark);margin-top:.4rem;min-height:1.2rem;}
+.score-row{display:flex;align-items:center;gap:.8rem;margin-top:.8rem;}
+.score-track{flex:1;background:var(--c);border-radius:20px;height:16px;overflow:hidden;}
+.score-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,var(--main),var(--acc));transition:width .4s ease;}
+.score-lbl{font-size:.95rem;font-weight:800;color:var(--main-dark);white-space:nowrap;}
+
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+@media(max-width:600px){body{font-size:19px;}.gen-problems{grid-template-columns:1fr;}.ex-grid{grid-template-columns:1fr;}.types-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;left:-40px;top:-40px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:110px;height:110px;right:6%;top:12%;animation-delay:1.2s;"></div>
+  <div class="hero-bubble" style="width:85px;height:85px;left:58%;bottom:16%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema2">Обикновени дроби</a> › Какво е дроб
+    </div>
+    <h1>Какво е обикновена дроб?</h1>
+    <p class="hero-sub">Числител, знаменател, правилна и неправилна дроб, смесено число — всичко с примери!</p>
+    <div class="hero-chips">
+      <span class="chip">🔢 Числител и знаменател</span>
+      <span class="chip">✅ Правилна дроб</span>
+      <span class="chip">📐 Неправилна дроб</span>
+      <span class="chip">🔄 Смесено число</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 2 — Обикновени дроби (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="kakvo-e-drob-5-klas.html" class="current">1. Какво е дроб</a>
+      <a href="osnovno-svoistvo-drobi-5-klas.html">2. Основно свойство</a>
+      <a href="sabirane-izvazdane-drobi-5-klas.html">3. Събиране и изваждане</a>
+      <a href="umnozhenie-delenie-drobi-5-klas.html">4. Умножение и деление</a>
+      <a href="chast-ot-chislo-5-klas.html">5. Намиране на част</a>
+    </div>
+  </div>
+
+<!-- РАЗДЕЛ 1: Какво е дроб -->
+<div class="reveal">
+  <div class="sec-tag">📌 Раздел 1</div>
+  <h2 class="sec-title">Какво е обикновена дроб?</h2>
+  <p class="sec-desc">Дробта показва колко части от цялото имаме.</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">🍕</div>
+      <div><h3>Числител и знаменател</h3><p>Двете части на всяка дроб</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="frac-visual">
+        <div class="frac-diagram">
+          <div class="frac-big">
+            <span class="n">3</span>
+            <span class="d">4</span>
+          </div>
+          <div class="frac-label">прочита се „три четвърти"</div>
+        </div>
+        <div class="frac-parts">
+          <div class="frac-part-row">
+            <span class="frac-part-arrow">↑</span>
+            <span class="frac-part-text">3 — числител</span>
+            <span style="font-size:.9rem;color:var(--ink-mid)">колко части имаме</span>
+          </div>
+          <div class="frac-part-row" style="margin-top:.5rem;">
+            <span class="frac-part-arrow">↓</span>
+            <span class="frac-part-text">4 — знаменател</span>
+            <span style="font-size:.9rem;color:var(--ink-mid)">на колко части е разделено цялото</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-title">📋 Определение</div>
+        <ul>
+          <li>Дробта <span class="frac"><span class="num">a</span><span class="den">b</span></span> се получава, когато разделим цялото на <strong>b равни части</strong> и вземем <strong>a от тях</strong>.</li>
+          <li><strong>Числителят</strong> (горното число) показва <strong>колко части вземаме</strong>.</li>
+          <li><strong>Знаменателят</strong> (долното число) показва <strong>на колко части е разделено цялото</strong>.</li>
+          <li>Знаменателят <strong>никога не може да е нула</strong>!</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">🍕</div>
+        <div class="tip-body"><strong>Пример от живота:</strong>
+        Пица е разрязана на 8 равни парчета. Ти изяждаш 3 парчета. Ял си <span class="frac"><span class="num">3</span><span class="den">8</span></span> от пицата — три осми от цялата пица.</div>
+      </div>
+
+      <div class="worked">
+        <div class="worked-title">📌 Как четем дробите?</div>
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div class="step-t"><span class="frac"><span class="num">1</span><span class="den">2</span></span> — „една втора" (половина)</div></div>
+          <div class="step"><div class="step-n">2</div><div class="step-t"><span class="frac"><span class="num">1</span><span class="den">3</span></span> — „една трета" (една от три равни части)</div></div>
+          <div class="step"><div class="step-n">3</div><div class="step-t"><span class="frac"><span class="num">3</span><span class="den">4</span></span> — „три четвърти"</div></div>
+          <div class="step"><div class="step-n">4</div><div class="step-t"><span class="frac"><span class="num">2</span><span class="den">5</span></span> — „две пети"</div></div>
+          <div class="step"><div class="step-n">5</div><div class="step-n" style="width:auto;border-radius:8px;padding:0 8px;font-size:.82rem;background:var(--acc);">!</div><div class="step-t"><span class="frac"><span class="num">a</span><span class="den">b</span></span> = a : b — дробта е и запис на деление!</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- РАЗДЕЛ 2: Видове дроби -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="sec-tag">📌 Раздел 2</div>
+  <h2 class="sec-title">Видове дроби</h2>
+  <p class="sec-desc">Правилни, неправилни и равни на цяло число</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">📊</div>
+      <div><h3>Три вида дроби</h3><p>Зависи от числителя и знаменателя</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="types-grid">
+        <div class="type-card highlight">
+          <h5>✅ Правилна дроб</h5>
+          <div class="example">
+            <span class="frac frac-lg"><span class="num">3</span><span class="den">4</span></span>
+            <span class="frac frac-lg"><span class="num">2</span><span class="den">7</span></span>
+          </div>
+          <div class="desc">Числителят е <strong>по-малък</strong> от знаменателя.<br>Стойността е <strong>по-малка от 1</strong>.</div>
+        </div>
+        <div class="type-card">
+          <h5>📐 Неправилна дроб</h5>
+          <div class="example">
+            <span class="frac frac-lg"><span class="num">5</span><span class="den">3</span></span>
+            <span class="frac frac-lg"><span class="num">7</span><span class="den">2</span></span>
+          </div>
+          <div class="desc">Числителят е <strong>по-голям или равен</strong> на знаменателя.<br>Стойността е <strong>≥ 1</strong>.</div>
+        </div>
+        <div class="type-card">
+          <h5>⭕ Равна на цяло число</h5>
+          <div class="example">
+            <span class="frac frac-lg"><span class="num">6</span><span class="den">3</span></span>
+            <span style="font-size:1.3rem;font-weight:900;color:var(--main-dark)">= 2</span>
+          </div>
+          <div class="desc">Числителят се дели точно на знаменателя.<br><span class="frac"><span class="num">6</span><span class="den">3</span></span> = 2, <span class="frac"><span class="num">10</span><span class="den">5</span></span> = 2</div>
+        </div>
+      </div>
+
+      <div class="rule">
+        <div class="rule-title">🔑 Как сравняваме дроб с 1?</div>
+        <ul>
+          <li>Ако числителят &lt; знаменател → дробта &lt; 1 (правилна)</li>
+          <li>Ако числителят = знаменател → дробта = 1, например <span class="frac"><span class="num">5</span><span class="den">5</span></span> = 1</li>
+          <li>Ако числителят &gt; знаменател → дробта &gt; 1 (неправилна)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">📊</div>
+      <div><h4>Провери се — Видове дроби</h4><p>Напиши П (правилна), Н (неправилна) или Ц (цяло число)</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">а) Какъв вид е:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">3</span><span class="den">7</span></span></div>
+          <input class="ex-inp" id="p1a" type="text" placeholder="П / Н / Ц" maxlength="1">
+          <div class="ex-hint" id="h1a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">б) Какъв вид е:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">8</span><span class="den">3</span></span></div>
+          <input class="ex-inp" id="p1b" type="text" placeholder="П / Н / Ц" maxlength="1">
+          <div class="ex-hint" id="h1b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">в) Какъв вид е:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">9</span><span class="den">9</span></span></div>
+          <input class="ex-inp" id="p1c" type="text" placeholder="П / Н / Ц" maxlength="1">
+          <div class="ex-hint" id="h1c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">г) Какъв вид е:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">1</span><span class="den">5</span></span></div>
+          <input class="ex-inp" id="p1d" type="text" placeholder="П / Н / Ц" maxlength="1">
+          <div class="ex-hint" id="h1d"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection1()">✓ Провери</button>
+        <div class="fb" id="fb1"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- РАЗДЕЛ 3: Смесено число -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="sec-tag">📌 Раздел 3</div>
+  <h2 class="sec-title">Смесено число</h2>
+  <p class="sec-desc">Неправилна дроб може да се запише като смесено число — цяла и дробна част.</p>
+
+  <div class="explain-card">
+    <div class="explain-head">
+      <div class="explain-emoji">🔄</div>
+      <div><h3>Смесено число ↔ Неправилна дроб</h3><p>Прехвърляне в двете посоки</p></div>
+    </div>
+    <div class="explain-body">
+      <div class="rule">
+        <div class="rule-title">📋 Какво е смесено число?</div>
+        <ul>
+          <li>Смесено число се състои от <strong>цяла</strong> и <strong>дробна</strong> (правилна) част.</li>
+          <li>Пример: 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> се чете „две цели и три четвърти"</li>
+          <li>Смесеното число е <strong>сбор</strong>: 2<span class="frac"><span class="num">3</span><span class="den">4</span></span> = 2 + <span class="frac"><span class="num">3</span><span class="den">4</span></span></li>
+        </ul>
+      </div>
+
+      <div class="worked">
+        <div class="worked-title">📌 Неправилна дроб → Смесено число: <span class="frac"><span class="num">11</span><span class="den">4</span></span></div>
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div class="step-t">Разделяме: 11 ÷ 4 = <span class="m">2 (остатък 3)</span></div></div>
+          <div class="step"><div class="step-n">2</div><div class="step-t">Частното (2) е цялата част</div></div>
+          <div class="step"><div class="step-n">3</div><div class="step-t">Остатъкът (3) е числителят на дробната част</div></div>
+        </div>
+        <div class="result-box"><span class="frac" style="color:#fff"><span class="num">11</span><span class="den">4</span></span> = 2<span class="frac" style="color:#fff;margin-left:4px"><span class="num">3</span><span class="den">4</span></span></div>
+      </div>
+
+      <div class="worked">
+        <div class="worked-title">📌 Смесено число → Неправилна дроб: 3<span class="frac"><span class="num">2</span><span class="den">5</span></span></div>
+        <div class="steps">
+          <div class="step"><div class="step-n">1</div><div class="step-t">Умножаваме цялата част по знаменателя: <span class="m">3 · 5 = 15</span></div></div>
+          <div class="step"><div class="step-n">2</div><div class="step-t">Прибавяме числителя: <span class="m">15 + 2 = 17</span></div></div>
+          <div class="step"><div class="step-n">3</div><div class="step-t">Знаменателят остава същият: <span class="m">5</span></div></div>
+        </div>
+        <div class="result-box">3<span class="frac" style="color:#fff;margin-left:4px"><span class="num">2</span><span class="den">5</span></span> = <span class="frac" style="color:#fff;margin-left:4px"><span class="num">17</span><span class="den">5</span></span></div>
+      </div>
+
+      <div class="tip">
+        <div class="tip-icon">💡</div>
+        <div class="tip-body"><strong>Бърза формула:</strong><br>
+        Смесено a<span class="frac"><span class="num">b</span><span class="den">c</span></span> → неправилна <span class="frac"><span class="num">a·c + b</span><span class="den">c</span></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-box">
+    <div class="practice-head">
+      <div class="practice-head-icon">🔄</div>
+      <div><h4>Провери се — Смесено число</h4><p>Попълни числителя или цялата част</p></div>
+    </div>
+    <div class="practice-body">
+      <div class="ex-grid">
+        <div class="ex-item">
+          <div class="ex-label">а) Неправилна → смесено:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">7</span><span class="den">3</span></span> = ? <span class="frac"><span class="num">1</span><span class="den">3</span></span></div>
+          <input class="ex-inp" id="p2a" type="number" placeholder="цяла">
+          <div class="ex-hint" id="h2a"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">б) Неправилна → смесено:</div>
+          <div class="ex-problem"><span class="frac"><span class="num">11</span><span class="den">4</span></span> = 2 <span class="frac"><span class="num">?</span><span class="den">4</span></span></div>
+          <input class="ex-inp" id="p2b" type="number" placeholder="числител">
+          <div class="ex-hint" id="h2b"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">в) Смесено → неправилна:</div>
+          <div class="ex-problem">2<span class="frac"><span class="num">3</span><span class="den">5</span></span> = <span class="frac"><span class="num">?</span><span class="den">5</span></span></div>
+          <input class="ex-inp" id="p2c" type="number" placeholder="числител">
+          <div class="ex-hint" id="h2c"></div>
+        </div>
+        <div class="ex-item">
+          <div class="ex-label">г) Смесено → неправилна:</div>
+          <div class="ex-problem">3<span class="frac"><span class="num">1</span><span class="den">4</span></span> = <span class="frac"><span class="num">?</span><span class="den">4</span></span></div>
+          <input class="ex-inp" id="p2d" type="number" placeholder="числител">
+          <div class="ex-hint" id="h2d"></div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkSection2()">✓ Провери</button>
+        <div class="fb" id="fb2"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ГЕНЕРАТОР -->
+<div class="reveal" style="margin-top:2.5rem;">
+  <div class="generator">
+    <div class="gen-head">
+      <div class="gen-head-left">
+        <div class="gen-head-icon">🎲</div>
+        <div><h4>Генератор на случайни задачи</h4><p>Определи вида на дробта и попълни числителя</p></div>
+      </div>
+      <button class="btn-ghost" onclick="generateAll()" style="flex-shrink:0;">🔄 Нови задачи</button>
+    </div>
+    <div class="gen-body">
+      <div class="gen-problems" id="gen-problems"></div>
+      <div class="btn-row">
+        <button class="btn-main" onclick="checkGen()">✓ Провери</button>
+        <button class="btn-ghost" onclick="generateAll()">🔄 Нови</button>
+        <div class="score-row" style="flex:1;margin-top:0;">
+          <div class="score-track"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+          <div class="score-lbl" id="score-lbl">0 / 6</div>
+        </div>
+      </div>
+      <div class="fb" id="fb-gen"></div>
+    </div>
+  </div>
+</div>
+
+<div class="finish-card reveal">
+  <h3>🎉 Готово! Следваща статия →</h3>
+  <p>Научи как се разширяват и съкращават дробите — Основното свойство!</p>
+  <div class="finish-links">
+    <a href="osnovno-svoistvo-drobi-5-klas.html" class="finish-link">→ Основно свойство на дробите</a>
+    <a href="klas-5.html#tema2" class="finish-link">← Всички статии за дроби</a>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+function ri(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function fracHTML(n,d){return '<span class="frac"><span class="num">'+n+'</span><span class="den">'+d+'</span></span>';}
+
+function checkInput(id,correct,hintId,isText){
+  var inp=document.getElementById(id);
+  var hint=document.getElementById(hintId);
+  var v=isText ? inp.value.trim().toUpperCase() : parseInt(inp.value);
+  if(isText ? v==='' : isNaN(v)){inp.className='ex-inp';if(hint)hint.textContent='';return false;}
+  if(isText ? v===correct : v===correct){inp.className='ex-inp ok';if(hint)hint.textContent='✅ Правилно!';return true;}
+  else{inp.className='ex-inp no';if(hint)hint.textContent='❌ Отговорът е: '+correct;return false;}
+}
+
+function showFb(id,ok,total){
+  var fb=document.getElementById(id);if(!fb)return;
+  if(ok===total){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+total+' верни.';fb.className='fb show no';}
+}
+
+function checkSection1(){
+  var ok=0;
+  if(checkInput('p1a','П','h1a',true))ok++;
+  if(checkInput('p1b','Н','h1b',true))ok++;
+  if(checkInput('p1c','Ц','h1c',true))ok++;
+  if(checkInput('p1d','П','h1d',true))ok++;
+  showFb('fb1',ok,4);
+}
+
+function checkSection2(){
+  var ok=0;
+  if(checkInput('p2a',2,'h2a',false))ok++;
+  if(checkInput('p2b',3,'h2b',false))ok++;
+  if(checkInput('p2c',13,'h2c',false))ok++;
+  if(checkInput('p2d',13,'h2d',false))ok++;
+  showFb('fb2',ok,4);
+}
+
+var genProblems=[];
+var letters=['а','б','в','г','д','е'];
+
+function generateAll(){
+  genProblems=[];
+  for(var i=0;i<6;i++){
+    var type=ri(0,1);
+    var d=ri(2,9);
+    var n;
+    if(type===0){n=ri(1,d-1);}// неправилна → смесено
+    else{var whole=ri(1,4);var nd=ri(1,d-1);n=whole*d+nd;}// смесено → неправилна
+    genProblems.push({n:n,d:d,type:type});
+  }
+  renderGen();
+  document.getElementById('score-fill').style.width='0%';
+  document.getElementById('score-lbl').textContent='0 / 6';
+  var fb=document.getElementById('fb-gen');fb.textContent='';fb.className='fb';
+}
+
+function renderGen(){
+  var c=document.getElementById('gen-problems');if(!c)return;
+  c.innerHTML=genProblems.map(function(p,i){
+    var q,placeholder;
+    if(p.type===0){
+      // правилна — намери числителя след като знаменателят е x
+      q=fracHTML(p.n,p.d)+' — числителят е ?';placeholder='числител';
+      p.ans=p.n;
+    } else {
+      // неправилна → намери числителя на неправилната
+      var whole=Math.floor(p.n/p.d);var rem=p.n%p.d;
+      q=whole+fracHTML(rem,p.d)+' = '+fracHTML('?',p.d);
+      placeholder='числител';
+      p.ans=p.n;
+    }
+    return '<div class="gen-card"><div class="gen-letter">'+letters[i]+')</div>'
+      +'<div class="gen-q">'+q+'</div>'
+      +'<input class="gen-inp" id="ginp-'+i+'" type="number" placeholder="'+placeholder+'">'
+      +'<div class="gen-reveal" id="grev-'+i+'"></div></div>';
+  }).join('');
+}
+
+function checkGen(){
+  var ok=0;
+  genProblems.forEach(function(p,i){
+    var inp=document.getElementById('ginp-'+i);
+    var rev=document.getElementById('grev-'+i);
+    if(!inp)return;
+    var v=parseInt(inp.value);
+    if(!isNaN(v)&&v===p.ans){inp.className='gen-inp ok';if(rev)rev.textContent='✅';ok++;}
+    else{inp.className='gen-inp no';if(rev)rev.textContent=inp.value===''?'⚠️':'❌ = '+p.ans;}
+  });
+  document.getElementById('score-fill').style.width=(ok/genProblems.length*100)+'%';
+  document.getElementById('score-lbl').textContent=ok+' / '+genProblems.length;
+  var fb=document.getElementById('fb-gen');
+  if(ok===genProblems.length){fb.textContent='🎉 Отлично!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от '+genProblems.length+' верни.';fb.className='fb show no';}
+}
+
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('visible');},i*60);obs.unobserve(e.target);}});
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+window.addEventListener('load',function(){generateAll();});
+</script>
+</body>
+</html>
