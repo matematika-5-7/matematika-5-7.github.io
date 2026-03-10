@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Триъгълник — видове по страни и по ъгли, елементи, върхове, страни, ъгли, височини. Анимации. Математика 5 клас.">
+<title>Триъгълник — видове, елементи, височини | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#ffedd5;--c-mid:#fed7aa;--c-soft:#fff7ed;
+  --main:#ea580c;--main-dark:#9a3412;--main-deep:#431407;
+  --main-btn:#c2410c;--main-mid:#f97316;
+  --acc:#d97706;--acc-light:#fef3c7;
+  --red:#ef4444;--red-light:#fef2f2;
+  --ink:#431407;--ink-mid:#9a3412;--border:#fed7aa;
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,247,237,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(234,88,12,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--acc-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#78350f;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+
+/* Карти с видове триъгълници */
+.tri-types-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin:1.2rem 0;}
+.tri-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1rem 1rem .9rem;text-align:center;transition:box-shadow .2s;}
+.tri-card:hover{box-shadow:0 4px 18px rgba(234,88,12,.15);}
+.tri-card canvas{display:block;margin:0 auto .5rem;}
+.tri-card h5{font-family:'Baloo 2',sans-serif;font-size:.92rem;font-weight:800;color:var(--main-dark);margin-bottom:.2rem;}
+.tri-card .tri-range{font-size:.8rem;color:var(--main);font-weight:800;}
+.tri-card p{font-size:.78rem;color:var(--ink-mid);line-height:1.5;margin-top:.2rem;}
+
+/* Елементи интерактивна схема */
+.elem-wrap{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.2rem 1.4rem;margin:1.2rem 0;}
+.elem-wrap canvas{display:block;margin:0 auto;max-width:100%;}
+.elem-legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.9rem;justify-content:center;}
+.elem-pill{display:flex;align-items:center;gap:.4rem;background:var(--c-soft);border:2px solid var(--c-mid);border-radius:20px;padding:.25rem .85rem;font-size:.85rem;font-weight:700;color:var(--ink);}
+.elem-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
+/* Анимация */
+.anim-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(234,88,12,.1);}
+.anim-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.85rem 1.3rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.anim-head-left{display:flex;align-items:center;gap:.7rem;}
+.anim-icon{font-size:1.6rem;}
+.anim-head h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.anim-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.anim-body{padding:1rem 1.2rem;}
+.anim-canvas-wrap{background:#f5f0e8;border-radius:12px;overflow:hidden;}
+.anim-canvas-wrap canvas{display:block;width:100%;max-width:700px;margin:0 auto;}
+.anim-caption{font-size:.92rem;color:var(--main-dark);margin-top:.65rem;min-height:1.5rem;font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;}
+.anim-step-list{display:flex;flex-direction:column;gap:.4rem;margin-top:.9rem;}
+.anim-step-row{display:flex;gap:.6rem;align-items:flex-start;font-size:.9rem;padding:.5rem .7rem;border-radius:10px;border:2px solid transparent;transition:all .3s;}
+.anim-step-row.active{background:var(--c);border-color:var(--c-mid);}
+.anim-step-row.done{opacity:.5;}
+.anim-step-num{width:24px;height:24px;border-radius:7px;background:var(--main);color:#fff;font-weight:900;font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.anim-step-row.done .anim-step-num{background:#16a34a;}
+.btn-anim{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.anim-btns{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+
+/* Провери се */
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(234,88,12,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.4rem;}
+.ex-problem{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.7;}
+.ex-inp{padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;width:100%;max-width:220px;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(194,65,12,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+@media(max-width:600px){body{font-size:19px;}.tri-types-grid{grid-template-columns:1fr 1fr;}.ex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bubble" style="width:190px;height:190px;left:-45px;top:-45px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:115px;height:115px;right:5%;top:11%;animation-delay:1.3s;"></div>
+  <div class="hero-bubble" style="width:80px;height:80px;left:60%;bottom:17%;animation-delay:.8s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema5">Геометрични фигури</a> › Триъгълник</div>
+    <h1>Триъгълник</h1>
+    <p class="hero-sub">Видове по страни и по ъгли, елементи — върхове, страни, ъгли, и височини с анимация!</p>
+    <div class="hero-chips">
+      <span class="chip">🔺 Видове триъгълници</span>
+      <span class="chip">📍 Елементи</span>
+      <span class="chip">📐 Ъгли и страни</span>
+      <span class="chip">↕ Височини</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 5 — Геометрични фигури (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="tocka-prava-otsechka-agal-5-klas.html">1. Точка, права, ъгъл</a>
+      <a href="perpendikulyarni-pravi-5-klas.html">2. Перпендикулярни прави</a>
+      <a href="triagalnik-5-klas.html" class="current">3. Триъгълник</a>
+      <a href="lice-triagalnik-5-klas.html">4. Лице на триъгълник</a>
+      <a href="usporedhik-romb-5-klas.html">5. Успоредник и ромб</a>
+      <a href="trapec-5-klas.html">6. Трапец</a>
+      <a href="geometria-zadachi-5-klas.html">7. Задачи</a>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 1: ОПРЕДЕЛЕНИЕ И ЕЛЕМЕНТИ -->
+  <div class="reveal">
+    <div class="sec-tag">📌 Раздел 1</div>
+    <h2 class="sec-title">Какво е триъгълник — елементи</h2>
+    <p class="sec-desc">Три върха, три страни, три ъгъла — и всичко е свързано!</p>
+
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">🔺</div><div><h3>Определение и елементи</h3><p>Основните части на триъгълника</p></div></div>
+      <div class="explain-body">
+        <div class="rule">
+          <div class="rule-title">📋 Определение</div>
+          <ul>
+            <li><strong>Триъгълникът</strong> е многоъгълник с <strong>три върха</strong>, <strong>три страни</strong> и <strong>три ъгъла</strong>.</li>
+            <li>Означаваме го с буквите на върховете: <strong>△ABC</strong>.</li>
+            <li>Страните се означават с малки букви — <strong>a, b, c</strong> — или с имената на двата края: <strong>BC, AC, AB</strong>.</li>
+            <li>Ъглите при върховете се означават: <strong>∠A, ∠B, ∠C</strong> (или α, β, γ).</li>
+          </ul>
+        </div>
+        <div class="elem-wrap">
+          <canvas id="elemCanvas" width="560" height="280"></canvas>
+          <div class="elem-legend" id="elemLegend"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 2: ВИДОВЕ ПО СТРАНИ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 2</div>
+    <h2 class="sec-title">Видове триъгълници по страни</h2>
+    <p class="sec-desc">Гледаме дали страните са равни помежду си.</p>
+
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📏</div><div><h3>Три вида по страни</h3><p>Разностранен, равнобедрен, равностранен</p></div></div>
+      <div class="explain-body">
+        <div class="tri-types-grid" id="bySides"></div>
+        <div class="rule">
+          <div class="rule-title">📋 Свойства</div>
+          <ul>
+            <li><strong>Разностранен:</strong> всички три страни са с различна дължина → всички три ъгъла са различни.</li>
+            <li><strong>Равнобедрен:</strong> две страни са равни (наречени <em>бедра</em>); третата е <em>основа</em>. Ъглите при основата са равни.</li>
+            <li><strong>Равностранен:</strong> всички страни са равни → всички ъгли са по <strong>60°</strong>. Той е и равнобедрен!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 3: ВИДОВЕ ПО ЪГЛИ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 3</div>
+    <h2 class="sec-title">Видове триъгълници по ъгли</h2>
+    <p class="sec-desc">Гледаме кой е най-голямият ъгъл в триъгълника.</p>
+
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📐</div><div><h3>Три вида по ъгли</h3><p>Остроъгълен, правоъгълен, тъпоъгълен</p></div></div>
+      <div class="explain-body">
+        <div class="tri-types-grid" id="byAngles"></div>
+        <div class="rule">
+          <div class="rule-title">📋 Свойства</div>
+          <ul>
+            <li><strong>Остроъгълен:</strong> всички три ъгъла са остри (по-малки от 90°).</li>
+            <li><strong>Правоъгълен:</strong> единият ъгъл е точно 90° — наречен <em>прав ъгъл</em>. Страните, ограждащи правия ъгъл, са <em>катети</em>; срещуположната страна е <em>хипотенуза</em>.</li>
+            <li><strong>Тъпоъгълен:</strong> единият ъгъл е тъп (по-голям от 90°). В един триъгълник може да има само един тъп ъгъл.</li>
+          </ul>
+        </div>
+        <div class="tip"><div class="tip-icon">🔺</div><div class="tip-body"><strong>Правоъгълният триъгълник</strong> е най-важният в геометрията — с него работим при лице и теорема на Питагор в по-горен клас.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 4: ВИСОЧИНИ — АНИМАЦИЯ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">🎬 Раздел 4</div>
+    <h2 class="sec-title">Височини в триъгълник</h2>
+    <p class="sec-desc">Всеки триъгълник има три височини — по една от всеки връх към срещуположната страна.</p>
+
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">↕</div><div><h3>Какво е височина?</h3><p>Перпендикуляр от връх към срещуположна страна</p></div></div>
+      <div class="explain-body">
+        <div class="rule">
+          <div class="rule-title">📋 Определение</div>
+          <ul>
+            <li><strong>Височината</strong> от връх A е <strong>перпендикулярът</strong>, спуснат от A към срещуположната страна BC.</li>
+            <li>Основата на височината е точката, в която тя пресича страната (или нейното продължение).</li>
+            <li>Всеки триъгълник има <strong>три височини</strong> — от всеки от трите върха.</li>
+            <li>Трите височини се пресичат в една точка, наречена <strong>ортоцентър</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="anim-box">
+      <div class="anim-head">
+        <div class="anim-head-left">
+          <div class="anim-icon">🎬</div>
+          <div><h4>Анимация: Трите височини</h4><p>Избери вид триъгълник и виж как се чертаят височините</p></div>
+        </div>
+        <button class="btn-ghost" onclick="resetHeight()">↺ Начало</button>
+      </div>
+      <div class="anim-body">
+        <div class="anim-btns" style="margin-bottom:.8rem;">
+          <button class="btn-anim" onclick="startHeightAnim('acute')">🔺 Остроъгълен</button>
+          <button class="btn-anim" onclick="startHeightAnim('right')">📐 Правоъгълен</button>
+          <button class="btn-anim" onclick="startHeightAnim('obtuse')">🔻 Тъпоъгълен</button>
+        </div>
+        <div class="anim-canvas-wrap">
+          <canvas id="heightCanvas" width="700" height="500"></canvas>
+        </div>
+        <div class="anim-caption" id="heightCaption">👆 Избери вид триъгълник, за да видиш височините</div>
+        <div class="anim-step-list" id="heightSteps">
+          <div class="anim-step-row" id="hs0"><div class="anim-step-num">1</div><div>Чертаем <strong>hₐ</strong> от A: продължаваме BC отвъд C, после перпендикуляр от A → A₁</div></div>
+          <div class="anim-step-row" id="hs1"><div class="anim-step-num">2</div><div>Чертаем <strong>h_b</strong> от B: продължаваме AC отвъд C, после перпендикуляр от B → B₁</div></div>
+          <div class="anim-step-row" id="hs2"><div class="anim-step-num">3</div><div>Чертаем <strong>hc</strong> от C — вътрешна, перпендикуляр към AB, основа C₁</div></div>
+          <div class="anim-step-row" id="hs3"><div class="anim-step-num">4</div><div>Трите височини се <strong>пресичат в ортоцентъра O</strong> — той е извън триъгълника!</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОВЕРИ СЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="practice-box">
+      <div class="practice-head">
+        <div class="practice-head-icon">🧩</div>
+        <div><h4>Провери се</h4><p>Видове триъгълници и елементи</p></div>
+      </div>
+      <div class="practice-body">
+        <div class="ex-grid">
+          <div class="ex-item">
+            <div class="ex-label">а) Триъгълник има страни 5 cm, 5 cm и 8 cm. Какъв вид е по страни?</div>
+            <div class="ex-problem">Напиши: РН (разностранен), РБ (равнобедрен), РС (равностранен)</div>
+            <input class="ex-inp" id="p1a" type="text" maxlength="2" placeholder="РН / РБ / РС">
+            <div class="ex-hint" id="h1a"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">б) Триъгълник има страни 6 cm, 6 cm и 6 cm. Какъв вид е по страни?</div>
+            <div class="ex-problem">Напиши: РН (разностранен), РБ (равнобедрен), РС (равностранен)</div>
+            <input class="ex-inp" id="p1b" type="text" maxlength="2" placeholder="РН / РБ / РС">
+            <div class="ex-hint" id="h1b"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">в) Триъгълник има ъгли 90°, 45° и 45°. Какъв вид е по ъгли?</div>
+            <div class="ex-problem">Напиши: О (остроъгълен), П (правоъгълен), Т (тъпоъгълен)</div>
+            <input class="ex-inp" id="p1c" type="text" maxlength="1" placeholder="О / П / Т">
+            <div class="ex-hint" id="h1c"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">г) Триъгълник има ъгли 60°, 70° и 50°. Какъв вид е по ъгли?</div>
+            <div class="ex-problem">Напиши: О (остроъгълен), П (правоъгълен), Т (тъпоъгълен)</div>
+            <input class="ex-inp" id="p1d" type="text" maxlength="1" placeholder="О / П / Т">
+            <div class="ex-hint" id="h1d"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">д) Колко височини има всеки триъгълник?</div>
+            <div class="ex-problem">Напиши числото:</div>
+            <input class="ex-inp" id="p1e" type="number" placeholder="брой">
+            <div class="ex-hint" id="h1e"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkAll()">✓ Провери</button>
+          <div class="fb" id="fb1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>🎉 Следваща статия →</h3>
+    <p>Лице на триъгълник — формула, мерни единици и задачи!</p>
+    <div class="finish-links">
+      <a href="lice-triagalnik-5-klas.html" class="finish-link">→ Лице на триъгълник</a>
+      <a href="perpendikulyarni-pravi-5-klas.html" class="finish-link">← Перпендикулярни прави</a>
+      <a href="klas-5.html#tema5" class="finish-link">↑ Всички статии</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-nav"><a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a></div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+// ===== HELPERS =====
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeInOut(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+function drawPaper(ctx,w,h){
+  ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#e8e3da';ctx.lineWidth=.7;
+  for(let x=0;x<w;x+=25){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=25){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+
+function drawTriangle(ctx,A,B,C,col,fill){
+  col=col||'#9a3412';
+  if(fill){ctx.fillStyle=fill;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.closePath();ctx.fill();}
+  ctx.strokeStyle=col;ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.closePath();ctx.stroke();
+}
+
+function labelVtx(ctx,x,y,label,offset){
+  offset=offset||{dx:0,dy:-14};
+  ctx.fillStyle='#431407';ctx.font='bold 14px Nunito,sans-serif';ctx.textAlign='center';
+  ctx.fillText(label,x+offset.dx,y+offset.dy);
+}
+
+function tickMark(ctx,x,y,ang,n,col){
+  // n tick marks at position (x,y) along angle ang
+  col=col||'#ea580c';
+  ctx.strokeStyle=col;ctx.lineWidth=2;
+  for(let i=0;i<n;i++){
+    const off=(i-(n-1)/2)*5;
+    const px=x+Math.cos(ang+Math.PI/2)*off;
+    const py=y+Math.sin(ang+Math.PI/2)*off;
+    ctx.beginPath();
+    ctx.moveTo(px+Math.cos(ang+Math.PI/2)*5,py+Math.sin(ang+Math.PI/2)*5);
+    ctx.lineTo(px-Math.cos(ang+Math.PI/2)*5,py-Math.sin(ang+Math.PI/2)*5);
+    ctx.stroke();
+  }
+}
+
+function rightAngleMark(ctx,vtx,p1,p2,size,col){
+  size=size||12;col=col||'#ea580c';
+  const d1={x:(p1.x-vtx.x),y:(p1.y-vtx.y)};
+  const l1=Math.hypot(d1.x,d1.y);
+  const u1={x:d1.x/l1*size,y:d1.y/l1*size};
+  const d2={x:(p2.x-vtx.x),y:(p2.y-vtx.y)};
+  const l2=Math.hypot(d2.x,d2.y);
+  const u2={x:d2.x/l2*size,y:d2.y/l2*size};
+  ctx.strokeStyle=col;ctx.lineWidth=1.8;
+  ctx.beginPath();
+  ctx.moveTo(vtx.x+u1.x,vtx.y+u1.y);
+  ctx.lineTo(vtx.x+u1.x+u2.x,vtx.y+u1.y+u2.y);
+  ctx.lineTo(vtx.x+u2.x,vtx.y+u2.y);
+  ctx.stroke();
+}
+
+function footOfPerpendicular(P,A,B){
+  const AB={x:B.x-A.x,y:B.y-A.y};
+  const AP={x:P.x-A.x,y:P.y-A.y};
+  const t=(AP.x*AB.x+AP.y*AB.y)/(AB.x*AB.x+AB.y*AB.y);
+  return{x:A.x+t*AB.x,y:A.y+t*AB.y,t:t};
+}
+
+function midpoint(A,B){return{x:(A.x+B.x)/2,y:(A.y+B.y)/2};}
+
+// ===== ЕЛЕМЕНТИ CANVAS =====
+window.addEventListener('DOMContentLoaded',()=>{
+  const cv=document.getElementById('elemCanvas');
+  const c=cv.getContext('2d');
+  drawPaper(c,cv.width,cv.height);
+  const A={x:280,y:40},B={x:80,y:240},C={x:480,y:240};
+  drawTriangle(c,A,B,C,'#9a3412','rgba(234,88,12,.08)');
+
+  // страни с имена
+  const sides=[
+    {p1:B,p2:C,label:'a (BC)',col:'#ea580c'},
+    {p1:A,p2:C,label:'b (AC)',col:'#d97706'},
+    {p1:A,p2:B,label:'c (AB)',col:'#059669'},
+  ];
+  sides.forEach(s=>{
+    const mx=(s.p1.x+s.p2.x)/2,my=(s.p1.y+s.p2.y)/2;
+    const ang=Math.atan2(s.p2.y-s.p1.y,s.p2.x-s.p1.x);
+    c.save();c.translate(mx,my);c.rotate(ang);
+    c.fillStyle=s.col;c.font='bold 13px Nunito,sans-serif';c.textAlign='center';
+    c.fillText(s.label,0,-8);c.restore();
+  });
+
+  // върхове и ъгли
+  [[A,'A','∠A',-16,-14],[B,'B','∠B',-18,6],[C,'C','∠C',14,6]].forEach(([pt,vl,al,dx,dy])=>{
+    c.fillStyle='#9a3412';c.beginPath();c.arc(pt.x,pt.y,5,0,Math.PI*2);c.fill();
+    c.fillStyle='#431407';c.font='bold 15px Nunito,sans-serif';c.textAlign='center';
+    c.fillText(vl,pt.x+dx,pt.y+dy);
+    c.fillStyle='#2563eb';c.font='12px Nunito,sans-serif';
+    c.fillText(al,pt.x+dx*2.5,pt.y+dy*2.5);
+  });
+
+  // легенда
+  const legend=[
+    {col:'#ea580c',label:'Страна a = BC (срещу връх A)'},
+    {col:'#d97706',label:'Страна b = AC (срещу връх B)'},
+    {col:'#059669',label:'Страна c = AB (срещу връх C)'},
+    {col:'#2563eb',label:'Ъгли ∠A, ∠B, ∠C при върховете'},
+    {col:'#9a3412',label:'Върхове A, B, C'},
+  ];
+  const lg=document.getElementById('elemLegend');
+  legend.forEach(l=>{
+    const pill=document.createElement('div');pill.className='elem-pill';
+    pill.innerHTML=`<div class="elem-dot" style="background:${l.col}"></div>${l.label}`;
+    lg.appendChild(pill);
+  });
+
+  // ===== ВИДОВЕ ПО СТРАНИ =====
+  // ===== ВИДОВЕ ПО СТРАНИ =====
+  // Canvas 240×180 — по-голям за по-ясен чертеж
+  // ═══════════════════════════════════════════════════════
+  // ВИДОВЕ ПО СТРАНИ  — canvas 260 × 200
+  // ═══════════════════════════════════════════════════════
+  function drawTriCard(ctx, W, H, A, B, C, col, drawFn) {
+    ctx.fillStyle = '#f5f0e8'; ctx.fillRect(0,0,W,H);
+    // fill
+    ctx.fillStyle = col + '1a';
+    ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y);
+    ctx.closePath(); ctx.fill();
+    // stroke
+    ctx.strokeStyle = col; ctx.lineWidth = 2.4;
+    ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath(); ctx.moveTo(A.x,A.y); ctx.lineTo(B.x,B.y); ctx.lineTo(C.x,C.y);
+    ctx.closePath(); ctx.stroke();
+    // inner drawings
+    drawFn(ctx, A, B, C, col);
+    // vertex dots + labels
+    const verts = [[A,'A',0,-14],[B,'B',-16,10],[C,'C',16,10]];
+    verts.forEach(([P,lb,dx,dy])=>{
+      ctx.fillStyle = col;
+      ctx.beginPath(); ctx.arc(P.x,P.y,3.5,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#2c1a0e';
+      ctx.font = 'bold 13px Nunito,sans-serif'; ctx.textAlign='center';
+      ctx.fillText(lb, P.x+dx, P.y+dy);
+    });
+  }
+
+  // Helper: чертае дъга при връх V между посоките V→P1 и V→P2
+  function arcAt(ctx, V, P1, P2, r, col, lw) {
+    const a1 = Math.atan2(P1.y-V.y, P1.x-V.x);
+    const a2 = Math.atan2(P2.y-V.y, P2.x-V.x);
+    // винаги рисуваме малкия ъгъл (антиклоквайз ако трябва)
+    let s=a1, e=a2;
+    let diff = ((e-s) % (2*Math.PI) + 2*Math.PI) % (2*Math.PI);
+    const ccw = diff > Math.PI;
+    ctx.strokeStyle=col; ctx.lineWidth=lw;
+    ctx.beginPath(); ctx.arc(V.x,V.y,r,s,e,ccw); ctx.stroke();
+  }
+
+  // Helper: tick marks на страната
+  function ticks(ctx, P1, P2, n, col) {
+    const mx=(P1.x+P2.x)/2, my=(P1.y+P2.y)/2;
+    const ang = Math.atan2(P2.y-P1.y, P2.x-P1.x);
+    const px = Math.cos(ang+Math.PI/2), py = Math.sin(ang+Math.PI/2);
+    ctx.strokeStyle=col; ctx.lineWidth=2;
+    for(let i=0;i<n;i++){
+      const off=(i-(n-1)/2)*5;
+      const cx=mx+Math.cos(ang+Math.PI/2)*off, cy=my+Math.sin(ang+Math.PI/2)*off;
+      ctx.beginPath();
+      ctx.moveTo(cx+px*6,cy+py*6);
+      ctx.lineTo(cx-px*6,cy-py*6);
+      ctx.stroke();
+    }
+  }
+
+  // Helper: надпис на страна (встрани от средата)
+  function sideLbl(ctx, P1, P2, txt, col, side) {
+    // side: +1 вляво от посоката, -1 вдясно
+    const mx=(P1.x+P2.x)/2, my=(P1.y+P2.y)/2;
+    const ang = Math.atan2(P2.y-P1.y, P2.x-P1.x);
+    const nx=-Math.sin(ang)*18*side, ny=Math.cos(ang)*18*side;
+    ctx.fillStyle=col; ctx.font='bold 11px Nunito,sans-serif'; ctx.textAlign='center';
+    ctx.fillText(txt, mx+nx, my+ny+4);
+  }
+
+  const W2=260, H2=200;
+  const bsg=document.getElementById('bySides');
+
+  // ── Разностранен ──
+  {
+    const col='#2563eb';
+    const A={x:40,y:170}, B={x:218,y:170}, C={x:168,y:28};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Разностранен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Три различни страни';
+    div.appendChild(_h);div.appendChild(_s);
+    bsg.appendChild(div);
+    const c=cv.getContext('2d');
+    drawTriCard(c,W2,H2,A,B,C,col,(c,A,B,C,col)=>{
+      ticks(c,A,B,1,col); ticks(c,B,C,2,col); ticks(c,C,A,3,col);
+      sideLbl(c,A,B,'c',col,1);
+      sideLbl(c,B,C,'a',col,-1);
+      sideLbl(c,C,A,'b',col,1);
+      arcAt(c,A,B,C,20,col,1.3);
+      arcAt(c,B,A,C,20,col,1.3);
+      arcAt(c,C,A,B,20,col,1.3);
+    });
+  }
+
+  // ── Равнобедрен ──
+  {
+    const col='#ea580c';
+    const A={x:130,y:22}, B={x:28,y:175}, C={x:232,y:175};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Равнобедрен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Две равни страни (бедра)';
+    div.appendChild(_h);div.appendChild(_s);
+    bsg.appendChild(div);
+    const c=cv.getContext('2d');
+    drawTriCard(c,W2,H2,A,B,C,col,(c,A,B,C,col)=>{
+      ticks(c,A,B,2,col); ticks(c,A,C,2,col); ticks(c,B,C,1,col);
+      sideLbl(c,A,B,'бедро',col,1);
+      sideLbl(c,A,C,'бедро',col,-1);
+      sideLbl(c,B,C,'основа',col,1);
+      // равни ъгли при основата
+      arcAt(c,B,A,C,22,col,1.5); arcAt(c,C,A,B,22,col,1.5);
+      arcAt(c,A,B,C,18,col,1.3);
+    });
+  }
+
+  // ── Равностранен ──
+  {
+    const col='#059669';
+    const A={x:130,y:20}, B={x:24,y:178}, C={x:236,y:178};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Равностранен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Три равни страни · всеки ъгъл 60°';
+    div.appendChild(_h);div.appendChild(_s);
+    bsg.appendChild(div);
+    const c=cv.getContext('2d');
+    drawTriCard(c,W2,H2,A,B,C,col,(c,A,B,C,col)=>{
+      ticks(c,A,B,3,col); ticks(c,B,C,3,col); ticks(c,C,A,3,col);
+      // 60° при всеки връх
+      [[A,B,C,0,-18],[B,A,C,-18,10],[C,A,B,18,10]].forEach(([V,P1,P2,dx,dy])=>{
+        arcAt(c,V,P1,P2,22,col,1.4);
+        c.fillStyle=col; c.font='bold 10px Nunito,sans-serif'; c.textAlign='center';
+        c.fillText('60°',V.x+dx*2.6,V.y+dy*2.4);
+      });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  // ВИДОВЕ ПО ЪГЛИ  — canvas 260 × 200
+  // ═══════════════════════════════════════════════════════
+  const bag=document.getElementById('byAngles');
+
+  // ── Остроъгълен ──
+  {
+    const col='#2563eb';
+    const A={x:130,y:22}, B={x:25,y:175}, C={x:230,y:175};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Остроъгълен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Всички ъгли &lt; 90°';
+    div.appendChild(_h);div.appendChild(_s);
+    bag.appendChild(div);
+    const c=cv.getContext('2d');
+    drawTriCard(c,W2,H2,A,B,C,col,(c,A,B,C,col)=>{
+      // дъга + надпис при всеки от трите ъгъла
+      [[A,B,C,0,-28],[B,A,C,-24,0],[C,A,B,24,0]].forEach(([V,P1,P2,dx,dy])=>{
+        arcAt(c,V,P1,P2,22,col,1.6);
+        const amid=(Math.atan2(P1.y-V.y,P1.x-V.x)+Math.atan2(P2.y-V.y,P2.x-V.x))/2;
+        c.fillStyle=col+'cc'; c.font='bold 9px Nunito,sans-serif'; c.textAlign='center';
+        c.fillText('<90°',V.x+Math.cos(amid)*36,V.y+Math.sin(amid)*34);
+      });
+    });
+  }
+
+  // ── Правоъгълен ──
+  {
+    const col='#059669';
+    // прав ъгъл при C (долу-ляво), C1 горе
+    const A={x:36,y:175}, B={x:36,y:22}, C={x:220,y:175};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Правоъгълен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Един ъгъл = 90°';
+    div.appendChild(_h);div.appendChild(_s);
+    bag.appendChild(div);
+    const c=cv.getContext('2d');
+    // Ръчно рисуваме защото вертикалните/хоризонталните страни трябва точна ориентация
+    c.fillStyle='#f5f0e8'; c.fillRect(0,0,W2,H2);
+    c.fillStyle=col+'1a';
+    c.beginPath(); c.moveTo(A.x,A.y); c.lineTo(B.x,B.y); c.lineTo(C.x,C.y); c.closePath(); c.fill();
+    c.strokeStyle=col; c.lineWidth=2.4; c.lineCap='round'; c.lineJoin='round';
+    c.beginPath(); c.moveTo(A.x,A.y); c.lineTo(B.x,B.y); c.lineTo(C.x,C.y); c.closePath(); c.stroke();
+    // Квадратче при A (правия ъгъл)
+    const sq=13;
+    c.strokeStyle=col; c.lineWidth=1.8; c.setLineDash([]);
+    c.beginPath(); c.moveTo(A.x+sq,A.y); c.lineTo(A.x+sq,A.y-sq); c.lineTo(A.x,A.y-sq); c.stroke();
+    // Надпис 90° до квадратчето
+    c.fillStyle=col; c.font='bold 10px Nunito,sans-serif'; c.textAlign='left';
+    c.fillText('90°',A.x+sq+3,A.y-sq+2);
+    // Дъги при B и C (остри)
+    arcAt(c,B,A,C,20,col,1.4); arcAt(c,C,A,B,20,col,1.4);
+    // Надписи на катети и хипотенуза
+    c.fillStyle=col; c.font='bold 11px Nunito,sans-serif'; c.textAlign='center';
+    c.fillText('катет',(A.x+B.x)/2-16,(A.y+B.y)/2);
+    c.fillText('катет',(A.x+C.x)/2,(A.y+C.y)/2+14);
+    c.save(); c.translate((B.x+C.x)/2,(B.y+C.y)/2);
+    const ha=Math.atan2(C.y-B.y,C.x-B.x); c.rotate(ha);
+    c.fillText('хипотенуза',0,-10); c.restore();
+    // Върхове
+    [[A,'A',-16,10],[B,'B',-16,-6],[C,'C',14,10]].forEach(([P,lb,dx,dy])=>{
+      c.fillStyle=col; c.beginPath(); c.arc(P.x,P.y,3.5,0,Math.PI*2); c.fill();
+      c.fillStyle='#2c1a0e'; c.font='bold 13px Nunito,sans-serif'; c.textAlign='center';
+      c.fillText(lb,P.x+dx,P.y+dy);
+    });
+  }
+
+  // ── Тъпоъгълен ──
+  {
+    const col='#dc2626';
+    // тъп ъгъл при A (горе-ляво, встрани)
+    const A={x:80,y:70}, B={x:22,y:175}, C={x:232,y:175};
+    const div=document.createElement('div'); div.className='tri-card';
+    const cv=document.createElement('canvas'); cv.width=W2; cv.height=H2;
+    div.appendChild(cv);
+    const _h=document.createElement('h5');_h.textContent='Тъпоъгълен';
+    const _s=document.createElement('div');_s.className='tri-range';_s.textContent='Един ъгъл &gt; 90°';
+    div.appendChild(_h);div.appendChild(_s);
+    bag.appendChild(div);
+    const c=cv.getContext('2d');
+    drawTriCard(c,W2,H2,A,B,C,col,(c,A,B,C,col)=>{
+      // тъп ъгъл при A
+      const a1=Math.atan2(B.y-A.y,B.x-A.x), a2=Math.atan2(C.y-A.y,C.x-A.x);
+      let s=a1,e=a2,diff=((e-s)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+      const ccw=diff>Math.PI;
+      c.strokeStyle=col; c.lineWidth=2; c.beginPath(); c.arc(A.x,A.y,28,s,e,ccw); c.stroke();
+      c.strokeStyle=col+'66'; c.lineWidth=1.2; c.beginPath(); c.arc(A.x,A.y,34,s,e,ccw); c.stroke();
+      // надпис >90° в средата на ъгъла
+      let amid=(s+e)/2; if(!ccw&&diff>Math.PI) amid+=Math.PI;
+      c.fillStyle=col; c.font='bold 10px Nunito,sans-serif'; c.textAlign='center';
+      c.fillText('>90°',A.x+Math.cos(amid)*46,A.y+Math.sin(amid)*44);
+      // остри ъгли при B и C
+      arcAt(c,B,A,C,20,col,1.4); arcAt(c,C,A,B,20,col,1.4);
+    });
+  }
+
+}); // край на DOMContentLoaded
+
+function drawPencil(ctx,tip,ang){
+  ctx.save();ctx.translate(tip.x,tip.y);ctx.rotate(ang+Math.PI/6);
+  const g=ctx.createLinearGradient(-5,-52,5,-52);
+  g.addColorStop(0,'#f7c948');g.addColorStop(1,'#e8a820');
+  ctx.fillStyle=g;ctx.beginPath();ctx.rect(-5,-50,10,40);ctx.fill();
+  ctx.strokeStyle='#b8841a';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#f4a0a0';ctx.beginPath();ctx.rect(-5,-62,10,12);ctx.fill();
+  ctx.fillStyle='#aaa';ctx.beginPath();ctx.rect(-5,-52,10,4);ctx.fill();
+  ctx.fillStyle='#deb887';ctx.beginPath();ctx.moveTo(-5,-10);ctx.lineTo(5,-10);ctx.lineTo(0,0);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#444';ctx.beginPath();ctx.moveTo(-1.5,-3);ctx.lineTo(1.5,-3);ctx.lineTo(0,0);ctx.closePath();ctx.fill();
+  ctx.restore();
+}
+
+// ===== ВИСОЧИНИ АНИМАЦИЯ =====
+const HC = document.getElementById('heightCanvas');
+const Hc = HC.getContext('2d');
+let hAnimId = null, hPhase = 0, hT = 0, hType = 'acute';
+
+// ── Координати точно като учебника ──
+// Остроъгълен: C горе-средата, A долу-ляво, B долу-дясно
+// Правоъгълен: C горе над средата, прав ъгъл при C₁ (на AB), A долу-ляво, B долу-дясно
+// Тъпоъгълен: C тъп горе малко вляво от средата, A долу-ляво, B долу-дясно
+const hTriangles = {
+  acute:  { A:{x:110,y:350}, B:{x:590,y:350}, C:{x:330,y:55}  },
+  right:  { A:{x:100,y:350}, B:{x:600,y:350}, C:{x:320,y:60}  },
+  obtuse: { A:{x:120,y:470}, B:{x:580,y:470}, C:{x:350,y:340} },
+};
+
+function setHStep(active){
+  for(let i=0;i<4;i++){
+    const el=document.getElementById('hs'+i);
+    el.classList.remove('active','done');
+    if(i===active) el.classList.add('active');
+    else if(i<active) el.classList.add('done');
+  }
+}
+function caption(txt){ document.getElementById('heightCaption').textContent=txt; }
+
+// Пресичане на две прави
+function lineX(p1,p2,p3,p4){
+  const dx1=p2.x-p1.x,dy1=p2.y-p1.y,dx2=p4.x-p3.x,dy2=p4.y-p3.y;
+  const d=dx1*dy2-dy1*dx2; if(Math.abs(d)<0.001) return null;
+  const t=((p3.x-p1.x)*dy2-(p3.y-p1.y)*dx2)/d;
+  return {x:p1.x+t*dx1, y:p1.y+t*dy1};
+}
+
+// Основа на перпендикуляра от P към правата A→B
+function foot(P,A,B){
+  const dx=B.x-A.x,dy=B.y-A.y;
+  const t=((P.x-A.x)*dx+(P.y-A.y)*dy)/(dx*dx+dy*dy);
+  return {x:A.x+t*dx, y:A.y+t*dy, t};
+}
+
+// Квадратче ⊾ при основата
+function sq(F,fromV,sA,sB,sz,col){
+  const ux=fromV.x-F.x,uy=fromV.y-F.y,ul=Math.hypot(ux,uy); if(ul<0.1)return;
+  const hu={x:ux/ul*sz,y:uy/ul*sz};
+  const sx=sB.x-sA.x,sy=sB.y-sA.y,sl=Math.hypot(sx,sy); if(sl<0.1)return;
+  const su={x:sx/sl*sz,y:sy/sl*sz};
+  Hc.strokeStyle=col;Hc.lineWidth=1.7;Hc.setLineDash([]);
+  Hc.beginPath();
+  Hc.moveTo(F.x+su.x,       F.y+su.y);
+  Hc.lineTo(F.x+su.x+hu.x,  F.y+su.y+hu.y);
+  Hc.lineTo(F.x+hu.x,       F.y+hu.y);
+  Hc.stroke();
+}
+
+// Надпис на височина встрани от средата
+function lblH(p1,p2,txt,col){
+  const mx=(p1.x+p2.x)/2,my=(p1.y+p2.y)/2;
+  const dx=p2.x-p1.x,dy=p2.y-p1.y,len=Math.hypot(dx,dy)||1;
+  const nx=-dy/len*22,ny=dx/len*22;
+  Hc.fillStyle=col;Hc.font='bold 13px Nunito,sans-serif';Hc.textAlign='center';
+  Hc.fillText(txt,mx+nx,my+ny);
+}
+
+// Надпис на основата (C₁, A₁, B₁)
+function lblFoot(F,txt,above){
+  if(!txt)return;
+  Hc.fillStyle='#431407';Hc.font='bold 12px Nunito,sans-serif';Hc.textAlign='center';
+  Hc.fillText(txt,F.x,F.y+(above?-9:16));
+}
+
+// Ортоцентър
+function drawOrtho(O){
+  Hc.fillStyle='#431407';Hc.beginPath();Hc.arc(O.x,O.y,5,0,Math.PI*2);Hc.fill();
+  Hc.strokeStyle='#fff';Hc.lineWidth=1.5;Hc.beginPath();Hc.arc(O.x,O.y,5,0,Math.PI*2);Hc.stroke();
+  Hc.fillStyle='#431407';Hc.font='bold 13px Nunito,sans-serif';Hc.textAlign='left';
+  Hc.fillText('O',O.x+8,O.y-7);
+}
+
+// Основа на триъгълника + върхове
+function drawBase(A,B,C,vOff){
+  drawPaper(Hc,HC.width,HC.height);
+  Hc.fillStyle='rgba(234,88,12,.07)';
+  Hc.beginPath();Hc.moveTo(A.x,A.y);Hc.lineTo(B.x,B.y);Hc.lineTo(C.x,C.y);Hc.closePath();Hc.fill();
+  Hc.strokeStyle='#9a3412';Hc.lineWidth=2.5;Hc.lineCap='round';Hc.lineJoin='round';
+  Hc.beginPath();Hc.moveTo(A.x,A.y);Hc.lineTo(B.x,B.y);Hc.lineTo(C.x,C.y);Hc.closePath();Hc.stroke();
+  vOff.forEach(([pt,lb,o])=>{
+    Hc.fillStyle='#9a3412';Hc.beginPath();Hc.arc(pt.x,pt.y,4,0,Math.PI*2);Hc.fill();
+    Hc.fillStyle='#431407';Hc.font='bold 15px Nunito,sans-serif';Hc.textAlign='center';
+    Hc.fillText(lb,pt.x+o.dx,pt.y+o.dy);
+  });
+}
+
+// Плътна или пунктирана линия
+function ln(p1,p2,col,dash){
+  Hc.strokeStyle=col;Hc.lineWidth=2.2;Hc.setLineDash(dash?[7,5]:[]);
+  Hc.beginPath();Hc.moveTo(p1.x,p1.y);Hc.lineTo(p2.x,p2.y);Hc.stroke();
+  Hc.setLineDash([]);
+}
+
+// Завършена височина = линия + квадратче + точка + надпис
+function finH(from,F,sA,sB,lbl,col,dash){
+  ln(from,F,col,dash);
+  sq(F,from,sA,sB,11,col);
+  Hc.fillStyle=col;Hc.beginPath();Hc.arc(F.x,F.y,3.5,0,Math.PI*2);Hc.fill();
+  lblH(from,F,lbl,col);
+}
+
+// Пунктирана линия (продължение на страна)
+function dashedExt(p1,p2,col){
+  Hc.strokeStyle=col;Hc.lineWidth=1.5;Hc.setLineDash([6,4]);
+  Hc.beginPath();Hc.moveTo(p1.x,p1.y);Hc.lineTo(p2.x,p2.y);Hc.stroke();
+  Hc.setLineDash([]);
+}
+
+// ── Молив ──────────────────────────────────────────────────────
+function pen(from,to,et,col,dash){
+  const cur={x:lerp(from.x,to.x,et),y:lerp(from.y,to.y,et)};
+  Hc.strokeStyle=col;Hc.lineWidth=2.2;Hc.setLineDash(dash?[7,5]:[]);
+  Hc.beginPath();Hc.moveTo(from.x,from.y);Hc.lineTo(cur.x,cur.y);Hc.stroke();
+  Hc.setLineDash([]);
+  drawPencil(Hc,cur,Math.atan2(to.y-from.y,to.x-from.x));
+  return cur;
+}
+function penDash(from,to,et){
+  const cur={x:lerp(from.x,to.x,et),y:lerp(from.y,to.y,et)};
+  dashedExt(from,cur,'#888');
+  drawPencil(Hc,cur,Math.atan2(to.y-from.y,to.x-from.x));
+}
+
+// ══════════════════════════════════════════════════════════════
+// ОСТРОЪГЪЛЕН
+// C горе-средата, A долу-ляво, B долу-дясно
+// Всички три височини са вътрешни. Ред: hc (C→C₁), hb (B→B₁), ha (A→A₁)
+// Фази: 0→hc анимира, 1→hb анимира, 2→ha анимира, 3→ортоцентър
+// ══════════════════════════════════════════════════════════════
+function animAcute(A,B,C,et){
+  const fC=foot(C,A,B), fB=foot(B,A,C), fA=foot(A,B,C);
+  const c0='#ea580c',c1='#2563eb',c2='#059669';
+  const vo=[[A,'A',{dx:-18,dy:14}],[B,'B',{dx:14,dy:14}],[C,'C',{dx:0,dy:-15}]];
+
+  drawBase(A,B,C,vo);
+
+  if(hPhase>=1){ finH(C,fC,A,B,'hc',c0,false); lblFoot(fC,'C₁',false); }
+  if(hPhase>=2){ finH(B,fB,A,C,'h_b',c1,false); lblFoot(fB,'B₁',false); }
+  if(hPhase>=3){ finH(A,fA,B,C,'hₐ',c2,false); lblFoot(fA,'A₁',false); }
+
+  if(hPhase===0){
+    pen(C,fC,et,c0,false);
+    setHStep(0); caption('Чертаем hc — от C перпендикулярно на AB...');
+  } else if(hPhase===1){
+    pen(B,fB,et,c1,false);
+    setHStep(1); caption('Чертаем h_b — от B перпендикулярно на AC...');
+  } else if(hPhase===2){
+    pen(A,fA,et,c2,false);
+    setHStep(2); caption('Чертаем hₐ — от A перпендикулярно на BC...');
+  } else if(hPhase===3){
+    const O=lineX(C,fC,A,fA); if(O) drawOrtho(O);
+    setHStep(3); caption('✅ Трите височини се пресичат в ортоцентъра O (вътре)!');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// ПРАВОЪГЪЛЕН
+// Прав ъгъл при C₁ (на AB). C горе, A долу-ляво, B долу-дясно.
+// Само hc (C→C₁) е самостоятелна. CA и CB съвпадат с другите две.
+// Фази: 0→hc анимира, 1→показва CA=ha, 2→показва CB=hb, 3→ортоцентър(=C)
+// ══════════════════════════════════════════════════════════════
+function animRight(A,B,C,et){
+  // C₁ е проекция на C върху AB
+  const fC=foot(C,A,B);
+  const c0='#ea580c',c1='#2563eb',c2='#059669';
+  const vo=[[A,'A',{dx:-18,dy:14}],[B,'B',{dx:14,dy:14}],[C,'C',{dx:0,dy:-15}]];
+
+  drawBase(A,B,C,vo);
+  // квадратче при C₁
+  if(hPhase>=1) sq(fC,C,A,B,12,'#9a3412');
+
+  if(hPhase>=1){ finH(C,fC,A,B,'hc',c0,false); lblFoot(fC,'C₁',false); }
+  if(hPhase>=2){
+    // ha = CA (катет) — оцветена
+    ln(C,A,c1,false); lblH(C,A,'hₐ',c1);
+  }
+  if(hPhase>=3){
+    // hb = CB (катет) — оцветена
+    ln(C,B,c2,false); lblH(C,B,'h_b',c2);
+  }
+
+  if(hPhase===0){
+    pen(C,fC,et,c0,false);
+    setHStep(0); caption('Чертаем hc — от C перпендикулярно на AB (единствената истинска)...');
+  } else if(hPhase===1){
+    // анимира CA
+    pen(C,A,et,c1,false);
+    setHStep(1); caption('hₐ съвпада с катета CA — двата катета са височини!');
+  } else if(hPhase===2){
+    pen(C,B,et,c2,false);
+    setHStep(2); caption('h_b съвпада с катета CB!');
+  } else if(hPhase===3){
+    drawOrtho(C);
+    setHStep(3); caption('✅ При правоъгълен ортоцентърът съвпада с правия връх C!');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// ТЪПОЪГЪЛЕН — ~121° при C
+// Canvas: 700x500. C горе-средата, A долу-ляво, B долу-дясно.
+// A₁ и B₁ са ИЗВЪН (горе). C₁ е вътре в AB. O е горе (извън).
+//
+// Фази:
+//   0: продължение на BC зад C → A₁
+//   1: hₐ от A → A₁
+//   2: продължение на AC зад C → B₁
+//   3: h_b от B → B₁
+//   4: hc от C → C₁
+//   5: продълженията на трите височини отвъд основите → O (анимирано)
+//   6: показва O с надпис
+// ══════════════════════════════════════════════════════════════
+function animObtuse(A,B,C,et){
+  const fA=foot(A,B,C);        // A₁
+  const fB=foot(B,A,C);        // B₁
+  const fC=foot(C,A,B);        // C₁
+  const O=lineX(A,fA,C,fC);   // ортоцентър
+
+  const c0='#ea580c', c1='#2563eb', c2='#059669';
+  const vo=[[A,'A',{dx:-18,dy:14}],[B,'B',{dx:14,dy:14}],[C,'C',{dx:0,dy:-15}]];
+
+  // ── Триъгълник + върхове ──
+  drawBase(A,B,C,vo);
+
+  // ── Продължения на страните (рисуват се СЛЕД триъгълника, за да са видими) ──
+  if(hPhase>=1) dashedExt(C, fA, '#888');
+  if(hPhase>=3) dashedExt(C, fB, '#888');
+
+  // ── Завършени височини ──
+  if(hPhase>=2){ finH(A,fA,B,C,'hₐ',c0,true);  lblFoot(fA,'A₁',true); }
+  if(hPhase>=4){ finH(B,fB,A,C,'h_b',c1,true);  lblFoot(fB,'B₁',true); }
+  if(hPhase>=5){ finH(C,fC,A,B,'hc', c2,false); lblFoot(fC,'C₁',false); }
+
+  // ── Продължения на височините до O (показват се след фаза 5) ──
+  if(hPhase>=6 && O){
+    dashedExt(fA, O, c0);
+    dashedExt(fB, O, c1);
+    dashedExt(fC, O, c2);
+    drawOrtho(O);
+  }
+
+  // ── Анимирана фаза ──
+  if(hPhase===0){
+    penDash(C,fA,et);
+    setHStep(0);
+    caption('Продължаваме страна BC зад върха C — основата A₁ е извън триъгълника...');
+
+  } else if(hPhase===1){
+    pen(A,fA,et,c0,true);
+    setHStep(0);
+    caption('Чертаем hₐ — от A перпендикулярно на продължението на BC...');
+
+  } else if(hPhase===2){
+    penDash(C,fB,et);
+    setHStep(1);
+    caption('Продължаваме страна AC зад върха C — основата B₁ е извън триъгълника...');
+
+  } else if(hPhase===3){
+    pen(B,fB,et,c1,true);
+    setHStep(1);
+    caption('Чертаем h_b — от B перпендикулярно на продължението на AC...');
+
+  } else if(hPhase===4){
+    pen(C,fC,et,c2,false);
+    setHStep(2);
+    caption('Чертаем hc — от C надолу до C₁ (единствената вътрешна височина)...');
+
+  } else if(hPhase===5){
+    // Трите продължения растат едновременно от основата към O
+    if(O){
+      const e=Math.min(1,et);
+      const cur0={x:lerp(fA.x,O.x,e), y:lerp(fA.y,O.y,e)};
+      const cur1={x:lerp(fB.x,O.x,e), y:lerp(fB.y,O.y,e)};
+      const cur2={x:lerp(fC.x,O.x,e), y:lerp(fC.y,O.y,e)};
+      dashedExt(fA, cur0, c0);
+      dashedExt(fB, cur1, c1);
+      dashedExt(fC, cur2, c2);
+    }
+    setHStep(3);
+    caption('Продължаваме трите височини — те се пресичат в ортоцентъра O...');
+
+  } else if(hPhase===6){
+    setHStep(3);
+    caption('✅ Ортоцентърът O е извън триъгълника — над C!');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+function hMaxPhase(){
+  if(hType==='acute') return 4;
+  if(hType==='right') return 4;
+  return 7; // 0..6
+}
+
+function startHeightAnim(type){
+  cancelAnimationFrame(hAnimId);
+  hType=type; hPhase=0; hT=0;
+  setHStep(-1);
+  hAnimId=requestAnimationFrame(animHeight);
+}
+function resetHeight(){
+  cancelAnimationFrame(hAnimId);
+  drawPaper(Hc,HC.width,HC.height);
+  caption('👆 Избери вид триъгълник, за да видиш височините');
+  setHStep(-1);
+}
+
+function animHeight(){
+  hT+=0.018;
+  const et=Math.min(1,easeInOut(hT));
+  const {A,B,C}=hTriangles[hType];
+
+  if     (hType==='acute')  animAcute(A,B,C,et);
+  else if(hType==='right')  animRight(A,B,C,et);
+  else                      animObtuse(A,B,C,et);
+
+  if(hT>=1){ hPhase++; hT=0; }
+  if(hPhase < hMaxPhase()){
+    hAnimId=requestAnimationFrame(animHeight);
+  }
+}
+
+// Стъпки в списъка вляво
+
+
+// ===== ПРОВЕРИ СЕ =====
+function chkTxt(id,correct,hid){
+  const inp=document.getElementById(id);const hint=document.getElementById(hid);
+  const v=inp.value.trim().toUpperCase();
+  if(!v){inp.className='ex-inp';hint.textContent='';return false;}
+  if(v===correct){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+correct;inp.className='ex-inp no';return false;
+}
+function chkNum(id,correct,hid){
+  const inp=document.getElementById(id);const hint=document.getElementById(hid);
+  const v=parseInt(inp.value);
+  if(isNaN(v)){inp.className='ex-inp';hint.textContent='';return false;}
+  if(v===correct){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+correct;inp.className='ex-inp no';return false;
+}
+function checkAll(){
+  let ok=0;
+  if(chkTxt('p1a','РН','h1a'))ok++;
+  if(chkTxt('p1b','РС','h1b'))ok++;
+  if(chkTxt('p1c','П','h1c'))ok++;
+  if(chkTxt('p1d','О','h1d'))ok++;
+  if(chkNum('p1e',3,'h1e'))ok++;
+  const fb=document.getElementById('fb1');
+  if(ok===5){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от 5 верни.';fb.className='fb show no';}
+}
+
+// ===== REVEAL =====
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});
+},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// init
+window.addEventListener('load',()=>{
+  drawPaper(Hc,HC.width,HC.height);
+});
+</script>
+</body>
+</html>

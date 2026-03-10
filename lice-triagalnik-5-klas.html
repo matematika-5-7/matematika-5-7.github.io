@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лице на триъгълник | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;--main:#2563eb;--main-dark:#1e40af;--main-deep:#1e3a8a;--main-btn:#1d4ed8;--main-mid:#3b82f6;--acc:#0284c7;--acc-light:#e0f2fe;--red:#ef4444;--red-light:#fef2f2;--ink:#1e3a8a;--ink-mid:#1e40af;--border:#bfdbfe;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--acc-light);border:2px solid #bae6fd;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#0c4a6e;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.formula-box{background:var(--main-deep);border-radius:18px;padding:1.4rem 1.8rem;margin:1.2rem 0;text-align:center;}
+.formula-label{font-size:.85rem;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:.4rem;}
+.formula-main{font-size:1.6rem;font-weight:900;color:#fff;font-family:'Baloo 2',sans-serif;}
+.formula-var{color:#93c5fd;}
+.formula-sub{font-size:.88rem;color:rgba(255,255,255,.72);margin-top:.45rem;}
+.units-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem;}
+.units-table th{background:var(--main-deep);color:#fff;padding:.55rem .9rem;text-align:left;font-weight:800;}
+.units-table td{padding:.5rem .9rem;border-bottom:1.5px solid var(--c-mid);}
+.units-table tr:nth-child(even) td{background:var(--c);}
+.units-table td strong{color:var(--main-dark);}
+.anim-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.1);}
+.anim-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.85rem 1.3rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.anim-head-left{display:flex;align-items:center;gap:.7rem;}
+.anim-icon{font-size:1.6rem;}
+.anim-head h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.anim-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.anim-body{padding:1rem 1.2rem;}
+.anim-canvas-wrap{background:#f0f6ff;border-radius:12px;overflow:hidden;}
+.anim-canvas-wrap canvas{display:block;width:100%;max-width:700px;margin:0 auto;}
+.anim-caption{font-size:.92rem;color:var(--main-dark);margin-top:.65rem;min-height:1.5rem;font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;}
+.btn-anim{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.anim-btns{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+.example-card{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.3rem 1.5rem;margin:1rem 0;position:relative;overflow:hidden;}
+.example-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--main);}
+.ex-num{font-family:'Baloo 2',sans-serif;font-size:.82rem;font-weight:800;color:var(--main);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem;}
+.ex-task{font-size:1rem;color:var(--ink);margin-bottom:.75rem;line-height:1.7;}
+.ex-solution{background:var(--c);border-radius:12px;padding:.9rem 1.1rem;}
+.ex-step{font-size:.97rem;color:var(--main-dark);margin-bottom:.3rem;line-height:1.7;}
+.ex-step strong{color:var(--main-deep);}
+.ex-answer{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-deep);margin-top:.5rem;padding:.45rem .9rem;background:#fff;border-radius:10px;display:inline-block;}
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(37,99,235,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.4rem;}
+.ex-problem{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.7;}
+.ex-inp{padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;width:100%;max-width:220px;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+@media(max-width:600px){body{font-size:19px;}.ex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+<div class="hero">
+  <div class="hero-bubble" style="width:190px;height:190px;left:-45px;top:-45px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:115px;height:115px;right:5%;top:11%;animation-delay:1.3s;"></div>
+  <div class="hero-bubble" style="width:80px;height:80px;left:60%;bottom:17%;animation-delay:.8s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema5">Геометрични фигури</a> › Лице на триъгълник</div>
+    <h1>Лице на триъгълник</h1>
+    <p class="hero-sub">Правоъгълен триъгълник, обща формула S&nbsp;=&nbsp;a·h÷2 и мерни единици — с анимации и примери!</p>
+    <div class="hero-chips">
+      <span class="chip">📐 Правоъгълен триъгълник</span>
+      <span class="chip">📏 Формула S = a·h ÷ 2</span>
+      <span class="chip">📦 Мерни единици</span>
+      <span class="chip">🧩 Задачи</span>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 5 — Геометрични фигури (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="tocka-prava-otsechka-agal-5-klas.html">1. Точка, права, ъгъл</a>
+      <a href="perpendikulyarni-pravi-5-klas.html">2. Перпендикулярни прави</a>
+      <a href="triagalnik-5-klas.html">3. Триъгълник</a>
+      <a href="lice-triagalnik-5-klas.html" class="current">4. Лице на триъгълник</a>
+      <a href="usporedhik-romb-5-klas.html">5. Успоредник и ромб</a>
+      <a href="trapec-5-klas.html">6. Трапец</a>
+      <a href="geometria-zadachi-5-klas.html">7. Задачи</a>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 1 -->
+  <div class="reveal">
+    <div class="sec-tag">📌 Раздел 1</div>
+    <h2 class="sec-title">Лице на правоъгълен триъгълник</h2>
+    <p class="sec-desc">Правоъгълният триъгълник е точно половин правоъгълник — лицето му е лесно за намиране!</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📐</div><div><h3>От правоъгълник до правоъгълен триъгълник</h3><p>Разбиране чрез разрязване по диагонала</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">Ако вземем правоъгълник и го разрежем по диагонала, получаваме <strong>два равни правоъгълни триъгълника</strong>. Значи лицето на всеки от тях е <strong>точно половината</strong> от лицето на правоъгълника.</p>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">✂️</div><div><h4>Разрязване по диагонала</h4><p>Анимация стъпка по стъпка</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="rectCutCanvas" width="700" height="300"></canvas></div>
+            <div class="anim-caption" id="rectCutCaption">Натисни ▶ Покажи за да видиш как правоъгълникът се разрязва на два триъгълника</div>
+            <div class="anim-btns">
+              <button class="btn-anim" onclick="startRectAnim()">▶ Покажи</button>
+              <button class="btn-ghost" onclick="resetRectAnim()">↺ Отначало</button>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box">
+          <div class="formula-label">ФОРМУЛА — ПРАВОЪГЪЛЕН ТРИЪГЪЛНИК</div>
+          <div class="formula-main">S = <span class="formula-var">a</span> · <span class="formula-var">b</span> ÷ 2</div>
+          <div class="formula-sub">където <strong>a</strong> и <strong>b</strong> са двата катета (страните при правия ъгъл)</div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Обяснение</div>
+          <ul>
+            <li>Правоъгълникът с катети <strong>a</strong> и <strong>b</strong> има лице <strong>a · b</strong>.</li>
+            <li>Диагоналът го разделя на <strong>два равни</strong> правоъгълни триъгълника.</li>
+            <li>Лицето на всеки триъгълник = <strong>(a · b) ÷ 2</strong>.</li>
+            <li>Двата катета са перпендикулярни — единият е основа, другият е височина.</li>
+          </ul>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Запомни!</strong>При правоъгълен триъгълник двата катета са едновременно и основа, и височина — защото сключват прав ъгъл помежду си.</div></div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 1</div>
+          <div class="ex-task">Правоъгълен триъгълник има катети <strong>a = 6 cm</strong> и <strong>b = 4 cm</strong>. Намери лицето му.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Формула:</strong> S = a · b ÷ 2</div>
+            <div class="ex-step"><strong>Заместваме:</strong> S = 6 · 4 ÷ 2 = 24 ÷ 2 = 12</div>
+            <div class="ex-answer">S = 12 cm²</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 2</div>
+          <div class="ex-task">Правоъгълен триъгълник има лице <strong>S = 15 cm²</strong> и катет <strong>a = 5 cm</strong>. Намери другия катет <strong>b</strong>.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>От формулата:</strong> a · b = 2 · S</div>
+            <div class="ex-step"><strong>Намираме b:</strong> b = 2 · 15 ÷ 5 = 30 ÷ 5 = 6</div>
+            <div class="ex-answer">b = 6 cm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 2 -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 2</div>
+    <h2 class="sec-title">Лице на произволен триъгълник</h2>
+    <p class="sec-desc">Формулата с основа и височина важи за всеки триъгълник — остроъгълен, правоъгълен или тъпоъгълен.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📏</div><div><h3>Основа и височина — общата формула</h3><p>Важи за всеки триъгълник</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">За <strong>всеки</strong> триъгълник избираме произволна страна за <strong>основа (a)</strong> и чертаем <strong>височина (h)</strong> — отсечката от срещуположния връх перпендикулярно на основата.</p>
+        <div class="formula-box">
+          <div class="formula-label">ОБЩА ФОРМУЛА — ВСЕКИ ТРИЪГЪЛНИК</div>
+          <div class="formula-main">S = <span class="formula-var">a</span> · <span class="formula-var">h</span> ÷ 2</div>
+          <div class="formula-sub"><strong>a</strong> = основа (избрана страна) &nbsp;|&nbsp; <strong>h</strong> = височина към тази основа</div>
+        </div>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">📐</div><div><h4>Основа и височина при трите вида</h4><p>Избери вид и виж как се построява h</p></div></div></div>
+          <div class="anim-body">
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;">
+              <button class="btn-anim" onclick="startAreaAnim('acute')">🔺 Остроъгълен</button>
+              <button class="btn-anim" style="background:#059669;" onclick="startAreaAnim('right')">📐 Правоъгълен</button>
+              <button class="btn-anim" style="background:#dc2626;" onclick="startAreaAnim('obtuse')">🔻 Тъпоъгълен</button>
+              <button class="btn-ghost" onclick="resetAreaAnim()">↺ Изчисти</button>
+            </div>
+            <div class="anim-canvas-wrap"><canvas id="areaAnimCanvas" width="700" height="360"></canvas></div>
+            <div class="anim-caption" id="areaCaption">👆 Избери вид триъгълник, за да видиш основата и височината</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Важно</div>
+          <ul>
+            <li>Можем да изберем <strong>всяка от трите страни</strong> за основа — резултатът ще е <strong>един и същ</strong>.</li>
+            <li>Височината <strong>h</strong> е перпендикулярна на основата и <strong>съответства</strong> на нея.</li>
+            <li>При <strong>тъпоъгълен</strong> — височините към двете по-малки страни падат <em>извън</em> триъгълника.</li>
+            <li>При <strong>правоъгълен</strong> — катетите са едновременно основа и съответна височина.</li>
+          </ul>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 3</div>
+          <div class="ex-task">Триъгълник има основа <strong>a = 10 cm</strong> и съответна височина <strong>h = 7 cm</strong>. Намери лицето.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Формула:</strong> S = a · h ÷ 2</div>
+            <div class="ex-step"><strong>Заместваме:</strong> S = 10 · 7 ÷ 2 = 70 ÷ 2 = 35</div>
+            <div class="ex-answer">S = 35 cm²</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 4</div>
+          <div class="ex-task">Триъгълник има лице <strong>S = 48 cm²</strong> и основа <strong>a = 12 cm</strong>. Намери височината <strong>h</strong>.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>От формулата:</strong> h = 2 · S ÷ a</div>
+            <div class="ex-step"><strong>Заместваме:</strong> h = 2 · 48 ÷ 12 = 96 ÷ 12 = 8</div>
+            <div class="ex-answer">h = 8 cm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 3 -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 3</div>
+    <h2 class="sec-title">Мерни единици за лице</h2>
+    <p class="sec-desc">Лицето се мери в квадратни единици. Важно е да знаеш как да превръщаш от една единица в друга.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📦</div><div><h3>Квадратни мерни единици</h3><p>mm², cm², dm², m², km² — и как се свързват</p></div></div>
+      <div class="explain-body">
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">🔲</div><div><h4>Визуализация на мерните единици</h4><p>1 cm² = колко mm²? 1 dm² = колко cm²?</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="unitsCanvas" width="700" height="310"></canvas></div>
+            <div class="anim-caption" id="unitsCaption">Всяка стъпка нагоре = ×100 | Всяка стъпка надолу = ÷100</div>
+          </div>
+        </div>
+        <table class="units-table">
+          <thead><tr><th>Единица</th><th>Знак</th><th>Равно на</th><th>Пример</th></tr></thead>
+          <tbody>
+            <tr><td><strong>квадратен милиметър</strong></td><td><strong>mm²</strong></td><td>—</td><td>сечение на тел</td></tr>
+            <tr><td><strong>квадратен сантиметър</strong></td><td><strong>cm²</strong></td><td>1 cm² = <strong>100 mm²</strong></td><td>монета</td></tr>
+            <tr><td><strong>квадратен дециметър</strong></td><td><strong>dm²</strong></td><td>1 dm² = <strong>100 cm²</strong></td><td>лист А4 ≈ 6 dm²</td></tr>
+            <tr><td><strong>квадратен метър</strong></td><td><strong>m²</strong></td><td>1 m² = <strong>100 dm²</strong></td><td>голяма плочка</td></tr>
+            <tr><td><strong>квадратен километър</strong></td><td><strong>km²</strong></td><td>1 km² = <strong>1 000 000 m²</strong></td><td>малък град</td></tr>
+          </tbody>
+        </table>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Правилото за квадратни единици:</strong> При линейни единици съседните се различават 10 пъти. При квадратни — по <strong>100 пъти</strong> (защото 10² = 100). Например: 1 m = 10 dm, но 1 m² = 100 dm².</div></div>
+        <div class="rule">
+          <div class="rule-title">📋 Честа грешка</div>
+          <ul>
+            <li>❌ <strong>Грешно:</strong> 1 m² = 10 dm²</li>
+            <li>✅ <strong>Вярно:</strong> 1 m² = (10 dm)² = 10² dm² = <strong>100 dm²</strong></li>
+            <li>❌ <strong>Грешно:</strong> 5 cm² = 50 mm²</li>
+            <li>✅ <strong>Вярно:</strong> 5 cm² = 5 · 100 mm² = <strong>500 mm²</strong></li>
+          </ul>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 5 — превръщане на единици</div>
+          <div class="ex-task">Правоъгълен триъгълник има катети <strong>30 mm</strong> и <strong>40 mm</strong>. Намери лицето в mm² и в cm².</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>В mm²:</strong> S = 30 · 40 ÷ 2 = 1200 ÷ 2 = 600 mm²</div>
+            <div class="ex-step"><strong>В cm²:</strong> 600 mm² ÷ 100 = 6 cm²</div>
+            <div class="ex-answer">S = 600 mm² = 6 cm²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОВЕРИ СЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="practice-box">
+      <div class="practice-head"><div class="practice-head-icon">🧩</div><div><h4>Провери се</h4><p>Лице на триъгълник и мерни единици</p></div></div>
+      <div class="practice-body">
+        <div class="ex-grid">
+          <div class="ex-item">
+            <div class="ex-label">а) Правоъгълен триъгълник, катети 3 cm и 8 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q1" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h1"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">б) Триъгълник с основа 12 cm и височина 5 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q2" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h2"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">в) Триъгълник: S = 24 cm², основа a = 8 cm</div>
+            <div class="ex-problem">Намери височината h в cm:</div>
+            <input class="ex-inp" id="q3" type="number" placeholder="cm">
+            <div class="ex-hint" id="h3"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">г) Колко mm² има в 3 cm²?</div>
+            <div class="ex-problem">Напиши числото:</div>
+            <input class="ex-inp" id="q4" type="number" placeholder="mm²">
+            <div class="ex-hint" id="h4"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">д) Колко cm² има в 2 dm²?</div>
+            <div class="ex-problem">Напиши числото:</div>
+            <input class="ex-inp" id="q5" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h5"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkAll()">✓ Провери</button>
+          <div class="fb" id="fb1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>🎉 Следваща статия →</h3>
+    <p>Успоредник и ромб — свойства, лице и диагонали!</p>
+    <div class="finish-links">
+      <a href="usporedhik-romb-5-klas.html" class="finish-link">→ Успоредник и ромб</a>
+      <a href="triagalnik-5-klas.html" class="finish-link">← Триъгълник</a>
+      <a href="klas-5.html#tema5" class="finish-link">↑ Всички статии</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="foot-nav"><a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a></div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+function lerp(a,b,t){return a+(b-a)*t;}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function drawPaper(ctx,w,h){
+  ctx.fillStyle='#f0f6ff';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#dbeafe';ctx.lineWidth=.7;
+  for(let x=0;x<w;x+=25){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=25){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+function fillTri(ctx,A,B,C,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.closePath();ctx.fill();}
+function strokeTri(ctx,A,B,C,col,lw){ctx.strokeStyle=col;ctx.lineWidth=lw||2.5;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.closePath();ctx.stroke();}
+function lbl(ctx,x,y,txt,col,sz){ctx.fillStyle=col||'#1e3a8a';ctx.font='bold '+(sz||13)+'px Nunito,sans-serif';ctx.textAlign='center';ctx.fillText(txt,x,y);}
+function rightSq(ctx,V,P1,P2,sz,col){
+  const d1={x:P1.x-V.x,y:P1.y-V.y},l1=Math.hypot(d1.x,d1.y),u1={x:d1.x/l1*(sz||13),y:d1.y/l1*(sz||13)};
+  const d2={x:P2.x-V.x,y:P2.y-V.y},l2=Math.hypot(d2.x,d2.y),u2={x:d2.x/l2*(sz||13),y:d2.y/l2*(sz||13)};
+  ctx.strokeStyle=col||'#2563eb';ctx.lineWidth=1.8;
+  ctx.beginPath();ctx.moveTo(V.x+u1.x,V.y+u1.y);ctx.lineTo(V.x+u1.x+u2.x,V.y+u1.y+u2.y);ctx.lineTo(V.x+u2.x,V.y+u2.y);ctx.stroke();
+}
+function footPt(P,A,B){const dx=B.x-A.x,dy=B.y-A.y,t=((P.x-A.x)*dx+(P.y-A.y)*dy)/(dx*dx+dy*dy);return{x:A.x+t*dx,y:A.y+t*dy};}
+function dashedSeg(ctx,A,B,col){ctx.save();ctx.strokeStyle=col||'#93c5fd';ctx.lineWidth=2;ctx.setLineDash([7,4]);ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+function cap(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+
+// ── АНИМАЦИЯ 1: ПРАВОЪГЪЛНИК → ДВА ТРИЪГЪЛНИКА ──
+const RC=document.getElementById('rectCutCanvas'),Rc=RC.getContext('2d');
+let rPhase=0,rT=0,rId=null;
+function drawRect(ph,t){
+  const et=ease(Math.min(1,t));
+  drawPaper(Rc,RC.width,RC.height);
+  const rx=80,ry=55,rw=240,rh=170;
+  const A={x:rx,y:ry},B={x:rx,y:ry+rh},C={x:rx+rw,y:ry+rh},D={x:rx+rw,y:ry};
+  if(ph===0){
+    Rc.fillStyle='#bfdbfe';Rc.fillRect(rx,ry,rw,rh);
+    Rc.strokeStyle='#1d4ed8';Rc.lineWidth=2.5;Rc.strokeRect(rx,ry,rw,rh);
+    lbl(Rc,(rx+rx+rw)/2,ry+rh+22,'a',null,14);lbl(Rc,rx-16,(ry+ry+rh)/2,'b',null,14);
+    lbl(Rc,(rx+rx+rw)/2,ry+rh/2,'S = a · b','#1d4ed8',15);
+    cap('rectCutCaption','Правоъгълник с лице S = a · b');
+  } else if(ph===1){
+    Rc.fillStyle='#bfdbfe';Rc.fillRect(rx,ry,rw,rh);
+    Rc.strokeStyle='#1d4ed8';Rc.lineWidth=2.5;Rc.strokeRect(rx,ry,rw,rh);
+    const cur={x:lerp(B.x,D.x,et),y:lerp(B.y,D.y,et)};
+    Rc.save();Rc.strokeStyle='#dc2626';Rc.lineWidth=2.5;Rc.setLineDash([9,5]);
+    Rc.beginPath();Rc.moveTo(B.x,B.y);Rc.lineTo(cur.x,cur.y);Rc.stroke();Rc.setLineDash([]);Rc.restore();
+    lbl(Rc,(rx+rx+rw)/2,ry+rh+22,'Разрязваме по диагонала...','#dc2626',13);
+    cap('rectCutCaption','Диагоналът разделя правоъгълника на два равни триъгълника');
+  } else {
+    const sep=ph===2?lerp(0,70,et):70;
+    const l1={A:{x:A.x-sep/2,y:A.y},B:{x:B.x-sep/2,y:B.y},D:{x:D.x-sep/2,y:D.y}};
+    const l2={B:{x:B.x+sep/2,y:B.y},C:{x:C.x+sep/2,y:C.y},D:{x:D.x+sep/2,y:D.y}};
+    fillTri(Rc,l1.A,l1.B,l1.D,'#bfdbfe');strokeTri(Rc,l1.A,l1.B,l1.D,'#1d4ed8');
+    fillTri(Rc,l2.B,l2.C,l2.D,'#bbf7d0');strokeTri(Rc,l2.B,l2.C,l2.D,'#059669');
+    const m1x=(l1.A.x+l1.B.x+l1.D.x)/3,m1y=(l1.A.y+l1.B.y+l1.D.y)/3;
+    const m2x=(l2.B.x+l2.C.x+l2.D.x)/3,m2y=(l2.B.y+l2.C.y+l2.D.y)/3;
+    lbl(Rc,m1x,m1y,'S/2','#1e3a8a',14);lbl(Rc,m2x,m2y,'S/2','#14532d',14);
+    lbl(Rc,rx+rw+sep+22,(ry+ry+rh)/2,'=','#059669',22);
+    const fx=rx+rw+sep+46,fy=ry+14;
+    Rc.fillStyle='#eff6ff';Rc.fillRect(fx,fy,210,130);
+    Rc.strokeStyle='#bfdbfe';Rc.lineWidth=2;Rc.strokeRect(fx,fy,210,130);
+    lbl(Rc,fx+105,fy+24,'Лице на','#1e3a8a',13);
+    lbl(Rc,fx+105,fy+44,'правоъгълен','#1e3a8a',13);
+    lbl(Rc,fx+105,fy+64,'триъгълник:','#1e3a8a',13);
+    lbl(Rc,fx+105,fy+94,'S = a · b ÷ 2','#1d4ed8',18);
+    lbl(Rc,fx+105,fy+116,'(a и b — катетите)','#64748b',11);
+    cap('rectCutCaption',ph===2?'Двата триъгълника са равни — всеки с лице S/2!':'✅ Лице на правоъгълен триъгълник = (a · b) ÷ 2');
+  }
+}
+function animRect(){rT+=0.016;drawRect(rPhase,rT);if(rT>=1){rPhase++;rT=0;}if(rPhase<=3)rId=requestAnimationFrame(animRect);}
+function startRectAnim(){cancelAnimationFrame(rId);rPhase=0;rT=0;rId=requestAnimationFrame(animRect);}
+function resetRectAnim(){cancelAnimationFrame(rId);rPhase=0;rT=0;drawRect(0,0);cap('rectCutCaption','Натисни ▶ Покажи за да видиш как правоъгълникът се разрязва на два триъгълника');}
+
+// ── АНИМАЦИЯ 2: ОСНОВА И ВИСОЧИНА ──
+const AC=document.getElementById('areaAnimCanvas'),Ac=AC.getContext('2d');
+let aType=null,aPhase=0,aT=0,aId=null;
+const triData={
+  acute:{A:{x:350,y:50},B:{x:85,y:305},C:{x:590,y:305},col:'#2563eb',name:'Остроъгълен'},
+  right:{A:{x:105,y:55},B:{x:105,y:305},C:{x:555,y:305},col:'#059669',name:'Правоъгълен'},
+  obtuse:{A:{x:195,y:110},B:{x:75,y:305},C:{x:600,y:305},col:'#dc2626',name:'Тъпоъгълен'},
+};
+function drawArea(type,phase,t){
+  drawPaper(Ac,AC.width,AC.height);
+  if(!type){cap('areaCaption','👆 Избери вид триъгълник, за да видиш основата и височината');return;}
+  const et=ease(Math.min(1,t));
+  const {A,B,C,col,name}=triData[type];
+  const F=footPt(A,B,C);
+  fillTri(Ac,A,B,C,col+'22');strokeTri(Ac,A,B,C,col);
+  [[A,'A',0,-16],[B,'B',-18,14],[C,'C',18,14]].forEach(([P,lb,dx,dy])=>{
+    Ac.fillStyle=col;Ac.beginPath();Ac.arc(P.x,P.y,4.5,0,Math.PI*2);Ac.fill();
+    lbl(Ac,P.x+dx,P.y+dy,lb,col,14);
+  });
+  if(phase>=0){
+    const yy=B.y+28;
+    Ac.strokeStyle=col;Ac.lineWidth=2;Ac.beginPath();Ac.moveTo(B.x,yy);Ac.lineTo(C.x,yy);Ac.stroke();
+    [[B.x,1],[C.x,-1]].forEach(([x,dir])=>{Ac.fillStyle=col;Ac.beginPath();Ac.moveTo(x+dir*8,yy-4);Ac.lineTo(x,yy);Ac.lineTo(x+dir*8,yy+4);Ac.fill();});
+    lbl(Ac,(B.x+C.x)/2,yy+16,'a — основа',col,12);
+  }
+  if(phase>=1){
+    const cur=phase===1?{x:lerp(A.x,F.x,et),y:lerp(A.y,F.y,et)}:F;
+    dashedSeg(Ac,A,cur,col+'cc');
+    if(phase>=2){
+      rightSq(Ac,F,A,B,13,col);
+      Ac.fillStyle=col;Ac.beginPath();Ac.arc(F.x,F.y,4,0,Math.PI*2);Ac.fill();
+      lbl(Ac,F.x+(type==='right'?-20:0),F.y+18,'H',col,11);
+      const hx=(A.x+F.x)/2+(type==='right'?-18:14),hy=(A.y+F.y)/2;
+      lbl(Ac,hx,hy,'h',col,14);
+    }
+  }
+  if(phase>=2){
+    const fx=15,fy=15;
+    Ac.fillStyle=col+'ee';Ac.beginPath();
+    if(Ac.roundRect)Ac.roundRect(fx,fy,200,85,10);else Ac.rect(fx,fy,200,85);
+    Ac.fill();
+    lbl(Ac,fx+100,fy+24,'S = a · h ÷ 2','#fff',16);
+    lbl(Ac,fx+100,fy+46,'основа: a = BC','#fff',11);
+    lbl(Ac,fx+100,fy+64,'височина: h ⊥ a','#fff',11);
+  }
+  const msgs=['Основата a = BC е избраната страна','Чертаем височина h от A перпендикулярно на a...','✅ '+name+' триъгълник: S = a · h ÷ 2'];
+  cap('areaCaption',msgs[Math.min(phase,2)]);
+}
+function animArea(){aT+=0.018;drawArea(aType,aPhase,aT);if(aT>=1){aPhase++;aT=0;}if(aPhase<=2)aId=requestAnimationFrame(animArea);}
+function startAreaAnim(type){cancelAnimationFrame(aId);aType=type;aPhase=0;aT=0;drawArea(type,0,0);aId=requestAnimationFrame(animArea);}
+function resetAreaAnim(){cancelAnimationFrame(aId);aType=null;drawArea(null,0,0);}
+
+// ── МЕРНИ ЕДИНИЦИ ──
+(function(){
+  const UC=document.getElementById('unitsCanvas'),u=UC.getContext('2d');
+  drawPaper(u,UC.width,UC.height);
+  const bx=45,by=40,bs=120,ms=12;
+  u.fillStyle='#bfdbfe';u.fillRect(bx,by,bs,bs);
+  u.strokeStyle='#93c5fd';u.lineWidth=0.5;
+  for(let i=0;i<=10;i++){u.beginPath();u.moveTo(bx+i*ms,by);u.lineTo(bx+i*ms,by+bs);u.stroke();u.beginPath();u.moveTo(bx,by+i*ms);u.lineTo(bx+bs,by+i*ms);u.stroke();}
+  u.strokeStyle='#1d4ed8';u.lineWidth=2.5;u.strokeRect(bx,by,bs,bs);
+  u.fillStyle='#dc2626';u.fillRect(bx,by,ms,ms);
+  u.fillStyle='#fff';u.font='bold 8px Nunito,sans-serif';u.textAlign='center';u.fillText('1mm²',bx+ms/2,by+ms/2+3);
+  lbl(u,bx+bs/2,by-12,'1 cm²','#1d4ed8',13);lbl(u,bx+bs/2,by+bs+18,'= 100 mm²','#1d4ed8',12);
+  const dx=235,dy=20,ds=240,cs=24;
+  u.fillStyle='#dbeafe';u.fillRect(dx,dy,ds,ds);
+  u.strokeStyle='#93c5fd';u.lineWidth=0.7;
+  for(let i=0;i<=10;i++){u.beginPath();u.moveTo(dx+i*cs,dy);u.lineTo(dx+i*cs,dy+ds);u.stroke();u.beginPath();u.moveTo(dx,dy+i*cs);u.lineTo(dx+ds,dy+i*cs);u.stroke();}
+  u.strokeStyle='#1d4ed8';u.lineWidth=2.5;u.strokeRect(dx,dy,ds,ds);
+  u.fillStyle='#2563eb44';u.fillRect(dx,dy,cs,cs);u.strokeStyle='#1d4ed8';u.lineWidth=1.5;u.strokeRect(dx,dy,cs,cs);
+  u.fillStyle='#1d4ed8';u.font='bold 9px Nunito,sans-serif';u.textAlign='center';u.fillText('1cm²',dx+cs/2,dy+cs/2+3);
+  lbl(u,dx+ds/2,dy-12,'1 dm²','#1d4ed8',13);lbl(u,dx+ds/2,dy+ds+18,'= 100 cm²','#1d4ed8',12);
+  const ry2=278;
+  const units=['mm²','cm²','dm²','m²','km²'],ux=[50,170,310,450,590];
+  const ucols=['#dc2626','#2563eb','#059669','#7c3aed','#d97706'];
+  ux.forEach((x,i)=>{
+    u.fillStyle=ucols[i];u.font='bold 14px Nunito,sans-serif';u.textAlign='center';u.fillText(units[i],x,ry2);
+    if(i<4){
+      u.strokeStyle='#94a3b8';u.lineWidth=1.5;const x1=x+32,x2=ux[i+1]-32,my=ry2-8;
+      u.beginPath();u.moveTo(x1,my);u.lineTo(x2,my);u.stroke();
+      u.fillStyle='#334155';u.font='10px Nunito,sans-serif';u.textAlign='center';
+      u.fillText('×100',(x1+x2)/2,my-5);u.fillText('÷100',(x1+x2)/2,my+14);
+    }
+  });
+  lbl(u,350,ry2+28,'← по-малка единица   |   по-голяма единица →','#475569',11);
+})();
+
+// ── ПРОВЕРИ СЕ ──
+function chkNum(id,ans,hid){
+  const inp=document.getElementById(id),hint=document.getElementById(hid),v=parseFloat(inp.value);
+  if(isNaN(v)){inp.className='ex-inp';hint.textContent='';return false;}
+  if(Math.abs(v-ans)<0.01){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+ans;inp.className='ex-inp no';return false;
+}
+function checkAll(){
+  let ok=0;
+  if(chkNum('q1',12,'h1'))ok++;
+  if(chkNum('q2',30,'h2'))ok++;
+  if(chkNum('q3',6,'h3'))ok++;
+  if(chkNum('q4',300,'h4'))ok++;
+  if(chkNum('q5',200,'h5'))ok++;
+  const fb=document.getElementById('fb1');
+  if(ok===5){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от 5 верни.';fb.className='fb show no';}
+}
+
+// ── REVEAL ──
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>{drawRect(0,0);drawArea(null,0,0);});
+</script>
+</body>
+</html>

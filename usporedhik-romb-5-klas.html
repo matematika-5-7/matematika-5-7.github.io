@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Успоредни прави, успоредник, ромб и лице на успоредник. Анимации и задачи. Математика 5 клас.">
+<title>Успоредник и ромб — свойства, лице | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;
+  --main:#2563eb;--main-dark:#1e40af;--main-deep:#1e3a8a;
+  --main-btn:#1d4ed8;--main-mid:#3b82f6;
+  --acc:#0284c7;--acc-light:#e0f2fe;
+  --grn:#059669;--grn-light:#d1fae5;
+  --red:#ef4444;--red-light:#fef2f2;
+  --ink:#1e3a8a;--ink-mid:#1e40af;--border:#bfdbfe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--acc-light);border:2px solid #bae6fd;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#0c4a6e;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.formula-box{background:var(--main-deep);border-radius:18px;padding:1.4rem 1.8rem;margin:1.2rem 0;text-align:center;}
+.formula-label{font-size:.85rem;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:.4rem;}
+.formula-main{font-size:1.6rem;font-weight:900;color:#fff;font-family:'Baloo 2',sans-serif;}
+.formula-var{color:#93c5fd;}
+.formula-sub{font-size:.88rem;color:rgba(255,255,255,.72);margin-top:.45rem;}
+/* Двойни карти (успоредник / ромб) */
+.shape-compare{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0;}
+@media(max-width:600px){.shape-compare{grid-template-columns:1fr;}}
+.shape-card{background:#fff;border:2.5px solid var(--border);border-radius:18px;overflow:hidden;}
+.shape-card-head{padding:.7rem 1rem;font-family:'Baloo 2',sans-serif;font-size:.95rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:.5rem;}
+.shape-card-body{padding:1rem;}
+.shape-card canvas{display:block;margin:0 auto .6rem;}
+.shape-card .prop-list{font-size:.88rem;color:var(--ink);line-height:1.8;padding-left:1.1rem;}
+.shape-card .prop-list li{margin-bottom:.1rem;}
+.shape-card .prop-list strong{color:var(--main-dark);}
+/* Анимации */
+.anim-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.1);}
+.anim-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.85rem 1.3rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.anim-head-left{display:flex;align-items:center;gap:.7rem;}
+.anim-icon{font-size:1.6rem;}
+.anim-head h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.anim-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.anim-body{padding:1rem 1.2rem;}
+.anim-canvas-wrap{background:#f0f6ff;border-radius:12px;overflow:hidden;}
+.anim-canvas-wrap canvas{display:block;width:100%;max-width:700px;margin:0 auto;}
+.anim-caption{font-size:.92rem;color:var(--main-dark);margin-top:.65rem;min-height:1.5rem;font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;}
+.btn-anim{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.anim-btns{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+/* Примери */
+.example-card{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.3rem 1.5rem;margin:1rem 0;position:relative;overflow:hidden;}
+.example-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--main);}
+.ex-num{font-family:'Baloo 2',sans-serif;font-size:.82rem;font-weight:800;color:var(--main);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem;}
+.ex-task{font-size:1rem;color:var(--ink);margin-bottom:.75rem;line-height:1.7;}
+.ex-solution{background:var(--c);border-radius:12px;padding:.9rem 1.1rem;}
+.ex-step{font-size:.97rem;color:var(--main-dark);margin-bottom:.3rem;line-height:1.7;}
+.ex-step strong{color:var(--main-deep);}
+.ex-answer{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-deep);margin-top:.5rem;padding:.45rem .9rem;background:#fff;border-radius:10px;display:inline-block;}
+/* Провери се */
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(37,99,235,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.4rem;}
+.ex-problem{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.7;}
+.ex-inp{padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;width:100%;max-width:220px;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+<div class="hero">
+  <div class="hero-bubble" style="width:200px;height:200px;left:-50px;top:-50px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:120px;height:120px;right:4%;top:10%;animation-delay:1.4s;"></div>
+  <div class="hero-bubble" style="width:75px;height:75px;left:58%;bottom:18%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema5">Геометрични фигури</a> › Успоредник и ромб</div>
+    <h1>Успоредник и ромб</h1>
+    <p class="hero-sub">Успоредни прави, свойства на успоредника и ромба, лице S = a·h — с анимации и примери!</p>
+    <div class="hero-chips">
+      <span class="chip">〰 Успоредни прави</span>
+      <span class="chip">▱ Успоредник</span>
+      <span class="chip">◇ Ромб</span>
+      <span class="chip">📐 Лице S = a·h</span>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 5 — Геометрични фигури (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="tocka-prava-otsechka-agal-5-klas.html">1. Точка, права, ъгъл</a>
+      <a href="perpendikulyarni-pravi-5-klas.html">2. Перпендикулярни прави</a>
+      <a href="triagalnik-5-klas.html">3. Триъгълник</a>
+      <a href="lice-triagalnik-5-klas.html">4. Лице на триъгълник</a>
+      <a href="usporedhik-romb-5-klas.html" class="current">5. Успоредник и ромб</a>
+      <a href="trapec-5-klas.html">6. Трапец</a>
+      <a href="geometria-zadachi-5-klas.html">7. Задачи</a>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 1: УСПОРЕДНИ ПРАВИ -->
+  <div class="reveal">
+    <div class="sec-tag">📌 Раздел 1</div>
+    <h2 class="sec-title">Успоредни прави</h2>
+    <p class="sec-desc">Преди да разгледаме успоредника, трябва да знаем какво са успоредни прави.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">〰</div><div><h3>Определение и свойства</h3><p>Прави, които не се пресичат</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">Две прави в равнината са <strong>успоредни</strong>, ако <strong>не се пресичат</strong> — дори при безкрайно продължение. Означаваме: <strong>a ∥ b</strong>.</p>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">〰</div><div><h4>Успоредни прави — визуализация</h4><p>Разстоянието между тях е навсякъде еднакво</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="parallelCanvas" width="700" height="200"></canvas></div>
+            <div class="anim-caption" id="parallelCaption">Разстоянието между успоредни прави е навсякъде еднакво</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Свойства на успоредни прави</div>
+          <ul>
+            <li>Две прави са успоредни, ако <strong>не се пресичат</strong>.</li>
+            <li>Разстоянието между тях е <strong>навсякъде еднакво</strong>.</li>
+            <li>Ако права е перпендикулярна на едната, тя е перпендикулярна и на другата.</li>
+            <li>Пример от живота: релси на железопътна линия, редове в тетрадка.</li>
+          </ul>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Запомни!</strong> Успоредни означава ∥. Перпендикулярни означава ⊥. Не ги бъркай!</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 2: УСПОРЕДНИК И РОМБ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 2</div>
+    <h2 class="sec-title">Успоредник и ромб — свойства</h2>
+    <p class="sec-desc">Двата четириъгълника с две двойки успоредни страни — и как се различават.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">▱◇</div><div><h3>Определения и свойства</h3><p>Успоредникът е основата — ромбът е специален случай</p></div></div>
+      <div class="explain-body">
+        <div class="shape-compare">
+          <div class="shape-card">
+            <div class="shape-card-head" style="background:linear-gradient(135deg,#1e3a8a,#2563eb);">▱ Успоредник</div>
+            <div class="shape-card-body">
+              <canvas id="paraCanvas" width="240" height="160"></canvas>
+              <ul class="prop-list">
+                <li>Два чифта <strong>успоредни страни</strong></li>
+                <li>Срещуположните страни са <strong>равни</strong></li>
+                <li>Срещуположните ъгли са <strong>равни</strong></li>
+                <li>Съседните ъгли дават <strong>180°</strong></li>
+                <li>Диагоналите се <strong>разделят на две</strong></li>
+              </ul>
+            </div>
+          </div>
+          <div class="shape-card">
+            <div class="shape-card-head" style="background:linear-gradient(135deg,#065f46,#059669);">◇ Ромб</div>
+            <div class="shape-card-body">
+              <canvas id="rhombCanvas" width="240" height="160"></canvas>
+              <ul class="prop-list">
+                <li>Всички <strong>четири страни са равни</strong></li>
+                <li>Два чифта <strong>успоредни страни</strong></li>
+                <li>Диагоналите се <strong>пресичат под 90°</strong></li>
+                <li>Диагоналите са <strong>ъглополовящи</strong></li>
+                <li>Ромбът е <strong>специален успоредник</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Разлика между успоредник и ромб</div>
+          <ul>
+            <li>Всеки ромб е успоредник, но <strong>не всеки успоредник е ромб</strong>.</li>
+            <li>При ромба <em>всичките четири страни</em> са равни; при успоредника само срещуположните.</li>
+            <li>Квадратът е специален ромб (всички ъгли = 90°).</li>
+          </ul>
+        </div>
+        <!-- Анимация: свойства -->
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">▱</div><div><h4>Свойства на успоредника — анимация</h4><p>Успоредни страни, равни ъгли, диагонали</p></div></div></div>
+          <div class="anim-body">
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.75rem;">
+              <button class="btn-anim" onclick="showProp('parallel')">〰 Успоредни страни</button>
+              <button class="btn-anim" onclick="showProp('angles')">∠ Ъгли</button>
+              <button class="btn-anim" onclick="showProp('diag')">✕ Диагонали</button>
+              <button class="btn-ghost" onclick="showProp(null)">↺ Изчисти</button>
+            </div>
+            <div class="anim-canvas-wrap"><canvas id="propCanvas" width="700" height="300"></canvas></div>
+            <div class="anim-caption" id="propCaption">👆 Избери свойство, за да го видиш маркирано</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 3: ЛИЦЕ НА УСПОРЕДНИК -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 3</div>
+    <h2 class="sec-title">Лице на успоредник</h2>
+    <p class="sec-desc">Лицето на успоредника се пресмята с основата и съответната височина — точно като при правоъгълника!</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📐</div><div><h3>Формула и извод</h3><p>От правоъгълник към успоредник</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">Ако отрежем триъгълника от единия край на успоредника и го залепим в другия край, получаваме <strong>правоъгълник</strong> — с <em>същото лице</em>!</p>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">✂️</div><div><h4>Успоредник → Правоъгълник</h4><p>Преместваме триъгълното парче</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="areaAnimCanvas" width="700" height="300"></canvas></div>
+            <div class="anim-caption" id="areaCaption">Натисни ▶ Покажи за да видиш извода на формулата</div>
+            <div class="anim-btns">
+              <button class="btn-anim" onclick="startAreaAnim()">▶ Покажи</button>
+              <button class="btn-ghost" onclick="resetAreaAnim()">↺ Отначало</button>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box">
+          <div class="formula-label">ФОРМУЛА — ЛИЦЕ НА УСПОРЕДНИК</div>
+          <div class="formula-main">S = <span class="formula-var">a</span> · <span class="formula-var">h</span></div>
+          <div class="formula-sub"><strong>a</strong> = основа (страна) &nbsp;|&nbsp; <strong>h</strong> = височина (перпендикулярна на основата)</div>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Важно!</strong> h е не страната, а <em>перпендикулярното разстояние</em> между двете основи. При правоъгълника страната и височината съвпадат — затова S = a·b.</div></div>
+        <div class="rule">
+          <div class="rule-title">📋 Лице на ромб</div>
+          <ul>
+            <li>Ромбът е успоредник, значи <strong>S = a · h</strong> важи и за него.</li>
+            <li>Алтернативна формула с диагоналите: <strong>S = d₁ · d₂ ÷ 2</strong></li>
+            <li>Защо? Диагоналите се пресичат под 90°, разделяйки ромба на 4 равни правоъгълни триъгълника.</li>
+          </ul>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 1</div>
+          <div class="ex-task">Успоредник с основа <strong>a = 8 cm</strong> и височина <strong>h = 5 cm</strong>. Намери лицето.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Формула:</strong> S = a · h</div>
+            <div class="ex-step"><strong>Заместваме:</strong> S = 8 · 5 = 40</div>
+            <div class="ex-answer">S = 40 cm²</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 2</div>
+          <div class="ex-task">Ромб с диагонали <strong>d₁ = 10 cm</strong> и <strong>d₂ = 6 cm</strong>. Намери лицето.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Формула:</strong> S = d₁ · d₂ ÷ 2</div>
+            <div class="ex-step"><strong>Заместваме:</strong> S = 10 · 6 ÷ 2 = 60 ÷ 2 = 30</div>
+            <div class="ex-answer">S = 30 cm²</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 3</div>
+          <div class="ex-task">Успоредник с лице <strong>S = 42 cm²</strong> и основа <strong>a = 7 cm</strong>. Намери височината <strong>h</strong>.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>От формулата:</strong> h = S ÷ a</div>
+            <div class="ex-step"><strong>Заместваме:</strong> h = 42 ÷ 7 = 6</div>
+            <div class="ex-answer">h = 6 cm</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОВЕРИ СЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="practice-box">
+      <div class="practice-head"><div class="practice-head-icon">🧩</div><div><h4>Провери се</h4><p>Успоредник, ромб и лице</p></div></div>
+      <div class="practice-body">
+        <div class="ex-grid">
+          <div class="ex-item">
+            <div class="ex-label">а) Успоредник: основа 9 cm, височина 4 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q1" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h1"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">б) Ромб: диагонали 8 cm и 6 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q2" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h2"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">в) Успоредник: S = 56 cm², основа a = 8 cm</div>
+            <div class="ex-problem">Намери височината h в cm:</div>
+            <input class="ex-inp" id="q3" type="number" placeholder="cm">
+            <div class="ex-hint" id="h3"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">г) Успоредни ли са две прави, ако не се пресичат?</div>
+            <div class="ex-problem">Напиши: ДА или НЕ</div>
+            <input class="ex-inp" id="q4" type="text" maxlength="3" placeholder="ДА / НЕ">
+            <div class="ex-hint" id="h4"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">д) Ромб: всичките четири страни са 5 cm, h = 4 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q5" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h5"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkAll()">✓ Провери</button>
+          <div class="fb" id="fb1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>🎉 Следваща статия →</h3>
+    <p>Трапец — видове, свойства и формула за лице!</p>
+    <div class="finish-links">
+      <a href="trapec-5-klas.html" class="finish-link">→ Трапец</a>
+      <a href="lice-triagalnik-5-klas.html" class="finish-link">← Лице на триъгълник</a>
+      <a href="klas-5.html#tema5" class="finish-link">↑ Всички статии</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-nav"><a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a></div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+<script>
+function lerp(a,b,t){return a+(b-a)*t;}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function drawPaper(ctx,w,h){
+  ctx.fillStyle='#f0f6ff';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#dbeafe';ctx.lineWidth=.7;
+  for(let x=0;x<w;x+=25){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=25){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+function lbl(ctx,x,y,txt,col,sz){ctx.fillStyle=col||'#1e3a8a';ctx.font='bold '+(sz||13)+'px Nunito,sans-serif';ctx.textAlign='center';ctx.fillText(txt,x,y);}
+function cap(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+function dashedLine(ctx,A,B,col,dash){
+  ctx.save();ctx.strokeStyle=col||'#93c5fd';ctx.lineWidth=2;ctx.setLineDash(dash||[7,4]);
+  ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();
+  ctx.setLineDash([]);ctx.restore();
+}
+function arrowLine(ctx,A,B,col,lw){
+  ctx.strokeStyle=col;ctx.lineWidth=lw||2;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();
+  const ang=Math.atan2(B.y-A.y,B.x-A.x);
+  ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(B.x,B.y);
+  ctx.lineTo(B.x-12*Math.cos(ang-0.4),B.y-12*Math.sin(ang-0.4));
+  ctx.lineTo(B.x-12*Math.cos(ang+0.4),B.y-12*Math.sin(ang+0.4));
+  ctx.closePath();ctx.fill();
+}
+function rightSq(ctx,V,P1,P2,sz,col){
+  const d1={x:P1.x-V.x,y:P1.y-V.y},l1=Math.hypot(d1.x,d1.y),u1={x:d1.x/l1*(sz||12),y:d1.y/l1*(sz||12)};
+  const d2={x:P2.x-V.x,y:P2.y-V.y},l2=Math.hypot(d2.x,d2.y),u2={x:d2.x/l2*(sz||12),y:d2.y/l2*(sz||12)};
+  ctx.strokeStyle=col||'#2563eb';ctx.lineWidth=1.8;
+  ctx.beginPath();ctx.moveTo(V.x+u1.x,V.y+u1.y);ctx.lineTo(V.x+u1.x+u2.x,V.y+u1.y+u2.y);ctx.lineTo(V.x+u2.x,V.y+u2.y);ctx.stroke();
+}
+
+// ── УСПОРЕДНИ ПРАВИ ──
+(function(){
+  const cv=document.getElementById('parallelCanvas'),c=cv.getContext('2d');
+  drawPaper(c,cv.width,cv.height);
+  const W=cv.width,H=cv.height;
+  // Две хоризонтални прави
+  const y1=65,y2=140;
+  c.strokeStyle='#1d4ed8';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(30,y1);c.lineTo(W-30,y1);c.stroke();
+  c.beginPath();c.moveTo(30,y2);c.lineTo(W-30,y2);c.stroke();
+  // Стрелки показващи посока
+  [[80,'a'],[W-80,'']].forEach(([ x,lbx])=>{
+    arrowLine(c,{x:x-30,y:y1},{x:x+30,y:y1},'#1d4ed8',2);
+    arrowLine(c,{x:x-30,y:y2},{x:x+30,y:y2},'#1d4ed8',2);
+  });
+  lbl(c,W-50,y1-12,'a','#1d4ed8',14);
+  lbl(c,W-50,y2+18,'b','#1d4ed8',14);
+  // Разстояния — вертикални пунктирани линии с двустранна стрелка
+  [160,350,520].forEach(x=>{
+    dashedLine(c,{x:x,y:y1},{x:x,y:y2},'#dc2626',[5,4]);
+    // размерни стрелки
+    c.strokeStyle='#dc2626';c.lineWidth=1.5;
+    c.beginPath();c.moveTo(x-6,y1+4);c.lineTo(x,y1);c.lineTo(x+6,y1+4);c.stroke();
+    c.beginPath();c.moveTo(x-6,y2-4);c.lineTo(x,y2);c.lineTo(x+6,y2-4);c.stroke();
+  });
+  lbl(c,385,(y1+y2)/2,'d — еднакво навсякъде','#dc2626',12);
+  lbl(c,W/2,H-8,'a ∥ b','#1d4ed8',13);
+  cap('parallelCaption','Разстоянието d между успоредни прави е навсякъде еднакво: a ∥ b');
+})();
+
+// ── КАРТИ: УСПОРЕДНИК И РОМБ ──
+(function(){
+  // Успоредник
+  const pc=document.getElementById('paraCanvas'),p=pc.getContext('2d');
+  p.fillStyle='#f0f6ff';p.fillRect(0,0,240,160);
+  const A={x:40,y:130},B={x:100,y:35},C={x:200,y:35},D={x:140,y:130};
+  p.fillStyle='#bfdbfe';p.beginPath();p.moveTo(A.x,A.y);p.lineTo(B.x,B.y);p.lineTo(C.x,C.y);p.lineTo(D.x,D.y);p.closePath();p.fill();
+  p.strokeStyle='#1d4ed8';p.lineWidth=2.2;p.lineCap='round';p.lineJoin='round';
+  p.beginPath();p.moveTo(A.x,A.y);p.lineTo(B.x,B.y);p.lineTo(C.x,C.y);p.lineTo(D.x,D.y);p.closePath();p.stroke();
+  // Надписи
+  [[A,'A',-14,10],[B,'B',-14,-8],[C,'C',14,-8],[D,'D',14,10]].forEach(([pt,l,dx,dy])=>{
+    p.fillStyle='#1e3a8a';p.font='bold 12px Nunito,sans-serif';p.textAlign='center';p.fillText(l,pt.x+dx,pt.y+dy);
+  });
+  // Tick marks на равните страни
+  [[A,D],[B,C]].forEach(([P1,P2])=>{
+    const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+    const px=Math.cos(ang+Math.PI/2),py=Math.sin(ang+Math.PI/2);
+    p.strokeStyle='#1d4ed8';p.lineWidth=2;
+    for(let i=-1;i<=1;i+=2){const cx=mx+px*i*4,cy=my+py*i*4;p.beginPath();p.moveTo(cx+px*5,cy+py*5);p.lineTo(cx-px*5,cy-py*5);p.stroke();}
+  });
+  [[A,B],[D,C]].forEach(([P1,P2])=>{
+    const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+    const px=Math.cos(ang+Math.PI/2),py=Math.sin(ang+Math.PI/2);
+    p.strokeStyle='#059669';p.lineWidth=2;
+    const cx=mx,cy=my;p.beginPath();p.moveTo(cx+px*5,cy+py*5);p.lineTo(cx-px*5,cy-py*5);p.stroke();
+  });
+  // Паралелни стрелки на страните
+  [[A,D,'#1d4ed8'],[B,C,'#1d4ed8'],[A,B,'#059669'],[D,C,'#059669']].forEach(([P1,P2,col])=>{
+    const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+    p.fillStyle=col;p.beginPath();p.moveTo(mx+Math.cos(ang)*6,my+Math.sin(ang)*6);p.lineTo(mx-6,my+Math.cos(ang-Math.PI/2)*0);
+    p.moveTo(mx+Math.cos(ang)*8,my+Math.sin(ang)*8);p.lineTo(mx+Math.cos(ang-0.5)*(-4),my+Math.sin(ang-0.5)*(-4));
+  });
+})();
+
+(function(){
+  // Ромб
+  const rc=document.getElementById('rhombCanvas'),r=rc.getContext('2d');
+  r.fillStyle='#f0f6ff';r.fillRect(0,0,240,160);
+  const cx=120,cy=82,dx=80,dy=55;
+  const A={x:cx,y:cy-dy},B={x:cx-dx,y:cy},C={x:cx,y:cy+dy},D={x:cx+dx,y:cy};
+  r.fillStyle='#d1fae5';r.beginPath();r.moveTo(A.x,A.y);r.lineTo(B.x,B.y);r.lineTo(C.x,C.y);r.lineTo(D.x,D.y);r.closePath();r.fill();
+  r.strokeStyle='#059669';r.lineWidth=2.2;r.lineCap='round';r.lineJoin='round';
+  r.beginPath();r.moveTo(A.x,A.y);r.lineTo(B.x,B.y);r.lineTo(C.x,C.y);r.lineTo(D.x,D.y);r.closePath();r.stroke();
+  // Диагонали пунктирани
+  [[A,C],[B,D]].forEach(([P1,P2])=>{r.save();r.strokeStyle='#059669';r.lineWidth=1.4;r.setLineDash([5,4]);r.beginPath();r.moveTo(P1.x,P1.y);r.lineTo(P2.x,P2.y);r.stroke();r.setLineDash([]);r.restore();});
+  // Прав ъгъл в центъра
+  rightSq(r,{x:cx,y:cy},{x:cx,y:cy-15},{x:cx-15,y:cy},10,'#059669');
+  // Надписи
+  [[A,'A',0,-12],[B,'B',-16,6],[C,'C',0,16],[D,'D',16,6]].forEach(([pt,l,ddx,ddy])=>{
+    r.fillStyle='#065f46';r.font='bold 12px Nunito,sans-serif';r.textAlign='center';r.fillText(l,pt.x+ddx,pt.y+ddy);
+  });
+  // Tick marks — всички 4 страни равни
+  [[A,B],[B,C],[C,D],[D,A]].forEach(([P1,P2])=>{
+    const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+    const px=Math.cos(ang+Math.PI/2),py=Math.sin(ang+Math.PI/2);
+    r.strokeStyle='#059669';r.lineWidth=2;
+    r.beginPath();r.moveTo(mx+px*5,my+py*5);r.lineTo(mx-px*5,my-py*5);r.stroke();
+  });
+})();
+
+// ── СВОЙСТВА АНИМАЦИЯ ──
+const PC=document.getElementById('propCanvas'),Pc=PC.getContext('2d');
+// Координати на успоредника
+const pA={x:110,y:240},pB={x:180,y:80},pC={x:560,y:80},pD={x:490,y:240};
+function drawParallelogram(ctx,A,B,C,D,fill,stroke){
+  ctx.fillStyle=fill||'#bfdbfe';ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.lineTo(D.x,D.y);ctx.closePath();ctx.fill();
+  ctx.strokeStyle=stroke||'#1d4ed8';ctx.lineWidth=2.5;ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.lineTo(D.x,D.y);ctx.closePath();ctx.stroke();
+}
+function showProp(type){
+  drawPaper(Pc,PC.width,PC.height);
+  drawParallelogram(Pc,pA,pB,pC,pD);
+  [[pA,'A',-16,14],[pB,'B',-16,-10],[pC,'C',16,-10],[pD,'D',16,14]].forEach(([pt,l,dx,dy])=>{lbl(Pc,pt.x+dx,pt.y+dy,l,'#1e3a8a',13);});
+  if(!type){cap('propCaption','👆 Избери свойство, за да го видиш маркирано');return;}
+  if(type==='parallel'){
+    // Маркирай двете двойки успоредни страни
+    [[pA,pD,'#dc2626'],[pB,pC,'#dc2626']].forEach(([P1,P2,col])=>{
+      Pc.strokeStyle=col;Pc.lineWidth=4.5;Pc.beginPath();Pc.moveTo(P1.x,P1.y);Pc.lineTo(P2.x,P2.y);Pc.stroke();
+      const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+      Pc.fillStyle=col;Pc.beginPath();Pc.moveTo(mx+Math.cos(ang)*10,my+Math.sin(ang)*10);Pc.lineTo(mx+Math.cos(ang-0.5)*(-5),my+Math.sin(ang-0.5)*(-5));Pc.lineTo(mx+Math.cos(ang+0.5)*(-5),my+Math.sin(ang+0.5)*(-5));Pc.closePath();Pc.fill();
+    });
+    [[pA,pB,'#059669'],[pD,pC,'#059669']].forEach(([P1,P2,col])=>{
+      Pc.strokeStyle=col;Pc.lineWidth=4.5;Pc.beginPath();Pc.moveTo(P1.x,P1.y);Pc.lineTo(P2.x,P2.y);Pc.stroke();
+    });
+    lbl(Pc,320,270,'AD ∥ BC (червено) и AB ∥ DC (зелено)','#1e3a8a',13);
+    cap('propCaption','Успоредникът има два чифта успоредни страни: AD ∥ BC и AB ∥ DC');
+  } else if(type==='angles'){
+    // Маркирай равни ъгли
+    [[pA,pB,pD,'#dc2626'],[pC,pB,pD,'#dc2626']].forEach(([V,P1,P2,col])=>{
+      const a1=Math.atan2(P1.y-V.y,P1.x-V.x),a2=Math.atan2(P2.y-V.y,P2.x-V.x);
+      let mn=Math.min(a1,a2),mx=Math.max(a1,a2);if(mx-mn>Math.PI){[mn,mx]=[mx,mn+2*Math.PI];}
+      Pc.strokeStyle=col;Pc.lineWidth=2;Pc.beginPath();Pc.arc(V.x,V.y,25,mn,mx);Pc.stroke();
+      const am=(mn+mx)/2;
+      Pc.fillStyle=col;Pc.font='bold 11px Nunito,sans-serif';Pc.textAlign='center';Pc.fillText('α',V.x+Math.cos(am)*38,V.y+Math.sin(am)*38);
+    });
+    [[pB,pA,pC,'#059669'],[pD,pA,pC,'#059669']].forEach(([V,P1,P2,col])=>{
+      const a1=Math.atan2(P1.y-V.y,P1.x-V.x),a2=Math.atan2(P2.y-V.y,P2.x-V.x);
+      let mn=Math.min(a1,a2),mx2=Math.max(a1,a2);if(mx2-mn>Math.PI){[mn,mx2]=[mx2,mn+2*Math.PI];}
+      Pc.strokeStyle=col;Pc.lineWidth=2;Pc.beginPath();Pc.arc(V.x,V.y,25,mn,mx2);Pc.stroke();
+      const am=(mn+mx2)/2;
+      Pc.fillStyle=col;Pc.font='bold 11px Nunito,sans-serif';Pc.textAlign='center';Pc.fillText('β',V.x+Math.cos(am)*38,V.y+Math.sin(am)*38);
+    });
+    lbl(Pc,320,270,'∠A = ∠C = α (червено) и ∠B = ∠D = β (зелено)','#1e3a8a',13);
+    cap('propCaption','Срещуположните ъгли са равни: ∠A=∠C и ∠B=∠D. Съседни ъгли → 180°');
+  } else if(type==='diag'){
+    const diag1s={x:(pA.x+pC.x)/2,y:(pA.y+pC.y)/2};
+    const diag2s={x:(pB.x+pD.x)/2,y:(pB.y+pD.y)/2};
+    // Диагоналите
+    Pc.strokeStyle='#dc2626';Pc.lineWidth=2;Pc.setLineDash([8,4]);Pc.beginPath();Pc.moveTo(pA.x,pA.y);Pc.lineTo(pC.x,pC.y);Pc.stroke();
+    Pc.strokeStyle='#059669';Pc.beginPath();Pc.moveTo(pB.x,pB.y);Pc.lineTo(pD.x,pD.y);Pc.stroke();
+    Pc.setLineDash([]);
+    // Средна точка
+    Pc.fillStyle='#dc2626';Pc.beginPath();Pc.arc(diag1s.x,diag1s.y,6,0,Math.PI*2);Pc.fill();
+    // Половини на AC с tick
+    [[pA,diag1s,'#dc2626'],[diag1s,pC,'#dc2626'],[pB,diag2s,'#059669'],[diag2s,pD,'#059669']].forEach(([P1,P2,col])=>{
+      const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+      const px=Math.cos(ang+Math.PI/2)*5,py=Math.sin(ang+Math.PI/2)*5;
+      Pc.strokeStyle=col;Pc.lineWidth=2;Pc.beginPath();Pc.moveTo(mx+px,my+py);Pc.lineTo(mx-px,my-py);Pc.stroke();
+    });
+    lbl(Pc,diag1s.x+20,diag1s.y-14,'M','#dc2626',13);
+    lbl(Pc,320,270,'Диагоналите се разделят на две равни части в M','#1e3a8a',13);
+    cap('propCaption','Диагоналите на успоредника се разделят наполовина взаимно: AM=MC, BM=MD');
+  }
+}
+
+// ── АНИМАЦИЯ ЛИЦЕ: УСПОРЕДНИК → ПРАВОЪГЪЛНИК ──
+const AA=document.getElementById('areaAnimCanvas'),Ac=AA.getContext('2d');
+let aPhase=0,aT=0,aId=null;
+// Успоредник: A долу-ляво, B горе-ляво, C горе-дясно, D долу-дясно; изместване offset
+const off=90; // изместване по x
+const aY1=220,aY2=80;
+function getParaPoints(ox){
+  return {A:{x:80+ox,y:aY1},B:{x:80+ox+off,y:aY2},C:{x:340+ox+off,y:aY2},D:{x:340+ox,y:aY1}};
+}
+function drawAreaScene(phase,t){
+  const et=ease(Math.min(1,t));
+  drawPaper(Ac,AA.width,AA.height);
+  const col='#2563eb';
+  if(phase===0){
+    const {A,B,C,D}=getParaPoints(0);
+    Ac.fillStyle='#bfdbfe';Ac.beginPath();Ac.moveTo(A.x,A.y);Ac.lineTo(B.x,B.y);Ac.lineTo(C.x,C.y);Ac.lineTo(D.x,D.y);Ac.closePath();Ac.fill();
+    Ac.strokeStyle=col;Ac.lineWidth=2.5;Ac.lineCap='round';Ac.lineJoin='round';
+    Ac.beginPath();Ac.moveTo(A.x,A.y);Ac.lineTo(B.x,B.y);Ac.lineTo(C.x,C.y);Ac.lineTo(D.x,D.y);Ac.closePath();Ac.stroke();
+    // Означи основа a и височина h
+    Ac.strokeStyle='#dc2626';Ac.lineWidth=2;Ac.setLineDash([6,4]);Ac.beginPath();Ac.moveTo(B.x,B.y);Ac.lineTo(B.x,A.y);Ac.stroke();Ac.setLineDash([]);
+    rightSq(Ac,{x:B.x,y:A.y},{x:B.x,y:B.y},{x:A.x,y:A.y},12,col);
+    lbl(Ac,(A.x+D.x)/2,A.y+18,'a (основа)',col,13);
+    lbl(Ac,B.x-18,(aY1+aY2)/2,'h',col,14);
+    cap('areaCaption','Успоредник с основа a и височина h');
+  } else if(phase===1){
+    // Отрязваме левия триъгълник и го движим вдясно
+    const {A,B,C,D}=getParaPoints(0);
+    const triA=A,triB=B,triF={x:A.x,y:aY2}; // левия триъгълник: A, B, F(x=A.x,y=B.y)
+    // Тялото на успоредника без триъгълника
+    Ac.fillStyle='#bfdbfe';
+    Ac.beginPath();Ac.moveTo(triF.x,triF.y);Ac.lineTo(C.x,C.y);Ac.lineTo(D.x,D.y);Ac.lineTo(A.x,A.y);Ac.closePath();Ac.fill();
+    Ac.strokeStyle=col;Ac.lineWidth=2.5;Ac.beginPath();Ac.moveTo(triF.x,triF.y);Ac.lineTo(C.x,C.y);Ac.lineTo(D.x,D.y);Ac.lineTo(A.x,A.y);Ac.closePath();Ac.stroke();
+    // Триъгълникът се движи вдясно
+    const dx=lerp(0,C.x-D.x,et);
+    const tA={x:triA.x+dx,y:triA.y},tB={x:triB.x+dx,y:triB.y},tF={x:triF.x+dx,y:triF.y};
+    Ac.fillStyle='#93c5fd';Ac.beginPath();Ac.moveTo(tA.x,tA.y);Ac.lineTo(tB.x,tB.y);Ac.lineTo(tF.x,tF.y);Ac.closePath();Ac.fill();
+    Ac.strokeStyle='#1d4ed8';Ac.lineWidth=2;Ac.beginPath();Ac.moveTo(tA.x,tA.y);Ac.lineTo(tB.x,tB.y);Ac.lineTo(tF.x,tF.y);Ac.closePath();Ac.stroke();
+    cap('areaCaption','Отрязваме триъгълното парче и го местим вдясно...');
+  } else {
+    // Правоъгълникът
+    const {A,B,C,D}=getParaPoints(0);
+    const rx=A.x,ry=aY2,rw=D.x-A.x,rh=aY1-aY2;
+    Ac.fillStyle='#bfdbfe';Ac.fillRect(rx,ry,rw,rh);
+    Ac.strokeStyle=col;Ac.lineWidth=2.5;Ac.strokeRect(rx,ry,rw,rh);
+    rightSq(Ac,{x:rx,y:ry+rh},{x:rx,y:ry},{x:rx+20,y:ry+rh},12,col);
+    lbl(Ac,rx+rw/2,aY1+18,'a',col,14);
+    lbl(Ac,rx-16,(aY1+aY2)/2,'h',col,14);
+    lbl(Ac,rx+rw/2,(aY1+aY2)/2,'S = a · h','#1e3a8a',16);
+    // Знак =
+    lbl(Ac,rx+rw+30,(aY1+aY2)/2,'=','#059669',22);
+    // Успоредникът вдясно (призрак)
+    const ox2=rw+70;
+    const {A:A2,B:B2,C:C2,D:D2}=getParaPoints(ox2);
+    Ac.fillStyle='#bfdbfe88';Ac.beginPath();Ac.moveTo(A2.x,A2.y);Ac.lineTo(B2.x,B2.y);Ac.lineTo(C2.x,C2.y);Ac.lineTo(D2.x,D2.y);Ac.closePath();Ac.fill();
+    Ac.strokeStyle=col+'88';Ac.lineWidth=2;Ac.lineCap='round';Ac.beginPath();Ac.moveTo(A2.x,A2.y);Ac.lineTo(B2.x,B2.y);Ac.lineTo(C2.x,C2.y);Ac.lineTo(D2.x,D2.y);Ac.closePath();Ac.stroke();
+    lbl(Ac,(A2.x+D2.x)/2,(aY1+aY2)/2,'S = a · h',col+'bb',15);
+    cap('areaCaption','✅ Успоредникът и правоъгълникът с основа a и височина h имат едно и също лице: S = a · h');
+  }
+}
+function animArea(){aT+=0.016;drawAreaScene(aPhase,aT);if(aT>=1){aPhase++;aT=0;}if(aPhase<=2)aId=requestAnimationFrame(animArea);}
+function startAreaAnim(){cancelAnimationFrame(aId);aPhase=0;aT=0;aId=requestAnimationFrame(animArea);}
+function resetAreaAnim(){cancelAnimationFrame(aId);aPhase=0;aT=0;drawAreaScene(0,0);cap('areaCaption','Натисни ▶ Покажи за да видиш извода на формулата');}
+
+// ── ПРОВЕРИ СЕ ──
+function chkNum(id,ans,hid){
+  const inp=document.getElementById(id),hint=document.getElementById(hid),v=parseFloat(inp.value);
+  if(isNaN(v)){inp.className='ex-inp';hint.textContent='';return false;}
+  if(Math.abs(v-ans)<0.01){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+ans;inp.className='ex-inp no';return false;
+}
+function chkTxt(id,ans,hid){
+  const inp=document.getElementById(id),hint=document.getElementById(hid);
+  const v=inp.value.trim().toUpperCase();
+  if(!v){inp.className='ex-inp';hint.textContent='';return false;}
+  if(v===ans.toUpperCase()){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+ans;inp.className='ex-inp no';return false;
+}
+function checkAll(){
+  let ok=0;
+  if(chkNum('q1',36,'h1'))ok++;  // 9*4=36
+  if(chkNum('q2',24,'h2'))ok++;  // 8*6/2=24
+  if(chkNum('q3',7,'h3'))ok++;   // 56/8=7
+  if(chkTxt('q4','ДА','h4'))ok++;
+  if(chkNum('q5',20,'h5'))ok++;  // 5*4=20
+  const fb=document.getElementById('fb1');
+  if(ok===5){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от 5 верни.';fb.className='fb show no';}
+}
+// ── REVEAL ──
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>{showProp(null);drawAreaScene(0,0);});
+</script>
+</body>
+</html>

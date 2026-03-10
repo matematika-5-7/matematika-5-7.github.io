@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Точка, права, отсечка, лъч, ъгъл — видове ъгли и измерване с транспортир. Обяснение с анимации. Математика 5 клас.">
+<title>Точка, права, отсечка, ъгъл — видове и измерване | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;
+  --main:#2563eb;--main-dark:#1e3a8a;--main-deep:#172554;
+  --main-btn:#1d4ed8;--main-mid:#3b82f6;
+  --acc:#7c3aed;--acc-light:#ede9fe;
+  --yel-light:#fef3c7;
+  --red:#ef4444;--red-light:#fef2f2;
+  --ink:#172554;--ink-mid:#1e3a8a;--border:#bfdbfe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.06);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--yel-light);border:2px solid #fde68a;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#78350f;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.figures-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin:1.2rem 0;}
+.fig-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1rem 1rem .9rem;text-align:center;}
+.fig-card canvas{display:block;margin:0 auto .5rem;}
+.fig-card h5{font-family:'Baloo 2',sans-serif;font-size:.92rem;font-weight:800;color:var(--main-dark);margin-bottom:.2rem;}
+.fig-card .fig-sub{font-size:.8rem;color:var(--main);font-weight:800;}
+.fig-card p{font-size:.78rem;color:var(--ink-mid);line-height:1.5;margin-top:.2rem;}
+.angles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0;}
+.ang-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:.9rem .9rem .8rem;text-align:center;}
+.ang-card canvas{display:block;margin:0 auto .4rem;}
+.ang-card h5{font-family:'Baloo 2',sans-serif;font-size:.9rem;font-weight:800;color:var(--main-dark);}
+.ang-card .deg{font-size:.82rem;color:var(--main);font-weight:800;}
+.ang-card p{font-size:.76rem;color:var(--ink-mid);margin-top:.15rem;line-height:1.45;}
+.worked{background:var(--c-soft);border:2px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;margin:.9rem 0;}
+.worked-title{font-weight:900;font-size:1rem;color:var(--main-dark);margin-bottom:.7rem;}
+.steps{display:flex;flex-direction:column;gap:.55rem;}
+.step{display:flex;gap:.8rem;align-items:flex-start;}
+.step-n{width:28px;height:28px;border-radius:8px;background:var(--main);color:#fff;font-weight:900;font-size:.82rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.2rem;}
+.step-t{font-size:.97rem;line-height:1.75;}
+.anim-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.1);}
+.anim-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.85rem 1.3rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem;flex-wrap:wrap;}
+.anim-head-left{display:flex;align-items:center;gap:.7rem;}
+.anim-icon{font-size:1.6rem;}
+.anim-head h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.anim-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.anim-body{padding:1rem 1.2rem;}
+.anim-canvas-wrap{background:#f5f0e8;border-radius:12px;overflow:hidden;}
+.anim-canvas-wrap canvas{display:block;width:100%;max-width:700px;margin:0 auto;}
+.anim-caption{font-size:.92rem;color:var(--main-dark);margin-top:.65rem;min-height:1.5rem;font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;}
+.anim-btns{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+.btn-anim{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(37,99,235,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.4rem;}
+.ex-problem{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.7;}
+.ex-inp{padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;width:100%;max-width:180px;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+@media(max-width:600px){body{font-size:19px;}.figures-grid{grid-template-columns:1fr 1fr;}.angles-grid{grid-template-columns:1fr;}.ex-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;left:-40px;top:-40px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:110px;height:110px;right:6%;top:12%;animation-delay:1.2s;"></div>
+  <div class="hero-bubble" style="width:85px;height:85px;left:58%;bottom:16%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb">
+      <a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema5">Геометрични фигури</a> › Точка, права, ъгъл
+    </div>
+    <h1>Точка, права, отсечка, ъгъл</h1>
+    <p class="hero-sub">Основните геометрични понятия — с анимирани чертежи и измерване на ъгли с транспортир!</p>
+    <div class="hero-chips">
+      <span class="chip">📍 Точка и права</span>
+      <span class="chip">📏 Отсечка и лъч</span>
+      <span class="chip">📐 Видове ъгли</span>
+      <span class="chip">🔵 Транспортир</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 5 — Геометрични фигури (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="tocka-prava-otsechka-agal-5-klas.html" class="current">1. Точка, права, ъгъл</a>
+      <a href="perpendikulyarni-pravi-5-klas.html">2. Перпендикулярни прави</a>
+      <a href="triagalnik-5-klas.html">3. Триъгълник</a>
+      <a href="lice-triagalnik-5-klas.html">4. Лице на триъгълник</a>
+      <a href="usporedhik-romb-5-klas.html">5. Успоредник и ромб</a>
+      <a href="trapec-5-klas.html">6. Трапец</a>
+      <a href="geometria-zadachi-5-klas.html">7. Задачи</a>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 1 -->
+  <div class="reveal">
+    <div class="sec-tag">📌 Раздел 1</div>
+    <h2 class="sec-title">Точка, права, отсечка и лъч</h2>
+    <p class="sec-desc">Четирите основни геометрични обекта — от тях се строи цялата геометрия.</p>
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📍</div>
+        <div><h3>Основни геометрични обекти</h3><p>Определения и означения</p></div>
+      </div>
+      <div class="explain-body">
+        <div class="figures-grid" id="fig-grid"></div>
+        <div class="rule">
+          <div class="rule-title">📋 Важни свойства</div>
+          <ul>
+            <li>През <strong>две точки</strong> минава точно <strong>една права</strong>.</li>
+            <li><strong>Отсечката</strong> е ограничена — има начало и край. Измерва се в cm, mm, m.</li>
+            <li><strong>Лъчът</strong> има начало, но е безкраен в едната посока.</li>
+            <li><strong>Правата</strong> е безкрайна и в двете посоки — няма начало и няма край.</li>
+          </ul>
+        </div>
+        <div class="tip">
+          <div class="tip-icon">✏️</div>
+          <div class="tip-body">
+            <strong>Означения:</strong>
+            Точките — с главни букви: A, B, C. Правите — с малки: a, b, c.
+            Отсечката между A и B се записва <strong>AB</strong> или <strong>BA</strong>.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 2 -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 2</div>
+    <h2 class="sec-title">Ъгъл — определение и означение</h2>
+    <p class="sec-desc">Ъгълът се образува от два лъча с обща начална точка — върха.</p>
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📐</div>
+        <div><h3>Какво е ъгъл?</h3><p>Части на ъгъла и как го означаваме</p></div>
+      </div>
+      <div class="explain-body">
+        <div class="rule">
+          <div class="rule-title">📋 Определение</div>
+          <ul>
+            <li><strong>Ъгълът</strong> се образува от два лъча (рамена) с обща начална точка — <strong>върха</strong>.</li>
+            <li>Означаваме ъгъл с буквата <strong>∠</strong>: например <strong>∠AOB</strong> или <strong>∠α</strong>.</li>
+            <li>Средната буква при ∠AOB е винаги <strong>върхът</strong>.</li>
+            <li>Ъгълът се измерва в <strong>градуси (°)</strong>.</li>
+          </ul>
+        </div>
+        <div id="angle-diagram-wrap" style="text-align:center;margin:1.2rem 0;"></div>
+        <div class="tip">
+          <div class="tip-icon">💡</div>
+          <div class="tip-body"><strong>Запомни:</strong> При ∠AOB — O е върхът, OA и OB са раменете.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 3 -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 3</div>
+    <h2 class="sec-title">Видове ъгли</h2>
+    <p class="sec-desc">Три вида — остър, прав и тъп.</p>
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">🔢</div>
+        <div><h3>Видове ъгли по градусна мярка</h3><p>От 0° до 180°</p></div>
+      </div>
+      <div class="explain-body">
+        <div class="angles-grid" id="angles-grid"></div>
+        <div class="rule">
+          <div class="rule-title">📋 Запомни границите</div>
+          <ul>
+            <li><strong>Остър ъгъл:</strong> по-малък от 90°. Например 30°, 60°, 89°.</li>
+            <li><strong>Прав ъгъл:</strong> точно 90°. Означаваме го с дъгичка и точка в нея.</li>
+            <li><strong>Тъп ъгъл:</strong> по-голям от 90°, но по-малък от 180°. Например 91°, 120°, 150°.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 4 — ИЗМЕРВАНЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">🎬 Раздел 4</div>
+    <h2 class="sec-title">Измерване на ъгъл с транспортир</h2>
+    <p class="sec-desc">Гледай как транспортирът се поставя и отчита ъгъла стъпка по стъпка.</p>
+    <div class="anim-box">
+      <div class="anim-head">
+        <div class="anim-head-left">
+          <div class="anim-icon">🎬</div>
+          <div><h4>Анимация: Измери ъгъл с транспортир</h4><p>Избери ъгъл и гледай трите стъпки</p></div>
+        </div>
+        <button class="btn-ghost" onclick="resetTransp()">↺ Начало</button>
+      </div>
+      <div class="anim-body">
+        <div class="anim-btns" style="margin-bottom:.8rem;">
+          <button class="btn-anim" onclick="startTranspAnim(50)">Измери 50°</button>
+          <button class="btn-anim" onclick="startTranspAnim(90)">Измери 90°</button>
+          <button class="btn-anim" onclick="startTranspAnim(130)">Измери 130°</button>
+        </div>
+        <div class="anim-canvas-wrap"><canvas id="transpCanvas" width="700" height="380"></canvas></div>
+        <div class="anim-caption" id="transpCaption">👆 Натисни бутон, за да стартираш анимацията</div>
+        <div class="worked" style="margin-top:1rem;">
+          <div class="worked-title">📌 Как се измерва ъгъл с транспортир — 3 стъпки:</div>
+          <div class="steps">
+            <div class="step"><div class="step-n">1</div><div class="step-t">Поставяме <strong>центъра</strong> на транспортира върху <strong>върха на ъгъла</strong>.</div></div>
+            <div class="step"><div class="step-n">2</div><div class="step-t">Завъртаме транспортира така, че <strong>нулевата линия да съвпадне с едното рамо</strong>.</div></div>
+            <div class="step"><div class="step-n">3</div><div class="step-t">Четем градусите там, където <strong>другото рамо пресича скалата</strong>.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 5 — НАЧЕРТАВАНЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">🎬 Раздел 5</div>
+    <h2 class="sec-title">Начертаване на ъгъл с транспортир</h2>
+    <p class="sec-desc">Обратната задача — чертаем ъгъл с даден брой градуси.</p>
+    <div class="anim-box">
+      <div class="anim-head">
+        <div class="anim-head-left">
+          <div class="anim-icon">✏️</div>
+          <div><h4>Анимация: Начертай ъгъл</h4><p>Молив и транспортир работят заедно</p></div>
+        </div>
+        <button class="btn-ghost" onclick="resetDraw()">↺ Начало</button>
+      </div>
+      <div class="anim-body">
+        <div class="anim-btns" style="margin-bottom:.8rem;">
+          <button class="btn-anim" onclick="startDrawAnim(60)">Начертай 60°</button>
+          <button class="btn-anim" onclick="startDrawAnim(110)">Начертай 110°</button>
+          <button class="btn-anim" onclick="startDrawAnim(45)">Начертай 45°</button>
+        </div>
+        <div class="anim-canvas-wrap"><canvas id="drawCanvas" width="700" height="380"></canvas></div>
+        <div class="anim-caption" id="drawCaption">👆 Избери ъгъл за начертаване</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОВЕРИ СЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="practice-box">
+      <div class="practice-head">
+        <div class="practice-head-icon">🧩</div>
+        <div><h4>Провери се — Видове ъгли</h4><p>Определи вида на ъгъла</p></div>
+      </div>
+      <div class="practice-body">
+        <div class="ex-grid">
+          <div class="ex-item">
+            <div class="ex-label">а) Какъв вид ъгъл е 75°?</div>
+            <div class="ex-problem">Напиши: О (остър), П (прав), Т (тъп)</div>
+            <input class="ex-inp" id="p1a" type="text" maxlength="1" placeholder="О / П / Т">
+            <div class="ex-hint" id="h1a"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">б) Какъв вид ъгъл е 90°?</div>
+            <div class="ex-problem">Напиши: О (остър), П (прав), Т (тъп)</div>
+            <input class="ex-inp" id="p1b" type="text" maxlength="1" placeholder="О / П / Т">
+            <div class="ex-hint" id="h1b"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">в) Какъв вид ъгъл е 145°?</div>
+            <div class="ex-problem">Напиши: О (остър), П (прав), Т (тъп)</div>
+            <input class="ex-inp" id="p1c" type="text" maxlength="1" placeholder="О / П / Т">
+            <div class="ex-hint" id="h1c"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkAll()">✓ Провери</button>
+          <div class="fb" id="fb1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>🎉 Следваща статия →</h3>
+    <p>Перпендикулярни прави — построяване в мрежа и с чертожен триъгълник!</p>
+    <div class="finish-links">
+      <a href="perpendikulyarni-pravi-5-klas.html" class="finish-link">→ Перпендикулярни прави</a>
+      <a href="klas-5.html#tema5" class="finish-link">↑ Всички статии</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="foot-nav">
+    <a href="index.html">Начало</a><a href="klas-5.html">5 клас</a>
+    <a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a>
+  </div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+
+<script>
+function lerp(a,b,t){return a+(b-a)*t;}
+function easeInOut(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+
+function drawPaper(ctx,w,h){
+  ctx.fillStyle='#f5f0e8';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#e8e3da';ctx.lineWidth=.7;
+  for(let x=0;x<w;x+=25){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=25){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+
+function dot(ctx,x,y,label,col,ldir){
+  col=col||'#1e3a8a';ldir=ldir||'top';
+  ctx.fillStyle=col;ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);ctx.fill();
+  if(label){
+    ctx.fillStyle='#172554';ctx.font='bold 13px Nunito,sans-serif';ctx.textAlign='center';
+    if(ldir==='top') ctx.fillText(label,x,y-10);
+    else if(ldir==='bottom') ctx.fillText(label,x,y+18);
+    else if(ldir==='left') ctx.fillText(label,x-14,y+5);
+    else ctx.fillText(label,x+14,y+5);
+  }
+}
+
+function drawPencil(ctx,tip,ang){
+  ctx.save();ctx.translate(tip.x,tip.y);ctx.rotate(ang+Math.PI/6);
+  const g=ctx.createLinearGradient(-5,-52,5,-52);
+  g.addColorStop(0,'#f7c948');g.addColorStop(1,'#e8a820');
+  ctx.fillStyle=g;ctx.beginPath();ctx.rect(-5,-50,10,40);ctx.fill();
+  ctx.strokeStyle='#b8841a';ctx.lineWidth=1;ctx.stroke();
+  ctx.fillStyle='#f4a0a0';ctx.beginPath();ctx.rect(-5,-62,10,12);ctx.fill();
+  ctx.fillStyle='#aaa';ctx.beginPath();ctx.rect(-5,-52,10,4);ctx.fill();
+  ctx.fillStyle='#deb887';ctx.beginPath();ctx.moveTo(-5,-10);ctx.lineTo(5,-10);ctx.lineTo(0,0);ctx.closePath();ctx.fill();
+  ctx.fillStyle='#444';ctx.beginPath();ctx.moveTo(-1.5,-3);ctx.lineTo(1.5,-3);ctx.lineTo(0,0);ctx.closePath();ctx.fill();
+  ctx.restore();
+}
+
+// FIGURES
+const figDefs=[
+  {title:'Точка A',sub:'Без размери',desc:'Обозначава положение. Означава се с главна буква.',
+   draw(cv){const c=cv.getContext('2d');drawPaper(c,cv.width,cv.height);dot(c,cv.width/2,cv.height/2,'A','#1e3a8a','top');}},
+  {title:'Права a',sub:'Безкрайна и в двете посоки',desc:'Няма начало и край. Минава през поне две точки.',
+   draw(cv){
+     const c=cv.getContext('2d');drawPaper(c,cv.width,cv.height);
+     c.strokeStyle='#1e3a8a';c.lineWidth=2;
+     c.beginPath();c.moveTo(10,cv.height/2);c.lineTo(cv.width-10,cv.height/2);c.stroke();
+     [[10,-1],[cv.width-10,1]].forEach(([tx,d])=>{
+       c.beginPath();c.moveTo(tx,cv.height/2);c.lineTo(tx+d*14,cv.height/2-6);c.lineTo(tx+d*14,cv.height/2+6);c.closePath();c.fillStyle='#1e3a8a';c.fill();
+     });
+     c.fillStyle='#1e3a8a';c.font='bold 12px Nunito,sans-serif';c.textAlign='left';c.fillText('a',cv.width-8,cv.height/2-8);
+     dot(c,50,cv.height/2,'A','#1e3a8a','top');dot(c,cv.width-50,cv.height/2,'B','#1e3a8a','top');
+   }},
+  {title:'Отсечка AB',sub:'Ограничена дължина',desc:'Има начало и край. Измерва се в cm, mm, m.',
+   draw(cv){
+     const c=cv.getContext('2d');drawPaper(c,cv.width,cv.height);
+     c.strokeStyle='#1e3a8a';c.lineWidth=2.5;
+     c.beginPath();c.moveTo(18,cv.height/2);c.lineTo(cv.width-18,cv.height/2);c.stroke();
+     dot(c,18,cv.height/2,'A','#1e3a8a','top');dot(c,cv.width-18,cv.height/2,'B','#1e3a8a','top');
+   }},
+  {title:'Лъч AB',sub:'Полубезкраен',desc:'Има начало (A), но няма край в посоката на B.',
+   draw(cv){
+     const c=cv.getContext('2d');drawPaper(c,cv.width,cv.height);
+     c.strokeStyle='#1e3a8a';c.lineWidth=2.5;
+     c.beginPath();c.moveTo(18,cv.height/2);c.lineTo(cv.width-10,cv.height/2);c.stroke();
+     c.beginPath();c.moveTo(cv.width-10,cv.height/2);c.lineTo(cv.width-22,cv.height/2-6);c.lineTo(cv.width-22,cv.height/2+6);c.closePath();c.fillStyle='#1e3a8a';c.fill();
+     dot(c,18,cv.height/2,'A','#1e3a8a','top');dot(c,80,cv.height/2,'B','#1e3a8a','top');
+   }},
+];
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const fg=document.getElementById('fig-grid');
+  figDefs.forEach(f=>{
+    const div=document.createElement('div');div.className='fig-card';
+    const cv=document.createElement('canvas');cv.width=170;cv.height=90;
+    div.appendChild(cv);
+    div.innerHTML+=`<h5>${f.title}</h5><div class="fig-sub">${f.sub}</div><p>${f.desc}</p>`;
+    fg.appendChild(div);f.draw(cv);
+  });
+
+  // ъгъл схема
+  const wrap=document.getElementById('angle-diagram-wrap');
+  const cv=document.createElement('canvas');cv.width=320;cv.height=185;
+  cv.style.cssText='display:block;margin:0 auto;border-radius:10px;';
+  wrap.appendChild(cv);
+  const c=cv.getContext('2d');drawPaper(c,320,185);
+  const ox=90,oy=150,r=105,a1=-0.08,a2=-1.05;
+  c.fillStyle='rgba(37,99,235,.1)';c.beginPath();c.moveTo(ox,oy);c.arc(ox,oy,r,a2,a1);c.closePath();c.fill();
+  c.strokeStyle='#1e3a8a';c.lineWidth=2.5;c.lineCap='round';
+  c.beginPath();c.moveTo(ox,oy);c.lineTo(ox+Math.cos(a1)*r,oy+Math.sin(a1)*r);c.stroke();
+  c.beginPath();c.moveTo(ox,oy);c.lineTo(ox+Math.cos(a2)*r,oy+Math.sin(a2)*r);c.stroke();
+  c.strokeStyle='#2563eb';c.lineWidth=1.8;c.beginPath();c.arc(ox,oy,32,a2,a1);c.stroke();
+  c.fillStyle='#1d4ed8';c.font='bold 14px Nunito,sans-serif';c.textAlign='left';c.fillText('α',ox+36,oy-22);
+  dot(c,ox,oy,'O','#1e3a8a','bottom');
+  c.fillStyle='#172554';c.font='bold 13px Nunito,sans-serif';c.textAlign='center';
+  c.fillText('A',ox+Math.cos(a1)*r+12,oy+Math.sin(a1)*r+4);
+  c.fillText('B',ox+Math.cos(a2)*r-10,oy+Math.sin(a2)*r-7);
+  c.fillStyle='#1e3a8a';c.font='11px Nunito,sans-serif';c.textAlign='left';
+  c.fillText('рамо OA',ox+Math.cos(a1)*r*.55+8,oy+Math.sin(a1)*r*.55+14);
+  c.fillText('рамо OB',ox+Math.cos(a2)*r*.55+4,oy+Math.sin(a2)*r*.55-8);
+
+  // видове ъгли
+  const angDefs=[
+    {name:'Остър',range:'0° < α < 90°',desc:'По-малък от прав',color:'#2563eb',deg:55},
+    {name:'Прав',range:'α = 90°',desc:'Раменете са ⊥',color:'#16a34a',deg:90},
+    {name:'Тъп',range:'90° < α < 180°',desc:'По-голям от прав',color:'#d97706',deg:125},
+  ];
+  const ag=document.getElementById('angles-grid');
+  angDefs.forEach(a=>{
+    const div=document.createElement('div');div.className='ang-card';
+    const cv2=document.createElement('canvas');cv2.width=150;cv2.height=115;
+    div.appendChild(cv2);
+    div.innerHTML+=`<h5>${a.name}</h5><div class="deg">${a.range}</div><p>${a.desc}</p>`;
+    ag.appendChild(div);
+    const c2=cv2.getContext('2d');c2.fillStyle='#f5f0e8';c2.fillRect(0,0,150,115);
+    const ox2=28,oy2=94,r2=68,rad=a.deg*Math.PI/180;
+    c2.fillStyle=a.color+'22';c2.beginPath();c2.moveTo(ox2,oy2);c2.arc(ox2,oy2,r2,-rad,0);c2.closePath();c2.fill();
+    c2.strokeStyle=a.color;c2.lineWidth=2.5;c2.lineCap='round';
+    c2.beginPath();c2.moveTo(ox2,oy2);c2.lineTo(ox2+r2,oy2);c2.stroke();
+    c2.beginPath();c2.moveTo(ox2,oy2);c2.lineTo(ox2+Math.cos(-rad)*r2,oy2+Math.sin(-rad)*r2);c2.stroke();
+    // дъга за означаване на ъгъла — за всички видове
+    c2.strokeStyle=a.color;c2.lineWidth=1.8;
+    c2.beginPath();c2.arc(ox2,oy2,26,-rad,0);c2.stroke();
+    // точка в дъгата за прав ъгъл
+    if(a.deg===90){
+      const dotAng=-rad/2; // средата на дъгата = -45°
+      const dr=26;
+      c2.fillStyle=a.color;
+      c2.beginPath();c2.arc(ox2+Math.cos(dotAng)*dr,oy2+Math.sin(dotAng)*dr,3.5,0,Math.PI*2);c2.fill();
+    } else {
+      c2.fillStyle=a.color;c2.font='bold 11px Nunito,sans-serif';c2.textAlign='left';
+      c2.fillText(a.deg+'°',ox2+30,oy2-10);
+    }
+    dot(c2,ox2,oy2,null,a.color);
+  });
+});
+
+// ТРАНСПОРТИР
+const TC=document.getElementById('transpCanvas');
+const Tc=TC.getContext('2d');
+let transpAnim=null,transpPhase=0,transpT=0,transpTarget=50;
+const T_OX=165,T_OY=300;
+
+function drawTranspBg(){drawPaper(Tc,TC.width,TC.height);}
+
+function drawAngleLines(ox,oy,arm2deg){
+  Tc.strokeStyle='#172554';Tc.lineWidth=2.5;Tc.lineCap='round';
+  Tc.beginPath();Tc.moveTo(ox,oy);Tc.lineTo(ox+195,oy);Tc.stroke();
+  if(arm2deg!==null){
+    const rad=-arm2deg*Math.PI/180;
+    Tc.beginPath();Tc.moveTo(ox,oy);Tc.lineTo(ox+Math.cos(rad)*195,oy+Math.sin(rad)*195);Tc.stroke();
+    Tc.strokeStyle='#2563eb';Tc.lineWidth=1.8;Tc.beginPath();Tc.arc(ox,oy,40,rad,-0.01);Tc.stroke();
+    const mr=rad/2;
+    Tc.fillStyle='#1d4ed8';Tc.font='bold 14px Nunito,sans-serif';Tc.textAlign='center';
+    Tc.fillText(Math.round(arm2deg)+'°',ox+Math.cos(mr)*62,oy+Math.sin(mr)*60-4);
+  }
+  Tc.fillStyle='#172554';Tc.beginPath();Tc.arc(ox,oy,5,0,Math.PI*2);Tc.fill();
+  Tc.fillStyle='#172554';Tc.font='bold 13px Nunito,sans-serif';Tc.textAlign='center';Tc.fillText('O',ox,oy+18);
+}
+
+function drawTransportir(cx,cy,hlDeg){
+  Tc.save();Tc.translate(cx,cy);
+  const R=115;
+  Tc.shadowColor='rgba(0,0,0,.2)';Tc.shadowBlur=8;Tc.shadowOffsetY=3;
+  const g=Tc.createLinearGradient(0,-R,0,0);
+  g.addColorStop(0,'rgba(180,220,255,.93)');g.addColorStop(1,'rgba(120,180,240,.89)');
+  Tc.fillStyle=g;Tc.beginPath();Tc.arc(0,0,R,Math.PI,0,false);Tc.lineTo(R,0);Tc.lineTo(-R,0);Tc.closePath();Tc.fill();
+  Tc.strokeStyle='#4488bb';Tc.lineWidth=1.5;Tc.shadowBlur=0;Tc.stroke();
+  Tc.strokeStyle='#2255aa';Tc.lineWidth=1.5;
+  Tc.beginPath();Tc.moveTo(-R,0);Tc.lineTo(R,0);Tc.stroke();
+  Tc.beginPath();Tc.moveTo(-6,0);Tc.lineTo(6,0);Tc.stroke();
+  Tc.beginPath();Tc.moveTo(0,-6);Tc.lineTo(0,6);Tc.stroke();
+  for(let d=0;d<=180;d+=10){
+    const hr=d*Math.PI/180,co=Math.cos(Math.PI-hr),si=-Math.sin(Math.PI-hr);
+    const ln=d%30===0?14:d%10===0?9:5;
+    Tc.strokeStyle='#2255aa';Tc.lineWidth=1;
+    Tc.beginPath();Tc.moveTo(co*R,si*R);Tc.lineTo(co*(R-ln),si*(R-ln));Tc.stroke();
+    if(d%30===0){Tc.fillStyle='#113366';Tc.font='bold 10px Nunito,sans-serif';Tc.textAlign='center';Tc.fillText(d,co*(R-24),si*(R-24)+4);}
+  }
+  if(hlDeg!==null){
+    const hr=hlDeg*Math.PI/180,hc=Math.cos(Math.PI-hr),hs=-Math.sin(Math.PI-hr);
+    Tc.strokeStyle='#ef4444';Tc.lineWidth=2;Tc.setLineDash([4,3]);
+    Tc.beginPath();Tc.moveTo(0,0);Tc.lineTo(hc*(R+6),hs*(R+6));Tc.stroke();
+    Tc.setLineDash([]);
+    Tc.fillStyle='#ef4444';Tc.beginPath();Tc.arc(hc*(R-5),hs*(R-5),5.5,0,Math.PI*2);Tc.fill();
+    Tc.fillStyle='#fff';Tc.font='bold 9px Nunito,sans-serif';Tc.textAlign='center';Tc.fillText(hlDeg,hc*(R-5),hs*(R-5)+3.5);
+  }
+  Tc.restore();
+}
+
+function startTranspAnim(deg){cancelAnimationFrame(transpAnim);transpTarget=deg;transpPhase=0;transpT=0;document.getElementById('transpCaption').textContent='';animTransp();}
+function resetTransp(){cancelAnimationFrame(transpAnim);drawTranspBg();document.getElementById('transpCaption').textContent='👆 Натисни бутон, за да стартираш анимацията';}
+
+function animTransp(){
+  transpT+=0.013;
+  const et=Math.min(1,easeInOut(transpT));
+  drawTranspBg();
+  const caps=['Стъпка 1: Поставяме центъра на транспортира върху върха O','Стъпка 2: Наместваме нулевата линия по рамото','Стъпка 3: Четем — другото рамо сочи '+transpTarget+'°','✅ Ъгълът е '+transpTarget+'°'];
+  if(transpPhase===0){
+    drawAngleLines(T_OX,T_OY,null);drawTransportir(lerp(TC.width-120,T_OX,et),lerp(65,T_OY,et),null);
+    document.getElementById('transpCaption').textContent=caps[0];if(transpT>=1){transpPhase=1;transpT=0;}
+  } else if(transpPhase===1){
+    drawAngleLines(T_OX,T_OY,null);drawTransportir(T_OX,T_OY,null);
+    document.getElementById('transpCaption').textContent=caps[1];if(transpT>=1.2){transpPhase=2;transpT=0;}
+  } else if(transpPhase===2){
+    const cur=lerp(0,transpTarget,et);
+    drawAngleLines(T_OX,T_OY,cur);drawTransportir(T_OX,T_OY,Math.round(cur));
+    document.getElementById('transpCaption').textContent=caps[2];if(transpT>=1){transpPhase=3;transpT=0;}
+  } else {
+    drawAngleLines(T_OX,T_OY,transpTarget);drawTransportir(T_OX,T_OY,transpTarget);
+    document.getElementById('transpCaption').textContent=caps[3];return;
+  }
+  transpAnim=requestAnimationFrame(animTransp);
+}
+
+// НАЧЕРТАЙ ЪГЪЛ
+const DC=document.getElementById('drawCanvas');
+const Dc=DC.getContext('2d');
+let drawAnimId=null,drawPhase=0,drawT=0,drawTarget=60;
+const D_OX=165,D_OY=300;
+function drawBg2(){drawPaper(Dc,DC.width,DC.height);}
+
+function drawTransp2(cx,cy,hlDeg){
+  Dc.save();Dc.translate(cx,cy);
+  const R=115;
+  Dc.shadowColor='rgba(0,0,0,.2)';Dc.shadowBlur=8;Dc.shadowOffsetY=3;
+  const g=Dc.createLinearGradient(0,-R,0,0);
+  g.addColorStop(0,'rgba(180,220,255,.93)');g.addColorStop(1,'rgba(120,180,240,.89)');
+  Dc.fillStyle=g;Dc.beginPath();Dc.arc(0,0,R,Math.PI,0,false);Dc.lineTo(R,0);Dc.lineTo(-R,0);Dc.closePath();Dc.fill();
+  Dc.strokeStyle='#4488bb';Dc.lineWidth=1.5;Dc.shadowBlur=0;Dc.stroke();
+  Dc.strokeStyle='#2255aa';Dc.lineWidth=1.5;
+  Dc.beginPath();Dc.moveTo(-R,0);Dc.lineTo(R,0);Dc.stroke();
+  Dc.beginPath();Dc.moveTo(-6,0);Dc.lineTo(6,0);Dc.stroke();Dc.beginPath();Dc.moveTo(0,-6);Dc.lineTo(0,6);Dc.stroke();
+  for(let d=0;d<=180;d+=10){
+    const hr=d*Math.PI/180,co=Math.cos(Math.PI-hr),si=-Math.sin(Math.PI-hr);
+    const ln=d%30===0?14:d%10===0?9:5;
+    Dc.strokeStyle='#2255aa';Dc.lineWidth=1;Dc.beginPath();Dc.moveTo(co*R,si*R);Dc.lineTo(co*(R-ln),si*(R-ln));Dc.stroke();
+    if(d%30===0){Dc.fillStyle='#113366';Dc.font='bold 10px Nunito,sans-serif';Dc.textAlign='center';Dc.fillText(d,co*(R-24),si*(R-24)+4);}
+  }
+  if(hlDeg!==null){
+    const hr=hlDeg*Math.PI/180,hc=Math.cos(Math.PI-hr),hs=-Math.sin(Math.PI-hr);
+    Dc.strokeStyle='#ef4444';Dc.lineWidth=2;Dc.setLineDash([4,3]);
+    Dc.beginPath();Dc.moveTo(0,0);Dc.lineTo(hc*(R+6),hs*(R+6));Dc.stroke();Dc.setLineDash([]);
+    Dc.fillStyle='#ef4444';Dc.beginPath();Dc.arc(hc*(R-5),hs*(R-5),5.5,0,Math.PI*2);Dc.fill();
+  }
+  Dc.restore();
+}
+
+function startDrawAnim(deg){cancelAnimationFrame(drawAnimId);drawTarget=deg;drawPhase=0;drawT=0;document.getElementById('drawCaption').textContent='';animDraw();}
+function resetDraw(){cancelAnimationFrame(drawAnimId);drawBg2();document.getElementById('drawCaption').textContent='👆 Избери ъгъл за начертаване';}
+
+const dCaps=['Стъпка 1: Чертаем първото рамо от O','Стъпка 2: Поставяме транспортира','Стъпка 3: Маркираме точка при ','Стъпка 4: Чертаем второто рамо','✅ Начертан ъгъл '];
+
+function animDraw(){
+  drawT+=0.013;
+  const et=Math.min(1,easeInOut(drawT));
+  drawBg2();
+  const hrad=drawTarget*Math.PI/180;
+  // Второто рамо: ъгъл deg от дясното рамо, нагоре (обратно часовниковата стрелка)
+  // В canvas Y расте надолу, затова нагоре = отрицателен ъгъл
+  // cos(-hrad) = cos(hrad), sin(-hrad) = -sin(hrad)
+  const arm2x=Math.cos(hrad);   // 45°→+0.71, 60°→+0.5, 110°→-0.34 (вляво!)
+  const arm2y=-Math.sin(hrad);  // винаги нагоре в canvas
+  const mX=D_OX+arm2x*110, mY=D_OY+arm2y*110;
+
+  if(drawPhase===0){
+    const ex=lerp(D_OX,D_OX+195,et);
+    Dc.strokeStyle='#172554';Dc.lineWidth=2.5;Dc.lineCap='round';
+    Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(ex,D_OY);Dc.stroke();
+    drawPencil(Dc,{x:ex,y:D_OY},0);
+    Dc.fillStyle='#172554';Dc.beginPath();Dc.arc(D_OX,D_OY,5,0,Math.PI*2);Dc.fill();
+    document.getElementById('drawCaption').textContent=dCaps[0];
+    if(drawT>=1){drawPhase=1;drawT=0;}
+  } else if(drawPhase===1){
+    Dc.strokeStyle='#172554';Dc.lineWidth=2.5;Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(D_OX+195,D_OY);Dc.stroke();
+    Dc.fillStyle='#172554';Dc.beginPath();Dc.arc(D_OX,D_OY,5,0,Math.PI*2);Dc.fill();
+    drawTransp2(lerp(DC.width-120,D_OX,et),lerp(65,D_OY,et),null);
+    document.getElementById('drawCaption').textContent=dCaps[1];
+    if(drawT>=1){drawPhase=2;drawT=0;}
+  } else if(drawPhase===2){
+    Dc.strokeStyle='#172554';Dc.lineWidth=2.5;Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(D_OX+195,D_OY);Dc.stroke();
+    Dc.fillStyle='#172554';Dc.beginPath();Dc.arc(D_OX,D_OY,5,0,Math.PI*2);Dc.fill();
+    drawTransp2(D_OX,D_OY,drawTarget);
+    if(et>0.65){Dc.fillStyle='#ef4444';Dc.beginPath();Dc.arc(mX,mY,5,0,Math.PI*2);Dc.fill();}
+    else drawPencil(Dc,{x:lerp(D_OX+80,mX,et/0.65),y:lerp(D_OY-60,mY,et/0.65)},Math.PI/4);
+    document.getElementById('drawCaption').textContent=dCaps[2]+drawTarget+'°';
+    if(drawT>=1){drawPhase=3;drawT=0;}
+  } else if(drawPhase===3){
+    Dc.strokeStyle='#172554';Dc.lineWidth=2.5;
+    Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(D_OX+195,D_OY);Dc.stroke();
+    Dc.fillStyle='#172554';Dc.beginPath();Dc.arc(D_OX,D_OY,5,0,Math.PI*2);Dc.fill();
+    Dc.fillStyle='#ef4444';Dc.beginPath();Dc.arc(mX,mY,5,0,Math.PI*2);Dc.fill();
+    const ex=lerp(D_OX,D_OX+arm2x*195,et),ey=lerp(D_OY,D_OY+arm2y*195,et);
+    Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(ex,ey);Dc.stroke();
+    drawPencil(Dc,{x:ex,y:ey},Math.atan2(arm2y,arm2x));
+    // дъга от дясното рамо (0) нагоре до arm2 ъгъла
+    Dc.strokeStyle='#2563eb';Dc.lineWidth=1.8;
+    Dc.beginPath();Dc.arc(D_OX,D_OY,42,arm2y<0?Math.atan2(arm2y,arm2x):0,0.01);Dc.stroke();
+    document.getElementById('drawCaption').textContent=dCaps[3];
+    if(drawT>=1){drawPhase=4;drawT=0;}
+  } else {
+    Dc.strokeStyle='#172554';Dc.lineWidth=2.5;
+    Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(D_OX+195,D_OY);Dc.stroke();
+    Dc.beginPath();Dc.moveTo(D_OX,D_OY);Dc.lineTo(D_OX+arm2x*195,D_OY+arm2y*195);Dc.stroke();
+    Dc.fillStyle='#172554';Dc.beginPath();Dc.arc(D_OX,D_OY,5,0,Math.PI*2);Dc.fill();
+    // дъга между двете рамена
+    const angArm2=Math.atan2(arm2y,arm2x); // отрицателно число (нагоре)
+    Dc.strokeStyle='#2563eb';Dc.lineWidth=2;
+    Dc.beginPath();Dc.arc(D_OX,D_OY,46,angArm2,0);Dc.stroke();
+    // етикет в средата на дъгата
+    const midA=angArm2/2;
+    Dc.fillStyle='#1d4ed8';Dc.font='bold 15px Nunito,sans-serif';Dc.textAlign='center';
+    Dc.fillText(drawTarget+'°',D_OX+Math.cos(midA)*66,D_OY+Math.sin(midA)*66-4);
+    Dc.fillStyle='#172554';Dc.font='bold 14px Nunito,sans-serif';Dc.fillText('O',D_OX,D_OY+18);
+    document.getElementById('drawCaption').textContent=dCaps[4]+drawTarget+'°!';return;
+  }
+  drawAnimId=requestAnimationFrame(animDraw);
+}
+
+// ПРОВЕРИ СЕ
+function chkTxt(id,correct,hid){
+  const inp=document.getElementById(id),hint=document.getElementById(hid);
+  const v=inp.value.trim().toUpperCase();
+  if(!v){inp.className='ex-inp';hint.textContent='';return false;}
+  if(v===correct){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  inp.className='ex-inp no';hint.textContent='❌ Отговорът е: '+correct;return false;
+}
+function checkAll(){
+  let ok=0;
+  if(chkTxt('p1a','О','h1a'))ok++;
+  if(chkTxt('p1b','П','h1b'))ok++;
+  if(chkTxt('p1c','Т','h1c'))ok++;
+  const fb=document.getElementById('fb1');
+  if(ok===3){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от 3 верни.';fb.className='fb show no';}
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+window.addEventListener('load',()=>{drawTranspBg();drawBg2();});
+</script>
+</body>
+</html>

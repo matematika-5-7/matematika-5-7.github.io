@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Трапец — видове, свойства и лице S=(a+c)·h÷2. Анимации и задачи. Математика 5 клас.">
+<title>Трапец — видове, лице | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;--main:#2563eb;--main-dark:#1e40af;--main-deep:#1e3a8a;--main-btn:#1d4ed8;--main-mid:#3b82f6;--acc:#0284c7;--acc-light:#e0f2fe;--red:#ef4444;--red-light:#fef2f2;--ink:#1e3a8a;--ink-mid:#1e40af;--border:#bfdbfe;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:22px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3.2rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.82rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.65rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:var(--acc-light);border:2px solid #bae6fd;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#0c4a6e;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.formula-box{background:var(--main-deep);border-radius:18px;padding:1.4rem 1.8rem;margin:1.2rem 0;text-align:center;}
+.formula-label{font-size:.85rem;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:.4rem;}
+.formula-main{font-size:1.6rem;font-weight:900;color:#fff;font-family:'Baloo 2',sans-serif;}
+.formula-var{color:#93c5fd;}
+.formula-sub{font-size:.88rem;color:rgba(255,255,255,.72);margin-top:.45rem;}
+.trapez-types{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0;}
+@media(max-width:600px){.trapez-types{grid-template-columns:1fr;}}
+.ttype-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;overflow:hidden;text-align:center;}
+.ttype-head{padding:.5rem .8rem;font-family:'Baloo 2',sans-serif;font-size:.88rem;font-weight:800;color:#fff;}
+.ttype-body{padding:.8rem .6rem .6rem;}
+.ttype-body canvas{display:block;margin:0 auto .4rem;}
+.ttype-sub{font-size:.78rem;color:var(--ink-mid);font-weight:700;}
+.anim-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.1);}
+.anim-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.85rem 1.3rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.anim-head-left{display:flex;align-items:center;gap:.7rem;}
+.anim-icon{font-size:1.6rem;}
+.anim-head h4{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.anim-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.anim-body{padding:1rem 1.2rem;}
+.anim-canvas-wrap{background:#f0f6ff;border-radius:12px;overflow:hidden;}
+.anim-canvas-wrap canvas{display:block;width:100%;max-width:700px;margin:0 auto;}
+.anim-caption{font-size:.92rem;color:var(--main-dark);margin-top:.65rem;min-height:1.5rem;font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;}
+.btn-anim{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.92rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.anim-btns{display:flex;gap:.6rem;margin-top:.75rem;flex-wrap:wrap;}
+.example-card{background:#fff;border:2.5px solid var(--border);border-radius:18px;padding:1.3rem 1.5rem;margin:1rem 0;position:relative;overflow:hidden;}
+.example-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--main);}
+.ex-num{font-family:'Baloo 2',sans-serif;font-size:.82rem;font-weight:800;color:var(--main);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.4rem;}
+.ex-task{font-size:1rem;color:var(--ink);margin-bottom:.75rem;line-height:1.7;}
+.ex-solution{background:var(--c);border-radius:12px;padding:.9rem 1.1rem;}
+.ex-step{font-size:.97rem;color:var(--main-dark);margin-bottom:.3rem;line-height:1.7;}
+.ex-step strong{color:var(--main-deep);}
+.ex-answer{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-deep);margin-top:.5rem;padding:.45rem .9rem;background:#fff;border-radius:10px;display:inline-block;}
+.practice-box{background:#fff;border:3px solid var(--border);border-radius:22px;overflow:hidden;margin:2rem 0;box-shadow:0 6px 24px rgba(37,99,235,.1);}
+.practice-head{background:linear-gradient(135deg,var(--main-deep),var(--acc));padding:1rem 1.5rem;display:flex;align-items:center;gap:.75rem;}
+.practice-head-icon{font-size:1.8rem;}
+.practice-head h4{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:#fff;}
+.practice-head p{font-size:.83rem;color:rgba(255,255,255,.82);}
+.practice-body{padding:1.4rem 1.5rem;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-bottom:1rem;}
+.ex-item{background:var(--c-soft);border:2px solid var(--border);border-radius:14px;padding:1rem 1.1rem;}
+.ex-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.4rem;}
+.ex-problem{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.55rem;line-height:1.7;}
+.ex-inp{padding:.45rem .7rem;border:2.5px solid var(--border);border-radius:10px;font-size:1rem;font-weight:800;color:var(--ink);background:#fff;outline:none;font-family:'Nunito',sans-serif;transition:border .15s;width:100%;max-width:220px;}
+.ex-inp:focus{border-color:var(--main);}
+.ex-inp.ok{border-color:#16a34a;background:#dcfce7;color:#14532d;}
+.ex-inp.no{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.ex-hint{font-size:.8rem;color:var(--ink-mid);margin-top:.35rem;min-height:1.1rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:13px;padding:.7rem 1.5rem;font-size:1rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;box-shadow:0 4px 14px rgba(29,78,216,.28);}
+.btn-main:hover{background:var(--main-dark);transform:translateY(-2px);}
+.btn-row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin-top:.75rem;}
+.fb{margin-top:.6rem;padding:.55rem 1rem;border-radius:11px;font-size:1rem;font-weight:700;display:none;}
+.fb.show{display:block;}
+.fb.ok{background:#dcfce7;color:#14532d;}
+.fb.no{background:var(--red-light);color:var(--red);}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main-dark));border-radius:20px;padding:1.75rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-card p{color:rgba(255,255,255,.8);font-size:.95rem;margin-bottom:1.25rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{background:var(--main-deep);color:rgba(255,255,255,.5);padding:2rem;text-align:center;font-size:.95rem;}
+footer strong{color:rgba(255,255,255,.9);}
+.foot-nav{display:flex;justify-content:center;gap:1.5rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.foot-nav a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s;}
+.foot-nav a:hover{color:var(--main-mid);}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+<div class="hero">
+  <div class="hero-bubble" style="width:200px;height:200px;left:-50px;top:-50px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:120px;height:120px;right:4%;top:10%;animation-delay:1.4s;"></div>
+  <div class="hero-bubble" style="width:75px;height:75px;left:58%;bottom:18%;animation-delay:.9s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="index.html">Начало</a> › <a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema5">Геометрични фигури</a> › Трапец</div>
+    <h1>Трапец</h1>
+    <p class="hero-sub">Видове трапеци, свойства и формула за лице S = (a + c) · h ÷ 2 — с анимации и примери!</p>
+    <div class="hero-chips">
+      <span class="chip">⊓ Определение</span>
+      <span class="chip">📐 Видове трапеци</span>
+      <span class="chip">📏 S = (a+c)·h÷2</span>
+      <span class="chip">🧩 Задачи</span>
+    </div>
+  </div>
+</div>
+<div class="content">
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📚 Тема 5 — Геометрични фигури (5 клас)</div>
+    <div class="topic-nav-links">
+      <a href="tocka-prava-otsechka-agal-5-klas.html">1. Точка, права, ъгъл</a>
+      <a href="perpendikulyarni-pravi-5-klas.html">2. Перпендикулярни прави</a>
+      <a href="triagalnik-5-klas.html">3. Триъгълник</a>
+      <a href="lice-triagalnik-5-klas.html">4. Лице на триъгълник</a>
+      <a href="usporedhik-romb-5-klas.html">5. Успоредник и ромб</a>
+      <a href="trapec-5-klas.html" class="current">6. Трапец</a>
+      <a href="geometria-zadachi-5-klas.html">7. Задачи</a>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 1: ОПРЕДЕЛЕНИЕ И ВИДОВЕ -->
+  <div class="reveal">
+    <div class="sec-tag">📌 Раздел 1</div>
+    <h2 class="sec-title">Какво е трапец — видове</h2>
+    <p class="sec-desc">Трапецът е четириъгълник с точно <strong>една двойка успоредни страни</strong>.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">⊓</div><div><h3>Определение и елементи</h3><p>Основи, бедра и височина</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">
+          <strong>Трапецът</strong> е четириъгълник, при който <strong>точно две страни са успоредни</strong>. Те се наричат <em>основи</em>. Другите две страни се наричат <em>бедра</em>.
+        </p>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">⊓</div><div><h4>Елементи на трапеца</h4><p>Основи, бедра и височина</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="trapDefCanvas" width="700" height="260"></canvas></div>
+            <div class="anim-caption" id="trapDefCaption">Трапец ABCD: основи AB и CD, бедра BC и AD, височина h</div>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Елементи на трапеца</div>
+          <ul>
+            <li><strong>Основи</strong> — двете успоредни страни: голяма основа <strong>a</strong> и малка основа <strong>c</strong> (a > c).</li>
+            <li><strong>Бедра</strong> — двете неуспоредни страни.</li>
+            <li><strong>Височина h</strong> — перпендикулярното разстояние между двете основи.</li>
+            <li>Сумата от ъглите при едно бедро = <strong>180°</strong>.</li>
+          </ul>
+        </div>
+        <div class="trapez-types">
+          <div class="ttype-card">
+            <div class="ttype-head" style="background:#1d4ed8;">Правоъгълен</div>
+            <div class="ttype-body">
+              <canvas id="ttRectCanvas" width="180" height="120"></canvas>
+              <div class="ttype-sub">Едно бедро ⊥ основите</div>
+            </div>
+          </div>
+          <div class="ttype-card">
+            <div class="ttype-head" style="background:#059669;">Равнобедрен</div>
+            <div class="ttype-body">
+              <canvas id="ttIsosCanvas" width="180" height="120"></canvas>
+              <div class="ttype-sub">Двете бедра са равни</div>
+            </div>
+          </div>
+          <div class="ttype-card">
+            <div class="ttype-head" style="background:#dc2626;">Разностранен</div>
+            <div class="ttype-body">
+              <canvas id="ttScalCanvas" width="180" height="120"></canvas>
+              <div class="ttype-sub">Всички страни са различни</div>
+            </div>
+          </div>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Запомни!</strong> Успоредникът е НЕ трапец — той има <em>две</em> двойки успоредни страни. Трапецът има само <em>една</em> двойка.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РАЗДЕЛ 2: ЛИЦЕ НА ТРАПЕЦ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="sec-tag">📌 Раздел 2</div>
+    <h2 class="sec-title">Лице на трапец</h2>
+    <p class="sec-desc">Формулата за лице на трапец се извежда чрез разделяне на два триъгълника.</p>
+    <div class="explain-card">
+      <div class="explain-head"><div class="explain-emoji">📐</div><div><h3>Формула и извод</h3><p>Трапецът = два триъгълника</p></div></div>
+      <div class="explain-body">
+        <p style="font-size:1rem;color:var(--ink);margin-bottom:1rem;line-height:1.7;">Ако теглим диагонала на трапеца, той се разделя на <strong>два триъгълника</strong> с обща <em>едни и съща</em> височина h. Лицата им се събират, за да дадат лицето на трапеца.</p>
+        <div class="anim-box">
+          <div class="anim-head"><div class="anim-head-left"><div class="anim-icon">✂️</div><div><h4>Извод на формулата</h4><p>Трапецът = два триъгълника с обща височина h</p></div></div></div>
+          <div class="anim-body">
+            <div class="anim-canvas-wrap"><canvas id="areaAnimCanvas" width="700" height="320"></canvas></div>
+            <div class="anim-caption" id="areaCaption">Натисни ▶ Покажи за да видиш как се извежда формулата</div>
+            <div class="anim-btns">
+              <button class="btn-anim" onclick="startAreaAnim()">▶ Покажи</button>
+              <button class="btn-ghost" onclick="resetAreaAnim()">↺ Отначало</button>
+            </div>
+          </div>
+        </div>
+        <div class="formula-box">
+          <div class="formula-label">ФОРМУЛА — ЛИЦЕ НА ТРАПЕЦ</div>
+          <div class="formula-main">S = (<span class="formula-var">a</span> + <span class="formula-var">c</span>) · <span class="formula-var">h</span> ÷ 2</div>
+          <div class="formula-sub"><strong>a</strong> = голяма основа &nbsp;|&nbsp; <strong>c</strong> = малка основа &nbsp;|&nbsp; <strong>h</strong> = височина</div>
+        </div>
+        <div class="rule">
+          <div class="rule-title">📋 Извод</div>
+          <ul>
+            <li>Диагоналът BD разделя трапеца на △ABD и △BCD.</li>
+            <li>S(△ABD) = <strong>a · h ÷ 2</strong> (основа AB = a, височина h).</li>
+            <li>S(△BCD) = <strong>c · h ÷ 2</strong> (основа CD = c, същата височина h).</li>
+            <li>S(трапец) = a·h÷2 + c·h÷2 = <strong>(a + c) · h ÷ 2</strong>.</li>
+          </ul>
+        </div>
+        <div class="tip"><div class="tip-icon">💡</div><div class="tip-body"><strong>Мнемоника:</strong> „Сбор от основите, по височината, на две". Лесно се запомня с акронима <em>(а + c) · h ÷ 2</em>.</div></div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 1</div>
+          <div class="ex-task">Трапец с основи <strong>a = 10 cm</strong> и <strong>c = 6 cm</strong>, и височина <strong>h = 4 cm</strong>. Намери лицето.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Формула:</strong> S = (a + c) · h ÷ 2</div>
+            <div class="ex-step"><strong>Заместваме:</strong> S = (10 + 6) · 4 ÷ 2 = 16 · 4 ÷ 2 = 64 ÷ 2 = 32</div>
+            <div class="ex-answer">S = 32 cm²</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 2</div>
+          <div class="ex-task">Трапец с лице <strong>S = 45 cm²</strong>, основи <strong>a = 12 cm</strong> и <strong>c = 6 cm</strong>. Намери височината <strong>h</strong>.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>От формулата:</strong> (a + c) · h = 2 · S, значи h = 2 · S ÷ (a + c)</div>
+            <div class="ex-step"><strong>Заместваме:</strong> h = 2 · 45 ÷ (12 + 6) = 90 ÷ 18 = 5</div>
+            <div class="ex-answer">h = 5 cm</div>
+          </div>
+        </div>
+        <div class="example-card">
+          <div class="ex-num">📝 Пример 3 — равнобедрен трапец</div>
+          <div class="ex-task">Равнобедрен трапец с основи <strong>14 cm</strong> и <strong>8 cm</strong>, бедра <strong>5 cm</strong>. Намери лицето.</div>
+          <div class="ex-solution">
+            <div class="ex-step"><strong>Намираме h:</strong> разликата на основите = 14 − 8 = 6 cm, делим на 2 → 3 cm (проекция на бедрото). h² = 5² − 3² = 25 − 9 = 16, h = 4 cm</div>
+            <div class="ex-step"><strong>Лице:</strong> S = (14 + 8) · 4 ÷ 2 = 22 · 4 ÷ 2 = 88 ÷ 2 = 44</div>
+            <div class="ex-answer">S = 44 cm²</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ПРОВЕРИ СЕ -->
+  <div class="reveal" style="margin-top:2.5rem;">
+    <div class="practice-box">
+      <div class="practice-head"><div class="practice-head-icon">🧩</div><div><h4>Провери се</h4><p>Трапец — видове и лице</p></div></div>
+      <div class="practice-body">
+        <div class="ex-grid">
+          <div class="ex-item">
+            <div class="ex-label">а) Трапец: a = 8 cm, c = 4 cm, h = 5 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q1" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h1"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">б) Трапец: a = 12 cm, c = 8 cm, h = 6 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q2" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h2"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">в) Трапец: S = 60 cm², a = 10 cm, c = 5 cm</div>
+            <div class="ex-problem">Намери височината h в cm:</div>
+            <input class="ex-inp" id="q3" type="number" placeholder="cm">
+            <div class="ex-hint" id="h3"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">г) Колко двойки успоредни страни има трапецът?</div>
+            <div class="ex-problem">Напиши числото:</div>
+            <input class="ex-inp" id="q4" type="number" placeholder="брой">
+            <div class="ex-hint" id="h4"></div>
+          </div>
+          <div class="ex-item">
+            <div class="ex-label">д) Трапец: a = 15 cm, c = 9 cm, h = 8 cm</div>
+            <div class="ex-problem">Намери лицето в cm²:</div>
+            <input class="ex-inp" id="q5" type="number" placeholder="cm²">
+            <div class="ex-hint" id="h5"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-main" onclick="checkAll()">✓ Провери</button>
+          <div class="fb" id="fb1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>🎉 Следваща статия →</h3>
+    <p>Задачи по геометрия — смесени упражнения за всички фигури!</p>
+    <div class="finish-links">
+      <a href="geometria-zadachi-5-klas.html" class="finish-link">→ Задачи по геометрия</a>
+      <a href="usporedhik-romb-5-klas.html" class="finish-link">← Успоредник и ромб</a>
+      <a href="klas-5.html#tema5" class="finish-link">↑ Всички статии</a>
+    </div>
+  </div>
+</div>
+<footer>
+  <div class="foot-nav"><a href="index.html">Начало</a><a href="klas-5.html">5 клас</a><a href="klas-6.html">6 клас</a><a href="klas-7.html">7 клас</a></div>
+  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+</footer>
+<script>
+function lerp(a,b,t){return a+(b-a)*t;}
+function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+function drawPaper(ctx,w,h){
+  ctx.fillStyle='#f0f6ff';ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle='#dbeafe';ctx.lineWidth=.7;
+  for(let x=0;x<w;x+=25){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();}
+  for(let y=0;y<h;y+=25){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();}
+}
+function lbl(ctx,x,y,txt,col,sz){ctx.fillStyle=col||'#1e3a8a';ctx.font='bold '+(sz||13)+'px Nunito,sans-serif';ctx.textAlign='center';ctx.fillText(txt,x,y);}
+function cap(id,txt){const el=document.getElementById(id);if(el)el.textContent=txt;}
+function fillTrap(ctx,A,B,C,D,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.lineTo(D.x,D.y);ctx.closePath();ctx.fill();}
+function strokeTrap(ctx,A,B,C,D,col,lw){ctx.strokeStyle=col;ctx.lineWidth=lw||2.5;ctx.lineCap='round';ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.lineTo(C.x,C.y);ctx.lineTo(D.x,D.y);ctx.closePath();ctx.stroke();}
+function rightSq(ctx,V,P1,P2,sz,col){
+  const d1={x:P1.x-V.x,y:P1.y-V.y},l1=Math.hypot(d1.x,d1.y),u1={x:d1.x/l1*(sz||12),y:d1.y/l1*(sz||12)};
+  const d2={x:P2.x-V.x,y:P2.y-V.y},l2=Math.hypot(d2.x,d2.y),u2={x:d2.x/l2*(sz||12),y:d2.y/l2*(sz||12)};
+  ctx.strokeStyle=col||'#2563eb';ctx.lineWidth=1.8;
+  ctx.beginPath();ctx.moveTo(V.x+u1.x,V.y+u1.y);ctx.lineTo(V.x+u1.x+u2.x,V.y+u1.y+u2.y);ctx.lineTo(V.x+u2.x,V.y+u2.y);ctx.stroke();
+}
+function dashedSeg(ctx,A,B,col){ctx.save();ctx.strokeStyle=col||'#93c5fd';ctx.lineWidth=2;ctx.setLineDash([7,4]);ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke();ctx.setLineDash([]);ctx.restore();}
+
+// ── ОПРЕДЕЛЕНИЕ CANVAS ──
+(function(){
+  const cv=document.getElementById('trapDefCanvas'),c=cv.getContext('2d');
+  drawPaper(c,cv.width,cv.height);
+  const A={x:80,y:210},B={x:200,y:60},C={x:500,y:60},D={x:620,y:210};
+  fillTrap(c,A,B,C,D,'#bfdbfe');strokeTrap(c,A,B,C,D,'#1d4ed8');
+  [[A,'A',-16,14],[B,'B',-14,-12],[C,'C',14,-12],[D,'D',16,14]].forEach(([P,l,dx,dy])=>{
+    c.fillStyle='#1d4ed8';c.beginPath();c.arc(P.x,P.y,4,0,Math.PI*2);c.fill();
+    lbl(c,P.x+dx,P.y+dy,l,'#1e3a8a',13);
+  });
+  // Означи основите
+  c.strokeStyle='#dc2626';c.lineWidth=4;
+  c.beginPath();c.moveTo(A.x,A.y);c.lineTo(D.x,D.y);c.stroke();
+  c.beginPath();c.moveTo(B.x,B.y);c.lineTo(C.x,C.y);c.stroke();
+  lbl(c,(A.x+D.x)/2,A.y+20,'a — голяма основа','#dc2626',12);
+  lbl(c,(B.x+C.x)/2,B.y-14,'c — малка основа','#dc2626',12);
+  // Бедра
+  c.strokeStyle='#059669';c.lineWidth=3;
+  c.beginPath();c.moveTo(A.x,A.y);c.lineTo(B.x,B.y);c.stroke();
+  c.beginPath();c.moveTo(D.x,D.y);c.lineTo(C.x,C.y);c.stroke();
+  lbl(c,(A.x+B.x)/2-24,(A.y+B.y)/2,'бедро','#059669',11);
+  lbl(c,(D.x+C.x)/2+28,(D.y+C.y)/2,'бедро','#059669',11);
+  // Височина h
+  dashedSeg(c,{x:350,y:60},{x:350,y:210},'#7c3aed');
+  c.strokeStyle='#7c3aed';c.lineWidth=1.5;
+  c.beginPath();c.moveTo(344,68);c.lineTo(350,60);c.lineTo(356,68);c.stroke();
+  c.beginPath();c.moveTo(344,202);c.lineTo(350,210);c.lineTo(356,202);c.stroke();
+  lbl(c,368,140,'h','#7c3aed',14);
+  // Успоредност знаци
+  [[{x:(A.x+D.x)/2,y:A.y-10},{x:(B.x+C.x)/2,y:B.y+10}]].forEach(()=>{
+    lbl(c,cv.width/2,cv.height-8,'AD ∥ BC  (основите са успоредни)','#1e3a8a',12);
+  });
+  cap('trapDefCaption','Трапец ABCD: основи AD (червено) и BC (червено), бедра AB и DC (зелено), височина h (лилаво)');
+})();
+
+// ── ТИПОВЕ ТРАПЕЦИ ──
+function drawTrapType(id,pts,col,extra){
+  const cv=document.getElementById(id),c=cv.getContext('2d');
+  c.fillStyle='#f0f6ff';c.fillRect(0,0,cv.width,cv.height);
+  const [A,B,C,D]=pts;
+  c.fillStyle=col+'22';c.beginPath();c.moveTo(A.x,A.y);c.lineTo(B.x,B.y);c.lineTo(C.x,C.y);c.lineTo(D.x,D.y);c.closePath();c.fill();
+  c.strokeStyle=col;c.lineWidth=2.2;c.lineCap='round';c.lineJoin='round';
+  c.beginPath();c.moveTo(A.x,A.y);c.lineTo(B.x,B.y);c.lineTo(C.x,C.y);c.lineTo(D.x,D.y);c.closePath();c.stroke();
+  if(extra)extra(c,A,B,C,D,col);
+}
+drawTrapType('ttRectCanvas',[{x:25,y:105},{x:25,y:25},{x:120,y:25},{x:158,y:105}],'#1d4ed8',(c,A,B,C,D,col)=>{
+  // Прав ъгъл при A (долу-ляво) и B (горе-ляво)
+  rightSq(c,A,B,D,11,col);
+  rightSq(c,B,A,C,11,col);
+});
+drawTrapType('ttIsosCanvas',[{x:35,y:105},{x:55,y:22},{x:130,y:22},{x:150,y:105}],'#059669',(c,A,B,C,D,col)=>{
+  // tick на двете равни бедра
+  [[A,B],[D,C]].forEach(([P1,P2])=>{
+    const mx=(P1.x+P2.x)/2,my=(P1.y+P2.y)/2,ang=Math.atan2(P2.y-P1.y,P2.x-P1.x);
+    const px=Math.cos(ang+Math.PI/2)*5,py=Math.sin(ang+Math.PI/2)*5;
+    c.strokeStyle=col;c.lineWidth=2;c.beginPath();c.moveTo(mx+px,my+py);c.lineTo(mx-px,my-py);c.stroke();
+  });
+});
+drawTrapType('ttScalCanvas',[{x:25,y:105},{x:60,y:22},{x:140,y:22},{x:160,y:105}],'#dc2626');
+
+// ── АНИМАЦИЯ ЛИЦЕ ТРАПЕЦ ──
+const AA=document.getElementById('areaAnimCanvas'),Ac=AA.getContext('2d');
+let aPhase=0,aT=0,aId=null;
+const tA={x:90,y:250},tB={x:200,y:80},tC={x:490,y:80},tD={x:590,y:250};
+function drawAreaScene(phase,t){
+  const et=ease(Math.min(1,t));
+  drawPaper(Ac,AA.width,AA.height);
+  const col='#2563eb';
+  if(phase===0){
+    fillTrap(Ac,tA,tB,tC,tD,'#bfdbfe');strokeTrap(Ac,tA,tB,tC,tD,col);
+    [[tA,'A',-16,16],[tB,'B',-16,-12],[tC,'C',16,-12],[tD,'D',16,16]].forEach(([P,l,dx,dy])=>{lbl(Ac,P.x+dx,P.y+dy,l,col,13);});
+    lbl(Ac,(tA.x+tD.x)/2,tA.y+20,'a',col,14);
+    lbl(Ac,(tB.x+tC.x)/2,tB.y-16,'c',col,14);
+    dashedSeg(Ac,{x:300,y:80},{x:300,y:250},'#7c3aed');
+    lbl(Ac,318,170,'h','#7c3aed',14);
+    cap('areaCaption','Трапец ABCD с основи a и c, и височина h');
+  } else if(phase===1){
+    // Чертаем диагонала BD
+    fillTrap(Ac,tA,tB,tC,tD,'#bfdbfe');strokeTrap(Ac,tA,tB,tC,tD,col);
+    const cur={x:lerp(tB.x,tD.x,et),y:lerp(tB.y,tD.y,et)};
+    Ac.save();Ac.strokeStyle='#dc2626';Ac.lineWidth=2.5;Ac.setLineDash([8,5]);Ac.beginPath();Ac.moveTo(tB.x,tB.y);Ac.lineTo(cur.x,cur.y);Ac.stroke();Ac.setLineDash([]);Ac.restore();
+    cap('areaCaption','Теглим диагонала BD — той разделя трапеца на два триъгълника');
+  } else if(phase===2){
+    // Двата триъгълника оцветени различно
+    Ac.fillStyle='#bfdbfe';Ac.beginPath();Ac.moveTo(tA.x,tA.y);Ac.lineTo(tB.x,tB.y);Ac.lineTo(tD.x,tD.y);Ac.closePath();Ac.fill();
+    Ac.fillStyle='#bbf7d0';Ac.beginPath();Ac.moveTo(tB.x,tB.y);Ac.lineTo(tC.x,tC.y);Ac.lineTo(tD.x,tD.y);Ac.closePath();Ac.fill();
+    strokeTrap(Ac,tA,tB,tC,tD,col);
+    Ac.strokeStyle='#dc2626';Ac.lineWidth=2.5;Ac.setLineDash([8,5]);Ac.beginPath();Ac.moveTo(tB.x,tB.y);Ac.lineTo(tD.x,tD.y);Ac.stroke();Ac.setLineDash([]);
+    // Означения
+    lbl(Ac,(tA.x+tB.x+tD.x)/3,(tA.y+tB.y+tD.y)/3,'S₁=a·h÷2','#1e3a8a',12);
+    lbl(Ac,(tB.x+tC.x+tD.x)/3,(tB.y+tC.y+tD.y)/3,'S₂=c·h÷2','#065f46',12);
+    lbl(Ac,(tA.x+tD.x)/2,tA.y+20,'a',col,14);lbl(Ac,(tB.x+tC.x)/2,tB.y-16,'c',col,14);
+    dashedSeg(Ac,{x:300,y:80},{x:300,y:250},'#7c3aed');lbl(Ac,318,170,'h','#7c3aed',14);
+    cap('areaCaption','△ABD: S₁=a·h÷2 и △BCD: S₂=c·h÷2 — двата с еднаква височина h');
+  } else {
+    // Финална формула
+    Ac.fillStyle='#bfdbfe';Ac.beginPath();Ac.moveTo(tA.x,tA.y);Ac.lineTo(tB.x,tB.y);Ac.lineTo(tC.x,tC.y);Ac.lineTo(tD.x,tD.y);Ac.closePath();Ac.fill();
+    strokeTrap(Ac,tA,tB,tC,tD,col);
+    lbl(Ac,(tA.x+tD.x)/2,tA.y+20,'a',col,14);lbl(Ac,(tB.x+tC.x)/2,tB.y-16,'c',col,14);
+    dashedSeg(Ac,{x:300,y:80},{x:300,y:250},'#7c3aed');lbl(Ac,318,170,'h','#7c3aed',14);
+    // Формула
+    const fx=tD.x+30,fy=120;
+    Ac.fillStyle='#1e3a8a';Ac.font='bold 14px Nunito,sans-serif';Ac.textAlign='left';
+    Ac.fillText('S = S₁ + S₂',fx,fy);
+    Ac.fillText('= a·h÷2 + c·h÷2',fx,fy+28);
+    Ac.fillStyle='#1d4ed8';Ac.font='bold 18px Baloo 2,sans-serif';
+    Ac.fillText('= (a+c)·h÷2',fx,fy+62);
+    cap('areaCaption','✅ Лице на трапец: S = (a + c) · h ÷ 2');
+  }
+}
+function animArea(){aT+=0.016;drawAreaScene(aPhase,aT);if(aT>=1){aPhase++;aT=0;}if(aPhase<=3)aId=requestAnimationFrame(animArea);}
+function startAreaAnim(){cancelAnimationFrame(aId);aPhase=0;aT=0;aId=requestAnimationFrame(animArea);}
+function resetAreaAnim(){cancelAnimationFrame(aId);aPhase=0;aT=0;drawAreaScene(0,0);cap('areaCaption','Натисни ▶ Покажи за да видиш как се извежда формулата');}
+
+// ── ПРОВЕРИ СЕ ──
+function chkNum(id,ans,hid){
+  const inp=document.getElementById(id),hint=document.getElementById(hid),v=parseFloat(inp.value);
+  if(isNaN(v)){inp.className='ex-inp';hint.textContent='';return false;}
+  if(Math.abs(v-ans)<0.01){inp.className='ex-inp ok';hint.textContent='✅ Правилно!';return true;}
+  hint.textContent='❌ Отговорът е: '+ans;inp.className='ex-inp no';return false;
+}
+function checkAll(){
+  let ok=0;
+  if(chkNum('q1',30,'h1'))ok++;  // (8+4)*5/2=30
+  if(chkNum('q2',60,'h2'))ok++;  // (12+8)*6/2=60
+  if(chkNum('q3',8,'h3'))ok++;   // h=2*60/(10+5)=8
+  if(chkNum('q4',1,'h4'))ok++;   // 1 двойка
+  if(chkNum('q5',96,'h5'))ok++;  // (15+9)*8/2=96
+  const fb=document.getElementById('fb1');
+  if(ok===5){fb.textContent='🎉 Браво! Всички верни!';fb.className='fb show ok';}
+  else{fb.textContent=ok+' от 5 верни.';fb.className='fb show no';}
+}
+// ── REVEAL ──
+const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('load',()=>{drawAreaScene(0,0);});
+</script>
+</body>
+</html>
