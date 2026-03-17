@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Симулатор на движение</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Baloo+2:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --accent:#FF6F00; --panel:rgba(255,255,255,0.93); --shadow:0 4px 20px rgba(0,0,0,0.13); --radius:14px; --text:#1a1a2e; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ font-family:'Nunito',sans-serif; font-size:12px; background:#dce8f0; min-height:100vh; color:var(--text); }
+  header{ background:linear-gradient(135deg,#0d47a1,#1565c0,#1976d2); color:#fff; padding:9px 16px; display:flex; align-items:center; gap:10px; box-shadow:0 3px 14px rgba(0,0,0,.3); }
+  .logo{ font-family:'Baloo 2',cursive; font-size:19px; font-weight:700; }
+  .sub{ font-size:11px; opacity:.75; }
+  .app{ display:grid; grid-template-columns:265px 1fr 255px; grid-template-rows:1fr 150px; gap:7px; padding:7px; height:calc(100vh - 48px); }
+  .panel{ background:var(--panel); border-radius:var(--radius); box-shadow:var(--shadow); padding:9px; overflow-y:auto; }
+  .panel h3{ font-family:'Baloo 2',cursive; font-size:13px; font-weight:700; color:#0d47a1; border-bottom:2px solid #e3f2fd; padding-bottom:4px; margin-bottom:7px; display:flex; align-items:center; gap:5px; }
+  .left-panel{ grid-column:1; grid-row:1/3; }
+  .task-ta{ width:100%; height:70px; border:1.5px solid #90caf9; border-radius:8px; padding:6px; font-family:'Nunito',sans-serif; font-size:12px; resize:vertical; background:#f7f9ff; color:var(--text); }
+  .task-ta:focus{ outline:none; border-color:#1565c0; }
+  .sec{ font-size:10px; font-weight:800; color:#546e7a; text-transform:uppercase; letter-spacing:.5px; margin:8px 0 4px; }
+  .tiles-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:4px; margin-bottom:4px; }
+  .tile{ border:2px solid transparent; border-radius:8px; padding:4px 2px; cursor:pointer; text-align:center; font-size:10px; font-weight:700; transition:all .2s; user-select:none; line-height:1.3; }
+  .tile:hover{ transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,.15); }
+  .tile.active{ border-color:var(--accent); box-shadow:0 0 0 2px var(--accent); }
+  .tile-road{background:linear-gradient(135deg,#cfd8dc,#90a4ae);}
+  .tile-highway{background:linear-gradient(135deg,#b0bec5,#546e7a);color:#fff;}
+  .tile-mountain{background:linear-gradient(135deg,#a5d6a7,#795548);color:#fff;}
+  .tile-rail{background:linear-gradient(135deg,#fff9c4,#9e9e9e);}
+  .tile-river{background:linear-gradient(135deg,#81d4fa,#0288d1);color:#fff;}
+  .tile-air{background:linear-gradient(135deg,#e3f2fd,#42a5f5);}
+  .vpal{ display:grid; grid-template-columns:repeat(5,1fr); gap:3px; }
+  .vbtn{ border:1.5px solid #e0e0e0; border-radius:7px; padding:3px 1px; cursor:grab; text-align:center; font-size:15px; background:#fff; transition:all .2s; }
+  .vbtn:hover{ border-color:#1565c0; transform:scale(1.12); background:#e3f2fd; }
+  .vl{ font-size:8px; display:block; color:#546e7a; font-weight:700; line-height:1.2; }
+  .veh-row{ display:flex; align-items:center; gap:3px; background:#f3f8ff; border-radius:7px; padding:3px 5px; border:1px solid #e0e0e0; margin-bottom:3px; }
+  .ve{ font-size:17px; }
+  .vn{ font-size:10px; font-weight:700; color:#0d47a1; flex:1; }
+  .veh-row input[type=number]{ width:46px; border:1px solid #90caf9; border-radius:5px; padding:2px 3px; font-size:11px; font-family:'Nunito',sans-serif; background:#f8f9ff; color:var(--text); }
+  .mirror-btn{ background:#e8eaf6; border:1px solid #9fa8da; border-radius:4px; cursor:pointer; font-size:11px; padding:1px 4px; color:#3949ab; font-weight:700; transition:all .15s; }
+  .mirror-btn:hover{ background:#c5cae9; }
+  .mirror-btn.on{ background:#3949ab; color:#fff; border-color:#3949ab; }
+  .remove-btn{ background:#ffebee; border:1px solid #ef9a9a; border-radius:4px; cursor:pointer; font-size:10px; color:#c62828; padding:1px 4px; }
+  .remove-btn:hover{ background:#ffcdd2; }
+  .formula-box{ background:linear-gradient(135deg,#e8eaf6,#c5cae9); border-radius:8px; padding:6px; margin-top:6px; font-size:11px; color:#283593; }
+  .formula-box strong{ font-size:11px; display:block; margin-bottom:2px; }
+  .canvas-area{ grid-column:2; grid-row:1; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; position:relative; }
+  #simCanvas{ width:100%; height:100%; display:block; cursor:crosshair; }
+  .drop-hint{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:rgba(100,150,200,.45); font-size:13px; font-weight:700; text-align:center; pointer-events:none; transition:opacity .3s; }
+  .prog-wrap{ position:absolute; bottom:8px; left:8px; right:8px; height:13px; background:rgba(255,255,255,.55); border-radius:7px; overflow:hidden; display:none; }
+  .prog-bar{ height:100%; background:linear-gradient(90deg,#43a047,#66bb6a); border-radius:7px; width:0%; transition:width .08s linear; }
+  .prog-label{ position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:10px; font-weight:700; color:#1b5e20; }
+  .time-disp{ position:absolute; top:8px; right:8px; background:rgba(0,0,0,.52); color:#fff; padding:4px 10px; border-radius:18px; font-size:12px; font-weight:700; font-family:'Baloo 2',cursive; display:none; }
+  .coll-flash{ position:absolute; top:0;left:0;right:0;bottom:0; background:rgba(255,80,0,0); pointer-events:none; border-radius:var(--radius); transition:background .15s; }
+  .coll-flash.bang{ background:rgba(255,80,0,.38); }
+  .right-panel{ grid-column:3; grid-row:1/3; }
+  .tab-btns{ display:flex; gap:3px; margin-bottom:7px; }
+  .tab-btn{ border:1.5px solid #90caf9; border-radius:6px; padding:3px 7px; font-size:11px; font-weight:700; background:#e3f2fd; color:#0d47a1; cursor:pointer; transition:all .15s; }
+  .tab-btn.active{ background:#1565c0; color:#fff; border-color:#1565c0; }
+  .tab-content{ display:none; }
+  .tab-content.active{ display:block; }
+  .data-table{ width:100%; border-collapse:collapse; font-size:11px; margin-bottom:6px; }
+  .data-table th{ background:#e3f2fd; color:#0d47a1; font-weight:700; padding:4px; text-align:left; }
+  .data-table td{ padding:3px 4px; border-bottom:1px solid #f0f0f0; vertical-align:middle; }
+  .cell-input{ width:100%; border:1px solid #ccc; border-radius:4px; padding:3px; font-size:11px; font-family:'Nunito',sans-serif; background:#fafafa; color:var(--text); }
+  .cell-input:focus{ outline:none; border-color:#1565c0; background:#fff; }
+  .cell-input.synced{ border-color:#43a047; background:#f1f8f1; }
+  .dir-btn{ border:1.5px solid #90caf9; border-radius:6px; padding:3px 6px; font-size:11px; background:#e3f2fd; cursor:pointer; font-weight:700; color:#0d47a1; transition:all .15s; }
+  .dir-btn.active{ background:#1565c0; color:#fff; border-color:#1565c0; }
+  .calc-table{ width:100%; border-collapse:collapse; font-size:11px; }
+  .calc-table th{ background:#e8eaf6; color:#283593; font-weight:700; padding:4px; text-align:center; border:1px solid #c5cae9; }
+  .calc-table td{ border:1px solid #e0e0e0; padding:2px 3px; text-align:center; }
+  .ci{ width:100%; border:none; background:transparent; font-size:11px; text-align:center; font-family:'Nunito',sans-serif; color:var(--text); }
+  .ci:focus{ outline:2px solid #90caf9; border-radius:3px; }
+  .ci.cerror{ background:#fff3f3; color:#c62828; }
+  .ci.cok   { background:#f1f8f1; color:#2e7d32; }
+  .add-row-btn{ background:#e8f5e9; border:1.5px solid #a5d6a7; border-radius:6px; padding:3px 8px; font-size:11px; font-weight:700; color:#2e7d32; cursor:pointer; margin-top:4px; }
+  .add-row-btn:hover{ background:#c8e6c9; }
+  .check-btn{ background:linear-gradient(135deg,#ff6f00,#ffa000); color:#fff; border:none; border-radius:8px; padding:5px 10px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; cursor:pointer; margin-top:5px; display:inline-flex; align-items:center; gap:4px; transition:all .2s; }
+  .check-btn:hover{ background:linear-gradient(135deg,#e65100,#ff6f00); transform:translateY(-1px); }
+  .hint-box{ background:linear-gradient(135deg,#fff8e1,#fff3cd); border:2px solid #ffc107; border-radius:10px; padding:7px; margin-top:7px; display:none; animation:pop .35s ease; }
+  .hint-box.show{ display:block; }
+  .result-box{ background:linear-gradient(135deg,#e8f5e9,#c8e6c9); border:2px solid #4caf50; border-radius:10px; padding:7px; margin-top:7px; display:none; animation:pop .35s ease; }
+  .result-box.show{ display:block; }
+  @keyframes pop{ from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);} }
+  .hint-title{ font-size:12px; font-weight:800; color:#e65100; margin-bottom:3px; }
+  .res-title { font-size:12px; font-weight:800; color:#2e7d32; margin-bottom:3px; }
+  .hint-box p,.result-box p{ font-size:11px; line-height:1.4; }
+  .btn-run{ background:linear-gradient(135deg,#2e7d32,#43a047); color:#fff; border:none; border-radius:9px; width:100%; padding:9px; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; transition:all .2s; margin-top:8px; display:flex; align-items:center; justify-content:center; gap:5px; }
+  .btn-run:hover{ background:linear-gradient(135deg,#1b5e20,#2e7d32); transform:translateY(-1px); }
+  .btn-run:disabled{ background:#bdbdbd; cursor:not-allowed; transform:none; }
+  .btn-sm{ border:1.5px solid #90caf9; border-radius:6px; padding:3px 8px; font-size:11px; font-weight:700; background:#e3f2fd; color:#0d47a1; cursor:pointer; transition:all .15s; }
+  .btn-sm:hover{ background:#bbdefb; }
+  .btn-reset{ background:#fff3e0; border:1.5px solid #ffcc80; border-radius:6px; padding:4px 10px; font-size:11px; font-weight:700; color:#e65100; cursor:pointer; width:100%; margin-top:4px; transition:all .15s; }
+  .btn-reset:hover{ background:#ffe0b2; }
+  .bottom-panel{ grid-column:2; grid-row:2; padding:8px; overflow-y:auto; }
+  .wt{ width:100%; border-collapse:collapse; font-size:11px; }
+  .wt th{ background:#e3f2fd; color:#0d47a1; font-weight:700; padding:4px; border:1px solid #bbdefb; text-align:center; }
+  .wt td{ border:1px solid #e0e0e0; padding:2px 3px; }
+  .wi{ width:100%; border:none; background:transparent; font-size:11px; font-family:'Nunito',sans-serif; color:var(--text); text-align:center; }
+  .wi:focus{ outline:2px solid #90caf9; border-radius:3px; }
+  .wi.synced{ background:#f1f8f1; color:#2e7d32; }
+  .drag-ghost{ position:fixed; pointer-events:none; z-index:9999; font-size:30px; opacity:.75; transform:translate(-50%,-50%); display:none; }
+  .vdata-block{ border:1.5px solid #90caf9; border-radius:9px; padding:6px 8px; margin-bottom:7px; background:#f7faff; }
+  .vdata-header{ display:flex; align-items:center; gap:6px; font-size:12px; font-weight:800; color:#0d47a1; margin-bottom:5px; padding-bottom:4px; border-bottom:1px solid #e3f2fd; }
+  .vdata-header .vd-emoji{ font-size:18px; }
+  .vdata-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:4px; }
+  .vdata-field{ display:flex; flex-direction:column; gap:2px; }
+  .vdata-field label{ font-size:10px; font-weight:700; color:#546e7a; text-transform:uppercase; }
+  .vdf-row{ display:flex; align-items:center; gap:2px; }
+  .vdata-input{ width:100%; border:1px solid #90caf9; border-radius:5px; padding:3px 4px; font-size:11px; font-family:'Nunito',sans-serif; background:#fff; color:var(--text); }
+  .vdata-input:focus{ outline:none; border-color:#1565c0; }
+  .vdata-input.synced{ border-color:#43a047; background:#f1f8f1; }
+  .vdata-input.auto{ border-color:#ff9800; background:#fff8e1; }
+  .vdata-unit{ font-size:10px; color:#90a4ae; white-space:nowrap; }
+  .auto-note{ font-size:10px; color:#e65100; font-weight:700; margin-top:3px; }
+  ::-webkit-scrollbar{ width:4px; }
+  ::-webkit-scrollbar-thumb{ background:#90caf9; border-radius:4px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="logo">🚀 Симулатор на Движение</div>
+    <div class="sub">Интерактивен физически симулатор за ученици</div>
+  </div>
+</header>
+<div class="app">
+<div class="panel left-panel">
+  <h3>📝 Условие на задачата</h3>
+  <textarea class="task-ta" id="taskText" placeholder="Напиши условието на задачата тук…&#10;Пример: Кола се движи с 60 км/ч и изминава 120 км. За колко часа пристига?"></textarea>
+  <div class="sec">🛤️ Вид настилка / среда</div>
+  <div class="tiles-grid">
+    <div class="tile tile-road"     onclick="setSurface('road',this)"    >🛣️<br>Път</div>
+    <div class="tile tile-highway"  onclick="setSurface('highway',this)" >🛤️<br>Шосе</div>
+    <div class="tile tile-mountain" onclick="setSurface('mountain',this)">⛰️<br>Планин.</div>
+    <div class="tile tile-rail"     onclick="setSurface('rail',this)"    >🚉<br>ЖП</div>
+    <div class="tile tile-river"    onclick="setSurface('river',this)"   >🌊<br>Вода</div>
+    <div class="tile tile-air"      onclick="setSurface('air',this)"     >☁️<br>Въздух</div>
+  </div>
+  <div class="sec">🚗 Превозни средства — плъзни към сцената</div>
+  <div class="vpal">
+    <div class="vbtn" draggable="true" data-emoji="🚗"  data-name="Кола"       ondragstart="sd(event,this)">🚗<span class="vl">Кола</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚙"  data-name="Джип"       ondragstart="sd(event,this)">🚙<span class="vl">Джип</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚕"  data-name="Такси"      ondragstart="sd(event,this)">🚕<span class="vl">Такси</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚌"  data-name="Автобус"    ondragstart="sd(event,this)">🚌<span class="vl">Авт.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚎"  data-name="Тролей"     ondragstart="sd(event,this)">🚎<span class="vl">Трол.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚐"  data-name="Мини-бус"   ondragstart="sd(event,this)">🚐<span class="vl">Мини</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚛"  data-name="Камион"     ondragstart="sd(event,this)">🚛<span class="vl">Камион</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚚"  data-name="Доставка"   ondragstart="sd(event,this)">🚚<span class="vl">Дост.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🏎️"  data-name="Болид"      ondragstart="sd(event,this)">🏎️<span class="vl">Болид</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚑"  data-name="Линейка"    ondragstart="sd(event,this)">🚑<span class="vl">Лин.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚒"  data-name="Пожарна"    ondragstart="sd(event,this)">🚒<span class="vl">Пожар.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚓"  data-name="Полиция"    ondragstart="sd(event,this)">🚓<span class="vl">Пол.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🏍️"  data-name="Мотор"      ondragstart="sd(event,this)">🏍️<span class="vl">Мотор</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛵"  data-name="Скутер"     ondragstart="sd(event,this)">🛵<span class="vl">Скутер</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚲"  data-name="Велосипед"  ondragstart="sd(event,this)">🚲<span class="vl">Вел.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛺"  data-name="Рикша"      ondragstart="sd(event,this)">🛺<span class="vl">Рикша</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚶"  data-name="Човек"      ondragstart="sd(event,this)">🚶<span class="vl">Човек</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🏃"  data-name="Бегач"      ondragstart="sd(event,this)">🏃<span class="vl">Бегач</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🧗"  data-name="Турист"     ondragstart="sd(event,this)">🧗<span class="vl">Тур.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🐎"  data-name="Кон"        ondragstart="sd(event,this)">🐎<span class="vl">Кон</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚂"  data-name="Влак"       ondragstart="sd(event,this)">🚂<span class="vl">Влак</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚄"  data-name="Бърз влак"  ondragstart="sd(event,this)">🚄<span class="vl">Бързвл.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚇"  data-name="Метро"      ondragstart="sd(event,this)">🚇<span class="vl">Метро</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚃"  data-name="Трамвай"    ondragstart="sd(event,this)">🚃<span class="vl">Трам.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="⛵"  data-name="Катер"      ondragstart="sd(event,this)">⛵<span class="vl">Катер</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚤"  data-name="Моторница"  ondragstart="sd(event,this)">🚤<span class="vl">Мотор.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛥️"  data-name="Яхта"       ondragstart="sd(event,this)">🛥️<span class="vl">Яхта</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚢"  data-name="Кораб"      ondragstart="sd(event,this)">🚢<span class="vl">Кораб</span></div>
+    <div class="vbtn" draggable="true" data-emoji="⛴️"  data-name="Ферибот"    ondragstart="sd(event,this)">⛴️<span class="vl">Фери.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🪵"  data-name="Сал"        ondragstart="sd(event,this)">🪵<span class="vl">Сал</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛶"  data-name="Лодка"      ondragstart="sd(event,this)">🛶<span class="vl">Лодка</span></div>
+    <div class="vbtn" draggable="true" data-emoji="✈️"  data-name="Самолет"    ondragstart="sd(event,this)">✈️<span class="vl">Самол.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛩️"  data-name="Мал.самол." ondragstart="sd(event,this)">🛩️<span class="vl">М.Сам.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚁"  data-name="Хеликоптер" ondragstart="sd(event,this)">🚁<span class="vl">Хел.</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🎈"  data-name="Балон"      ondragstart="sd(event,this)">🎈<span class="vl">Балон</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🛸"  data-name="Дрон"       ondragstart="sd(event,this)">🛸<span class="vl">Дрон</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🚀"  data-name="Ракета"     ondragstart="sd(event,this)">🚀<span class="vl">Ракета</span></div>
+    <div class="vbtn" draggable="true" data-emoji="🪂"  data-name="Парашут"    ondragstart="sd(event,this)">🪂<span class="vl">Пар.</span></div>
+  </div>
+  <div class="sec">🎯 В сцената</div>
+  <div id="vehiclesList"><div style="font-size:11px;color:#90a4ae;padding:3px;">Плъзни превозно средство в сцената →</div></div>
+  <div class="formula-box">
+    <strong>📐 S = v × t &nbsp;|&nbsp; v = S ÷ t &nbsp;|&nbsp; t = S ÷ v</strong>
+    <div style="font-size:10px;color:#3949ab;">S – км &nbsp; v – км/ч &nbsp; t – часове</div>
+  </div>
+</div>
+<div class="canvas-area" id="canvasArea" ondragover="event.preventDefault()" ondrop="dropV(event)">
+  <canvas id="simCanvas"></canvas>
+  <div class="drop-hint" id="dropHint">⬇️ Плъзни превозно средство тук<br><span style="font-size:11px;opacity:.5;">и избери настилка отляво</span></div>
+  <div class="prog-wrap" id="progWrap"><div class="prog-bar" id="progBar"></div><div class="prog-label" id="progLabel">0%</div></div>
+  <div class="time-disp" id="timeDisp">⏱ 0.00 ч</div>
+  <div class="coll-flash" id="collFlash"></div>
+</div>
+<div class="panel right-panel">
+  <h3>📊 Данни и пресмятания</h3>
+  <div class="tab-btns">
+    <button class="tab-btn active" onclick="switchTab('data',this)">Данни</button>
+    <button class="tab-btn" onclick="switchTab('calc',this)">Пресмятания</button>
+    <button class="tab-btn" onclick="switchTab('result',this)">Резултат</button>
+  </div>
+  <div class="tab-content active" id="tab-data">
+    <div id="veh-data-blocks"><div style="font-size:11px;color:#90a4ae;padding:4px 0;">Добави превозно средство в сцената, за да въведеш данните му.</div></div>
+    <div style="margin-top:7px;display:flex;gap:4px;flex-wrap:wrap;">
+      <button class="dir-btn active" id="dir-right" onclick="setDir('right')">→ Надясно</button>
+      <button class="dir-btn" id="dir-left"  onclick="setDir('left')">← Наляво</button>
+      <button class="dir-btn" id="dir-meet"  onclick="setDir('meet')">↔ Насрещно</button>
+    </div>
+    <div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap;">
+      <button class="btn-sm" onclick="clearScene()">🗑️ Изчисти</button>
+    </div>
+  </div>
+  <div class="tab-content" id="tab-calc">
+    <div style="font-size:11px;color:#546e7a;margin-bottom:5px;">Запиши пресмятанията си. Системата ги проверява.</div>
+    <table class="calc-table" id="calcTable">
+      <tr><th>Формула</th><th>Заместване</th><th>Резултат</th></tr>
+      <tr>
+        <td><input class="ci" placeholder="t = S / v" id="cf-1"></td>
+        <td><input class="ci" placeholder="120 / 60"  id="cs-1" oninput="evalC(1)"></td>
+        <td><input class="ci" placeholder="2"         id="cr-1" oninput="checkR(1)"></td>
+      </tr>
+    </table>
+    <button class="add-row-btn" onclick="addCalcRow()">+ Добави ред</button>
+    <button class="check-btn"   onclick="checkAll()">🔍 Провери</button>
+  </div>
+  <div class="tab-content" id="tab-result">
+    <div style="font-size:11px;color:#546e7a;margin-bottom:4px;">Твоят отговор:</div>
+    <textarea class="task-ta" id="studentAnswer" placeholder="Отговор: …" style="height:55px;"></textarea>
+    <div class="sec" style="margin-top:6px;">Автоматично изчислено:</div>
+    <div id="autoResult" style="font-size:12px;background:#e3f2fd;border-radius:8px;padding:7px;margin-top:3px;color:#0d47a1;font-weight:700;min-height:32px;"></div>
+  </div>
+  <div class="hint-box" id="hintBox"><div class="hint-title">💡 Подсказка</div><p id="hintText"></p></div>
+  <div class="result-box" id="resultBox"><div class="res-title">🎉 Правилно!</div><p id="resultText"></p></div>
+  <button class="btn-run" id="runBtn" onclick="runAnim()">▶ Пусни анимацията</button>
+  <button class="btn-reset" onclick="resetAnim()">↺ Нулирай</button>
+</div>
+<div class="panel bottom-panel">
+  <h3>📋 Работна таблица</h3>
+  <table class="wt" id="workTable">
+    <tr><th>Величина</th><th>Знак</th><th>Стойност</th><th>Единица</th><th>Бележка</th></tr>
+    <tr>
+      <td><input class="wi" placeholder="Скорост"    id="wt-1-1"></td>
+      <td><input class="wi" placeholder="v"          id="wt-1-2"></td>
+      <td><input class="wi" placeholder="60"         id="wt-1-3" oninput="sfw(1)"></td>
+      <td><input class="wi" placeholder="км/ч"       id="wt-1-4"></td>
+      <td><input class="wi" placeholder="Дадено"     id="wt-1-5"></td>
+    </tr>
+    <tr>
+      <td><input class="wi" placeholder="Разстояние" id="wt-2-1"></td>
+      <td><input class="wi" placeholder="S"          id="wt-2-2"></td>
+      <td><input class="wi" placeholder="120"        id="wt-2-3" oninput="sfw(2)"></td>
+      <td><input class="wi" placeholder="км"         id="wt-2-4"></td>
+      <td><input class="wi" placeholder="Дадено"     id="wt-2-5"></td>
+    </tr>
+    <tr>
+      <td><input class="wi" placeholder="Время"      id="wt-3-1"></td>
+      <td><input class="wi" placeholder="t"          id="wt-3-2"></td>
+      <td><input class="wi" placeholder="?"          id="wt-3-3" oninput="sfw(3)"></td>
+      <td><input class="wi" placeholder="ч"          id="wt-3-4"></td>
+      <td><input class="wi" placeholder="Намери"     id="wt-3-5"></td>
+    </tr>
+  </table>
+  <button class="add-row-btn" onclick="addWorkRow()">+ Добави ред</button>
+</div>
+</div>
+<div class="drag-ghost" id="dragGhost"></div>
+<script>
+let surface='road';
+let vehicles=[];
+let dir='right';
+let animRunning=false, animId=null;
+let calcRowCount=1, workRowCount=3;
+let lock=false;
+const SURF={
+  road:    { lanes:[0.655,0.765], drawBg:drawRoad    },
+  highway: { lanes:[0.655,0.765], drawBg:drawHighway },
+  mountain:{ lanes:[0.775,0.815], drawBg:drawMountain},
+  rail:    { lanes:[0.735,0.775], drawBg:drawRail    },
+  river:   { lanes:[0.600,0.680], drawBg:drawRiver   },
+  air:     { lanes:[0.220,0.400], drawBg:drawAir     }
+};
+const ca=document.getElementById('canvasArea');
+const cv=document.getElementById('simCanvas');
+const cx=cv.getContext('2d');
+function resize(){cv.width=ca.clientWidth; cv.height=ca.clientHeight; draw();}
+window.addEventListener('resize',resize);
+function cloud(x,y,r){
+  cx.fillStyle='rgba(255,255,255,0.83)';
+  [[0,0,r],[r*.6,-r*.3,r*.7],[r*1.2,0,r*.8],[r*.6,r*.3,r*.6]].forEach(([dx,dy,rr])=>{
+    cx.beginPath(); cx.arc(x+dx,y+dy,rr,0,Math.PI*2); cx.fill();
+  });
+}
+function tree(x,y,s=1){
+  cx.fillStyle='#5d4037'; cx.fillRect(x-3*s,y,6*s,20*s);
+  cx.fillStyle='#2e7d32'; cx.beginPath(); cx.arc(x,y-8*s,16*s,0,Math.PI*2); cx.fill();
+}
+function twoLaneRoad(cx,w,h,roadTop,roadBot,midY,laneYs,roadColor='#546e7a'){
+  cx.fillStyle=roadColor; cx.fillRect(0,h*roadTop,w,h*(roadBot-roadTop));
+  cx.fillStyle='#fdd835'; cx.fillRect(0,h*midY-2,w,4);
+  cx.setLineDash([28,18]); cx.strokeStyle='rgba(255,255,255,.4)'; cx.lineWidth=2;
+  laneYs.forEach(y=>{ cx.beginPath(); cx.moveTo(0,h*y); cx.lineTo(w,h*y); cx.stroke(); });
+  cx.setLineDash([]);
+}
+function drawRoad(w,h){
+  let g=cx.createLinearGradient(0,0,0,h*.57); g.addColorStop(0,'#87CEEB'); g.addColorStop(1,'#c8e6c9');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h*.57);
+  cloud(w*.12,h*.07,46); cloud(w*.57,h*.05,64); cloud(w*.82,h*.1,36);
+  cx.fillStyle='#81c784'; cx.beginPath();
+  cx.moveTo(0,h*.57); cx.bezierCurveTo(w*.25,h*.38,w*.55,h*.52,w*.75,h*.36);
+  cx.bezierCurveTo(w*.9,h*.22,w,h*.42,w,h*.57); cx.closePath(); cx.fill();
+  cx.fillStyle='#a5d6a7'; cx.fillRect(0,h*.57,w,h*.43);
+  twoLaneRoad(cx,w,h,.60,.82,.71,[.655,.765]);
+  cx.fillStyle='#90a4ae'; cx.fillRect(0,h*.82,w,h*.04);
+  for(let x=55;x<w;x+=165) tree(x,h*.555);
+}
+function drawHighway(w,h){
+  let g=cx.createLinearGradient(0,0,0,h*.5); g.addColorStop(0,'#90caf9'); g.addColorStop(1,'#b3e5fc');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h*.5);
+  cloud(w*.18,h*.06,73); cloud(w*.72,h*.09,50);
+  cx.fillStyle='#66bb6a'; cx.fillRect(0,h*.5,w,h*.1);
+  twoLaneRoad(cx,w,h,.60,.82,.71,[.655,.765],'#37474f');
+  cx.fillStyle='#4e6d40'; cx.fillRect(0,h*.82,w,h*.18);
+}
+function drawMountain(w,h){
+  let g=cx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#80deea'); g.addColorStop(1,'#b2dfdb');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h);
+  [[.1,.42],[.32,.27],[.6,.36],[.84,.22]].forEach(([mx,my])=>{
+    cx.fillStyle='#78909c'; cx.beginPath(); cx.moveTo(w*mx-85,h*.9); cx.lineTo(w*mx,h*my); cx.lineTo(w*mx+85,h*.9); cx.closePath(); cx.fill();
+    cx.fillStyle='#eceff1'; cx.beginPath(); cx.moveTo(w*mx-22,h*(my+.07)); cx.lineTo(w*mx,h*my); cx.lineTo(w*mx+22,h*(my+.07)); cx.closePath(); cx.fill();
+  });
+  cx.fillStyle='#a5d6a7'; cx.fillRect(0,h*.74,w,h*.26);
+  twoLaneRoad(cx,w,h,.76,.83,.795,[.775,.815],'#bcaaa4');
+}
+function drawRail(w,h){
+  let g=cx.createLinearGradient(0,0,0,h*.62); g.addColorStop(0,'#b3e5fc'); g.addColorStop(1,'#e8f5e9');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h*.62);
+  cloud(w*.28,h*.07,60);
+  cx.fillStyle='#66bb6a'; cx.fillRect(0,h*.62,w,h*.38);
+  cx.fillStyle='#9e9e9e'; cx.fillRect(0,h*.71,w,h*.15);
+  cx.fillStyle='#5d4037'; for(let x=8;x<w;x+=22){ cx.fillRect(x,h*.7,10,h*.16); }
+  cx.fillStyle='#bdbdbd'; cx.fillRect(0,h*.735,w,5); cx.fillRect(0,h*.805,w,5);
+  cx.strokeStyle='rgba(255,200,0,.5)'; cx.lineWidth=2; cx.setLineDash([20,20]);
+  cx.beginPath(); cx.moveTo(0,h*.77); cx.lineTo(w,h*.77); cx.stroke(); cx.setLineDash([]);
+}
+function drawRiver(w,h){
+  let g=cx.createLinearGradient(0,0,0,h*.42); g.addColorStop(0,'#81d4fa'); g.addColorStop(1,'#b3e5fc');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h*.42);
+  cloud(w*.08,h*.05,54); cloud(w*.68,h*.07,40);
+  cx.fillStyle='#a5d6a7'; cx.fillRect(0,h*.42,w,h*.1);
+  let wg=cx.createLinearGradient(0,h*.52,0,h); wg.addColorStop(0,'#29b6f6'); wg.addColorStop(1,'#0277bd');
+  cx.fillStyle=wg; cx.fillRect(0,h*.52,w,h*.48);
+  cx.strokeStyle='rgba(255,255,255,.22)'; cx.lineWidth=2; cx.setLineDash([20,20]);
+  cx.beginPath(); cx.moveTo(0,h*.64); cx.lineTo(w,h*.64); cx.stroke();
+  cx.setLineDash([]);
+  for(let y=.58;y<1;y+=.08){ cx.strokeStyle='rgba(255,255,255,.1)'; cx.lineWidth=1.5; cx.beginPath(); cx.moveTo(0,h*y); cx.lineTo(w,h*y); cx.stroke(); }
+  cx.fillStyle='#388e3c'; cx.fillRect(0,h*.42,w,h*.05);
+  for(let x=75;x<w;x+=130) tree(x,h*.41);
+}
+function drawAir(w,h){
+  let g=cx.createLinearGradient(0,0,0,h); g.addColorStop(0,'#1565c0'); g.addColorStop(.5,'#42a5f5'); g.addColorStop(1,'#b3e5fc');
+  cx.fillStyle=g; cx.fillRect(0,0,w,h);
+  for(let i=0;i<9;i++) cloud(w*(.04+i*.12),h*(.04+Math.sin(i)*.06+.03*i),34+i*7);
+  cx.strokeStyle='rgba(255,255,255,.2)'; cx.lineWidth=1.5; cx.setLineDash([25,25]);
+  [.22,.40].forEach(y=>{ cx.beginPath(); cx.moveTo(0,h*y); cx.lineTo(w,h*y); cx.stroke(); });
+  cx.setLineDash([]);
+  cx.fillStyle='#388e3c'; cx.fillRect(0,h*.88,w,h*.12);
+  for(let x=45;x<w;x+=95) tree(x,h*.86,.7);
+}
+function draw(){
+  const w=cv.width,h=cv.height; if(!w||!h) return;
+  cx.clearRect(0,0,w,h);
+  const s=SURF[surface]||SURF.road;
+  s.drawBg(w,h);
+  document.getElementById('dropHint').style.opacity=vehicles.length?'0':'1';
+  vehicles.forEach(v=>{
+    const vy=h*(v.laneY||s.lanes[0]);
+    cx.save();
+    cx.font='28px serif'; cx.textBaseline='bottom'; cx.textAlign='center';
+    const defaultMirror=(v.dir==='left');
+    const shouldMirror=v.mirrored ? !defaultMirror : defaultMirror;
+    if(shouldMirror){ cx.translate(v.x,0); cx.scale(-1,1); cx.translate(-v.x,0); }
+    cx.fillText(v.emoji,v.x,vy+5);
+    cx.restore();
+    if(v.speed>0){
+      const tw=54,th=15,tx=v.x,ty=vy-28;
+      cx.fillStyle='rgba(255,255,255,.88)';
+      cx.beginPath(); cx.roundRect(tx-tw/2,ty-th/2,tw,th,4); cx.fill();
+      cx.strokeStyle='#1565c0'; cx.lineWidth=1.2;
+      cx.beginPath(); cx.roundRect(tx-tw/2,ty-th/2,tw,th,4); cx.stroke();
+      cx.fillStyle='#0d47a1'; cx.font='bold 10px Nunito,sans-serif';
+      cx.textAlign='center'; cx.textBaseline='middle';
+      cx.fillText(v.speed+' км/ч',tx,ty);
+    }
+  });
+}
+function setSurface(name,el){
+  surface=name;
+  document.querySelectorAll('.tile').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  resetAnim(); draw();
+}
+let dgEmoji='',dgName='';
+function sd(e,el){
+  dgEmoji=el.dataset.emoji; dgName=el.dataset.name;
+  e.dataTransfer.setData('text/plain',JSON.stringify({emoji:dgEmoji,name:dgName}));
+  const g=document.getElementById('dragGhost');
+  g.textContent=dgEmoji; g.style.display='block';
+  document.addEventListener('dragover',mvGhost);
+  document.addEventListener('dragend',endDrag);
+}
+function mvGhost(e){ const g=document.getElementById('dragGhost'); g.style.left=e.clientX+'px'; g.style.top=e.clientY+'px'; }
+function endDrag(){ document.getElementById('dragGhost').style.display='none'; document.removeEventListener('dragover',mvGhost); document.removeEventListener('dragend',endDrag); }
+function dropV(e){
+  e.preventDefault();
+  let d; try{ d=JSON.parse(e.dataTransfer.getData('text/plain')); }catch{ return; }
+  const rect=ca.getBoundingClientRect();
+  const relX=e.clientX-rect.left;
+  const s=SURF[surface]||SURF.road;
+  const lanes=s.lanes;
+  let lane=0;
+  if(dir==='meet') lane=vehicles.length%2===0?0:1;
+  vehicles.push({ id:Date.now(), emoji:d.emoji, name:d.name, speed:0, dist:0, time:0, dir, mirrored:false, x:relX, laneY:lanes[lane], lane });
+  updateList(); renderDataBlocks(); draw();
+}
+function updateList(){
+  const el=document.getElementById('vehiclesList');
+  if(!vehicles.length){ el.innerHTML='<div style="font-size:11px;color:#90a4ae;padding:3px;">Плъзни превозно средство в сцената →</div>'; renderDataBlocks(); return; }
+  el.innerHTML=vehicles.map(v=>`
+    <div class="veh-row" id="vrow-${v.id}">
+      <span class="ve">${v.emoji}</span>
+      <span class="vn">${v.name}</span>
+      <button class="mirror-btn ${v.mirrored?'on':''}" title="Огледално обръщане" onclick="toggleMirror(${v.id})">⟷</button>
+      <button class="remove-btn" onclick="removeV(${v.id})">✕</button>
+    </div>
+  `).join('');
+  renderDataBlocks();
+}
+function renderDataBlocks(){
+  const wrap=document.getElementById('veh-data-blocks');
+  if(!vehicles.length){ wrap.innerHTML='<div style="font-size:11px;color:#90a4ae;padding:4px 0;">Добави превозно средство в сцената, за да въведеш данните му.</div>'; return; }
+  wrap.innerHTML=vehicles.map((v,i)=>`
+    <div class="vdata-block">
+      <div class="vdata-header"><span class="vd-emoji">${v.emoji}</span><span>ПС ${i+1}: ${v.name}</span></div>
+      <div class="vdata-grid">
+        <div class="vdata-field"><label>🚗 Скорост</label><div class="vdf-row"><input class="vdata-input" id="vd-spd-${v.id}" type="number" min="0" value="${v.speed||''}" placeholder="0" oninput="vdChange(${v.id},'speed',this.value)"><span class="vdata-unit">км/ч</span></div></div>
+        <div class="vdata-field"><label>📏 Разст.</label><div class="vdf-row"><input class="vdata-input" id="vd-dist-${v.id}" type="number" min="0" value="${v.dist||''}" placeholder="0" oninput="vdChange(${v.id},'dist',this.value)"><span class="vdata-unit">км</span></div></div>
+        <div class="vdata-field"><label>⏱️ Время</label><div class="vdf-row"><input class="vdata-input" id="vd-time-${v.id}" type="number" min="0" value="${v.time||''}" placeholder="?" oninput="vdChange(${v.id},'time',this.value)"><span class="vdata-unit">ч</span></div></div>
+      </div>
+      <div class="auto-note" id="vd-auto-${v.id}"></div>
+    </div>
+  `).join('');
+}
+function vdChange(id,field,val){
+  if(lock) return;
+  const v=vehicles.find(x=>x.id===id); if(!v) return;
+  v[field]=parseFloat(val)||0;
+  autoCalcV(v); draw();
+  const i=vehicles.indexOf(v);
+  if(i===0){ lock=true; if(field==='speed') setWV(1,v.speed); if(field==='dist') setWV(2,v.dist); if(field==='time') setWV(3,v.time); lock=false; }
+}
+function autoCalcV(v){
+  const {speed,dist,time}=v;
+  let msg='';
+  lock=true;
+  if(speed>0&&dist>0&&!time){ v.time=Math.round(dist/speed*100)/100; const el=document.getElementById(`vd-time-${v.id}`); if(el){el.value=v.time;el.classList.add('auto');} msg=`t = ${dist} ÷ ${speed} = ${v.time} ч`; }
+  else if(speed>0&&time>0&&!dist){ v.dist=Math.round(speed*time*100)/100; const el=document.getElementById(`vd-dist-${v.id}`); if(el){el.value=v.dist;el.classList.add('auto');} msg=`S = ${speed} × ${time} = ${v.dist} км`; }
+  else if(dist>0&&time>0&&!speed){ v.speed=Math.round(dist/time*100)/100; const el=document.getElementById(`vd-spd-${v.id}`); if(el){el.value=v.speed;el.classList.add('auto');} msg=`v = ${dist} ÷ ${time} = ${v.speed} км/ч`; }
+  lock=false;
+  const noteEl=document.getElementById(`vd-auto-${v.id}`); if(noteEl) noteEl.textContent=msg?('⚡ '+msg):'';
+  document.getElementById('autoResult').textContent=vehicles.map((vv,i)=>{ if(!vv.speed||!vv.dist) return ''; return `ПС${i+1}: t = ${vv.dist} ÷ ${vv.speed} = ${(vv.dist/vv.speed).toFixed(2)} ч`; }).filter(Boolean).join(' | ');
+}
+function toggleMirror(id){ const v=vehicles.find(x=>x.id===id); if(!v) return; v.mirrored=!v.mirrored; updateList(); draw(); }
+function removeV(id){ vehicles=vehicles.filter(v=>v.id!==id); updateList(); draw(); }
+function setDir(d){
+  dir=d;
+  ['right','left','meet'].forEach(x=>document.getElementById('dir-'+x).classList.toggle('active',x===d));
+  const lanes=(SURF[surface]||SURF.road).lanes;
+  vehicles.forEach((v,i)=>{
+    if(d==='meet'){ v.dir=i%2===0?'right':'left'; v.lane=i%2===0?0:1; v.laneY=lanes[v.lane]; }
+    else { v.dir=d; v.lane=0; v.laneY=lanes[0]; }
+  });
+  draw();
+}
+function setWV(row,val){ const el=document.getElementById(`wt-${row}-3`); if(!el) return; el.value=val!==''?val:''; el.classList.toggle('synced',!!val&&val!==''); }
+function sfw(row){
+  if(lock) return;
+  const val=parseFloat(document.getElementById(`wt-${row}-3`)?.value)||0;
+  if(!vehicles.length) return;
+  const v=vehicles[0]; lock=true;
+  if(row===1){ v.speed=val; const el=document.getElementById(`vd-spd-${v.id}`); if(el) el.value=val||''; }
+  if(row===2){ v.dist=val;  const el=document.getElementById(`vd-dist-${v.id}`); if(el) el.value=val||''; }
+  if(row===3){ v.time=val;  const el=document.getElementById(`vd-time-${v.id}`); if(el) el.value=val||''; }
+  lock=false; autoCalcV(v); draw();
+}
+function switchTab(name,el){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active'); document.getElementById('tab-'+name).classList.add('active');
+}
+function addWorkRow(){
+  workRowCount++;
+  const r=workRowCount,t=document.getElementById('workTable'),tr=document.createElement('tr');
+  tr.innerHTML=`<td><input class="wi" placeholder="Величина" id="wt-${r}-1"></td><td><input class="wi" placeholder="Знак" id="wt-${r}-2"></td><td><input class="wi" placeholder="Стойност" id="wt-${r}-3" oninput="sfw(${r})"></td><td><input class="wi" placeholder="Ед." id="wt-${r}-4"></td><td><input class="wi" placeholder="Бел." id="wt-${r}-5"></td>`;
+  t.appendChild(tr);
+}
+function addCalcRow(){
+  calcRowCount++;
+  const r=calcRowCount,t=document.getElementById('calcTable'),tr=document.createElement('tr');
+  tr.innerHTML=`<td><input class="ci" placeholder="формула" id="cf-${r}"></td><td><input class="ci" placeholder="заместване" id="cs-${r}" oninput="evalC(${r})"></td><td><input class="ci" placeholder="резултат" id="cr-${r}" oninput="checkR(${r})"></td>`;
+  t.appendChild(tr);
+}
+function seval(expr){ if(!/^[\d\s\+\-\*\/\.\(\)]+$/.test(expr)) return NaN; try{ return Function('"use strict";return('+expr+')')(); }catch{ return NaN; } }
+function evalC(r){ const s=document.getElementById(`cs-${r}`)?.value.trim(); if(!s) return; const n=seval(s); if(!isNaN(n)) document.getElementById(`cr-${r}`).placeholder='≈ '+Math.round(n*100)/100; }
+function checkR(r){ const sub=document.getElementById(`cs-${r}`)?.value.trim(); const el=document.getElementById(`cr-${r}`); const u=parseFloat(el.value); if(!sub||isNaN(u)){el.classList.remove('cerror','cok');return;} const c=seval(sub); if(isNaN(c)) return; const ok=Math.abs(u-c)<0.05*Math.abs(c)+0.01; el.classList.toggle('cerror',!ok); el.classList.toggle('cok',ok); }
+function checkAll(){
+  const errs=[];
+  for(let i=1;i<=calcRowCount;i++){ const sub=document.getElementById(`cs-${i}`)?.value.trim(); const el=document.getElementById(`cr-${i}`); if(!sub||!el?.value) continue; const u=parseFloat(el.value); if(isNaN(u)) continue; const c=seval(sub); if(isNaN(c)) continue; if(Math.abs(u-c)>=0.05*Math.abs(c)+0.01) errs.push(i); }
+  if(errs.length){ showHint(`Има грешка в ред ${errs.join(', ')}. Провери дали резултатът съответства на заместването. S = v × t`); }
+  else { document.getElementById('hintBox').classList.remove('show'); document.getElementById('resultBox').classList.add('show'); document.getElementById('resultText').textContent='Всички пресмятания са верни! Пусни анимацията.'; }
+}
+let animDur=5000;
+function runAnim(){
+  if(animRunning) return;
+  if(!vehicles.length){ showHint('Добави поне едно превозно средство към сцената!'); return; }
+  const bad=vehicles.find(v=>!(v.speed>0));
+  if(bad){ showHint(`Въведи скорост за "${bad.name}" в таб Данни!`); return; }
+  vehicles.forEach(v=>{ if(v.speed>0&&v.dist>0&&!v.time) v.time=v.dist/v.speed; if(v.speed>0&&v.time>0&&!v.dist) v.dist=v.speed*v.time; if(!v.time) v.time=1; });
+  const sub1=document.getElementById('cs-1')?.value.trim();
+  const res1=document.getElementById('cr-1')?.value.trim();
+  if(sub1&&res1){ const c=seval(sub1),u=parseFloat(res1); if(!isNaN(c)&&!isNaN(u)&&Math.abs(u-c)>=0.05*Math.abs(c)+0.01){ showHint(`Пресмятането в ред 1 изглежда грешно — резултатът ${u} не съответства на ${sub1} ≈ ${Math.round(c*100)/100}. Провери и опитай отново.`); return; } }
+  const w=cv.width;
+  const lanes=(SURF[surface]||SURF.road).lanes;
+  const maxTime=Math.max(...vehicles.map(v=>v.time||1));
+  animDur=Math.min(Math.max(maxTime*900,2200),9000);
+  vehicles.forEach((v,i)=>{
+    if(dir==='meet'){ v.dir=i%2===0?'right':'left'; v.lane=i%2===0?0:1; v.laneY=lanes[v.lane]; v.x=i%2===0?40:w-40; }
+    else if(dir==='left'){ v.x=w-40; v.laneY=lanes[0]; }
+    else { v.x=40; v.laneY=lanes[0]; }
+  });
+  animRunning=true;
+  document.getElementById('progWrap').style.display='block';
+  document.getElementById('timeDisp').style.display='block';
+  document.getElementById('runBtn').disabled=true;
+  document.getElementById('hintBox').classList.remove('show');
+  const t0=performance.now(); let collFired=false;
+  function frame(now){
+    const elapsedSec=(now-t0)/1000;
+    const masterProg=Math.min(elapsedSec/(animDur/1000),1);
+    const curT=maxTime*masterProg;
+    vehicles.forEach(v=>{
+      const vTimeSec=(v.time/maxTime)*(animDur/1000);
+      const vProg=Math.min(elapsedSec/vTimeSec,1);
+      const px=(w-80)*vProg;
+      if(dir==='meet'){ if(v.dir==='right') v.x=Math.min(40+px,w-20); else v.x=Math.max((w-40)-px,20); }
+      else if(dir==='left'){ v.x=Math.max((w-40)-px,20); }
+      else { v.x=Math.min(40+px,w-20); }
+    });
+    if(dir==='meet'&&vehicles.length>=2&&!collFired){ const a=vehicles[0],b=vehicles.find((_,i)=>i>0); if(a&&b&&Math.abs(a.x-b.x)<55){ collFired=true; const fl=document.getElementById('collFlash'); fl.classList.add('bang'); setTimeout(()=>fl.classList.remove('bang'),450); } }
+    document.getElementById('progBar').style.width=(masterProg*100)+'%';
+    document.getElementById('progLabel').textContent=Math.round(masterProg*100)+'%';
+    document.getElementById('timeDisp').textContent='⏱ '+curT.toFixed(2)+' ч';
+    draw();
+    if(masterProg<1){ animId=requestAnimationFrame(frame); }
+    else{ animRunning=false; document.getElementById('runBtn').disabled=false; document.getElementById('timeDisp').textContent='⏱ '+maxTime.toFixed(2)+' ч ✓'; showSuccess('Анимацията завърши! '+vehicles.map((v,i)=>`ПС${i+1}: ${v.dist||'?'} км за ${v.time||'?'} ч`).join(' | ')); }
+  }
+  animId=requestAnimationFrame(frame);
+}
+function resetAnim(){
+  if(animId) cancelAnimationFrame(animId);
+  animRunning=false;
+  document.getElementById('progWrap').style.display='none';
+  document.getElementById('timeDisp').style.display='none';
+  document.getElementById('progBar').style.width='0%';
+  document.getElementById('runBtn').disabled=false;
+  document.getElementById('collFlash').classList.remove('bang');
+  vehicles.forEach((v,i)=>{ v.x=50+i*75; });
+  draw();
+}
+function clearScene(){ resetAnim(); vehicles=[]; document.getElementById('autoResult').textContent=''; document.getElementById('hintBox').classList.remove('show'); document.getElementById('resultBox').classList.remove('show'); updateList(); draw(); }
+function showHint(msg){ document.getElementById('hintText').textContent=msg; document.getElementById('hintBox').classList.add('show'); document.getElementById('resultBox').classList.remove('show'); }
+function showSuccess(msg){ document.getElementById('resultText').textContent=msg; document.getElementById('resultBox').classList.add('show'); document.getElementById('hintBox').classList.remove('show'); }
+window.addEventListener('load',()=>{ resize(); document.querySelector('.tile-road').classList.add('active'); draw(); });
+<\/script>
+</body>
+</html>

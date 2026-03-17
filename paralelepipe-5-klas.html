@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Правоъгълен паралелепипед — елементи, лице на повърхнина, обем. Математика 5 клас.">
+<title>Правоъгълен паралелепипед — лице, обем | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{--c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;--main:#2563eb;--main-dark:#1e40af;--main-deep:#1e3a8a;--main-btn:#1d4ed8;--main-mid:#3b82f6;--green:#16a34a;--green-light:#dcfce7;--red:#ef4444;--red-light:#fef2f2;--yellow:#d97706;--yellow-light:#fef9c3;--ink:#1e3a8a;--ink-mid:#1e40af;--border:#bfdbfe;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:20px;line-height:1.75;}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0);}50%{transform:translateY(-18px);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.7rem,5vw,3rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1.05rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.88rem;font-weight:700;color:#fff;}
+.content{max-width:860px;margin:0 auto;padding:2rem 1.25rem 6rem;}
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.78rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.26rem .9rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:.4rem;line-height:1.15;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:1rem;margin-bottom:1.4rem;}
+.section-block{margin-bottom:3rem;}
+.explain-card{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.explain-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.explain-emoji{font-size:2rem;}
+.explain-head h3{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:#fff;}
+.explain-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.explain-body{padding:1.4rem 1.5rem;}
+.rule{background:var(--c);border:2.5px solid var(--c-mid);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0;}
+.rule-title{font-family:'Baloo 2',sans-serif;font-size:1.05rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;display:flex;align-items:center;gap:.45rem;}
+.rule ul{padding-left:1.4rem;display:flex;flex-direction:column;gap:.35rem;font-size:1rem;}
+.rule li{line-height:1.75;}
+.rule strong{color:var(--main-dark);font-weight:900;}
+.tip{background:#e0f2fe;border:2px solid #bae6fd;border-radius:14px;padding:.9rem 1.1rem;margin:1rem 0;display:flex;gap:.75rem;align-items:flex-start;}
+.tip-icon{font-size:1.55rem;flex-shrink:0;}
+.tip-body{font-size:.97rem;color:#0c4a6e;line-height:1.7;}
+.tip-body strong{font-weight:900;display:block;margin-bottom:.1rem;}
+.formula-box{background:var(--main-deep);border-radius:18px;padding:1.4rem 1.8rem;margin:1.2rem 0;text-align:center;}
+.formula-label{font-size:.85rem;color:rgba(255,255,255,.7);font-weight:700;margin-bottom:.4rem;}
+.formula-main{font-size:1.5rem;font-weight:900;color:#fff;font-family:'Baloo 2',sans-serif;letter-spacing:.02em;}
+.formula-var{color:#93c5fd;}
+.formula-sub{font-size:.88rem;color:rgba(255,255,255,.72);margin-top:.45rem;}
+.f-pill{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;font-weight:800;font-size:1rem;color:#fff;display:inline-block;margin:.3rem;}
+.elements-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0;}
+@media(max-width:600px){.elements-grid{grid-template-columns:1fr 1fr;}}
+.el-card{background:#fff;border:2.5px solid var(--border);border-radius:16px;padding:1rem .8rem;text-align:center;}
+.el-num{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:800;color:var(--main);line-height:1;}
+.el-name{font-size:.88rem;font-weight:800;color:var(--ink-mid);margin-top:.2rem;}
+.el-sub{font-size:.78rem;color:#64748b;margin-top:.15rem;}
+.dim-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.2rem 0;}
+.dim-card{border-radius:14px;padding:1rem;text-align:center;border:2.5px solid;}
+.canvas-box{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 20px rgba(37,99,235,.09);}
+.canvas-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.9rem 1.3rem;display:flex;align-items:center;gap:.75rem;}
+.canvas-head h3{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;color:#fff;}
+.canvas-head p{font-size:.8rem;color:rgba(255,255,255,.82);}
+.canvas-body{padding:1rem 1.2rem;}
+.canvas-wrap{background:linear-gradient(180deg,#e0f2fe,#f0f9ff);border-radius:14px;overflow:hidden;margin-bottom:.8rem;}
+canvas{display:block;margin:0 auto;}
+.canvas-caption{font-size:.9rem;color:var(--main-dark);font-weight:700;text-align:center;background:var(--c);border-radius:10px;padding:.4rem .8rem;margin-bottom:.6rem;}
+.btn-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem;}
+.btn-main{background:var(--main-btn);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.9rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-main:hover{background:var(--main-dark);}
+.btn-ghost{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);border-radius:11px;padding:.48rem 1.1rem;font-size:.9rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-ghost:hover{background:var(--c-mid);}
+.btn-green{background:var(--green);color:#fff;border:none;border-radius:11px;padding:.5rem 1.2rem;font-size:.9rem;font-weight:800;cursor:pointer;font-family:'Nunito',sans-serif;transition:all .2s;}
+.btn-green:hover{background:#15803d;}
+/* Сравнение куб/паралелепипед */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0;}
+@media(max-width:540px){.compare-grid{grid-template-columns:1fr;}}
+.compare-card{border-radius:16px;padding:1rem 1.2rem;}
+.compare-card.cube{background:#dbeafe;border:2.5px solid #93c5fd;}
+.compare-card.para{background:#dcfce7;border:2.5px solid #86efac;}
+.compare-title{font-family:'Baloo 2',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.5rem;}
+.compare-title.cube{color:#1e40af;}
+.compare-title.para{color:#15803d;}
+/* Развивка симулатор */
+.net-sim{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;margin:1.5rem 0;box-shadow:0 4px 24px rgba(37,99,235,.12);}
+.net-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;}
+.net-head h3{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:.2rem;}
+.net-head p{font-size:.82rem;color:rgba(255,255,255,.82);}
+.net-body{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1.2rem;}
+@media(max-width:640px){.net-body{grid-template-columns:1fr;}}
+.net-instruction{background:var(--yellow-light);border:2px solid #fcd34d;border-radius:12px;padding:.7rem 1rem;font-size:.88rem;font-weight:700;color:#92400e;display:flex;gap:.5rem;align-items:flex-start;}
+.net-controls{display:flex;gap:.6rem;flex-wrap:wrap;}
+.net-progress{background:var(--c-soft);border-radius:12px;padding:.7rem 1rem;font-size:.88rem;font-weight:700;color:var(--ink-mid);}
+.net-progress span{color:var(--main);font-weight:900;}
+/* Задачи */
+.zadacha-card{background:#fff;border:2.5px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 16px rgba(37,99,235,.08);}
+.zadacha-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:.9rem 1.4rem;display:flex;align-items:center;gap:.8rem;}
+.zadacha-num{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;background:rgba(255,255,255,.2);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.zadacha-type{font-size:.75rem;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;}
+.zadacha-title{font-size:.95rem;font-weight:800;color:#fff;}
+.zadacha-body{padding:1.2rem 1.4rem;}
+.zadacha-text{background:var(--c-soft);border-left:4px solid var(--main);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.95rem;font-weight:700;}
+.solution{background:var(--green-light);border:2px solid #86efac;border-radius:14px;padding:1rem 1.3rem;margin-top:.8rem;}
+.solution-title{font-family:'Baloo 2',sans-serif;font-size:.95rem;font-weight:800;color:var(--green);margin-bottom:.6rem;}
+.solution-step{display:flex;gap:.7rem;align-items:flex-start;margin-bottom:.5rem;font-size:.93rem;}
+.step-dot{background:var(--green);color:#fff;font-weight:800;font-size:.78rem;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;}
+.answer{background:#fff;border:2.5px solid var(--green);border-radius:12px;padding:.6rem 1.1rem;display:inline-flex;align-items:center;gap:.5rem;font-weight:800;color:var(--green);margin-top:.5rem;font-size:.95rem;}
+/* Тест */
+.test-wrap{background:#fff;border:2.5px solid var(--border);border-radius:22px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,.12);}
+.test-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1.2rem 1.6rem;}
+.test-head h2{font-family:'Baloo 2',sans-serif;font-size:1.4rem;font-weight:800;color:#fff;margin-bottom:.2rem;}
+.test-head p{font-size:.88rem;color:rgba(255,255,255,.82);}
+.test-body{padding:1.4rem 1.6rem;}
+.q-block{margin-bottom:1.8rem;padding-bottom:1.4rem;border-bottom:2px solid var(--border);}
+.q-block:last-of-type{border-bottom:none;}
+.q-num{font-size:.78rem;font-weight:800;color:var(--main);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem;}
+.q-text{font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.8rem;line-height:1.6;}
+.q-options{display:flex;flex-direction:column;gap:.45rem;}
+.q-opt{display:flex;align-items:center;gap:.7rem;background:var(--c-soft);border:2px solid var(--border);border-radius:12px;padding:.6rem 1rem;cursor:pointer;transition:all .18s;font-size:.95rem;font-weight:700;}
+.q-opt:hover{border-color:var(--main);background:var(--c);}
+.q-opt.selected{border-color:var(--main);background:var(--c);}
+.q-opt.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.q-opt.wrong{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.q-opt-letter{background:var(--main);color:#fff;font-weight:800;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.82rem;flex-shrink:0;}
+.q-opt.correct .q-opt-letter{background:var(--green);}
+.q-opt.wrong .q-opt-letter{background:var(--red);}
+.q-feedback{font-size:.88rem;margin-top:.5rem;padding:.5rem .9rem;border-radius:10px;display:none;font-weight:700;}
+.q-feedback.show{display:block;}
+.q-feedback.ok{background:var(--green-light);color:var(--green);}
+.q-feedback.err{background:var(--red-light);color:var(--red);}
+.test-footer{background:var(--c-soft);border-top:2px solid var(--border);padding:1.2rem 1.6rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;}
+.score-box{font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:800;color:var(--main-dark);}
+.test-submit{background:linear-gradient(135deg,var(--green),#15803d);color:#fff;border:none;border-radius:13px;padding:.7rem 2rem;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:800;cursor:pointer;transition:all .2s;}
+.test-submit:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(22,163,74,.3);}
+.test-result{background:linear-gradient(135deg,var(--main-deep),var(--main));color:#fff;border-radius:16px;padding:1.2rem 1.5rem;margin-top:1rem;text-align:center;display:none;}
+.test-result.show{display:block;}
+.test-result .big{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:800;}
+.test-result p{font-size:.95rem;opacity:.9;margin-top:.3rem;}
+.finish-card{background:linear-gradient(135deg,var(--main-deep),var(--main));border-radius:20px;padding:1.8rem 2rem;margin-top:3rem;text-align:center;}
+.finish-card h3{font-family:'Baloo 2',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:.5rem;}
+.finish-links{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem;}
+.finish-link{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.5rem 1.2rem;color:#fff;font-weight:800;font-size:.9rem;text-decoration:none;transition:all .2s;}
+.finish-link:hover{background:rgba(255,255,255,.25);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+footer{text-align:center;padding:2rem 1rem;font-size:.82rem;color:#64748b;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="klas-5.html" class="nav-logo">Мат<em>5</em></a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bubble" style="width:200px;height:200px;top:-50px;right:-40px;"></div>
+  <div class="hero-bubble" style="width:110px;height:110px;bottom:70px;left:30px;animation-delay:2s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema6">Геометрични тела</a> › Паралелепипед</div>
+    <h1>📦 Правоъгълен паралелепипед</h1>
+    <p class="hero-sub">Елементи, лице на повърхнина, обем — с анимации, симулатор и задачи</p>
+    <div class="hero-chips">
+      <span class="chip">📐 Елементи</span>
+      <span class="chip">📏 Лице S и S₁</span>
+      <span class="chip">📦 Обем V</span>
+      <span class="chip">🔧 Развивки</span>
+      <span class="chip">✏️ Задачи</span>
+      <span class="chip">🎯 Тест</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <nav class="topic-nav reveal">
+    <div class="topic-nav-title">📌 Геометрични тела — 5 клас</div>
+    <div class="topic-nav-links">
+      <a href="kub-5-klas.html">1. Куб</a>
+      <a href="paralelepipe-5-klas.html" class="current">2. Паралелепипед</a>
+      <a href="klas-5.html#tema6">↑ Всички теми</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════ ЕЛЕМЕНТИ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">📐 Елементи</div>
+    <div class="sec-title">Какво е правоъгълен паралелепипед?</div>
+    <div class="sec-desc">Геометрично тяло с 6 правоъгълни стени, в което всички ъгли са прави.</div>
+
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📦</div>
+        <div>
+          <h3>Определение</h3>
+          <p>Тяло с три двойки успоредни правоъгълни стени</p>
+        </div>
+      </div>
+      <div class="explain-body">
+
+        <div class="tip">
+          <div class="tip-icon">📌</div>
+          <div class="tip-body">
+            <strong>Три измерения — дължина, ширина, височина</strong>
+            За разлика от куба, при паралелепипеда <strong>a, b, c</strong> могат да бъдат различни.
+            Ако a = b = c — получаваме куб!
+          </div>
+        </div>
+
+        <!-- Трите измерения -->
+        <div class="dim-grid">
+          <div class="dim-card" style="background:#dbeafe;border-color:#93c5fd;">
+            <div style="font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;color:#1e40af;">a</div>
+            <div style="font-size:.9rem;font-weight:800;color:#1e40af;margin-top:.2rem;">Дължина</div>
+            <div style="font-size:.78rem;color:#64748b;">по-дългата страна на основата</div>
+          </div>
+          <div class="dim-card" style="background:#dcfce7;border-color:#86efac;">
+            <div style="font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;color:#15803d;">b</div>
+            <div style="font-size:.9rem;font-weight:800;color:#15803d;margin-top:.2rem;">Ширина</div>
+            <div style="font-size:.78rem;color:#64748b;">по-късата страна на основата</div>
+          </div>
+          <div class="dim-card" style="background:#fef9c3;border-color:#fcd34d;">
+            <div style="font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;color:#b45309;">c</div>
+            <div style="font-size:.9rem;font-weight:800;color:#b45309;margin-top:.2rem;">Височина</div>
+            <div style="font-size:.78rem;color:#64748b;">вертикалното измерение</div>
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">📋 Елементи на паралелепипеда</div>
+          <ul>
+            <li><strong>Стени (лица)</strong> — 6 правоъгълника в 3 двойки успоредни</li>
+            <li><strong>Ръбове</strong> — 12 ръба: 4 с дължина a, 4 с дължина b, 4 с дължина c</li>
+            <li><strong>Върхове</strong> — 8 точки, в които се срещат ръбовете</li>
+            <li><strong>Основи</strong> — горната и долната стена (правоъгълник a × b)</li>
+          </ul>
+        </div>
+
+        <div class="elements-grid">
+          <div class="el-card">
+            <div class="el-num" style="color:#2563eb;">6</div>
+            <div class="el-name">Стени</div>
+            <div class="el-sub">3 двойки правоъгълници</div>
+          </div>
+          <div class="el-card">
+            <div class="el-num" style="color:#16a34a;">12</div>
+            <div class="el-name">Ръбове</div>
+            <div class="el-sub">по 4 от всяко измерение</div>
+          </div>
+          <div class="el-card">
+            <div class="el-num" style="color:#d97706;">8</div>
+            <div class="el-name">Върхове</div>
+            <div class="el-sub">ъглови точки</div>
+          </div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">💡</div>
+          <div class="tip-body">
+            <strong>Правило на Ойлер (важи за всички многостени!):</strong>
+            Върхове − Ръбове + Стени = 2 &nbsp;→&nbsp; <strong>8 − 12 + 6 = 2</strong> ✓
+          </div>
+        </div>
+
+        <!-- Интерактивен 3D паралелепипед -->
+        <div class="canvas-box" style="margin-top:1rem;">
+          <div class="canvas-head">
+            <div>
+              <h3>🎮 Интерактивен паралелепипед — завърти с мишката</h3>
+              <p>Задръж и плъзни за въртене · Натисни бутон за маркиране на елемент</p>
+            </div>
+          </div>
+          <div class="canvas-body">
+            <div class="canvas-wrap">
+              <canvas id="ppCanvas" width="600" height="300"></canvas>
+            </div>
+            <div class="canvas-caption" id="ppCaption">🖱️ Плъзни за въртене на паралелепипеда</div>
+            <div class="btn-row">
+              <button class="btn-main" onclick="ppHighlight('faces')">🟦 Стени</button>
+              <button class="btn-main" onclick="ppHighlight('edges')">📏 Ръбове</button>
+              <button class="btn-main" onclick="ppHighlight('vertices')">🔴 Върхове</button>
+              <button class="btn-main" onclick="ppHighlight('dims')">📐 Размери</button>
+              <button class="btn-ghost" onclick="ppHighlight('none')">↺ Изчисти</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Сравнение с куба -->
+        <div class="compare-grid" style="margin-top:1.2rem;">
+          <div class="compare-card cube">
+            <div class="compare-title cube">🧊 Куб</div>
+            <ul style="font-size:.9rem;padding-left:1.2rem;line-height:1.9;">
+              <li>Ръб: <strong>a = b = c</strong></li>
+              <li>Стени: 6 квадрата</li>
+              <li>S₁ = 6·a²</li>
+              <li>V = a³</li>
+            </ul>
+          </div>
+          <div class="compare-card para">
+            <div class="compare-title para">📦 Паралелепипед</div>
+            <ul style="font-size:.9rem;padding-left:1.2rem;line-height:1.9;">
+              <li>Ръбове: <strong>a, b, c</strong> (различни)</li>
+              <li>Стени: 6 правоъгълника</li>
+              <li>S₁ = 2(ab + bc + ac)</li>
+              <li>V = a·b·c</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ РАЗВИВКА С АНИМАЦИЯ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">✏️ Развивка</div>
+    <div class="sec-title">Развивка на паралелепипед</div>
+    <div class="sec-desc">Въведи размерите и гледай как моливът начертава развивката — срещуположните стени са еднакво оцветени.</div>
+
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📐</div>
+        <div>
+          <h3>✏️ Анимирана развивка</h3>
+          <p>Моливът чертае развивката стъпка по стъпка · Въведи a, b, c и натисни „Начертай"</p>
+        </div>
+      </div>
+      <div class="explain-body">
+
+        <!-- Полета за въвеждане -->
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1rem;">
+          <div style="display:flex;flex-direction:column;gap:.3rem;">
+            <label style="font-size:.82rem;font-weight:800;color:#1e40af;">Дължина a (cm)</label>
+            <input type="number" id="netA" value="6" min="1" max="20" step="1"
+              style="width:80px;border:2px solid var(--c-mid);border-radius:10px;padding:.45rem .7rem;font-size:1.1rem;font-weight:800;font-family:'Nunito',sans-serif;color:var(--ink);background:var(--c-soft);">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.3rem;">
+            <label style="font-size:.82rem;font-weight:800;color:#15803d;">Ширина b (cm)</label>
+            <input type="number" id="netB" value="4" min="1" max="20" step="1"
+              style="width:80px;border:2px solid #86efac;border-radius:10px;padding:.45rem .7rem;font-size:1.1rem;font-weight:800;font-family:'Nunito',sans-serif;color:var(--ink);background:#f0fdf4;">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.3rem;">
+            <label style="font-size:.82rem;font-weight:800;color:#b45309;">Височина c (cm)</label>
+            <input type="number" id="netC" value="3" min="1" max="20" step="1"
+              style="width:80px;border:2px solid #fcd34d;border-radius:10px;padding:.45rem .7rem;font-size:1.1rem;font-weight:800;font-family:'Nunito',sans-serif;color:var(--ink);background:#fefce8;">
+          </div>
+          <button class="btn-main" onclick="startNetAnim()" style="align-self:flex-end;">✏️ Начертай</button>
+          <button class="btn-ghost" onclick="resetNetAnim()" style="align-self:flex-end;">↺ Изтрий</button>
+        </div>
+
+        <!-- Canvas за развивката -->
+        <div style="background:linear-gradient(180deg,#f8faff,#eff6ff);border-radius:16px;overflow:hidden;border:2px solid var(--border);position:relative;">
+          <canvas id="netCanvas" width="700" height="420" style="display:block;width:100%;"></canvas>
+        </div>
+
+        <!-- Легенда -->
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.8rem;">
+          <div style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:700;">
+            <div style="width:20px;height:20px;background:#93c5fd;border:2px solid #3b82f6;border-radius:4px;"></div> Горна/Долна (a×b)
+          </div>
+          <div style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:700;">
+            <div style="width:20px;height:20px;background:#bbf7d0;border:2px solid #22c55e;border-radius:4px;"></div> Предна/Задна (a×c)
+          </div>
+          <div style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:700;">
+            <div style="width:20px;height:20px;background:#fde68a;border:2px solid #f59e0b;border-radius:4px;"></div> Лява/Дясна (b×c)
+          </div>
+        </div>
+
+        <!-- Резултат -->
+        <div id="netResult" style="display:none;margin-top:.8rem;background:#fff;border:2.5px solid var(--border);border-radius:14px;padding:1rem 1.2rem;font-size:.95rem;">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ЛИЦЕ ══════════════ -->
+
+  <!-- ══════════════ ЛИЦЕ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">📏 Лице</div>
+    <div class="sec-title">Лице на повърхнина</div>
+    <div class="sec-desc">Намираме лицето на трите вида двойки стени и ги събираме.</div>
+
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📐</div>
+        <div>
+          <h3>Околна и пълна повърхнина</h3>
+          <p>Стъпка по стъпка — от трите двойки правоъгълници</p>
+        </div>
+      </div>
+      <div class="explain-body">
+
+        <div class="tip">
+          <div class="tip-icon">🔍</div>
+          <div class="tip-body">
+            <strong>Трите двойки стени:</strong>
+            Всяка двойка е два еднакви правоъгълника — горна+долна (a×b), предна+задна (a×c), лява+дясна (b×c).
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">📋 Лице на трите двойки</div>
+          <ul>
+            <li>Горна + Долна: 2 × (a · b)</li>
+            <li>Предна + Задна: 2 × (a · c)</li>
+            <li>Лява + Дясна: 2 × (b · c)</li>
+          </ul>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">🔍</div>
+          <div class="tip-body">
+            <strong>Какво е околна повърхнина?</strong>
+            Само <strong>4-те странични стени</strong> (без горната и долната основа): S = 2·c·(a+b)
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-label">Лице на ОКОЛНАТА повърхнина</div>
+          <div class="formula-main"><span class="formula-var">S</span> = 2 · <span class="formula-var">c</span> · (<span class="formula-var">a</span> + <span class="formula-var">b</span>)</div>
+          <div class="formula-sub">c — височина &nbsp;·&nbsp; a — дължина &nbsp;·&nbsp; b — ширина</div>
+        </div>
+
+        <div class="formula-box">
+          <div class="formula-label">Лице на ПЪЛНАТА повърхнина</div>
+          <div class="formula-main"><span class="formula-var">S₁</span> = 2·(<span class="formula-var">ab</span> + <span class="formula-var">bc</span> + <span class="formula-var">ac</span>)</div>
+          <div class="formula-sub">всичките 6 стени заедно</div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">💡 Пример — стъпка по стъпка</div>
+          <ul>
+            <li>Паралелепипед: a = 6 cm, b = 4 cm, c = 3 cm</li>
+            <li>Горна+Долна: 2 × (6·4) = 2 × 24 = <strong>48 cm²</strong></li>
+            <li>Предна+Задна: 2 × (6·3) = 2 × 18 = <strong>36 cm²</strong></li>
+            <li>Лява+Дясна: 2 × (4·3) = 2 × 12 = <strong>24 cm²</strong></li>
+            <li>S₁ = 48 + 36 + 24 = <strong>108 cm²</strong></li>
+            <li>Или: S₁ = 2·(24+12+18) = 2·54 = <strong>108 cm²</strong> ✓</li>
+          </ul>
+        </div>
+
+        <!-- Интерактивна анимация лице -->
+        <div class="canvas-wrap" style="border-radius:14px;margin-top:1rem;">
+          <canvas id="faceCanvas" width="600" height="230"></canvas>
+        </div>
+        <div class="canvas-caption" id="faceCaption">Въведи размерите и натисни „Покажи"</div>
+        <div style="display:flex;gap:.7rem;align-items:center;margin-top:.6rem;flex-wrap:wrap;">
+          <label style="font-size:.88rem;font-weight:700;">a =</label>
+          <input type="number" id="faInput" value="6" min="1" max="20" style="width:60px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <label style="font-size:.88rem;font-weight:700;">b =</label>
+          <input type="number" id="fbInput" value="4" min="1" max="20" style="width:60px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <label style="font-size:.88rem;font-weight:700;">c =</label>
+          <input type="number" id="fcInput" value="3" min="1" max="20" style="width:60px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <span style="font-size:.88rem;font-weight:700;">cm</span>
+          <button class="btn-main" onclick="animFacePP()">▶ Покажи</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ОБЕМ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">📦 Обем</div>
+    <div class="sec-title">Обем на правоъгълен паралелепипед</div>
+    <div class="sec-desc">Обемът е дължина × ширина × височина.</div>
+
+    <div class="explain-card">
+      <div class="explain-head">
+        <div class="explain-emoji">📦</div>
+        <div>
+          <h3>Формула за обем</h3>
+          <p>Три различни измерения — a, b, c</p>
+        </div>
+      </div>
+      <div class="explain-body">
+
+        <div class="formula-box">
+          <div class="formula-label">Обем на правоъгълен паралелепипед</div>
+          <div class="formula-main"><span class="formula-var">V</span> = <span class="formula-var">a · b · c</span></div>
+          <div class="formula-sub">a — дължина &nbsp;·&nbsp; b — ширина &nbsp;·&nbsp; c — височина</div>
+        </div>
+
+        <div class="tip">
+          <div class="tip-icon">💡</div>
+          <div class="tip-body">
+            <strong>Връзка с куба:</strong>
+            При куба a = b = c, затова V = a·a·a = a³. При паралелепипеда трите измерения са различни.
+          </div>
+        </div>
+
+        <div class="rule">
+          <div class="rule-title">📏 Мерни единици за обем</div>
+        </div>
+        <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:.92rem;">
+          <tr style="background:var(--main);color:#fff;">
+            <th style="padding:.6rem .9rem;text-align:left;font-weight:800;">Единица</th>
+            <th style="padding:.6rem .9rem;text-align:left;font-weight:800;">Знак</th>
+            <th style="padding:.6rem .9rem;text-align:left;font-weight:800;">Връзка</th>
+          </tr>
+          <tr><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);">Кубичен сантиметър</td><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);font-weight:800;">cm³</td><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);">—</td></tr>
+          <tr style="background:var(--c-soft);"><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);">Кубичен дециметър</td><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);font-weight:800;">dm³</td><td style="padding:.5rem .9rem;border-bottom:1px solid var(--border);">1 dm³ = 1 000 cm³</td></tr>
+          <tr><td style="padding:.5rem .9rem;">Кубичен метър</td><td style="padding:.5rem .9rem;font-weight:800;">m³</td><td style="padding:.5rem .9rem;">1 m³ = 1 000 dm³</td></tr>
+        </table>
+
+        <div class="tip">
+          <div class="tip-icon">📦</div>
+          <div class="tip-body">
+            <strong>Пример: кутия 10 cm × 6 cm × 4 cm</strong>
+            V = 10 · 6 · 4 = <strong>240 cm³</strong>
+          </div>
+        </div>
+
+        <!-- Анимация обем -->
+        <div class="canvas-wrap" style="border-radius:14px;margin-top:1rem;">
+          <canvas id="volCanvas" width="600" height="240"></canvas>
+        </div>
+        <div class="canvas-caption" id="volCaption">Въведи размерите и натисни „Покажи"</div>
+        <div style="display:flex;gap:.7rem;align-items:center;margin-top:.6rem;flex-wrap:wrap;">
+          <label style="font-size:.88rem;font-weight:700;">a =</label>
+          <input type="number" id="vaInput" value="4" min="1" max="8" style="width:55px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <label style="font-size:.88rem;font-weight:700;">b =</label>
+          <input type="number" id="vbInput" value="3" min="1" max="8" style="width:55px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <label style="font-size:.88rem;font-weight:700;">c =</label>
+          <input type="number" id="vcInput" value="2" min="1" max="8" style="width:55px;border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .6rem;font-size:.95rem;font-weight:700;font-family:'Nunito',sans-serif;">
+          <span style="font-size:.88rem;font-weight:700;">cm</span>
+          <button class="btn-main" onclick="animVolPP()">▶ Покажи</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ЗАДАЧИ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">✏️ Задачи</div>
+    <div class="sec-title">Практически задачи</div>
+    <div class="sec-desc">Четири варианта по нарастваща трудност.</div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">1</div>
+        <div><div class="zadacha-type">Лесна · Обем</div>
+        <div class="zadacha-title">Кутия за сок</div></div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">Правоъгълна кутия за сок има размери: дължина <strong>8 cm</strong>, ширина <strong>4 cm</strong>, височина <strong>12 cm</strong>. Намерете обема на кутията в cm³.</div>
+        <div class="solution">
+          <div class="solution-title">✅ Решение</div>
+          <div class="solution-step"><div class="step-dot">1</div><div>V = a · b · c</div></div>
+          <div class="solution-step"><div class="step-dot">2</div><div>V = 8 · 4 · 12</div></div>
+          <div class="solution-step"><div class="step-dot">3</div><div>V = 32 · 12 = <strong>384 cm³</strong></div></div>
+          <div class="answer">✓ V = 384 cm³</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">2</div>
+        <div><div class="zadacha-type">Средна · Пълна повърхнина</div>
+        <div class="zadacha-title">Боядисване на стая</div></div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">Стая има формата на правоъгълен паралелепипед с дължина <strong>5 m</strong>, ширина <strong>4 m</strong> и височина <strong>3 m</strong>. Намерете лицето на пълната повърхнина на стаята.</div>
+        <div class="solution">
+          <div class="solution-title">✅ Решение</div>
+          <div class="solution-step"><div class="step-dot">1</div><div>ab = 5 · 4 = 20 m²</div></div>
+          <div class="solution-step"><div class="step-dot">2</div><div>bc = 4 · 3 = 12 m²</div></div>
+          <div class="solution-step"><div class="step-dot">3</div><div>ac = 5 · 3 = 15 m²</div></div>
+          <div class="solution-step"><div class="step-dot">4</div><div>S₁ = 2·(20 + 12 + 15) = 2 · 47 = <strong>94 m²</strong></div></div>
+          <div class="answer">✓ S₁ = 94 m²</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">3</div>
+        <div><div class="zadacha-type">Средна · Обем и V в литри</div>
+        <div class="zadacha-title">Аквариум</div></div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">Аквариум с форма на правоъгълен паралелепипед има размери: <strong>60 cm × 30 cm × 40 cm</strong>. а) Намерете обема в cm³. б) Колко литра вода се побира в него? в) Ако се напълни до <strong>¾</strong>, колко литра вода са нужни?</div>
+        <div class="solution">
+          <div class="solution-title">✅ Решение</div>
+          <div class="solution-step"><div class="step-dot">1</div><div>V = 60 · 30 · 40 = <strong>72 000 cm³</strong></div></div>
+          <div class="solution-step"><div class="step-dot">2</div><div>1 dm³ = 1 000 cm³, значи 72 000 ÷ 1 000 = <strong>72 литра</strong></div></div>
+          <div class="solution-step"><div class="step-dot">3</div><div>¾ от 72 = 72 ÷ 4 · 3 = <strong>54 литра</strong></div></div>
+          <div class="answer">✓ V = 72 000 cm³ = 72 л &nbsp;|&nbsp; ¾ → 54 л</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">4</div>
+        <div><div class="zadacha-type">По-трудна · Намери измерение</div>
+        <div class="zadacha-title">Намери височината по обема</div></div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">Правоъгълна кутия има основа <strong>8 cm × 5 cm</strong> и обем <strong>200 cm³</strong>. Намерете височината на кутията.</div>
+        <div class="solution">
+          <div class="solution-title">✅ Решение</div>
+          <div class="solution-step"><div class="step-dot">1</div><div>V = a · b · c → 200 = 8 · 5 · c</div></div>
+          <div class="solution-step"><div class="step-dot">2</div><div>200 = 40 · c</div></div>
+          <div class="solution-step"><div class="step-dot">3</div><div>c = 200 ÷ 40 = <strong>5 cm</strong></div></div>
+          <div class="solution-step"><div class="step-dot">4</div><div>Проверка: 8 · 5 · 5 = 200 ✓</div></div>
+          <div class="answer">✓ c = 5 cm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ ТЕСТ ══════════════ -->
+  <div class="section-block reveal">
+    <div class="sec-tag">🎯 Тест</div>
+    <div class="sec-title">Провери знанията си</div>
+    <div class="sec-desc">10 въпроса за правоъгълния паралелепипед.</div>
+    <div class="test-wrap">
+      <div class="test-head">
+        <h2>🎯 Тест: Правоъгълен паралелепипед</h2>
+        <p>Избери верния отговор. Можеш да смениш отговора преди да натиснеш „Провери".</p>
+      </div>
+      <div class="test-body" id="testBody"></div>
+      <div class="test-footer">
+        <div class="score-box" id="scoreBox">Отговори на всички въпроси</div>
+        <button class="test-submit" onclick="submitTest()">🔍 Провери отговорите</button>
+      </div>
+      <div style="padding:0 1.6rem 1.4rem;">
+        <div class="test-result" id="testResult">
+          <div class="big" id="testScore">—</div>
+          <p id="testMsg"></p>
+        </div>
+        <button class="btn-ghost" onclick="resetTest()" style="margin-top:.8rem;display:none;" id="retryBtn">↺ Опитай отново</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="finish-card reveal">
+    <h3>✅ Научи паралелепипеда!</h3>
+    <div class="finish-links">
+      <a href="kub-5-klas.html" class="finish-link">← Куб</a>
+      <a href="klas-5.html#tema6" class="finish-link">↑ Всички теми</a>
+      <a href="klas-5.html" class="finish-link">← 5 клас</a>
+    </div>
+  </div>
+</div>
+<footer>Математика 5–7 клас · Безплатни учебни материали по официалната програма на МОН</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// ПОМОЩНИ ФУНКЦИИ — ортографска проекция
+// ═══════════════════════════════════════════════
+function makeOrtho(rx, ry){
+  // Връща функция за проектиране на 3D точка към 2D с ортографска проекция
+  return function(v, cx, cy, sc){
+    let [x,y,z] = v;
+    const cosY=Math.cos(ry), sinY=Math.sin(ry);
+    const cosX=Math.cos(rx), sinX=Math.sin(rx);
+    const x2 = x*cosY + z*sinY;
+    const z2 = -x*sinY + z*cosY;
+    const y2 = y*cosX - z2*sinX;
+    return [x2*sc + cx, y2*sc + cy];
+  };
+}
+
+function rotateNorm(norm, rx, ry){
+  let [nx,ny,nz] = norm;
+  const cosY=Math.cos(ry), sinY=Math.sin(ry);
+  const cosX=Math.cos(rx), sinX=Math.sin(rx);
+  const nx2 = nx*cosY + nz*sinY;
+  const nz2 = -nx*sinY + nz*cosY;
+  const ny2 = ny*cosX - nz2*sinX;
+  const nz3 = ny*sinX + nz2*cosX;
+  return nz3;
+}
+
+function pointInPoly(px, py, poly){
+  let inside = false;
+  for(let i=0,j=poly.length-1; i<poly.length; j=i++){
+    const [xi,yi]=poly[i],[xj,yj]=poly[j];
+    if(((yi>py)!==(yj>py)) && (px<(xj-xi)*(py-yi)/(yj-yi)+xi)) inside=!inside;
+  }
+  return inside;
+}
+
+// ═══════════════════════════════════════════════
+// 1. ИНТЕРАКТИВЕН 3D ПАРАЛЕЛЕПИПЕД
+// ═══════════════════════════════════════════════
+const ppCv = document.getElementById('ppCanvas');
+const ppCtx = ppCv.getContext('2d');
+let ppRx=0.4, ppRy=0.62;
+let ppDrag=false, ppLX=0, ppLY=0;
+let ppHL='none', ppAutoRot=true;
+
+// Паралелепипед: a=1.6, b=1.0, c=0.75 (нормализирани)
+const PP={a:1.6, b:1.0, c:0.75};
+function ppVerts(){
+  const {a,b,c}=PP;
+  return [
+    [-a,-b,-c],[a,-b,-c],[a,b,-c],[-a,b,-c],
+    [-a,-b, c],[a,-b, c],[a,b, c],[-a,b, c]
+  ];
+}
+const PP_EDGES=[
+  [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],
+  [0,4],[1,5],[2,6],[3,7]
+];
+const PP_FACES=[
+  {vi:[3,2,6,7],norm:[0,1,0], fi:0,label:'Горна (a×b)'},
+  {vi:[0,1,5,4],norm:[0,-1,0],fi:1,label:'Долна (a×b)'},
+  {vi:[4,5,6,7],norm:[0,0,1], fi:2,label:'Предна (a×c)'},
+  {vi:[0,1,2,3],norm:[0,0,-1],fi:3,label:'Задна (a×c)'},
+  {vi:[0,3,7,4],norm:[-1,0,0],fi:4,label:'Лява (b×c)'},
+  {vi:[1,2,6,5],norm:[1,0,0], fi:5,label:'Дясна (b×c)'},
+];
+const PP_FCLR=['#bfdbfe','#fde68a','#bbf7d0','#fca5a5','#c4b5fd','#fed7aa'];
+const PP_DIM_CLR=['#2563eb','#16a34a','#b45309'];
+
+function drawPP3d(){
+  const w=ppCv.width, h=ppCv.height;
+  ppCtx.clearRect(0,0,w,h);
+  ppCtx.fillStyle='#f0f6ff'; ppCtx.fillRect(0,0,w,h);
+
+  const proj=makeOrtho(ppRx, ppRy);
+  const verts=ppVerts();
+  const sc=75, cx=w/2, cy=h/2;
+  const pts=verts.map(v=>proj(v,cx,cy,sc));
+
+  // Painter's sort
+  const sorted=PP_FACES.map((f,i)=>{
+    const avgZ=f.vi.reduce((s,vi)=>{
+      let [x,y,z]=verts[vi];
+      const cosY=Math.cos(ppRy),sinY=Math.sin(ppRy);
+      const cosX=Math.cos(ppRx),sinX=Math.sin(ppRx);
+      const x2=x*cosY+z*sinY; const z2=-x*sinY+z*cosY;
+      const z3=y*sinX+z2*cosX;
+      return s+z3;
+    },0)/4;
+    return {f,i,avgZ};
+  }).sort((a,b)=>b.avgZ-a.avgZ);
+
+  sorted.forEach(({f})=>{
+    const nz=rotateNorm(f.norm, ppRx, ppRy);
+    if(nz<0.01) return;
+    const poly=f.vi.map(vi=>pts[vi]);
+    ppCtx.beginPath();
+    poly.forEach(([px,py],j)=>j===0?ppCtx.moveTo(px,py):ppCtx.lineTo(px,py));
+    ppCtx.closePath();
+
+    if(ppHL==='faces'){
+      ppCtx.fillStyle=`hsla(${f.fi*60},75%,72%,0.82)`;
+    } else {
+      ppCtx.fillStyle=PP_FCLR[f.fi];
+    }
+    ppCtx.globalAlpha=0.55+nz*0.45;
+    ppCtx.fill(); ppCtx.globalAlpha=1;
+    ppCtx.strokeStyle='#1e40af'; ppCtx.lineWidth=1.5; ppCtx.stroke();
+
+    if((ppHL==='faces'||ppHL==='none') && nz>0.2){
+      const fcx=poly.reduce((s,[x])=>s+x,0)/4;
+      const fcy=poly.reduce((s,[,y])=>s+y,0)/4;
+      ppCtx.fillStyle='#1e3a8a'; ppCtx.font='bold 10px Nunito,sans-serif';
+      ppCtx.textAlign='center'; ppCtx.textBaseline='middle';
+      ppCtx.fillText(f.label,fcx,fcy);
+    }
+  });
+
+  // Ръбове
+  if(ppHL==='edges'){
+    PP_EDGES.forEach(([a,b])=>{
+      ppCtx.beginPath(); ppCtx.moveTo(pts[a][0],pts[a][1]); ppCtx.lineTo(pts[b][0],pts[b][1]);
+      ppCtx.strokeStyle='#ef4444'; ppCtx.lineWidth=3; ppCtx.stroke();
+    });
+  } else {
+    PP_EDGES.forEach(([a,b])=>{
+      ppCtx.beginPath(); ppCtx.moveTo(pts[a][0],pts[a][1]); ppCtx.lineTo(pts[b][0],pts[b][1]);
+      ppCtx.strokeStyle='rgba(30,58,138,0.5)'; ppCtx.lineWidth=1.2; ppCtx.stroke();
+    });
+  }
+
+  // Върхове
+  if(ppHL==='vertices'){
+    pts.forEach(([px,py])=>{
+      ppCtx.beginPath(); ppCtx.arc(px,py,6,0,Math.PI*2);
+      ppCtx.fillStyle='#ef4444'; ppCtx.fill();
+    });
+  }
+
+  // Размерни линии
+  if(ppHL==='dims'){
+    const {a,b,c}=PP;
+    const dimPairs=[
+      {p1:[-a,-b,-c],p2:[a,-b,-c],label:`a`,clr:PP_DIM_CLR[0]},
+      {p1:[a,-b,-c],p2:[a,b,-c],label:`b`,clr:PP_DIM_CLR[1]},
+      {p1:[a,b,-c],p2:[a,b,c],label:`c`,clr:PP_DIM_CLR[2]},
+    ];
+    dimPairs.forEach(({p1,p2,label,clr})=>{
+      const [x1,y1]=proj(p1,cx,cy,sc);
+      const [x2,y2]=proj(p2,cx,cy,sc);
+      ppCtx.strokeStyle=clr; ppCtx.lineWidth=3;
+      ppCtx.beginPath(); ppCtx.moveTo(x1,y1); ppCtx.lineTo(x2,y2); ppCtx.stroke();
+      ppCtx.fillStyle=clr; ppCtx.font='bold 14px Baloo 2,sans-serif';
+      ppCtx.textAlign='center'; ppCtx.textBaseline='middle';
+      ppCtx.fillText(label,(x1+x2)/2-8,(y1+y2)/2-10);
+    });
+  }
+
+  // Ребро a надпис (ако не е dims)
+  if(ppHL==='none'){
+    const [x1,y1]=proj([-PP.a,-PP.b,-PP.c],cx,cy,sc);
+    const [x2,y2]=proj([ PP.a,-PP.b,-PP.c],cx,cy,sc);
+    ppCtx.fillStyle='#1e3a8a'; ppCtx.font='bold 12px Nunito,sans-serif';
+    ppCtx.textAlign='center'; ppCtx.textBaseline='middle';
+    ppCtx.fillText('a',(x1+x2)/2,(y1+y2)/2-12);
+  }
+}
+
+ppCv.addEventListener('mousedown',e=>{ppDrag=true;ppLX=e.offsetX;ppLY=e.offsetY;ppAutoRot=false;});
+ppCv.addEventListener('mousemove',e=>{if(!ppDrag)return;ppRy+=(e.offsetX-ppLX)*0.013;ppRx+=(e.offsetY-ppLY)*0.013;ppLX=e.offsetX;ppLY=e.offsetY;drawPP3d();});
+ppCv.addEventListener('mouseup',()=>ppDrag=false);
+ppCv.addEventListener('mouseleave',()=>ppDrag=false);
+ppCv.addEventListener('touchstart',e=>{const t=e.touches[0];ppDrag=true;ppLX=t.clientX;ppLY=t.clientY;ppAutoRot=false;e.preventDefault();},{passive:false});
+ppCv.addEventListener('touchmove',e=>{if(!ppDrag)return;const t=e.touches[0];ppRy+=(t.clientX-ppLX)*0.013;ppRx+=(t.clientY-ppLY)*0.013;ppLX=t.clientX;ppLY=t.clientY;drawPP3d();e.preventDefault();},{passive:false});
+ppCv.addEventListener('touchend',()=>ppDrag=false);
+
+function ppHighlight(type){
+  ppHL=type;
+  const caps={
+    'faces':'🟦 6 стени — 3 двойки правоъгълника: 2×(a·b) + 2×(a·c) + 2×(b·c)',
+    'edges':'📏 12 ръба — 4 с дължина a (сини), 4 с b (зелени), 4 с c (жълти)',
+    'vertices':'🔴 8 върха — ъглови точки',
+    'dims':'📐 a = дължина (синьо), b = ширина (зелено), c = височина (жълто)',
+    'none':'🖱️ Плъзни за въртене на паралелепипеда'
+  };
+  document.getElementById('ppCaption').textContent=caps[type]||'';
+  drawPP3d();
+}
+
+(function autoRot(){
+  if(ppAutoRot&&!ppDrag){ppRy+=0.007;drawPP3d();}
+  requestAnimationFrame(autoRot);
+})();
+drawPP3d();
+
+// ═══════════════════════════════════════════════
+// 2. АНИМИРАНА РАЗВИВКА С МОЛИВ
+// ═══════════════════════════════════════════════
+const netCv  = document.getElementById('netCanvas');
+const netCtx = netCv.getContext('2d');
+
+// Цветове за трите двойки стени (срещуположните са еднакви)
+const NET_CLR = {
+  ab: { fill:'#93c5fd', stroke:'#2563eb' },  // Горна + Долна (a×b)
+  ac: { fill:'#bbf7d0', stroke:'#16a34a' },  // Предна + Задна (a×c)
+  bc: { fill:'#fde68a', stroke:'#d97706' },  // Лява + Дясна (b×c)
+};
+
+let netAnimRaf  = null;
+let netAnimating = false;
+let pencilX = 0, pencilY = 0;
+
+// ── Изчисли оформлението по снимката ──
+// Схема (точно по снимката):
+//
+//          ┌─────────────┐
+//          │   Горна     │  a × b
+//          │   (a×b)     │
+// ┌────────┼─────────────┼──────────┬─────────────┐
+// │ Лява   │  Предна     │  Дясна   │   Задна     │
+// │ (b×c)  │  (a×c)      │  (b×c)   │   (a×c)     │
+// └────────┴─────────────┴──────────┴─────────────┘
+//          │   Долна     │
+//          │   (a×b)     │
+//          └─────────────┘
+//
+// Хоризонтален ред: b | a | b | a
+// Вертикален: b (горна) | c (средни) | b (долна)
+
+function calcNetLayout(a, b, c, W, H){
+  const totalW = b + a + b + a;
+  const totalH = b + c + b;
+
+  const margin = 52; // място за размерни надписи
+  const scaleX = (W - margin*2) / totalW;
+  const scaleY = (H - margin*2) / totalH;
+  const unit   = Math.min(scaleX, scaleY, 40);
+
+  const netW = totalW * unit;
+  const netH = totalH * unit;
+  const ox   = (W - netW) / 2;
+  const oy   = (H - netH) / 2;
+
+  // 6 стени: {x, y, w, h, col, name}
+  return {
+    unit, ox, oy, a, b, c,
+    rects: [
+      // 0 Горна (a×b) — над средата
+      { x: ox+b*unit,       y: oy,           w: a*unit, h: b*unit, col:'ab', name:'Горна' },
+      // 1 Долна (a×b) — под средата
+      { x: ox+b*unit,       y: oy+(b+c)*unit, w: a*unit, h: b*unit, col:'ab', name:'Долна' },
+      // 2 Предна (a×c) — средата, втора колона
+      { x: ox+b*unit,       y: oy+b*unit,    w: a*unit, h: c*unit, col:'ac', name:'Предна' },
+      // 3 Задна (a×c) — средата, четвърта колона
+      { x: ox+(b+a+b)*unit, y: oy+b*unit,    w: a*unit, h: c*unit, col:'ac', name:'Задна' },
+      // 4 Лява (b×c) — средата, първа колона
+      { x: ox,              y: oy+b*unit,    w: b*unit, h: c*unit, col:'bc', name:'Лява' },
+      // 5 Дясна (b×c) — средата, трета колона
+      { x: ox+(b+a)*unit,   y: oy+b*unit,    w: b*unit, h: c*unit, col:'bc', name:'Дясна' },
+    ]
+  };
+}
+
+// ── Нарисувай фон с точкова решетка ──
+function drawNetBg(W, H){
+  netCtx.fillStyle = '#f8faff';
+  netCtx.fillRect(0, 0, W, H);
+  netCtx.fillStyle = 'rgba(148,163,184,0.2)';
+  for(let x=20; x<W; x+=20)
+    for(let y=20; y<H; y+=20){
+      netCtx.beginPath(); netCtx.arc(x,y,1,0,Math.PI*2); netCtx.fill();
+    }
+}
+
+// ── Нарисувай запълнен правоъгълник ──
+function drawRect(r, strokeOnly){
+  const cl = NET_CLR[r.col];
+  if(!strokeOnly){
+    netCtx.fillStyle = cl.fill;
+    netCtx.fillRect(r.x, r.y, r.w, r.h);
+  }
+  netCtx.strokeStyle = cl.stroke;
+  netCtx.lineWidth   = 2.5;
+  netCtx.strokeRect(r.x, r.y, r.w, r.h);
+}
+
+// ── Нарисувай размерни надписи ──
+function drawDims(layout){
+  const {rects, unit, a, b, c} = layout;
+  const OFF = 13;
+
+  // Надписи в центъра на всяка стена
+  const lbls = [
+    {i:0, txt:`${a}×${b}`, col:'#1e40af'},
+    {i:1, txt:`${a}×${b}`, col:'#1e40af'},
+    {i:2, txt:`${a}×${c}`, col:'#15803d'},
+    {i:3, txt:`${a}×${c}`, col:'#15803d'},
+    {i:4, txt:`${b}×${c}`, col:'#b45309'},
+    {i:5, txt:`${b}×${c}`, col:'#b45309'},
+  ];
+  const fs = Math.max(9, Math.min(14, unit*0.52));
+  lbls.forEach(({i,txt,col})=>{
+    const r=rects[i];
+    netCtx.fillStyle=col;
+    netCtx.font=`bold ${fs}px Nunito,sans-serif`;
+    netCtx.textAlign='center'; netCtx.textBaseline='middle';
+    netCtx.fillText(txt, r.x+r.w/2, r.y+r.h/2);
+  });
+
+  // Имена на стените
+  const nameFs = Math.max(8, Math.min(11, unit*0.4));
+  const names = [
+    {i:0,col:'#1e40af'},{i:1,col:'#1e40af'},
+    {i:2,col:'#15803d'},{i:3,col:'#15803d'},
+    {i:4,col:'#b45309'},{i:5,col:'#b45309'},
+  ];
+  names.forEach(({i,col})=>{
+    const r=rects[i];
+    netCtx.fillStyle=col+'aa';
+    netCtx.font=`700 ${nameFs}px Nunito,sans-serif`;
+    netCtx.textAlign='center'; netCtx.textBaseline='alphabetic';
+    netCtx.fillText(rects[i].name, r.x+r.w/2, r.y+10);
+  });
+
+  // Размерни стрелки по периметъра
+  const r0=rects[0], r2=rects[2], r4=rects[4];
+  const strokeW = Math.min(14, unit*0.5);
+
+  // a — над горната стена
+  dimArrow(r0.x, r0.y-OFF, r0.x+r0.w, r0.y-OFF, `a = ${a}`, '#1e40af', 'h');
+  // b — вляво от горната стена
+  dimArrow(r0.x-OFF, r0.y, r0.x-OFF, r0.y+r0.h, `b = ${b}`, '#15803d', 'v');
+  // c — вляво от лявата стена
+  dimArrow(r4.x-OFF, r4.y, r4.x-OFF, r4.y+r4.h, `c = ${c}`, '#b45309', 'v');
+}
+
+function dimArrow(x1,y1,x2,y2,txt,col,dir){
+  netCtx.strokeStyle=col; netCtx.lineWidth=1.5;
+  netCtx.beginPath(); netCtx.moveTo(x1,y1); netCtx.lineTo(x2,y2); netCtx.stroke();
+  const aw=5;
+  if(dir==='h'){
+    [[x1,1],[x2,-1]].forEach(([x,d])=>{
+      netCtx.beginPath(); netCtx.moveTo(x,y1); netCtx.lineTo(x+d*aw,y1-3); netCtx.lineTo(x+d*aw,y1+3); netCtx.closePath();
+      netCtx.fillStyle=col; netCtx.fill();
+    });
+    netCtx.fillStyle=col; netCtx.font='bold 12px Baloo 2,sans-serif';
+    netCtx.textAlign='center'; netCtx.textBaseline='bottom';
+    netCtx.fillText(txt,(x1+x2)/2,y1-3);
+  } else {
+    [[y1,1],[y2,-1]].forEach(([y,d])=>{
+      netCtx.beginPath(); netCtx.moveTo(x1,y); netCtx.lineTo(x1-3,y+d*aw); netCtx.lineTo(x1+3,y+d*aw); netCtx.closePath();
+      netCtx.fillStyle=col; netCtx.fill();
+    });
+    netCtx.save(); netCtx.translate(x1-3,(y1+y2)/2); netCtx.rotate(-Math.PI/2);
+    netCtx.fillStyle=col; netCtx.font='bold 12px Baloo 2,sans-serif';
+    netCtx.textAlign='center'; netCtx.textBaseline='bottom';
+    netCtx.fillText(txt,0,-3); netCtx.restore();
+  }
+}
+
+// ── Молив икона ──
+function drawPencil(x, y){
+  netCtx.save();
+  netCtx.translate(x, y); netCtx.rotate(-Math.PI/4);
+  netCtx.fillStyle='#fbbf24'; netCtx.fillRect(-4,-14,8,18);
+  netCtx.fillStyle='#fca5a5'; netCtx.fillRect(-4,-18,8,4);
+  netCtx.fillStyle='#fbbf24';
+  netCtx.beginPath(); netCtx.moveTo(-4,4); netCtx.lineTo(4,4); netCtx.lineTo(0,11); netCtx.closePath(); netCtx.fill();
+  netCtx.fillStyle='#374151';
+  netCtx.beginPath(); netCtx.moveTo(-1.5,8); netCtx.lineTo(1.5,8); netCtx.lineTo(0,11); netCtx.closePath(); netCtx.fill();
+  netCtx.strokeStyle='#92400e'; netCtx.lineWidth=1;
+  netCtx.strokeRect(-4,-18,8,22);
+  netCtx.restore();
+}
+
+// ── Главна анимация ──
+function startNetAnim(){
+  const a=Math.max(1,Math.min(20,parseInt(document.getElementById('netA').value)||6));
+  const b=Math.max(1,Math.min(20,parseInt(document.getElementById('netB').value)||4));
+  const c=Math.max(1,Math.min(20,parseInt(document.getElementById('netC').value)||3));
+
+  if(netAnimRaf){ cancelAnimationFrame(netAnimRaf); netAnimRaf=null; }
+  netAnimating=true;
+
+  const W=netCv.width, H=netCv.height;
+  const layout=calcNetLayout(a,b,c,W,H);
+  const {rects,unit}=layout;
+
+  // Покажи резултата
+  const ab=a*b, bc=b*c, ac=a*c;
+  const S1=2*(ab+bc+ac), S=2*c*(a+b), V=a*b*c;
+  const res=document.getElementById('netResult');
+  res.style.display='block';
+  res.innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;font-size:.9rem;">
+      <div><strong style="color:#2563eb;">Горна+Долна:</strong><br>2×(${a}×${b}) = <b>${2*ab} cm²</b></div>
+      <div><strong style="color:#16a34a;">Предна+Задна:</strong><br>2×(${a}×${c}) = <b>${2*ac} cm²</b></div>
+      <div><strong style="color:#d97706;">Лява+Дясна:</strong><br>2×(${b}×${c}) = <b>${2*bc} cm²</b></div>
+    </div>
+    <div style="margin-top:.7rem;padding-top:.7rem;border-top:2px solid var(--border);display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.95rem;">
+      <span><b>S₁ = ${S1} cm²</b> (пълна повърхнина)</span>
+      <span><b>S = ${S} cm²</b> (околна)</span>
+      <span><b>V = ${V} cm³</b> (обем)</span>
+    </div>`;
+
+  // Ред на рисуване: Лява → Предна → Дясна → Задна → Горна → Долна
+  const ORDER=[4,2,5,3,0,1];
+
+  // Ръбовете на всяка стена — по посока на часовниковата стрелка
+  function getEdges(r){
+    const {x,y,w,h}=r;
+    return [
+      {x1:x,   y1:y,   x2:x+w, y2:y  },
+      {x1:x+w, y1:y,   x2:x+w, y2:y+h},
+      {x1:x+w, y1:y+h, x2:x,   y2:y+h},
+      {x1:x,   y1:y+h, x2:x,   y2:y  },
+    ];
+  }
+
+  let phase=0, edge=0, prog=0;
+  const filled=new Array(rects.length).fill(false);
+  const SPEED=0.016;
+
+  // Нарисувай началото
+  netCtx.clearRect(0,0,W,H);
+  drawNetBg(W,H);
+  pencilX=rects[ORDER[0]].x;
+  pencilY=rects[ORDER[0]].y;
+
+  function frame(){
+    if(!netAnimating) return;
+    netCtx.clearRect(0,0,W,H);
+    drawNetBg(W,H);
+
+    // Вече завършени стени
+    rects.forEach((_,i)=>{ if(filled[i]) drawRect(rects[i]); });
+
+    if(phase>=ORDER.length){
+      // Готово — нарисувай всичко и размерите
+      rects.forEach((_,i)=>drawRect(rects[i]));
+      drawDims(layout);
+      drawPencil(pencilX,pencilY);
+      netAnimating=false;
+      return;
+    }
+
+    const ri=ORDER[phase];
+    const r=rects[ri];
+    const cl=NET_CLR[r.col];
+    const edges=getEdges(r);
+
+    // Запълни текущата стена
+    netCtx.fillStyle=cl.fill; netCtx.fillRect(r.x,r.y,r.w,r.h);
+
+    // Вече завършени ръбове на тази стена
+    for(let ei=0;ei<edge;ei++){
+      const e=edges[ei];
+      netCtx.strokeStyle=cl.stroke; netCtx.lineWidth=2.5;
+      netCtx.beginPath(); netCtx.moveTo(e.x1,e.y1); netCtx.lineTo(e.x2,e.y2); netCtx.stroke();
+    }
+
+    // Анимирай текущия ръб
+    const e=edges[edge];
+    const dx=e.x2-e.x1, dy=e.y2-e.y1;
+    const len=Math.sqrt(dx*dx+dy*dy)||1;
+    prog=Math.min(prog+SPEED*Math.max(unit*3,50)/len, 1);
+    const px=e.x1+dx*prog, py=e.y1+dy*prog;
+    pencilX=px; pencilY=py;
+
+    netCtx.strokeStyle=cl.stroke; netCtx.lineWidth=2.5;
+    netCtx.beginPath(); netCtx.moveTo(e.x1,e.y1); netCtx.lineTo(px,py); netCtx.stroke();
+
+    if(prog>=1){ prog=0; edge++; if(edge>=4){ filled[ri]=true; edge=0; phase++; } }
+
+    drawPencil(pencilX,pencilY);
+    netAnimRaf=requestAnimationFrame(frame);
+  }
+
+  netAnimRaf=requestAnimationFrame(frame);
+}
+
+function resetNetAnim(){
+  if(netAnimRaf){ cancelAnimationFrame(netAnimRaf); netAnimRaf=null; }
+  netAnimating=false;
+  netCtx.clearRect(0,0,netCv.width,netCv.height);
+  drawNetBg(netCv.width,netCv.height);
+  document.getElementById('netResult').style.display='none';
+}
+
+// Инициализация
+drawNetBg(netCv.width, netCv.height);
+window.addEventListener('load',()=>{ setTimeout(startNetAnim,700); });
+
+
+// ═══════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════
+// 3. АНИМАЦИЯ ЛИЦЕ
+
+// ═══════════════════════════════════════════════
+const fcv=document.getElementById('faceCanvas');
+const fctx=fcv.getContext('2d');
+
+function animFacePP(){
+  const a=parseInt(document.getElementById('faInput').value)||6;
+  const b=parseInt(document.getElementById('fbInput').value)||4;
+  const c=parseInt(document.getElementById('fcInput').value)||3;
+  const ab=a*b, bc=b*c, ac=a*c;
+  const S1=2*(ab+bc+ac), S=2*c*(a+b);
+  const w=fcv.width, h=fcv.height;
+  fctx.clearRect(0,0,w,h); fctx.fillStyle='#f0f6ff'; fctx.fillRect(0,0,w,h);
+
+  // Рисуй 3 двойки правоъгълници
+  const pairs=[
+    {label:'a×b', val:ab, count:2, col:'#93c5fd', tw:Math.min(60,a*8), th:Math.min(40,b*8)},
+    {label:'a×c', val:ac, count:2, col:'#86efac', tw:Math.min(60,a*8), th:Math.min(40,c*8)},
+    {label:'b×c', val:bc, count:2, col:'#fca5a5', tw:Math.min(40,b*8), th:Math.min(40,c*8)},
+  ];
+
+  let startX=30;
+  pairs.forEach(({label,val,count,col,tw,th})=>{
+    for(let i=0;i<count;i++){
+      const x=startX, y=h*0.12;
+      fctx.fillStyle=col; fctx.fillRect(x,y,tw,th);
+      fctx.strokeStyle='#1e40af'; fctx.lineWidth=2; fctx.strokeRect(x,y,tw,th);
+      fctx.fillStyle='#1e3a8a'; fctx.font='bold 10px Nunito,sans-serif';
+      fctx.textAlign='center'; fctx.textBaseline='middle';
+      fctx.fillText(label,x+tw/2,y+th/2);
+      startX+=tw+10;
+    }
+    startX+=14;
+  });
+
+  // Текст с формулите
+  const fy=h*0.62;
+  fctx.fillStyle='#1e3a8a'; fctx.font='bold 13px Nunito,sans-serif';
+  fctx.textAlign='center';
+  fctx.fillText(`a=${a}, b=${b}, c=${c}`,w/2,fy);
+  fctx.fillStyle='#2563eb'; fctx.font='bold 13px Nunito,sans-serif';
+  fctx.fillText(`2×(${a}·${b}) + 2×(${b}·${c}) + 2×(${a}·${c}) = 2·(${ab}+${bc}+${ac}) = ${S1} cm²`,w/2,fy+24);
+  fctx.fillStyle='#16a34a'; fctx.font='bold 13px Nunito,sans-serif';
+  fctx.fillText(`S₁ = ${S1} cm²  |  S (околна) = 2·${c}·(${a}+${b}) = ${S} cm²`,w/2,fy+48);
+
+  document.getElementById('faceCaption').textContent=`S₁ = ${S1} cm² (пълна)  |  S = ${S} cm² (околна)`;
+}
+animFacePP();
+
+// ═══════════════════════════════════════════════
+// 4. АНИМАЦИЯ ОБЕМ
+// ═══════════════════════════════════════════════
+const vcv=document.getElementById('volCanvas');
+const vctx=vcv.getContext('2d');
+
+function drawIsoBox(ctx,cx,cy,sw,sh,sd,col1,col2,col3){
+  const hs=sd*0.5;
+  ctx.fillStyle=col1; ctx.beginPath(); ctx.moveTo(cx-sw/2,cy); ctx.lineTo(cx+sw/2,cy); ctx.lineTo(cx+sw/2,cy+sh); ctx.lineTo(cx-sw/2,cy+sh); ctx.closePath(); ctx.fill();
+  ctx.strokeStyle='#1e3a8a'; ctx.lineWidth=1.2; ctx.stroke();
+  ctx.fillStyle=col2; ctx.beginPath(); ctx.moveTo(cx+sw/2,cy); ctx.lineTo(cx+sw/2+hs,cy-hs*0.7); ctx.lineTo(cx+sw/2+hs,cy+sh-hs*0.7); ctx.lineTo(cx+sw/2,cy+sh); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.fillStyle=col3; ctx.beginPath(); ctx.moveTo(cx-sw/2,cy); ctx.lineTo(cx+sw/2,cy); ctx.lineTo(cx+sw/2+hs,cy-hs*0.7); ctx.lineTo(cx-sw/2+hs,cy-hs*0.7); ctx.closePath(); ctx.fill(); ctx.stroke();
+}
+
+function animVolPP(){
+  const a=parseInt(document.getElementById('vaInput').value)||4;
+  const b=parseInt(document.getElementById('vbInput').value)||3;
+  const c=parseInt(document.getElementById('vcInput').value)||2;
+  const V=a*b*c;
+  vctx.clearRect(0,0,vcv.width,vcv.height);
+  const w=vcv.width, h=vcv.height;
+  vctx.fillStyle='#f0f6ff'; vctx.fillRect(0,0,w,h);
+
+  const maxDim=Math.max(a,b,c);
+  const unit=Math.min(22, Math.floor(w*0.45/(maxDim+1)));
+  const startX=w*0.15, startY=h*0.88;
+
+  for(let ix=0;ix<a;ix++){
+    for(let iy=0;iy<b;iy++){
+      for(let iz=0;iz<c;iz++){
+        const px=startX+ix*unit-iz*unit*0.38;
+        const py=startY-iy*unit-iz*unit*0.38;
+        const br=Math.round(180-ix*12-iz*8);
+        const bg=Math.round(220-iy*12);
+        const col1=`rgb(${br},${bg},255)`;
+        const col2=`rgb(${br-30},${bg-20},220)`;
+        const col3=`rgb(${br-10},${bg+15},255)`;
+        drawIsoBox(vctx,px,py,unit,unit,unit,col1,col2,col3);
+      }
+    }
+  }
+
+  vctx.fillStyle='#1e3a8a'; vctx.font='bold 14px Nunito,sans-serif';
+  vctx.textAlign='center';
+  vctx.fillText(`V = a·b·c = ${a}·${b}·${c} = ${V} cm³`,w*0.72,h*0.38);
+  vctx.fillStyle='#2563eb'; vctx.font='bold 12px Nunito,sans-serif';
+  vctx.fillText(`(${a}×${b}×${c} = ${V} малки кубчета)`,w*0.72,h*0.54);
+
+  document.getElementById('volCaption').textContent=`V = ${a}·${b}·${c} = ${V} cm³`;
+}
+animVolPP();
+
+// ═══════════════════════════════════════════════
+// 5. ТЕСТ
+// ═══════════════════════════════════════════════
+const QUESTIONS=[
+  {q:'Колко стени има правоъгълният паралелепипед?',opts:['4','5','6','8'],ans:2,hint:'6 стени — 3 двойки правоъгълници.'},
+  {q:'Колко ръба има правоъгълният паралелепипед?',opts:['8','10','12','6'],ans:2,hint:'12 ръба — по 4 от всяко от трите измерения.'},
+  {q:'Колко върха има правоъгълният паралелепипед?',opts:['6','8','10','12'],ans:1,hint:'8 върха — в 8-те ъгъла на тялото.'},
+  {q:'Формулата за пълна повърхнина е:',opts:['S₁ = a·b·c','S₁ = 2(ab+bc+ac)','S₁ = 6·a²','S₁ = 4·a·b'],ans:1,hint:'S₁ = 2(ab + bc + ac) — трите двойки стени.'},
+  {q:'Формулата за обем е:',opts:['V = a+b+c','V = 2(a+b+c)','V = a²·b','V = a·b·c'],ans:3,hint:'V = a·b·c — три измерения.'},
+  {q:'Паралелепипед 5×3×4 cm. Обемът му е:',opts:['48 cm³','60 cm³','36 cm³','120 cm³'],ans:1,hint:'V = 5·3·4 = 60 cm³.'},
+  {q:'Паралелепипед 6×4×3 cm. Пълната повърхнина е:',opts:['108 cm²','144 cm²','72 cm²','96 cm²'],ans:0,hint:'S₁ = 2·(6·4+4·3+6·3) = 2·(24+12+18) = 2·54 = 108 cm².'},
+  {q:'Ако a=b=c, паралелепипедът се нарича:',opts:['Цилиндър','Конус','Куб','Призма'],ans:2,hint:'Куб — специален случай на паралелепипед с равни три измерения.'},
+  {q:'1 dm³ е равен на:',opts:['10 cm³','100 cm³','1000 cm³','10000 cm³'],ans:2,hint:'1 dm³ = 10³ cm³ = 1000 cm³.'},
+  {q:'Основата на паралелепипед е с размери 8×5 cm, обемът е 160 cm³. Височината е:',opts:['2 cm','3 cm','4 cm','5 cm'],ans:2,hint:'V=a·b·c → 160=8·5·c → c=160÷40=4 cm.'},
+];
+
+let answers=new Array(QUESTIONS.length).fill(-1);
+let submitted=false;
+
+function buildTest(){
+  document.getElementById('testBody').innerHTML=QUESTIONS.map((q,qi)=>`
+    <div class="q-block" id="qblock-${qi}">
+      <div class="q-num">Въпрос ${qi+1} от ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options">
+        ${q.opts.map((o,oi)=>`
+          <div class="q-opt" id="opt-${qi}-${oi}" onclick="selAns(${qi},${oi})">
+            <div class="q-opt-letter">${'АБВГ'[oi]}</div><span>${o}</span>
+          </div>`).join('')}
+      </div>
+      <div class="q-feedback" id="fb-${qi}"></div>
+    </div>`).join('');
+}
+
+function selAns(qi,oi){
+  if(submitted) return;
+  QUESTIONS[qi].opts.forEach((_,j)=>document.getElementById(`opt-${qi}-${j}`).classList.remove('selected'));
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  answers[qi]=oi;
+  const ans=answers.filter(a=>a>=0).length;
+  document.getElementById('scoreBox').textContent=`Отговорено: ${ans} / ${QUESTIONS.length}`;
+}
+
+function submitTest(){
+  if(submitted) return; submitted=true;
+  let correct=0;
+  QUESTIONS.forEach((q,qi)=>{
+    const ua=answers[qi];
+    const fb=document.getElementById(`fb-${qi}`);
+    q.opts.forEach((_,oi)=>{
+      const el=document.getElementById(`opt-${qi}-${oi}`);
+      el.classList.remove('selected');
+      if(oi===q.ans) el.classList.add('correct');
+      else if(oi===ua) el.classList.add('wrong');
+    });
+    if(ua===q.ans){correct++;fb.textContent='✅ Правилно!';fb.className='q-feedback show ok';}
+    else{fb.textContent=`❌ Грешно. ${q.hint}`;fb.className='q-feedback show err';}
+  });
+  const pct=Math.round(correct/QUESTIONS.length*100);
+  const lvl=Math.min(4,Math.floor(pct/25));
+  const emojis=['😕','🙂','😊','😄','🌟'];
+  const msgs=['Прегледай материала отново!','Добро начало — прочети формулите.','Добре! Прегледай грешките.','Много добре! Почти перфектно!','🏆 Отлично! Познаваш паралелепипеда!'];
+  document.getElementById('testScore').textContent=`${emojis[lvl]} ${correct} / ${QUESTIONS.length} верни (${pct}%)`;
+  document.getElementById('testMsg').textContent=msgs[lvl];
+  document.getElementById('testResult').classList.add('show');
+  document.getElementById('scoreBox').textContent=`Резултат: ${correct} / ${QUESTIONS.length}`;
+  document.getElementById('retryBtn').style.display='inline-flex';
+}
+
+function resetTest(){
+  submitted=false; answers=new Array(QUESTIONS.length).fill(-1);
+  buildTest();
+  document.getElementById('testResult').classList.remove('show');
+  document.getElementById('retryBtn').style.display='none';
+  document.getElementById('scoreBox').textContent='Отговори на всички въпроси';
+}
+buildTest();
+
+// ═══════════════════════════════════════════════
+// 6. REVEAL
+// ═══════════════════════════════════════════════
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

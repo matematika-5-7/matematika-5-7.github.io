@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Задачи за движение — 5 клас | Математика</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c:#dbeafe;--c-mid:#bfdbfe;--c-soft:#eff6ff;
+  --main:#2563eb;--main-dark:#1e40af;--main-deep:#1e3a8a;
+  --main-btn:#1d4ed8;--main-mid:#3b82f6;
+  --acc:#0284c7;--acc-light:#e0f2fe;
+  --green:#16a34a;--green-light:#dcfce7;
+  --red:#ef4444;--red-light:#fef2f2;
+  --yellow:#d97706;--yellow-light:#fef9c3;
+  --ink:#1e3a8a;--ink-mid:#1e40af;--border:#bfdbfe;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--c-soft);color:var(--ink);font-size:18px;line-height:1.75;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(239,246,255,.97);backdrop-filter:blur(12px);border-bottom:3px solid var(--c-mid);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.9rem;font-weight:800;color:var(--main-dark);text-decoration:none;background:var(--c);border:2px solid var(--c-mid);padding:.4rem 1.1rem;border-radius:20px;transition:all .2s;}
+.nav-back:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--main-deep) 0%,var(--main) 55%,var(--main-mid) 100%);padding:3rem 1.5rem 4rem;position:relative;overflow:hidden;text-align:center;}
+.hero::before{content:'';position:absolute;bottom:0;left:0;right:0;height:52px;background:var(--c-soft);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero-bubble{position:absolute;border-radius:50%;background:rgba(255,255,255,.07);animation:bub 5s ease-in-out infinite;}
+@keyframes bub{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-18px) scale(1.05);}}
+.hero-inner{position:relative;max-width:740px;margin:0 auto;}
+.hero-crumb{font-size:.85rem;color:rgba(255,255,255,.72);margin-bottom:.9rem;}
+.hero-crumb a{color:rgba(255,255,255,.72);text-decoration:none;}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.9rem,5vw,3rem);font-weight:800;color:#fff;line-height:1.1;margin-bottom:.7rem;}
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.88);max-width:560px;margin:0 auto 1.4rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;padding-bottom:1.8rem;}
+.chip{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.32);border-radius:20px;padding:.28rem 1rem;font-size:.85rem;font-weight:700;color:#fff;}
+
+/* TOPIC NAV */
+.topic-nav{background:#fff;border:2px solid var(--border);border-radius:16px;padding:1rem 1.25rem;margin-bottom:2rem;}
+.topic-nav-title{font-size:.78rem;font-weight:800;color:var(--ink-mid);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.6rem;}
+.topic-nav-links{display:flex;flex-wrap:wrap;gap:.5rem;}
+.topic-nav-links a{background:var(--c);border:2px solid var(--c-mid);color:var(--main-dark);border-radius:10px;padding:.3rem .85rem;font-size:.82rem;font-weight:700;text-decoration:none;transition:all .18s;}
+.topic-nav-links a:hover{background:var(--main-btn);color:#fff;border-color:var(--main-btn);}
+.topic-nav-links a.current{background:var(--main-dark);color:#fff;border-color:var(--main-dark);}
+
+/* MAIN */
+.wrap{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 5rem;}
+.sec-tag{display:inline-flex;align-items:center;gap:.4rem;background:var(--main);color:#fff;font-size:.75rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:.24rem .85rem;border-radius:8px;margin-bottom:.5rem;}
+.sec-title{font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.35rem;color:var(--main-dark);}
+.sec-desc{color:var(--ink-mid);font-size:.97rem;margin-bottom:1.4rem;}
+.section-block{margin-bottom:3.5rem;}
+
+/* FORMULA BOX */
+.formula-box{background:linear-gradient(135deg,var(--main-deep),var(--main));color:#fff;border-radius:18px;padding:1.5rem 2rem;margin:1.5rem 0;text-align:center;}
+.formula-box .f-label{font-size:.85rem;font-weight:700;opacity:.8;margin-bottom:.5rem;}
+.formula-main{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:800;letter-spacing:.02em;}
+.formula-sub{font-size:.88rem;opacity:.8;margin-top:.4rem;}
+.formula-trio{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1.2rem 0;}
+.f-card{background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.3);border-radius:12px;padding:.7rem 1.4rem;font-weight:800;font-size:1.05rem;}
+
+/* ЗАДАЧИ */
+.zadacha-card{background:#fff;border:2px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 2px 16px rgba(37,99,235,.08);}
+.zadacha-head{background:linear-gradient(135deg,var(--main-deep),var(--main));padding:1rem 1.5rem;display:flex;align-items:center;gap:.8rem;}
+.zadacha-num{font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;background:rgba(255,255,255,.2);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.zadacha-type{font-size:.78rem;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.08em;}
+.zadacha-title{font-size:1rem;font-weight:800;color:#fff;}
+.zadacha-body{padding:1.4rem 1.5rem;}
+.zadacha-text{background:var(--c-soft);border-left:4px solid var(--main);border-radius:0 12px 12px 0;padding:1rem 1.25rem;margin-bottom:1.2rem;font-size:.97rem;font-weight:700;}
+
+/* CANVAS ANIMATIONS */
+.canvas-wrap{background:linear-gradient(180deg,#e0f2fe 0%,#f0f9ff 100%);border-radius:16px;overflow:hidden;margin-bottom:1rem;position:relative;}
+canvas.road-canvas{display:block;width:100%;height:auto;}
+.anim-controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem;}
+.btn-anim{background:var(--main);color:#fff;border:none;border-radius:10px;padding:.5rem 1.1rem;font-family:'Nunito',sans-serif;font-size:.88rem;font-weight:800;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.4rem;}
+.btn-anim:hover{background:var(--main-dark);}
+.btn-anim.secondary{background:var(--c);color:var(--main-dark);border:2px solid var(--c-mid);}
+.btn-anim.secondary:hover{background:var(--main);color:#fff;}
+
+/* РЕШЕНИЕ */
+.solution-box{background:var(--green-light);border:2px solid #86efac;border-radius:14px;padding:1.2rem 1.5rem;margin-top:1rem;}
+.solution-step{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.6rem;}
+.step-num{background:var(--green);color:#fff;font-weight:800;font-size:.82rem;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.15rem;}
+.step-text{font-size:.95rem;}
+.answer-box{background:#fff;border:3px solid var(--green);border-radius:12px;padding:.7rem 1.25rem;display:inline-flex;align-items:center;gap:.6rem;font-weight:800;color:var(--green);margin-top:.4rem;font-size:1rem;}
+
+/* INPUT TABLE */
+.input-table{width:100%;border-collapse:collapse;margin:1rem 0;}
+.input-table th{background:var(--main);color:#fff;padding:.6rem .9rem;font-size:.85rem;font-weight:800;text-align:left;}
+.input-table td{padding:.5rem .9rem;border-bottom:1px solid var(--border);font-size:.9rem;}
+.input-table input{border:2px solid var(--c-mid);border-radius:8px;padding:.3rem .7rem;font-family:'Nunito',sans-serif;font-size:.95rem;font-weight:700;width:100%;background:var(--c-soft);color:var(--ink);}
+.input-table input:focus{outline:none;border-color:var(--main);background:#fff;}
+.hint-box{background:var(--yellow-light);border:2px solid #fcd34d;border-radius:12px;padding:.8rem 1.2rem;display:none;margin-top:.6rem;font-size:.9rem;font-weight:700;color:#92400e;}
+.hint-box.show{display:flex;gap:.5rem;align-items:flex-start;}
+.check-btn{background:var(--main);color:#fff;border:none;border-radius:10px;padding:.55rem 1.4rem;font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;transition:all .18s;margin-top:.8rem;}
+.check-btn:hover{background:var(--main-dark);}
+.result-ok{background:var(--green-light);border:2px solid #86efac;border-radius:10px;padding:.6rem 1rem;font-weight:800;color:var(--green);display:none;margin-top:.5rem;}
+.result-ok.show{display:flex;align-items:center;gap:.5rem;}
+
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* FOOTER */
+.finish-bar{background:linear-gradient(135deg,var(--main-deep),var(--main));border-radius:20px;padding:1.8rem 2rem;margin-top:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.finish-bar h3{font-family:'Baloo 2',sans-serif;font-size:1.3rem;font-weight:800;color:#fff;}
+.finish-bar p{font-size:.88rem;color:rgba(255,255,255,.8);}
+.finish-link{background:#fff;color:var(--main-dark);border-radius:12px;padding:.6rem 1.4rem;font-weight:800;font-size:.95rem;text-decoration:none;transition:all .2s;white-space:nowrap;}
+.finish-link:hover{background:var(--c);transform:translateY(-2px);}
+footer{text-align:center;padding:2rem 1rem;font-size:.82rem;color:#64748b;}
+
+@media(max-width:600px){
+  .data-grid{grid-template-columns:1fr;}
+  .formula-trio{flex-direction:column;align-items:center;}
+  .finish-bar{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="klas-5.html" class="nav-logo">Мат<em>5</em></a>
+  <a href="klas-5.html" class="nav-back">← 5 клас</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bubble" style="width:180px;height:180px;top:-40px;right:-30px;animation-delay:0s;"></div>
+  <div class="hero-bubble" style="width:100px;height:100px;bottom:60px;left:20px;animation-delay:2s;"></div>
+  <div class="hero-inner">
+    <div class="hero-crumb"><a href="klas-5.html">5 клас</a> › <a href="klas-5.html#tema3">Десетични дроби</a> › Задачи за движение</div>
+    <h1>🚗 Задачи за движение</h1>
+    <p class="hero-sub">Движение по суша, вода и въздух — с анимации и интерактивен конструктор</p>
+    <div class="hero-chips">
+      <span class="chip">🛣️ По суша</span>
+      <span class="chip">🌊 По вода</span>
+      <span class="chip">✈️ По въздух</span>
+      <span class="chip">🔧 Конструктор</span>
+    </div>
+  </div>
+</div>
+
+<!-- WRAP -->
+<div class="wrap">
+
+  <!-- TOPIC NAV -->
+  <div class="topic-nav reveal">
+    <div class="topic-nav-title">📌 Десетични дроби и проценти</div>
+    <div class="topic-nav-links">
+      <a href="desetichni-drobi-chetene-5-klas.html">1. Четене</a>
+      <a href="zakraglyavane-5-klas.html">2. Закръгляване</a>
+      <a href="deistviya-desetichni-5-klas.html">3. Действия</a>
+      <a href="neizvestna-komponenta-5-klas.html">4. Неизвестна компонента</a>
+      <a href="procent-5-klas.html">5. Проценти</a>
+      <a href="drobi-desetichni-5-klas.html">6. Дроби ↔ десетични</a>
+      <a href="zadachi-dvizhenie-5-klas.html" class="current">7. Задачи за движение</a>
+    </div>
+  </div>
+
+  <!-- ФОРМУЛА -->
+  <div class="section-block reveal">
+    <div class="sec-tag">📐 Формула</div>
+    <div class="sec-title">Основна формула за движение</div>
+    <div class="sec-desc">Всички задачи за движение се решават с три взаимосвързани формули.</div>
+    <div class="formula-box">
+      <div class="f-label">Разстояние = Скорост × Време</div>
+      <div class="formula-main">S = V · t</div>
+      <div class="formula-sub">S — разстояние (km) &nbsp;|&nbsp; V — скорост (km/h) &nbsp;|&nbsp; t — време (h)</div>
+      <div class="formula-trio">
+        <div class="f-card">S = V · t</div>
+        <div class="f-card">V = S ÷ t</div>
+        <div class="f-card">t = S ÷ V</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= ЗАДАЧА 1: ЕДНОПОСОЧНО ======= -->
+  <div class="section-block reveal">
+    <div class="sec-tag">🛣️ По суша — еднопосочно</div>
+    <div class="sec-title">Задача 1 — Намери разстоянието</div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">1</div>
+        <div>
+          <div class="zadacha-type">Еднопосочно движение</div>
+          <div class="zadacha-title">Кола се движи от град А до град Б</div>
+        </div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">
+          Кола тръгва от град А към град Б със скорост <strong>72.5 km/h</strong>.
+          Пътува <strong>3.2 часа</strong>. Намери изминатото разстояние.
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="c1" class="road-canvas" width="800" height="180"></canvas>
+        </div>
+        <div class="anim-controls">
+          <button class="btn-anim" onclick="startAnim(1)">▶ Пусни анимацията</button>
+          <button class="btn-anim secondary" onclick="resetAnim(1)">↺ Нулирай</button>
+        </div>
+
+        <table class="input-table">
+          <tr><th>Стъпка</th><th>Пресмятане</th><th>Резултат</th></tr>
+          <tr>
+            <td>Скорост (km/h)</td>
+            <td>дадена</td>
+            <td>72.5</td>
+          </tr>
+          <tr>
+            <td>Време (h)</td>
+            <td>дадено</td>
+            <td>3.2</td>
+          </tr>
+          <tr>
+            <td><strong>Разстояние S = V · t</strong></td>
+            <td>72.5 × 3.2 = ?</td>
+            <td><input type="number" id="ans1" placeholder="въведи отговор" step="0.1"></td>
+          </tr>
+        </table>
+        <div class="hint-box" id="hint1">💡 <span>Умножи 72.5 × 3.2. Първо: 72.5 × 3 = 217.5, после: 72.5 × 0.2 = 14.5. Събери!</span></div>
+        <div class="result-ok" id="ok1">✅ Браво! S = 232 km — правилно!</div>
+        <button class="check-btn" onclick="check(1, 232)">✔ Провери отговора</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= ЗАДАЧА 2: ДВУПОСОЧНО ======= -->
+  <div class="section-block reveal">
+    <div class="sec-tag">🔄 По суша — двупосочно</div>
+    <div class="sec-title">Задача 2 — Двама тръгват един срещу друг</div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">2</div>
+        <div>
+          <div class="zadacha-type">Двупосочно движение (среща)</div>
+          <div class="zadacha-title">Автобус и кола тръгват един срещу друг</div>
+        </div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">
+          От два града на разстояние <strong>280 km</strong> едновременно тръгват кола и автобус.
+          Колата се движи със скорост <strong>85 km/h</strong>, автобусът — <strong>55 km/h</strong>.
+          След колко часа ще се срещнат?
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="c2" class="road-canvas" width="800" height="180"></canvas>
+        </div>
+        <div class="anim-controls">
+          <button class="btn-anim" onclick="startAnim(2)">▶ Пусни анимацията</button>
+          <button class="btn-anim secondary" onclick="resetAnim(2)">↺ Нулирай</button>
+        </div>
+
+        <table class="input-table">
+          <tr><th>Стъпка</th><th>Пресмятане</th><th>Резултат</th></tr>
+          <tr><td>Обща скорост V₁+V₂</td><td>85 + 55 = ?</td><td><input type="number" id="ans2a" placeholder="?"></td></tr>
+          <tr><td><strong>Време t = S ÷ V</strong></td><td>280 ÷ 140 = ?</td><td><input type="number" id="ans2b" placeholder="?"></td></tr>
+        </table>
+        <div class="hint-box" id="hint2">💡 <span>При среща: двете коли вървят една срещу друга, затова се движат заедно с обща скорост = V₁ + V₂. После: t = S ÷ (V₁+V₂).</span></div>
+        <div class="result-ok" id="ok2">✅ Браво! V₁+V₂ = 140 km/h, t = 2 часа!</div>
+        <button class="check-btn" onclick="check2()">✔ Провери отговора</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= ЗАДАЧА 3: ВОДА ======= -->
+  <div class="section-block reveal">
+    <div class="sec-tag">🌊 Движение по вода</div>
+    <div class="sec-title">Задача 3 — Катер по течението и срещу течението</div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">3</div>
+        <div>
+          <div class="zadacha-type">Движение по вода</div>
+          <div class="zadacha-title">Катер — с течението и срещу течението</div>
+        </div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">
+          Катер има скорост <strong>24 km/h</strong> в тихи води. Скоростта на течението е <strong>4.5 km/h</strong>.
+          Намери скоростта <strong>по течението</strong> и <strong>срещу течението</strong>.
+          Ако катерът се движи по течението <strong>2.4 часа</strong>, намери изминатото разстояние.
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="c3" class="road-canvas" width="800" height="200"></canvas>
+        </div>
+        <div class="anim-controls">
+          <button class="btn-anim" onclick="startAnim(3)">▶ Пусни анимацията</button>
+          <button class="btn-anim secondary" onclick="resetAnim(3)">↺ Нулирай</button>
+        </div>
+
+        <table class="input-table">
+          <tr><th>Стъпка</th><th>Формула</th><th>Резултат</th></tr>
+          <tr><td>Скорост по течението</td><td>24 + 4.5 = ?</td><td><input type="number" id="ans3a" placeholder="?" step="0.1"></td></tr>
+          <tr><td>Скорост срещу течението</td><td>24 − 4.5 = ?</td><td><input type="number" id="ans3b" placeholder="?" step="0.1"></td></tr>
+          <tr><td><strong>Разстояние (по течението)</strong></td><td>28.5 × 2.4 = ?</td><td><input type="number" id="ans3c" placeholder="?" step="0.1"></td></tr>
+        </table>
+        <div class="hint-box" id="hint3">💡 <span>По течението: V = Vкатер + Vтечение. Срещу: V = Vкатер − Vтечение. Разстояние = V по течение × t.</span></div>
+        <div class="result-ok" id="ok3">✅ Браво! По течение: 28.5 km/h, Срещу: 19.5 km/h, S = 68.4 km!</div>
+        <button class="check-btn" onclick="check3()">✔ Провери отговора</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= ЗАДАЧА 4: ВЪЗДУХ ======= -->
+  <div class="section-block reveal">
+    <div class="sec-tag">✈️ Движение по въздух</div>
+    <div class="sec-title">Задача 4 — Самолет с попътен вятър</div>
+
+    <div class="zadacha-card">
+      <div class="zadacha-head">
+        <div class="zadacha-num">4</div>
+        <div>
+          <div class="zadacha-type">Движение по въздух</div>
+          <div class="zadacha-title">Самолет с попътен и насрещен вятър</div>
+        </div>
+      </div>
+      <div class="zadacha-body">
+        <div class="zadacha-text">
+          Самолет лети от София до Берлин — разстояние <strong>1560 km</strong>.
+          Скоростта на самолета е <strong>780 km/h</strong>, скоростта на вятъра — <strong>45 km/h</strong>.
+          Намери времето на полета <strong>с попътен вятър</strong>.
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="c4" class="road-canvas" width="800" height="200"></canvas>
+        </div>
+        <div class="anim-controls">
+          <button class="btn-anim" onclick="startAnim(4)">▶ Пусни анимацията</button>
+          <button class="btn-anim secondary" onclick="resetAnim(4)">↺ Нулирай</button>
+        </div>
+
+        <table class="input-table">
+          <tr><th>Стъпка</th><th>Формула</th><th>Резултат</th></tr>
+          <tr><td>Скорост с попътен вятър</td><td>780 + 45 = ?</td><td><input type="number" id="ans4a" placeholder="?"></td></tr>
+          <tr><td><strong>Време t = S ÷ V</strong></td><td>1560 ÷ 825 = ?</td><td><input type="number" id="ans4b" placeholder="?" step="0.01"></td></tr>
+        </table>
+        <div class="hint-box" id="hint4">💡 <span>С попътен вятър: V = Vсамолет + Vвятър. После t = S ÷ V. Закръгли до стотни!</span></div>
+        <div class="result-ok" id="ok4">✅ Браво! V = 825 km/h, t ≈ 1.89 h!</div>
+        <button class="check-btn" onclick="check4()">✔ Провери отговора</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= КОНСТРУКТОР ======= -->
+  <div class="section-block reveal" id="constructor">
+    <div class="sec-tag">🔧 Интерактивен симулатор</div>
+    <div class="sec-title">Симулатор на движение</div>
+    <div class="sec-desc">Плъзни превозни средства в сцената, въведи данните и пусни анимацията!</div>
+
+    <!-- Симулаторът се зарежда в iframe за изолация на CSS/JS -->
+    <div id="simWrapper" style="border:3px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 4px 30px rgba(37,99,235,.12);">
+      <iframe id="simFrame" src="simulator-dvizhenie.html" style="width:100%;height:680px;border:none;display:block;" title="Симулатор на движение"></iframe>
+    </div>
+  </div>
+
+  <!-- FINISH -->
+  <div class="finish-bar reveal">
+    <div>
+      <h3>✅ Задачите за движение — готово!</h3>
+      <p>Следваща тема: Таблици и диаграми</p>
+    </div>
+    <a href="danni-diagrami-5-klas.html" class="finish-link">→ Таблици и диаграми</a>
+  </div>
+
+</div>
+
+<footer>Математика 5–7 клас · Безплатни учебни материали по официалната програма на МОН</footer>
+
+<script>
+// ======== АНИМАЦИИ ЗА ГОТОВИТЕ ЗАДАЧИ ========
+
+const anims = {
+  1: { prog:0, running:false, raf:null },
+  2: { prog:0, running:false, raf:null },
+  3: { prog:0, running:false, raf:null },
+  4: { prog:0, running:false, raf:null },
+};
+
+function drawTask1(prog){
+  const cv = document.getElementById('c1');
+  const ctx = cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Небе
+  const sky = ctx.createLinearGradient(0,0,0,H*0.55);
+  sky.addColorStop(0,'#bfdbfe'); sky.addColorStop(1,'#e0f2fe');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*0.55);
+
+  // Земя
+  const grd = ctx.createLinearGradient(0,H*0.55,0,H);
+  grd.addColorStop(0,'#d1fae5'); grd.addColorStop(1,'#a7f3d0');
+  ctx.fillStyle=grd; ctx.fillRect(0,H*0.55,W,H*0.45);
+
+  // Пътека
+  const RY=H*0.62, RH=36;
+  ctx.fillStyle='#374151'; ctx.fillRect(0,RY,W,RH);
+  // Прекъсната линия
+  ctx.strokeStyle='#fbbf24'; ctx.lineWidth=3; ctx.setLineDash([20,14]);
+  ctx.beginPath(); ctx.moveTo(0,RY+RH/2); ctx.lineTo(W,RY+RH/2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Дървета
+  [80,200,380,540,680,760].forEach(x=>{
+    let ty=H*0.47;
+    ctx.fillStyle='#166534'; ctx.beginPath();
+    ctx.moveTo(x,ty-26); ctx.lineTo(x-14,ty); ctx.lineTo(x+14,ty); ctx.closePath(); ctx.fill();
+    ctx.fillStyle='#92400e'; ctx.fillRect(x-3,ty,6,14);
+  });
+
+  // Кола
+  const carX = 60 + prog*(W-160);
+  drawCar(ctx, carX, RY-2, '#2563eb', '🚗');
+
+  // Надписи
+  const RY2=RY+RH+18;
+  ctx.fillStyle='#1e3a8a'; ctx.font='bold 15px Nunito,sans-serif';
+  ctx.fillText('А',18, RY+RH/2+5);
+  ctx.fillText('Б',W-28, RY+RH/2+5);
+
+  // Скорост на колата
+  ctx.fillStyle='rgba(30,58,138,.85)';
+  ctx.font='bold 13px Nunito,sans-serif';
+  ctx.fillText('72.5 km/h', carX-30, RY-16);
+
+  // Прогрес
+  const pct = Math.round(prog*100);
+  ctx.fillStyle='#1e40af'; ctx.font='bold 13px Nunito,sans-serif';
+  ctx.fillText(`${pct}%`, W/2-12, H-8);
+}
+
+// === ОТДЕЛНИ ФУНКЦИИ ЗА ВСЯКО ПРЕВОЗНО СРЕДСТВО ===
+
+function drawCar(ctx, x, y, color){
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.roundRect(x-26,y-22,52,20,5); ctx.fill();
+  ctx.fillStyle=lighten(color);
+  ctx.beginPath(); ctx.roundRect(x-16,y-32,32,14,4); ctx.fill();
+  // Прозорци
+  ctx.fillStyle='rgba(200,230,255,0.8)';
+  ctx.beginPath(); ctx.roundRect(x-13,y-30,12,10,2); ctx.fill();
+  ctx.beginPath(); ctx.roundRect(x+2,y-30,12,10,2); ctx.fill();
+  ctx.fillStyle='#111';
+  [x-14, x+14].forEach(wx=>{
+    ctx.beginPath(); ctx.arc(wx,y,7,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#d1d5db'; ctx.beginPath(); ctx.arc(wx,y,3.5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#111';
+  });
+}
+
+function drawBus(ctx, x, y, color){
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.roundRect(x-38,y-28,76,26,4); ctx.fill();
+  ctx.fillStyle=lighten(color);
+  for(let i=-24;i<=24;i+=16){
+    ctx.beginPath(); ctx.roundRect(x+i-6,y-26,12,12,2); ctx.fill();
+  }
+  ctx.fillStyle='#111';
+  [-22,22].forEach(wx=>{
+    ctx.beginPath(); ctx.arc(x+wx,y,8,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#d1d5db'; ctx.beginPath(); ctx.arc(x+wx,y,4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#111';
+  });
+}
+
+function drawTruck(ctx, x, y, color){
+  // Кабина
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.roundRect(x+10,y-30,30,28,4); ctx.fill();
+  // Прозорец на кабина
+  ctx.fillStyle='rgba(200,230,255,0.8)';
+  ctx.beginPath(); ctx.roundRect(x+16,y-27,18,12,2); ctx.fill();
+  // Каросерия (ремарке)
+  ctx.fillStyle='#475569';
+  ctx.beginPath(); ctx.roundRect(x-44,y-26,56,24,3); ctx.fill();
+  // Ленти на ремаркето
+  ctx.strokeStyle='#94a3b8'; ctx.lineWidth=1;
+  for(let i=-30;i<12;i+=10){
+    ctx.beginPath(); ctx.moveTo(x+i,y-26); ctx.lineTo(x+i,y-4); ctx.stroke();
+  }
+  // Колела
+  ctx.fillStyle='#111';
+  [x-28,x-10,x+26].forEach(wx=>{
+    ctx.beginPath(); ctx.arc(wx,y,8,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#d1d5db'; ctx.beginPath(); ctx.arc(wx,y,4,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle='#111';
+  });
+}
+
+function drawMoto(ctx, x, y, color){
+  // Тяло
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.ellipse(x,y-12,20,8,0,0,Math.PI*2); ctx.fill();
+  // Кормило
+  ctx.strokeStyle='#374151'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x+14,y-16); ctx.lineTo(x+20,y-22); ctx.stroke();
+  // Седалка
+  ctx.fillStyle='#1f2937';
+  ctx.beginPath(); ctx.roundRect(x-10,y-20,20,6,3); ctx.fill();
+  // Колела
+  ctx.fillStyle='#111';
+  [x-16, x+16].forEach(wx=>{
+    ctx.beginPath(); ctx.arc(wx,y,9,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle='#d1d5db'; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.arc(wx,y,5,0,Math.PI*2); ctx.stroke();
+  });
+}
+
+function drawBike(ctx, x, y, color){
+  // Рамка
+  ctx.strokeStyle=color; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x-14,y); ctx.lineTo(x,y-16); ctx.lineTo(x+14,y); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x,y-16); ctx.lineTo(x-6,y); ctx.stroke();
+  // Колела
+  ctx.strokeStyle='#374151'; ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.arc(x-14,y,10,0,Math.PI*2); ctx.stroke();
+  ctx.beginPath(); ctx.arc(x+14,y,10,0,Math.PI*2); ctx.stroke();
+  // Кормило
+  ctx.strokeStyle='#1f2937'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x+10,y-16); ctx.lineTo(x+18,y-18); ctx.stroke();
+  // Седалка
+  ctx.fillStyle='#1f2937';
+  ctx.beginPath(); ctx.roundRect(x-8,y-20,14,4,2); ctx.fill();
+}
+
+function drawPerson(ctx, x, y){
+  // Тяло
+  ctx.fillStyle='#fbbf24'; // глава
+  ctx.beginPath(); ctx.arc(x,y-34,8,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#2563eb'; // тяло
+  ctx.beginPath(); ctx.roundRect(x-8,y-26,16,18,3); ctx.fill();
+  // Крака — анимирани (разчитаме на аргумент за фаза, но без него просто стоят)
+  ctx.strokeStyle='#1e3a8a'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x-4,y-8); ctx.lineTo(x-7,y+6); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x+4,y-8); ctx.lineTo(x+7,y+6); ctx.stroke();
+  // Ръце
+  ctx.beginPath(); ctx.moveTo(x-8,y-22); ctx.lineTo(x-16,y-14); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x+8,y-22); ctx.lineTo(x+16,y-14); ctx.stroke();
+}
+
+function drawHiker(ctx, x, y){
+  // Раница
+  ctx.fillStyle='#92400e';
+  ctx.beginPath(); ctx.roundRect(x-6,y-30,14,18,4); ctx.fill();
+  // Тяло
+  ctx.fillStyle='#16a34a'; // зелена яке
+  ctx.beginPath(); ctx.roundRect(x-8,y-26,16,16,3); ctx.fill();
+  // Глава
+  ctx.fillStyle='#fbbf24';
+  ctx.beginPath(); ctx.arc(x,y-34,8,0,Math.PI*2); ctx.fill();
+  // Шапка
+  ctx.fillStyle='#7f1d1d';
+  ctx.beginPath(); ctx.roundRect(x-9,y-44,18,8,3); ctx.fill();
+  ctx.fillStyle='#991b1b';
+  ctx.beginPath(); ctx.roundRect(x-7,y-42,14,4,2); ctx.fill();
+  // Крака
+  ctx.strokeStyle='#1c1917'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x-4,y-10); ctx.lineTo(x-6,y+6); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x+4,y-10); ctx.lineTo(x+8,y+6); ctx.stroke();
+  // Щека/тояжка
+  ctx.strokeStyle='#92400e'; ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.moveTo(x+10,y-24); ctx.lineTo(x+14,y+8); ctx.stroke();
+}
+
+function drawHorse(ctx, x, y, color){
+  ctx.fillStyle=color||'#92400e';
+  // Тяло
+  ctx.beginPath(); ctx.ellipse(x,y-12,26,12,0,0,Math.PI*2); ctx.fill();
+  // Глава
+  ctx.beginPath(); ctx.ellipse(x+22,y-20,10,8,-0.4,0,Math.PI*2); ctx.fill();
+  // Муцуна
+  ctx.fillStyle=lighten(color||'#92400e');
+  ctx.beginPath(); ctx.ellipse(x+30,y-18,5,4,0,0,Math.PI*2); ctx.fill();
+  // Крака
+  ctx.fillStyle=color||'#92400e';
+  [-14,-4,4,14].forEach((dx,i)=>{
+    ctx.beginPath(); ctx.roundRect(x+dx-3,y-2,6,14,2); ctx.fill();
+  });
+  // Грива
+  ctx.fillStyle='#1c1917';
+  ctx.beginPath(); ctx.roundRect(x+12,y-28,6,14,3); ctx.fill();
+  // Опашка
+  ctx.strokeStyle='#1c1917'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(x-24,y-12); ctx.lineTo(x-32,y-4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(x-24,y-12); ctx.lineTo(x-34,y-12); ctx.stroke();
+}
+
+function drawBoat(ctx, x, y, color){
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.moveTo(x-36,y); ctx.lineTo(x-26,y+18); ctx.lineTo(x+26,y+18); ctx.lineTo(x+36,y); ctx.closePath(); ctx.fill();
+  ctx.fillStyle=lighten(color);
+  ctx.beginPath(); ctx.roundRect(x-18,y-18,36,20,3); ctx.fill();
+  // Флаг
+  ctx.fillStyle='#ef4444';
+  ctx.beginPath(); ctx.moveTo(x,y-18); ctx.lineTo(x,y-36);
+  ctx.lineTo(x+14,y-28); ctx.lineTo(x,y-20); ctx.closePath(); ctx.fill();
+}
+
+function drawPlane(ctx, x, y, color){
+  // Тяло
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.ellipse(x,y,42,12,0,0,Math.PI*2); ctx.fill();
+  // Крила
+  ctx.fillStyle=lighten(color);
+  ctx.beginPath(); ctx.moveTo(x-10,y); ctx.lineTo(x-30,y+22); ctx.lineTo(x+10,y+22); ctx.lineTo(x+16,y); ctx.closePath(); ctx.fill();
+  // Опашка
+  ctx.fillStyle=color;
+  ctx.beginPath(); ctx.moveTo(x+28,y); ctx.lineTo(x+42,y-14); ctx.lineTo(x+42,y); ctx.closePath(); ctx.fill();
+}
+
+function drawTrain(ctx, x, y, color){
+  [-30,0,30].forEach((dx,i)=>{
+    ctx.fillStyle=i===0?color:lighten(color);
+    ctx.beginPath(); ctx.roundRect(x+dx-16,y-24,32,24,3); ctx.fill();
+    [-8,8].forEach(wx=>{
+      ctx.fillStyle='#111'; ctx.beginPath(); ctx.arc(x+dx+wx,y,6,0,Math.PI*2); ctx.fill();
+    });
+  });
+  // Вагонни прозорци
+  [0,30].forEach(dx=>{
+    ctx.fillStyle='#bfdbfe';
+    [-8,0,8].forEach(wx=>{
+      ctx.beginPath(); ctx.roundRect(x+dx+wx-4,y-20,8,8,2); ctx.fill();
+    });
+  });
+}
+
+function lighten(hex){
+  const r=parseInt(hex.slice(1,3),16);
+  const g=parseInt(hex.slice(3,5),16);
+  const b=parseInt(hex.slice(5,7),16);
+  return `rgb(${Math.min(r+60,255)},${Math.min(g+60,255)},${Math.min(b+60,255)})`;
+}
+
+function drawTask2(prog){
+  const cv=document.getElementById('c2'); const ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  const sky=ctx.createLinearGradient(0,0,0,H*0.55);
+  sky.addColorStop(0,'#bfdbfe'); sky.addColorStop(1,'#e0f2fe');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*0.55);
+  const grd=ctx.createLinearGradient(0,H*0.55,0,H);
+  grd.addColorStop(0,'#d1fae5'); grd.addColorStop(1,'#a7f3d0');
+  ctx.fillStyle=grd; ctx.fillRect(0,H*0.55,W,H*0.45);
+  const RY=H*0.62, RH=36;
+  ctx.fillStyle='#374151'; ctx.fillRect(0,RY,W,RH);
+  ctx.strokeStyle='#fbbf24'; ctx.lineWidth=3; ctx.setLineDash([20,14]);
+  ctx.beginPath(); ctx.moveTo(0,RY+RH/2); ctx.lineTo(W,RY+RH/2); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Градове
+  ctx.fillStyle='#1e3a8a'; ctx.font='bold 14px Nunito,sans-serif';
+  ctx.fillText('Град А',10,RY-8);
+  ctx.fillText('Град Б',W-68,RY-8);
+
+  // Кола от ляво
+  const carX = 60 + prog * (W-120) * (85/140);
+  drawCar(ctx, carX, RY-2, '#2563eb');
+  ctx.fillStyle='#1e3a8a'; ctx.font='bold 12px Nunito,sans-serif';
+  ctx.fillText('85 km/h →', carX-25, RY-18);
+
+  // Автобус от дясно
+  const busX = W-80 - prog * (W-120) * (55/140);
+  drawBus(ctx, busX, RY-2, '#dc2626');
+  ctx.fillStyle='#dc2626'; ctx.font='bold 12px Nunito,sans-serif';
+  ctx.fillText('← 55 km/h', busX-30, RY-22);
+
+  // Среща
+  if(prog >= 0.99){
+    ctx.fillStyle='rgba(22,163,74,.95)';
+    ctx.font='bold 18px Baloo 2,sans-serif';
+    ctx.fillText('🤝 Срещнаха се!', W/2-70, RY-30);
+  }
+}
+
+function drawTask3(prog){
+  const cv=document.getElementById('c3'); const ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Небе
+  const sky=ctx.createLinearGradient(0,0,0,H*0.3);
+  sky.addColorStop(0,'#bfdbfe'); sky.addColorStop(1,'#93c5fd');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H*0.3);
+
+  // Вода
+  const water=ctx.createLinearGradient(0,H*0.3,0,H);
+  water.addColorStop(0,'#0284c7'); water.addColorStop(1,'#0ea5e9');
+  ctx.fillStyle=water; ctx.fillRect(0,H*0.3,W,H*0.7);
+
+  // Вълни
+  ctx.strokeStyle='rgba(255,255,255,.3)'; ctx.lineWidth=2;
+  for(let i=0;i<6;i++){
+    const wy=H*0.35+i*20;
+    ctx.beginPath();
+    for(let x=0;x<W;x+=4){
+      const y=wy+Math.sin((x+prog*200)/20)*3;
+      x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+
+  // Брегове
+  ctx.fillStyle='#92400e';
+  ctx.fillRect(0,H*0.28,30,H*0.05);
+  ctx.fillRect(W-30,H*0.28,30,H*0.05);
+
+  const WY=H*0.42;
+  const boatX = 60 + prog*(W-160);
+  drawBoat(ctx, boatX, WY, '#1d4ed8');
+
+  // Стрелка за течение
+  ctx.strokeStyle='rgba(255,255,255,.6)'; ctx.lineWidth=2;
+  ctx.beginPath(); ctx.moveTo(W*0.35,H*0.22); ctx.lineTo(W*0.55,H*0.22); ctx.stroke();
+  ctx.fillStyle='rgba(255,255,255,.6)';
+  ctx.beginPath(); ctx.moveTo(W*0.55,H*0.22); ctx.lineTo(W*0.55-8,H*0.22-5); ctx.lineTo(W*0.55-8,H*0.22+5); ctx.closePath(); ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.8)'; ctx.font='bold 11px Nunito,sans-serif';
+  ctx.fillText('течение 4.5 km/h',W*0.35,H*0.2);
+  ctx.fillText('28.5 km/h',boatX-22,WY-38);
+}
+
+function drawTask4(prog){
+  const cv=document.getElementById('c4'); const ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+
+  // Небе
+  const sky=ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#1e3a8a'); sky.addColorStop(0.4,'#1d4ed8'); sky.addColorStop(1,'#93c5fd');
+  ctx.fillStyle=sky; ctx.fillRect(0,0,W,H);
+
+  // Облаци
+  [[100,40,1],[250,60,.8],[450,30,.9],[620,50,.7],[720,35,.85]].forEach(([cx,cy,op])=>{
+    ctx.fillStyle=`rgba(255,255,255,${op*0.6})`;
+    ctx.beginPath(); ctx.arc(cx,cy,22,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx+20,cy+5,18,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx-15,cy+8,16,0,Math.PI*2); ctx.fill();
+  });
+
+  // Вятър
+  ctx.strokeStyle='rgba(255,255,255,.35)'; ctx.lineWidth=1.5;
+  ctx.setLineDash([8,6]);
+  [60,100,140].forEach(y=>{
+    ctx.beginPath(); ctx.moveTo(30,y); ctx.lineTo(W-30,y); ctx.stroke();
+  });
+  ctx.setLineDash([]);
+
+  // Градове (долу)
+  ctx.fillStyle='rgba(255,255,255,.6)'; ctx.font='bold 13px Nunito,sans-serif';
+  ctx.fillText('🏙 София',10,H-10);
+  ctx.fillText('🏙 Берлин',W-80,H-10);
+
+  const planeX = 70 + prog*(W-180);
+  const planeY = H*0.45;
+  drawPlane(ctx, planeX, planeY, '#2563eb');
+
+  // Надпис
+  ctx.fillStyle='rgba(255,255,255,.9)'; ctx.font='bold 12px Nunito,sans-serif';
+  ctx.fillText('780+45=825 km/h', planeX-40, planeY-30);
+}
+
+// Анимационен двигател
+function startAnim(n){
+  if(anims[n].running) return;
+  anims[n].running=true;
+  const drawFns={1:drawTask1,2:drawTask2,3:drawTask3,4:drawTask4};
+  function step(){
+    anims[n].prog=Math.min(anims[n].prog+0.004,1);
+    drawFns[n](anims[n].prog);
+    if(anims[n].prog<1) anims[n].raf=requestAnimationFrame(step);
+    else anims[n].running=false;
+  }
+  anims[n].raf=requestAnimationFrame(step);
+}
+
+function resetAnim(n){
+  cancelAnimationFrame(anims[n].raf);
+  anims[n].prog=0; anims[n].running=false;
+  const drawFns={1:drawTask1,2:drawTask2,3:drawTask3,4:drawTask4};
+  drawFns[n](0);
+}
+
+// Инициализация на canvas-ите
+window.addEventListener('load',()=>{
+  [1,2,3,4].forEach(n=>resetAnim(n));
+  initBuilder();
+});
+
+// ======== ПРОВЕРКИ ========
+function check(n, correct){
+  const inp=document.getElementById('ans'+n);
+  const val=parseFloat(inp.value);
+  const hint=document.getElementById('hint'+n);
+  const ok=document.getElementById('ok'+n);
+  if(Math.abs(val-correct)<0.5){
+    ok.classList.add('show'); hint.classList.remove('show');
+    inp.style.borderColor='#16a34a'; inp.style.background='#dcfce7';
+    startAnim(n);
+  } else {
+    hint.classList.add('show'); ok.classList.remove('show');
+    inp.style.borderColor='#ef4444'; inp.style.background='#fef2f2';
+  }
+}
+
+function check2(){
+  const a=parseFloat(document.getElementById('ans2a').value);
+  const b=parseFloat(document.getElementById('ans2b').value);
+  const hint=document.getElementById('hint2'); const ok=document.getElementById('ok2');
+  if(Math.abs(a-140)<1 && Math.abs(b-2)<0.1){
+    ok.classList.add('show'); hint.classList.remove('show'); startAnim(2);
+  } else {
+    hint.classList.add('show'); ok.classList.remove('show');
+  }
+}
+
+function check3(){
+  const a=parseFloat(document.getElementById('ans3a').value);
+  const b=parseFloat(document.getElementById('ans3b').value);
+  const c=parseFloat(document.getElementById('ans3c').value);
+  const ok=document.getElementById('ok3'); const hint=document.getElementById('hint3');
+  if(Math.abs(a-28.5)<0.2 && Math.abs(b-19.5)<0.2 && Math.abs(c-68.4)<0.5){
+    ok.classList.add('show'); hint.classList.remove('show'); startAnim(3);
+  } else {
+    hint.classList.add('show'); ok.classList.remove('show');
+  }
+}
+
+function check4(){
+  const a=parseFloat(document.getElementById('ans4a').value);
+  const b=parseFloat(document.getElementById('ans4b').value);
+  const ok=document.getElementById('ok4'); const hint=document.getElementById('hint4');
+  if(Math.abs(a-825)<1 && Math.abs(b-1.89)<0.1){
+    ok.classList.add('show'); hint.classList.remove('show'); startAnim(4);
+  } else {
+    hint.classList.add('show'); ok.classList.remove('show');
+  }
+}
+
+// ======== СИМУЛАТОР ========
+(function(){
+  const frame = document.getElementById('simFrame');
+  if(frame) frame.src = 'simulator-dvizhenie.html';
+})();
+
+
+// Reveal
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('visible'),i*80);
+      observer.unobserve(e.target);
+    }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
