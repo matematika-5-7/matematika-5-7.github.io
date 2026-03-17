@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Математика 5 клас — безплатни учебни материали по официалната програма на МОН. Делимост, дроби, десетични дроби, геометрия.">
-<title>Математика 5 клас | Учебни материали</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Математика 5 клас | Всички теми</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Baloo+2:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #faf8f3;
@@ -46,15 +46,14 @@
     display: flex; align-items: center; justify-content: space-between;
   }
 
-  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--ink); text-decoration: none; }
-  .nav-logo em { color: var(--gold); font-style: italic; }
+  .nav-logo { font-family: 'Baloo 2', cursive; font-size: 1.25rem; font-weight: 900; color: var(--ink); text-decoration: none; }
+  .nav-logo em { color: var(--c5); font-style: normal; background:var(--c5-light); padding:.05rem .35rem; border-radius:6px; }
 
   .nav-links { display: flex; gap: 0.4rem; list-style: none; }
   .nav-links a { padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.82rem; font-weight: 500; text-decoration: none; color: var(--ink-light); transition: all 0.2s; }
   .nav-links a:hover { background: var(--border); color: var(--ink); }
   .nav-links .active { background: var(--c5-light); color: var(--c5); font-weight: 700; }
-  .nav-links .n6:hover { background: #edf7f3; color: var(--c6); }
-  .nav-links .n7:hover { background: #eef2fc; color: var(--c7); }
+
 
   /* HERO */
   .hero {
@@ -293,12 +292,10 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">М<em>атематика</em> 5–7</a>
+  <a href="index.html" class="nav-logo">Мат<em>5</em></a>
   <ul class="nav-links">
+    <li><a href="index.html">← Начало</a></li>
     <li><a href="klas-5.html" class="active n5">5 клас</a></li>
-    <li><a href="klas-6.html" class="n6">6 клас</a></li>
-    <li><a href="klas-7.html" class="n7">7 клас</a></li>
-    <li><a href="content-plan.html">Всички теми</a></li>
   </ul>
 </nav>
 
@@ -398,7 +395,7 @@
         </div>
         <span class="article-arrow">→</span>
       </a>
-      <div class="article-card" style="opacity:.55;cursor:not-allowed;pointer-events:none;">
+      <a href="nod-nok-5-klas.html" class="article-card">
         <div class="article-icon icon-exercise">✏️</div>
         <div class="article-body">
           <div class="article-type" style="color:#1e3a8a;">Упражнение</div>
@@ -406,7 +403,7 @@
           <div class="article-desc">Алгоритъм + 5 решени задачи за самопроверка.</div>
         </div>
         <span class="article-arrow">→</span>
-      </div>
+      </a>
       <div class="coming-card">
         <span>⏳</span>
         <span>Скоро: 10 задачи по делимост с решения</span>
@@ -531,15 +528,15 @@
         </div>
         <span class="article-arrow">→</span>
       </a>
-      <div class="article-card" style="opacity:.55;cursor:not-allowed;pointer-events:none;">
+      <a href="zadachi-dvizhenie-5-klas.html" class="article-card">
         <div class="article-icon icon-exercise">✏️</div>
         <div class="article-body">
           <div class="article-type" style="color:#1e3a8a;">Упражнение</div>
-          <div class="article-title">Задачи с десетични дроби от движение и практиката</div>
-          <div class="article-desc">Скорост, разстояние, части от цяло — по програмата.</div>
+          <div class="article-title">Задачи за движение — по суша, вода и въздух <span class="hot-badge">🔥 Ново</span></div>
+          <div class="article-desc">Анимации + интерактивен симулатор с плъзгане. Еднопосочно, насрещно, по вода и въздух.</div>
         </div>
         <span class="article-arrow">→</span>
-      </div>
+      </a>
       <a href="drobi-desetichni-5-klas.html" class="article-card">
         <div class="article-icon icon-explain">📖</div>
         <div class="article-body">
@@ -664,15 +661,24 @@
       </div>
     </div>
     <div class="articles-grid">
-      <div class="article-card" style="opacity:.55;cursor:not-allowed;pointer-events:none;">
+      <a href="kub-5-klas.html" class="article-card">
         <div class="article-icon icon-explain">📖</div>
         <div class="article-body">
           <div class="article-type">Обяснение</div>
-          <div class="article-title">Куб и правоъгълен паралелепипед — елементи, лице и обем</div>
-          <div class="article-desc">Лице на повърхнина, обем, развивки — по програмата.</div>
+          <div class="article-title">Куб — елементи, лице и обем <span class="hot-badge">🔥 Ново</span></div>
+          <div class="article-desc">3D куб, развивки симулатор, мерни единици, задачи и тест.</div>
         </div>
         <span class="article-arrow">→</span>
-      </div>
+      </a>
+      <a href="paralelepipe-5-klas.html" class="article-card">
+        <div class="article-icon icon-explain">📖</div>
+        <div class="article-body">
+          <div class="article-type">Обяснение</div>
+          <div class="article-title">Правоъгълен паралелепипед — лице и обем <span class="hot-badge">🔥 Ново</span></div>
+          <div class="article-desc">3D модел, развивки, формули S₁=2(ab+bc+ac), V=abc, задачи и тест.</div>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
       <div class="article-card" style="opacity:.55;cursor:not-allowed;pointer-events:none;">
         <div class="article-icon icon-summary">📋</div>
         <div class="article-body">
@@ -711,13 +717,10 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-nav">
-    <a href="index.html">Начало</a>
+    <a href="index.html">← Начало</a>
     <a href="klas-5.html">5 клас</a>
-    <a href="klas-6.html">6 клас</a>
-    <a href="klas-7.html">7 клас</a>
-    <a href="content-plan.html">Всички теми</a>
   </div>
-  <p><strong>Математика 5–7 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
+  <p><strong>Математика 5 клас</strong> · Безплатни учебни материали по официалната програма на МОН</p>
 </footer>
 
 <script>
