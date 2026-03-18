@@ -286,6 +286,121 @@
     .exam-num { display: none; }
     .article-card { padding: 1rem; }
   }
+
+  /* ── EXAM BOX ── */
+  .exam-box {
+    background: var(--c5); border-radius: 20px;
+    padding: 2rem 2.5rem; margin-top: 3rem;
+  }
+  .exam-box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700; color: #fff;
+    margin-bottom: 0.35rem;
+  }
+  .exam-box-sub {
+    font-size: 0.85rem; color: rgba(255,255,255,0.65);
+    line-height: 1.6; margin-bottom: 1.1rem;
+  }
+  .exam-divider {
+    border: none; border-top: 1.5px solid rgba(255,255,255,0.18);
+    margin: 1.6rem 0;
+  }
+
+  /* Вариант 1 — теми */
+  .exam-tema-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem;
+    margin-bottom: 0.3rem;
+  }
+  @media(max-width:600px){ .exam-tema-grid { grid-template-columns: 1fr 1fr; } }
+  .exam-tema-btn {
+    background: rgba(255,255,255,0.11);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    border-radius: 13px; padding: 0.7rem 0.85rem;
+    color: #fff; text-decoration: none;
+    font-size: 0.86rem; font-weight: 700;
+    display: flex; align-items: center; gap: 0.45rem;
+    transition: all 0.18s;
+  }
+  .exam-tema-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.45);
+    transform: translateY(-2px);
+  }
+  .etb-icon { font-size: 1.2rem; flex-shrink:0; }
+  .etb-arr  { margin-left: auto; opacity: 0.55; transition: transform .18s; }
+  .exam-tema-btn:hover .etb-arr { transform: translateX(3px); opacity: 1; }
+
+  /* Вариант 2 — prep cards */
+  .prep-cards-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 0.6rem;
+    margin-bottom: 0.3rem;
+  }
+  @media(max-width:600px){ .prep-cards-grid { grid-template-columns: 1fr 1fr; } }
+  .prep-card {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 13px; padding: 0.85rem 0.8rem;
+    text-align: center; transition: all .18s;
+    cursor: default;
+  }
+  .prep-card.active {
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.45);
+    cursor: pointer;
+  }
+  .prep-card.active:hover { transform: translateY(-2px); background: rgba(255,255,255,0.22); }
+  .prep-card-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  .prep-card-name { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
+  .prep-card-coming { font-size: 0.75rem; color: rgba(255,255,255,0.5); font-weight: 600; }
+  .prep-card-btn {
+    display: inline-block; margin-top: 0.4rem;
+    background: rgba(255,255,255,0.2); border: 1.5px solid rgba(255,255,255,0.4);
+    border-radius: 8px; padding: 0.25rem 0.7rem;
+    font-size: 0.78rem; font-weight: 700; color: #fff;
+    text-decoration: none; transition: all .15s;
+  }
+  .prep-card-btn:hover { background: rgba(255,255,255,0.32); }
+
+  /* Вариант 3 — акордеон */
+  .accord-wrap { display: flex; flex-direction: column; gap: 0.5rem; }
+  .accord-item {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    border-radius: 13px; overflow: hidden;
+  }
+  .accord-btn {
+    width: 100%; background: none; border: none;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.1rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.92rem; font-weight: 700; color: #fff;
+    cursor: pointer; text-align: left;
+    transition: background .18s;
+  }
+  .accord-btn:hover { background: rgba(255,255,255,0.08); }
+  .accord-btn.open { background: rgba(255,255,255,0.1); }
+  .accord-ico { font-size: 1.1rem; flex-shrink:0; transition: transform .25s; }
+  .accord-btn.open .accord-ico { transform: rotate(45deg); }
+  .accord-body {
+    display: none; padding: 0 1.1rem 1rem;
+    animation: accord-in .22s ease;
+  }
+  .accord-body.show { display: block; }
+  @keyframes accord-in { from{opacity:0;transform:translateY(-6px);} to{opacity:1;transform:none;} }
+  .accord-body ul {
+    list-style: none; display: flex; flex-direction: column; gap: 0.4rem;
+    padding-left: 0;
+  }
+  .accord-body li {
+    font-size: 0.87rem; color: rgba(255,255,255,0.88); line-height: 1.55;
+    padding-left: 1rem; position: relative;
+  }
+  .accord-body li::before {
+    content: '▸'; position: absolute; left: 0;
+    color: rgba(255,255,255,0.45); font-size: 0.72rem; top: 0.15rem;
+  }
+  .accord-body li strong { color: #fff; font-weight: 800; }
+
 </style>
 </head>
 <body>
@@ -697,22 +812,185 @@
 
   <!-- EXAM BOX -->
   <div class="exam-box reveal">
-    <div>
-      <h3>Подготовка за контролно по математика</h3>
-      <p>Преди контролно или изпит — използвай конспектите за бързо повторение на всички теми от 5 клас.</p>
-      <div class="exam-tags">
-        <span class="exam-tag">Делимост</span>
-        <span class="exam-tag">Дроби</span>
-        <span class="exam-tag">Десетични дроби</span>
-        <span class="exam-tag">Таблици и диаграми</span>
-        <span class="exam-tag">Геометрия</span>
-        <span class="exam-tag">Геометрични тела</span>
+
+    <!-- ВАРИАНТ 1 — Кликаеми теми -->
+    <div class="exam-box-title">📚 Подготовка за контролно</div>
+    <p class="exam-box-sub">Избери тема — ще отидеш директно към всички статии и задачи от нея.</p>
+    <div class="exam-tema-grid">
+      <a href="#tema1" class="exam-tema-btn">
+        <span class="etb-icon">🔢</span><span>Делимост</span>
+        <span class="etb-arr">→</span>
+      </a>
+      <a href="#tema2" class="exam-tema-btn">
+        <span class="etb-icon">½</span><span>Обикновени дроби</span>
+        <span class="etb-arr">→</span>
+      </a>
+      <a href="#tema3" class="exam-tema-btn">
+        <span class="etb-icon">0.5</span><span>Десетични дроби</span>
+        <span class="etb-arr">→</span>
+      </a>
+      <a href="#tema4" class="exam-tema-btn">
+        <span class="etb-icon">📊</span><span>Таблици и диаграми</span>
+        <span class="etb-arr">→</span>
+      </a>
+      <a href="#tema5" class="exam-tema-btn">
+        <span class="etb-icon">📐</span><span>Геометрични фигури</span>
+        <span class="etb-arr">→</span>
+      </a>
+      <a href="#tema6" class="exam-tema-btn">
+        <span class="etb-icon">📦</span><span>Геометрични тела</span>
+        <span class="etb-arr">→</span>
+      </a>
+    </div>
+
+    <hr class="exam-divider">
+
+    <!-- ВАРИАНТ 2 — Карти за подготовка (placeholder — ще се попълват с тест-генератори) -->
+    <div class="exam-box-title">🎯 Тестове за подготовка по теми</div>
+    <p class="exam-box-sub">Скоро — генератор на задачи за всяка тема. Всеки път различни задачи!</p>
+    <div class="prep-cards-grid">
+      <div class="prep-card active" data-tema="1" onclick="window.location='test-delitelnost.html'">
+        <div class="prep-card-icon">🔢</div>
+        <div class="prep-card-name">Делимост</div>
+        <a href="test-delitelnost.html" class="prep-card-btn">▶ Започни теста</a>
+      </div>
+      <div class="prep-card" data-tema="2">
+        <div class="prep-card-icon">½</div>
+        <div class="prep-card-name">Обикновени дроби</div>
+        <div class="prep-card-coming">⏳ Скоро</div>
+      </div>
+      <div class="prep-card active" data-tema="3" onclick="window.location='test-desetichni1.html'">
+        <div class="prep-card-icon">0.5</div>
+        <div class="prep-card-name">Десетични дроби I<br><small style="font-weight:600;font-size:.72rem;opacity:.8;">Събиране и изваждане</small></div>
+        <a href="test-desetichni1.html" class="prep-card-btn">▶ Започни теста</a>
+      </div>
+      <div class="prep-card active" data-tema="3b" onclick="window.location='test-desetichni2.html'">
+        <div class="prep-card-icon">✖️</div>
+        <div class="prep-card-name">Десетични дроби II<br><small style="font-weight:600;font-size:.72rem;opacity:.8;">Умножение, деление, %</small></div>
+        <a href="test-desetichni2.html" class="prep-card-btn">▶ Започни теста</a>
+      </div>
+      <div class="prep-card" data-tema="4">
+        <div class="prep-card-icon">📊</div>
+        <div class="prep-card-name">Таблици и диаграми</div>
+        <div class="prep-card-coming">⏳ Скоро</div>
+      </div>
+      <div class="prep-card" data-tema="5">
+        <div class="prep-card-icon">📐</div>
+        <div class="prep-card-name">Геометрични фигури</div>
+        <div class="prep-card-coming">⏳ Скоро</div>
+      </div>
+      <div class="prep-card" data-tema="6">
+        <div class="prep-card-icon">📦</div>
+        <div class="prep-card-name">Геометрични тела</div>
+        <div class="prep-card-coming">⏳ Скоро</div>
       </div>
     </div>
-    <div class="exam-num">5</div>
+
+    <hr class="exam-divider">
+
+    <!-- ВАРИАНТ 3 — Конспект акордеон -->
+    <div class="exam-box-title">📋 Конспект за бързо повторение</div>
+    <p class="exam-box-sub">Кликни на тема за да видиш ключовите формули и правила.</p>
+    <div class="accord-wrap">
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>🔢 Делимост</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Делител</strong> — a е делител на b, ако b ÷ a = цяло число</li>
+            <li><strong>Кратно</strong> — b е кратно на a, ако b = a × n</li>
+            <li><strong>Признак за 2</strong> — последната цифра е 0, 2, 4, 6 или 8</li>
+            <li><strong>Признак за 3</strong> — сборът на цифрите се дели на 3</li>
+            <li><strong>Признак за 5</strong> — последната цифра е 0 или 5</li>
+            <li><strong>Просто число</strong> — дели се само на 1 и на себе си</li>
+            <li><strong>НОД</strong> — най-голям общ делител</li>
+            <li><strong>НОК</strong> — най-малко общо кратно</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>½ Обикновени дроби</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Дроб</strong> — числител / знаменател</li>
+            <li><strong>Основно свойство</strong> — a/b = (a×n)/(b×n)</li>
+            <li><strong>Събиране/изваждане</strong> — изравни знаменателите, после действай с числителите</li>
+            <li><strong>Умножение</strong> — числител × числител / знаменател × знаменател</li>
+            <li><strong>Деление</strong> — умножи по реципрочната дроб</li>
+            <li><strong>Част от число</strong> — число × (числител ÷ знаменател)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>0.5 Десетични дроби</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Четене</strong> — 3.45 = „три цяло четиридесет и пет стотни"</li>
+            <li><strong>Закръгляване</strong> — погледни следващата цифра: ≥5 → нагоре, &lt;5 → надолу</li>
+            <li><strong>×10, ×100</strong> — запетаята се мести надясно (1 или 2 места)</li>
+            <li><strong>÷10, ÷100</strong> — запетаята се мести наляво</li>
+            <li><strong>Процент</strong> — % = (частта ÷ цялото) × 100</li>
+            <li><strong>Движение</strong> — S = v × t &nbsp;|&nbsp; v = S ÷ t &nbsp;|&nbsp; t = S ÷ v</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>📊 Таблици и диаграми</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Таблица</strong> — данни в редове и колони</li>
+            <li><strong>Стълбовидна диаграма</strong> — сравнява величини</li>
+            <li><strong>Линейна диаграма</strong> — показва промяна във времето</li>
+            <li><strong>Кръгова диаграма</strong> — показва дялове от цялото</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>📐 Геометрични фигури</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Триъгълник</strong> — S = (a × h) ÷ 2</li>
+            <li><strong>Успоредник</strong> — S = a × h</li>
+            <li><strong>Ромб</strong> — S = (d₁ × d₂) ÷ 2</li>
+            <li><strong>Трапец</strong> — S = (a + c) × h ÷ 2</li>
+            <li><strong>Сбор на ъглите в триъгълник</strong> — 180°</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accord-item">
+        <button class="accord-btn" onclick="toggleAccord(this)">
+          <span>📦 Геометрични тела</span><span class="accord-ico">＋</span>
+        </button>
+        <div class="accord-body">
+          <ul>
+            <li><strong>Куб</strong> — S₁ = 6·a² &nbsp;|&nbsp; V = a³</li>
+            <li><strong>Паралелепипед</strong> — S₁ = 2(ab+bc+ac) &nbsp;|&nbsp; V = a·b·c</li>
+            <li><strong>Мерни единици</strong> — 1 m³ = 1 000 dm³ = 1 000 000 cm³</li>
+            <li><strong>1 dm³ = 1 литър</strong></li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- .accord-wrap -->
+
   </div>
 
-</div>
+</div><!-- .main -->
 
 <!-- FOOTER -->
 <footer>
@@ -734,6 +1012,22 @@
   }, { threshold: 0.08 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── АКОРДЕОН ──
+function toggleAccord(btn){
+  const body = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // Затвори всички
+  document.querySelectorAll('.accord-btn').forEach(b=>{
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('show');
+  });
+  // Отвори текущия ако беше затворен
+  if(!isOpen){
+    btn.classList.add('open');
+    body.classList.add('show');
+  }
+}
+
 </script>
 
 </body>

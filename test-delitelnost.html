@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тест: Делимост | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#c0392b;--main-dark:#922b21;--main-light:#fdf0ee;--main-mid:#e8998f;
+  --green:#16a34a;--green-light:#dcfce7;--red:#ef4444;--red-light:#fef2f2;
+  --yellow:#d97706;--yellow-light:#fef9c3;
+  --ink:#1a1a2e;--ink2:#3d3d5c;--bg:#faf8f3;--white:#fff;--border:#e8e2d6;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.7;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,243,.96);backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--border);padding:.7rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:900;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.85rem;font-weight:700;color:var(--main-dark);text-decoration:none;
+  background:var(--main-light);border:1.5px solid var(--main-mid);padding:.35rem 1rem;border-radius:18px;transition:all .2s;}
+.nav-back:hover{background:var(--main);color:#fff;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--main-dark),var(--main));
+  padding:2.5rem 1.5rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:900;color:#fff;margin-bottom:.4rem;}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.82);margin-bottom:1.2rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+.hchip{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.28);
+  border-radius:18px;padding:.22rem .9rem;font-size:.82rem;font-weight:700;color:#fff;}
+
+/* COUNTER BADGE */
+.counter-badge{
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);
+  border-radius:20px;padding:.3rem 1rem;font-size:.82rem;font-weight:800;color:#fff;
+  display:inline-flex;align-items:center;gap:.4rem;margin-bottom:.8rem;
+}
+
+/* MAIN WRAP */
+.wrap{max-width:820px;margin:0 auto;padding:2rem 1.2rem 5rem;}
+
+/* INFO BAR */
+.info-bar{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.info-pill{background:var(--white);border:2px solid var(--border);border-radius:12px;
+  padding:.45rem 1rem;font-size:.85rem;font-weight:700;color:var(--ink2);
+  display:flex;align-items:center;gap:.4rem;}
+.info-pill strong{color:var(--main);}
+
+/* ЗАДАЧИ */
+.q-block{background:var(--white);border:2px solid var(--border);border-radius:20px;
+  overflow:hidden;margin-bottom:1.2rem;box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transition:border-color .2s;}
+.q-block.answered{border-color:var(--main-mid);}
+.q-head{background:linear-gradient(135deg,var(--main-dark),var(--main));
+  padding:.75rem 1.2rem;display:flex;align-items:center;gap:.7rem;}
+.q-num{font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;
+  background:rgba(255,255,255,.2);width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.q-type{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.07em;}
+.q-title-text{font-size:.92rem;font-weight:800;color:#fff;}
+.q-body{padding:1.1rem 1.2rem;}
+.q-text{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.9rem;line-height:1.65;}
+.q-text .hl{color:var(--main-dark);font-weight:900;}
+
+/* MCQ варианти */
+.opts{display:flex;flex-direction:column;gap:.4rem;}
+.opt{display:flex;align-items:center;gap:.65rem;background:#f9f7f4;border:2px solid var(--border);
+  border-radius:12px;padding:.55rem .95rem;cursor:pointer;transition:all .18s;
+  font-size:.95rem;font-weight:700;user-select:none;}
+.opt:hover{border-color:var(--main-mid);background:var(--main-light);}
+.opt.selected{border-color:var(--main);background:var(--main-light);}
+.opt.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.opt.disabled{pointer-events:none;}
+.opt-letter{background:var(--main);color:#fff;font-weight:900;font-size:.78rem;
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.opt.correct .opt-letter{background:var(--green);}
+.opt.wrong .opt-letter{background:var(--red);}
+
+/* INPUT задачи */
+.input-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.q-input{border:2px solid var(--border);border-radius:10px;padding:.4rem .8rem;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
+  width:110px;background:#f9f7f4;color:var(--ink);transition:border-color .18s;}
+.q-input:focus{outline:none;border-color:var(--main);background:#fff;}
+.q-input.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.q-input.wrong{border-color:var(--red);background:var(--red-light);}
+.input-label{font-size:.92rem;font-weight:700;color:var(--ink2);}
+
+/* Feedback */
+.q-feedback{font-size:.85rem;font-weight:700;margin-top:.55rem;padding:.45rem .85rem;
+  border-radius:10px;display:none;}
+.q-feedback.show{display:block;}
+.q-feedback.ok{background:var(--green-light);color:var(--green);}
+.q-feedback.err{background:var(--red-light);color:var(--red);}
+
+/* БУТОНИ */
+.btn-submit{background:linear-gradient(135deg,var(--main-dark),var(--main));color:#fff;
+  border:none;border-radius:16px;padding:.9rem 2.5rem;font-family:'Nunito',sans-serif;
+  font-size:1.05rem;font-weight:800;cursor:pointer;transition:all .2s;
+  display:block;width:100%;margin-top:1.5rem;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(192,57,43,.3);}
+.btn-submit:disabled{background:#94a3b8;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-retry{background:var(--main-light);color:var(--main-dark);border:2px solid var(--main-mid);
+  border-radius:14px;padding:.7rem 2rem;font-family:'Nunito',sans-serif;
+  font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:.8rem;}
+.btn-retry:hover{background:var(--main);color:#fff;}
+
+/* СЕРТИФИКАТ */
+.cert-wrap{display:none;margin-top:2rem;}
+.cert-wrap.show{display:block;}
+.cert{background:linear-gradient(135deg,#1a1a2e,#2d1b4e);border-radius:24px;
+  padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);}
+.cert::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 36px);}
+.cert-stars{font-size:2rem;margin-bottom:.5rem;position:relative;}
+.cert-title{font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;
+  margin-bottom:.3rem;position:relative;}
+.cert-name{font-size:.95rem;color:rgba(255,255,255,.7);margin-bottom:1.4rem;position:relative;}
+.cert-score-big{font-family:'Baloo 2',sans-serif;font-size:3.2rem;font-weight:900;
+  color:#fbbf24;line-height:1;margin-bottom:.3rem;position:relative;}
+.cert-score-label{font-size:.88rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem;position:relative;}
+.cert-grade-wrap{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:1.5rem;position:relative;}
+.cert-grade-card{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:16px;padding:.8rem 1.4rem;min-width:120px;}
+.cert-grade-num{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:900;color:#fff;}
+.cert-grade-lbl{font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase;}
+.cert-quality{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;
+  padding:.5rem 1.5rem;border-radius:20px;display:inline-block;margin-bottom:1.2rem;
+  position:relative;}
+.cert-quality.q6{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1a2e;}
+.cert-quality.q5{background:linear-gradient(135deg,#4ade80,#16a34a);color:#fff;}
+.cert-quality.q4{background:linear-gradient(135deg,#60a5fa,#2563eb);color:#fff;}
+.cert-quality.q3{background:linear-gradient(135deg,#fb923c,#ea580c);color:#fff;}
+.cert-quality.q2{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff;}
+.cert-date{font-size:.78rem;color:rgba(255,255,255,.4);position:relative;}
+.cert-counter{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.4rem;position:relative;}
+
+/* Progress bar */
+.progress-wrap{background:var(--border);border-radius:8px;height:8px;margin-bottom:1.5rem;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--main-dark),var(--main));
+  border-radius:8px;transition:width .3s ease;width:0%;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="klas-5.html" class="nav-logo">Мат<em>5</em></a>
+  <a href="klas-5.html#tema1" class="nav-back">← Делимост</a>
+</nav>
+
+<div class="hero">
+  <div class="counter-badge" id="counterBadge">📝 Решавания: <span id="solveCount">0</span></div>
+  <h1>🔢 Тест: Делимост</h1>
+  <p class="hero-sub">16 задачи · При всяко зареждане — различни задачи</p>
+  <div class="hero-chips">
+    <span class="hchip">Признаци за делимост</span>
+    <span class="hchip">Прости числа</span>
+    <span class="hchip">НОД и НОК</span>
+    <span class="hchip">Разлагане на прости множители</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="info-bar">
+    <div class="info-pill">📋 Въпроси: <strong>16</strong></div>
+    <div class="info-pill">⭐ Точки: <strong id="totalPtsInfo">16</strong></div>
+    <div class="info-pill">📊 Оценка: <strong>Оц = 2 + (т/16)×4</strong></div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div id="testContainer"></div>
+
+  <button class="btn-submit" id="submitBtn" onclick="submitTest()">🔍 Провери отговорите</button>
+
+  <div class="cert-wrap" id="certWrap">
+    <div class="cert" id="certDiv"></div>
+    <div style="text-align:center;margin-top:1rem;">
+      <button class="btn-retry" onclick="retryTest()">🔄 Нов тест с различни задачи</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// БАНКА С ЗАДАЧИ — 17 задачи (без №11)
+// Всяка задача е обект с тип и данни
+// ═══════════════════════════════════════════
+
+// Помощни функции
+function rand(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
+function gcd(a,b){ return b===0?a:gcd(b,a%b); }
+function lcm(a,b){ return a*b/gcd(a,b); }
+function isPrime(n){ if(n<2)return false; for(let i=2;i<=Math.sqrt(n);i++) if(n%i===0)return false; return true; }
+
+// ── Брояч на решавания (localStorage) ──
+function getSolveCount(){
+  return parseInt(localStorage.getItem('delitelnost_solve_count')||'0');
+}
+function incSolveCount(){
+  const n = getSolveCount()+1;
+  localStorage.setItem('delitelnost_solve_count', n);
+  return n;
+}
+document.getElementById('solveCount').textContent = getSolveCount();
+
+// ═══════════════════════════════════════════
+// ГЕНЕРАТОРИ НА ЗАДАЧИ
+// ═══════════════════════════════════════════
+
+// Задача 1 — Числото X се дели на: а)2 б)3 в)4 г)5
+function gen1(){
+  // Генерира 5-цифрено нечетно число, за да бъде интересно
+  const num = rand(10000,99999)*2+1; // нечетно — не се дели на 2
+  // Провери на кои от {2,3,4,5} се дели
+  const divisors=[2,3,4,5];
+  const correct = divisors.filter(d=>num%d===0);
+  // Ако нито едно или всички — regenerate
+  if(correct.length===0||correct.length===4) return gen1();
+  const correctStr = correct.join(' и ');
+  const incorrectStr = divisors.filter(d=>num%d!==0).join(' и ');
+  // MCQ — 4 варианта кои от {2,3,4,5}
+  const subsets=[
+    [2],[3],[4],[5],[2,3],[2,5],[3,4],[3,5],[2,3,4],[2,3,5],[3,4,5],[2,4,5]
+  ].filter(s=>s.length>=1);
+  const correctSet = divisors.filter(d=>num%d===0).sort().join(' и ');
+  // Направи 4 различни варианта включително верния
+  let opts = new Set([correctSet]);
+  while(opts.size<4){
+    const s = shuffle(divisors).slice(0,rand(1,3)).sort((a,b)=>a-b).join(' и ');
+    opts.add(s);
+  }
+  opts = shuffle([...opts]);
+  const ansIdx = opts.indexOf(correctSet);
+  return {
+    type:'mcq',
+    text:`Числото <span class="hl">${num}</span> се дели на:`,
+    opts: opts.map(o=>'На '+o),
+    ans: ansIdx,
+    hint:`Признак за делимост: на 2 — последната цифра е четна; на 3 — сборът на цифрите се дели на 3; на 4 — последните две цифри; на 5 — последната е 0 или 5.`
+  };
+}
+
+// Задача 2 — Кои от числата са съставни?
+function gen2(){
+  // Генерира 5 числа между 15 и 50
+  function randNums(){
+    const pool=[];
+    while(pool.length<5){
+      const n=rand(15,60);
+      if(!pool.includes(n)) pool.push(n);
+    }
+    return pool;
+  }
+  const nums = randNums();
+  const composed = nums.filter(n=>!isPrime(n)&&n>1);
+  if(composed.length===0||composed.length===5) return gen2();
+  const correctStr = composed.sort((a,b)=>a-b).join(' и ');
+  let opts = new Set([correctStr]);
+  while(opts.size<4){
+    const s = shuffle(nums).slice(0,rand(1,3)).sort((a,b)=>a-b).join(' и ');
+    opts.add(s);
+  }
+  opts = shuffle([...opts]);
+  const ansIdx = opts.indexOf(correctStr);
+  return {
+    type:'mcq',
+    text:`Кои от числата <span class="hl">${nums.join(', ')}</span> са съставни?`,
+    opts,
+    ans: ansIdx,
+    hint:`Съставно число = има делители освен 1 и себе си. Просто число = дели се само на 1 и себе си.`
+  };
+}
+
+// Задача 3 — Всички делители на X са:
+function gen3(){
+  // Числа с точно определен брой делители — интересни
+  const candidates = [100,125,144,64,81,36,49,121,169,225,256,196];
+  const num = candidates[rand(0,candidates.length-1)];
+  function getDivisors(n){
+    const d=[];
+    for(let i=1;i<=n;i++) if(n%i===0) d.push(i);
+    return d;
+  }
+  const divs = getDivisors(num);
+  const correctStr = divs.join(', ');
+  // Направи 3 грешни варианта — пропусни или добави делители
+  function fakeSet(divs, num){
+    const d = [...divs];
+    if(Math.random()<.5 && d.length>2){
+      d.splice(rand(1,d.length-2),1);
+    } else {
+      let extra=rand(2,num-1);
+      while(divs.includes(extra)||num%extra===0) extra=rand(2,num-1);
+      d.push(extra); d.sort((a,b)=>a-b);
+    }
+    return d.join(', ');
+  }
+  let opts = new Set([correctStr]);
+  let tries=0;
+  while(opts.size<4&&tries<30){ opts.add(fakeSet(divs,num)); tries++; }
+  opts = shuffle([...opts]);
+  const ansIdx = opts.indexOf(correctStr);
+  return {
+    type:'mcq',
+    text:`Всички делители на <span class="hl">${num}</span> са:`,
+    opts,
+    ans: ansIdx,
+    hint:`Делителите на ${num} са всички числа, на които ${num} се дели без остатък.`
+  };
+}
+
+// Задача 4 — Кое от числата се дели едновременно на 2, 3 и 5?
+function gen4(){
+  // Числото трябва да се дели на 2,3,5 → дели се на 30
+  const correct = rand(1,9)*30;
+  // 3 грешни варианта — близки числа
+  const wrongs = new Set();
+  while(wrongs.size<3){
+    const w = correct + rand(-15,15);
+    if(w!==correct && w>0 && !(w%30===0)) wrongs.add(w);
+  }
+  const all = shuffle([correct,...wrongs]);
+  return {
+    type:'mcq',
+    text:`Кое от числата се дели едновременно на <span class="hl">2, 3 и 5</span>?`,
+    opts: all.map(String),
+    ans: all.indexOf(correct),
+    hint:`Числото трябва да се дели на 2 (четно), на 3 (сбор на цифрите÷3) и на 5 (завършва на 0 или 5). Значи трябва да се дели на 2×3×5=30.`
+  };
+}
+
+// Задача 5 — Разлагане на прости множители
+function gen5(){
+  const nums=[12,18,24,30,36,40,48,60,72,84,90,96,120];
+  const num=nums[rand(0,nums.length-1)];
+  function primeFactors(n){
+    const f=[]; let d=2;
+    while(n>1){ while(n%d===0){f.push(d);n/=d;} d++; }
+    return f;
+  }
+  const pf = primeFactors(num);
+  const correctStr = pf.join('.');
+  // Направи грешни варианти — промени един множител
+  function fakeFactors(pf){
+    const f=[...pf];
+    const idx=rand(0,f.length-1);
+    f[idx]=f[idx]+(Math.random()<.5?1:-1);
+    if(f[idx]<2) f[idx]=7;
+    return f.sort((a,b)=>a-b).join('.');
+  }
+  let opts=new Set([correctStr]);
+  let tries=0;
+  while(opts.size<4&&tries<20){opts.add(fakeFactors(pf));tries++;}
+  opts=shuffle([...opts]);
+  return {
+    type:'mcq',
+    text:`Как се разлага на прости множители числото <span class="hl">${num}</span>?`,
+    opts,
+    ans:opts.indexOf(correctStr),
+    hint:`Разлагай последователно — дели на 2, после на 3 и т.н. докато получиш 1.`
+  };
+}
+
+// Задача 6 — НОД на две числа (MCQ)
+function gen6(){
+  const pairs=[[20,40],[12,18],[15,25],[24,36],[30,45],[16,24],[18,27],[20,30]];
+  const [a,b]=pairs[rand(0,pairs.length-1)];
+  const correct=gcd(a,b);
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=rand(1,Math.min(a,b));
+    if(w!==correct) wrongs.add(w);
+  }
+  const opts=shuffle([correct,...wrongs]);
+  return {
+    type:'mcq',
+    text:`НОД на числата <span class="hl">${a}</span> и <span class="hl">${b}</span> е:`,
+    opts:opts.map(String),
+    ans:opts.indexOf(correct),
+    hint:`НОД = най-голямото число, което дели и двете. НОД(${a},${b})=${correct}.`
+  };
+}
+
+// Задача 7 — НОК на две числа (MCQ)
+function gen7(){
+  const pairs=[[12,30],[4,6],[6,10],[8,12],[9,15],[6,14],[10,15]];
+  const [a,b]=pairs[rand(0,pairs.length-1)];
+  const correct=lcm(a,b);
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=rand(correct-5,correct+30);
+    if(w!==correct&&w>0) wrongs.add(w);
+  }
+  const opts=shuffle([correct,...wrongs]);
+  return {
+    type:'mcq',
+    text:`НОК на числата <span class="hl">${a}</span> и <span class="hl">${b}</span> е:`,
+    opts:opts.map(String),
+    ans:opts.indexOf(correct),
+    hint:`НОК = най-малкото число, което се дели и на двете. НОК(${a},${b})=${correct}.`
+  };
+}
+
+// Задача 8 — Кое твърдение НЕ е вярно?
+function gen8(){
+  // Фиксирани варианти от задачата — истинска/лъжлива логика
+  const sets=[
+    {
+      opts:[
+        'Всяко естествено число е кратно на себе си.',
+        '1 не е делител на всяко естествено число.',
+        '5 е просто число.',
+        'НОК на взаимно прости числа е произведението им.'
+      ],
+      ans:1,
+      hint:'1 е делител на ВСЯКО естествено число, защото всяко число÷1=цяло число. Твърдение б) е невярно.'
+    },
+    {
+      opts:[
+        '2 е единственото четно просто число.',
+        'Всяко четно число е съставно.',
+        '1 не е нито просто, нито съставно.',
+        'НОД(a,b) × НОК(a,b) = a × b.'
+      ],
+      ans:1,
+      hint:'2 е четно и просто едновременно — значи не е вярно, че всяко четно число е съставно.'
+    },
+    {
+      opts:[
+        'НОД(a,b) е делител на НОК(a,b).',
+        'Всяко просто число е и съставно.',
+        '0 е кратно на всяко естествено число.',
+        'Всяко число има поне два делителя: 1 и себе си, ако е ≥ 2.'
+      ],
+      ans:1,
+      hint:'Простото число НЕ е съставно — те са две различни категории.'
+    }
+  ];
+  const s=sets[rand(0,sets.length-1)];
+  return {type:'mcq', text:'Кое от твърденията <span class="hl">не</span> е вярно?',
+    opts:s.opts, ans:s.ans, hint:s.hint};
+}
+
+// Задача 9 — Произведение на кои две прости числа е равно на X?
+function gen9(){
+  const primes=[2,3,5,7,11,13,17,19,23];
+  const p1=primes[rand(0,5)], p2=primes[rand(1,7)];
+  if(p1===p2) return gen9();
+  const nums=[p1*p2, 14, 10, 77, 65, 15, 21, 35, 22, 26, 33, 34, 38, 46];
+  const product=p1*p2;
+  // Изберем 4 различни продукта от прости числа
+  const otherProducts=new Set([product]);
+  for(let i=0;i<primes.length&&otherProducts.size<4;i++){
+    for(let j=i+1;j<primes.length;j++){
+      const p=primes[i]*primes[j];
+      if(p!==product) otherProducts.add(p);
+      if(otherProducts.size>=4) break;
+    }
+  }
+  const opts=shuffle([...otherProducts]);
+  // Намери кои прости числа дават всеки продукт
+  function findPrimes(n){
+    for(let i=0;i<primes.length;i++)
+      for(let j=i+1;j<primes.length;j++)
+        if(primes[i]*primes[j]===n) return `${primes[i]} и ${primes[j]}`;
+    return '—';
+  }
+  const target=opts[rand(0,3)]; // питаме за произволен
+  const correctAns=findPrimes(target);
+  return {
+    type:'fill_single',
+    text:`На произведението на кои две прости числа е равно числото <span class="hl">${target}</span>?`,
+    inputs:[{label:'', placeholder:'напр. 2 и 7', id:'q9a'}],
+    checkFn:(vals)=>{
+      const v=vals[0].trim().replace(/\s+/g,' ');
+      const [x,y]=correctAns.split(' и ').map(Number).sort((a,b)=>a-b);
+      // Приемаме различни формати
+      const patterns=[`${x} и ${y}`,`${y} и ${x}`,`${x}·${y}`,`${x}*${y}`,`${x}х${y}`];
+      return patterns.some(p=>v===p||v===p.replace(' и ',' и '));
+    },
+    correct: correctAns,
+    hint:`${target} = ${correctAns.replace(' и ',' × ')}`
+  };
+}
+
+// Задача 10 — Разложи на прости множители (свободен отговор)
+function gen10(){
+  const nums=[80,48,60,72,96,120,180,36,90,144];
+  const num=nums[rand(0,nums.length-1)];
+  function pf(n){const f=[];let d=2;while(n>1){while(n%d===0){f.push(d);n/=d;}d++;}return f;}
+  const factors=pf(num);
+  const correctStr=factors.join('·');
+  return {
+    type:'fill_single',
+    text:`Разложете на прости множители: <span class="hl">${num}</span> = ?`,
+    inputs:[{label:'', placeholder:`напр. ${factors[0]}·...`, id:'q10a'}],
+    checkFn:(vals)=>{
+      const v=vals[0].replace(/[×х*\s]/g,'·').trim();
+      // Провери дали произведението е вярно и числата са прости
+      const parts=v.split('·').map(Number);
+      if(parts.some(isNaN)) return false;
+      if(parts.reduce((a,b)=>a*b,1)!==num) return false;
+      return parts.every(p=>isPrime(p));
+    },
+    correct:`${num} = ${correctStr}`,
+    hint:`Разлагай последователно: ${num}÷${factors[0]}=... Всички множители трябва да са прости.`
+  };
+}
+
+// Задача 12 — Намерете НОД (свободен отговор)
+function gen12(){
+  const pairs=[[6,24],[25,35],[12,18],[15,45],[16,40],[18,24],[30,42],[20,28]];
+  const idx=rand(0,pairs.length-1);
+  const [a,b]=pairs[idx];
+  const correct=gcd(a,b);
+  const pairs2=pairs.filter((_,i)=>i!==idx);
+  const [c,d]=pairs2[rand(0,pairs2.length-1)];
+  const correct2=gcd(c,d);
+  return {
+    type:'fill_multi',
+    text:`Намерете НОД на числата:`,
+    inputs:[
+      {label:`НОД(${a}; ${b}) =`, placeholder:'', id:'q12a'},
+      {label:`НОД(${c}; ${d}) =`, placeholder:'', id:'q12b'},
+    ],
+    checkFn:(vals)=>{
+      return parseInt(vals[0])===correct && parseInt(vals[1])===correct2;
+    },
+    correct:`НОД(${a};${b})=${correct}, НОД(${c};${d})=${correct2}`,
+    hint:`НОД намираш чрез разлагане на прости множители или последователно деление.`
+  };
+}
+
+// Задача 13 — Намерете НОК (свободен отговор)
+function gen13(){
+  const sets=[
+    [[10,14],[27,54],[14,17],[11,44]],
+    [[6,8],[9,12],[4,6],[8,10]],
+    [[12,18],[15,20],[6,9],[4,10]]
+  ];
+  const chosen=sets[rand(0,sets.length-1)];
+  const pair=chosen[rand(0,chosen.length-1)];
+  const [a,b]=pair;
+  const pair2=chosen.find(p=>p!==pair&&(p[0]!==a||p[1]!==b))||[5,7];
+  const [c,d]=pair2;
+  return {
+    type:'fill_multi',
+    text:`Намерете НОК на числата:`,
+    inputs:[
+      {label:`НОК(${a}; ${b}) =`, placeholder:'', id:'q13a'},
+      {label:`НОК(${c}; ${d}) =`, placeholder:'', id:'q13b'},
+    ],
+    checkFn:(vals)=>{
+      return parseInt(vals[0])===lcm(a,b) && parseInt(vals[1])===lcm(c,d);
+    },
+    correct:`НОК(${a};${b})=${lcm(a,b)}, НОК(${c};${d})=${lcm(c,d)}`,
+    hint:`НОК = (a×b)÷НОД(a,b)`
+  };
+}
+
+// Задача 14 — НОК(8;16;28) = ?
+function gen14(){
+  const triples=[[8,16,28],[6,9,12],[4,6,10],[12,15,20],[6,8,12]];
+  const [a,b,c]=triples[rand(0,triples.length-1)];
+  const correct=lcm(lcm(a,b),c);
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=rand(correct-10,correct+50);
+    if(w>0&&w!==correct) wrongs.add(w);
+  }
+  const opts=shuffle([correct,...wrongs]);
+  return {
+    type:'mcq',
+    text:`НОК(<span class="hl">${a}; ${b}; ${c}</span>) = ?`,
+    opts:opts.map(String),
+    ans:opts.indexOf(correct),
+    hint:`Намери НОК(${a},${b})=${lcm(a,b)}, после НОК(${lcm(a,b)},${c})=${correct}.`
+  };
+}
+
+// Задача 15 — НОК(6;15;18) свободен отговор
+function gen15(){
+  const triples=[[6,15,18],[4,6,10],[8,12,16],[9,12,15],[6,10,15]];
+  const [a,b,c]=triples[rand(0,triples.length-1)];
+  const correct=lcm(lcm(a,b),c);
+  return {
+    type:'fill_single',
+    text:`Намерете <span class="hl">НОК(${a}; ${b}; ${c})</span> = ?`,
+    inputs:[{label:'', placeholder:'отговор', id:'q15a'}],
+    checkFn:(vals)=>parseInt(vals[0])===correct,
+    correct:String(correct),
+    hint:`НОК(${a},${b})=${lcm(a,b)}, после НОК(${lcm(a,b)},${c})=${correct}.`
+  };
+}
+
+// Задача 16 — Сборът НОД(22;66)+НОК(22;66) = ?
+function gen16(){
+  const pairs=[[22,66],[6,18],[4,12],[8,24],[5,15],[3,9],[10,30]];
+  const [a,b]=pairs[rand(0,pairs.length-1)];
+  const g=gcd(a,b), l=lcm(a,b), correct=g+l;
+  const wrongs=new Set();
+  while(wrongs.size<3){
+    const w=rand(correct-10,correct+20);
+    if(w!==correct&&w>0) wrongs.add(w);
+  }
+  const opts=shuffle([correct,...wrongs]);
+  return {
+    type:'mcq',
+    text:`Сборът НОД(<span class="hl">${a}; ${b}</span>) + НОК(<span class="hl">${a}; ${b}</span>) е равен на:`,
+    opts:opts.map(String),
+    ans:opts.indexOf(correct),
+    hint:`НОД(${a},${b})=${g}, НОК(${a},${b})=${l}, сбор=${g}+${l}=${correct}.`
+  };
+}
+
+// Задача 17 — Коя цифра може да се запише на мястото на *?
+function gen17(){
+  const templates=[
+    {
+      template:'*85',
+      rule:'дели се на 5',
+      check:(d)=>((d*100+85)%5===0),
+      hint:'На 5 се дели число, чиято последна цифра е 0 или 5. Последната цифра е 5 — значи всяка цифра работи на *.'
+    },
+    {
+      template:'94*',
+      rule:'дели се на 2',
+      check:(d)=>((940+d)%2===0),
+      hint:'На 2 се дели число с четна последна цифра: 0,2,4,6,8.'
+    },
+    {
+      template:'52*',
+      rule:'дели се на 10',
+      check:(d)=>((520+d)%10===0),
+      hint:'На 10 се дели число, завършващо на 0.'
+    },
+    {
+      template:'*26',
+      rule:'дели се на 3',
+      check:(d)=>((d*100+26)%3===0),
+      hint:'На 3 се дели число, чийто сбор на цифрите се дели на 3. Сборът е *+2+6=*+8.'
+    },
+    {
+      template:'3*6',
+      rule:'дели се на 3',
+      check:(d)=>((300+d*10+6)%3===0),
+      hint:'На 3: сборът на цифрите 3+*+6=9+* трябва да се дели на 3.'
+    }
+  ];
+  const t=templates[rand(0,templates.length-1)];
+  const correctDigits=[];
+  for(let d=0;d<=9;d++) if(t.check(d)) correctDigits.push(d);
+  const correctStr=correctDigits.join(' или ');
+  return {
+    type:'fill_single',
+    text:`Коя цифра може да се запише на мястото на <span class="hl">*</span>, така че числото <span class="hl">${t.template}</span> да се дели на ${t.rule}?`,
+    inputs:[{label:'Цифра(и):', placeholder:'напр. 0 или 5', id:'q17a'}],
+    checkFn:(vals)=>{
+      const v=vals[0].trim();
+      const entered=v.split(/[\s,иor]+/).map(s=>s.trim()).filter(Boolean).map(Number);
+      return entered.length===correctDigits.length && correctDigits.every(d=>entered.includes(d));
+    },
+    correct:`${correctStr}`,
+    hint:t.hint
+  };
+}
+
+// ── Всички генератори в масив ──
+const GENERATORS = [gen1,gen2,gen3,gen4,gen5,gen6,gen7,gen8,gen9,gen10,gen12,gen13,gen14,gen15,gen16,gen17];
+const TASK_NAMES = [
+  'Делимост на число',
+  'Прости и съставни числа',
+  'Делители на число',
+  'Делимост на 2, 3 и 5',
+  'Разлагане на прости множители',
+  'НОД на две числа',
+  'НОК на две числа',
+  'Вярно твърдение',
+  'Произведение на прости числа',
+  'Разлагане — свободен отговор',
+  'НОД — свободен отговор',
+  'НОК — свободен отговор',
+  'НОК на три числа',
+  'НОК — свободен отговор',
+  'НОД + НОК',
+  'Цифра за делимост'
+];
+
+// ═══════════════════════════════════════════
+// ГЕНЕРИРАЙ И ИЗОБРАЗИ ТЕСТА
+// ═══════════════════════════════════════════
+let currentQuestions = [];
+let userAnswers = [];
+let submitted = false;
+
+function generateTest(){
+  submitted = false;
+  userAnswers = new Array(16).fill(null);
+  currentQuestions = GENERATORS.map((g,i) => {
+    try { return {...g(), idx:i, name:TASK_NAMES[i]}; }
+    catch(e){ console.error('Gen error',i,e); return gen6(); }
+  });
+  renderTest();
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('certWrap').classList.remove('show');
+  document.getElementById('progressBar').style.width = '0%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderTest(){
+  const container = document.getElementById('testContainer');
+  container.innerHTML = currentQuestions.map((q,i) => renderQuestion(q,i)).join('');
+}
+
+function renderQuestion(q, i){
+  const head = `
+    <div class="q-block reveal" id="qblock-${i}">
+      <div class="q-head">
+        <div class="q-num">${i+1}</div>
+        <div>
+          <div class="q-type">${q.name}</div>
+          <div class="q-title-text">Задача ${i+1}</div>
+        </div>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.text}</div>`;
+  let body = '';
+  if(q.type==='mcq'){
+    body = `<div class="opts">${q.opts.map((o,oi)=>`
+      <div class="opt" id="opt-${i}-${oi}" onclick="selectOpt(${i},${oi})">
+        <div class="opt-letter">${'АБВГ'[oi]}</div>
+        <span>${o}</span>
+      </div>`).join('')}</div>`;
+  } else if(q.type==='fill_single'){
+    body = q.inputs.map(inp=>`
+      <div class="input-row">
+        ${inp.label?`<span class="input-label">${inp.label}</span>`:''}
+        <input class="q-input" id="${inp.id}-${i}" type="text" placeholder="${inp.placeholder}" oninput="markAnswered(${i})">
+      </div>`).join('');
+  } else if(q.type==='fill_multi'){
+    body = q.inputs.map(inp=>`
+      <div class="input-row">
+        <span class="input-label">${inp.label}</span>
+        <input class="q-input" id="${inp.id}-${i}" type="text" placeholder="отговор" oninput="markAnswered(${i})">
+      </div>`).join('');
+  }
+  return head + body + `
+        <div class="q-feedback" id="fb-${i}"></div>
+      </div>
+    </div>`;
+}
+
+function selectOpt(qi, oi){
+  if(submitted) return;
+  const q = currentQuestions[qi];
+  q.opts.forEach((_,j)=>{
+    document.getElementById(`opt-${qi}-${j}`)?.classList.remove('selected');
+  });
+  document.getElementById(`opt-${qi}-${oi}`)?.classList.add('selected');
+  userAnswers[qi] = oi;
+  document.getElementById(`qblock-${qi}`)?.classList.add('answered');
+  updateProgress();
+}
+
+function markAnswered(qi){
+  document.getElementById(`qblock-${qi}`)?.classList.add('answered');
+  userAnswers[qi] = '__filled__';
+  updateProgress();
+}
+
+function updateProgress(){
+  const answered = currentQuestions.filter((q,i)=>{
+    if(q.type==='mcq') return userAnswers[i]!==null && userAnswers[i]!=='__filled__' || userAnswers[i]!==null;
+    const inp = document.getElementById(`${q.inputs[0].id}-${i}`);
+    return inp && inp.value.trim()!=='';
+  }).length;
+  document.getElementById('progressBar').style.width = (answered/16*100)+'%';
+}
+
+// ═══════════════════════════════════════════
+// ПРОВЕРКА
+// ═══════════════════════════════════════════
+function submitTest(){
+  if(submitted) return;
+  submitted = true;
+  let correct = 0;
+  const wrongTopics = [];
+
+  currentQuestions.forEach((q,i)=>{
+    const fb = document.getElementById(`fb-${i}`);
+    let isCorrect = false;
+
+    if(q.type==='mcq'){
+      const chosen = userAnswers[i];
+      q.opts.forEach((_,oi)=>{
+        const el = document.getElementById(`opt-${qi=i}-${oi}`);
+        if(!el) return;
+        el.classList.add('disabled');
+        if(oi===q.ans) el.classList.add('correct');
+        else if(oi===chosen) el.classList.add('wrong');
+      });
+      isCorrect = (chosen === q.ans);
+    } else {
+      // fill
+      const vals = q.inputs.map(inp=>{
+        const el=document.getElementById(`${inp.id}-${i}`);
+        if(el){ el.disabled=true; return el.value; }
+        return '';
+      });
+      isCorrect = q.checkFn(vals);
+      q.inputs.forEach(inp=>{
+        const el=document.getElementById(`${inp.id}-${i}`);
+        if(el) el.classList.add(isCorrect?'correct':'wrong');
+      });
+    }
+
+    if(isCorrect){
+      correct++;
+      fb.textContent='✅ Правилно!';
+      fb.className='q-feedback show ok';
+    } else {
+      fb.innerHTML=`❌ Грешно. Верен отговор: <strong>${q.correct}</strong>. 💡 ${q.hint}`;
+      fb.className='q-feedback show err';
+      wrongTopics.push(q.name);
+    }
+  });
+
+  // Оценка
+  const total = 16;
+  const gradeRaw = 2 + (correct/total)*4;
+  const grade = Math.round(gradeRaw*10)/10;
+  const gradeFloor = Math.floor(grade);
+
+  const quality = grade>=5.5?{txt:'Отличен',cls:'q6'}:
+                  grade>=4.5?{txt:'Много добър',cls:'q5'}:
+                  grade>=3.5?{txt:'Добър',cls:'q4'}:
+                  grade>=3.0?{txt:'Среден',cls:'q3'}:
+                             {txt:'Слаб',cls:'q2'};
+
+  const emoji = grade>=5.5?'🏆':grade>=4.5?'🌟':grade>=3.5?'😊':grade>=3.0?'🙂':'😕';
+  const solveNum = incSolveCount();
+  document.getElementById('solveCount').textContent = solveNum;
+
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('bg-BG',{day:'2-digit',month:'long',year:'numeric'});
+
+  const certEl = document.getElementById('certDiv');
+  certEl.innerHTML = `
+    <div class="cert-stars">${emoji}</div>
+    <div class="cert-title">Сертификат за резултат</div>
+    <div class="cert-name">Тест: Делимост · Математика 5 клас</div>
+    <div class="cert-score-big">${correct} / ${total}</div>
+    <div class="cert-score-label">верни отговора</div>
+    <div class="cert-grade-wrap">
+      <div class="cert-grade-card">
+        <div class="cert-grade-num">${grade.toFixed(2)}</div>
+        <div class="cert-grade-lbl">Оценка</div>
+      </div>
+      <div class="cert-grade-card">
+        <div class="cert-grade-num">${correct}</div>
+        <div class="cert-grade-lbl">Точки</div>
+      </div>
+    </div>
+    <div class="cert-quality ${quality.cls}">${quality.txt}</div>
+    <div class="cert-date">📅 ${dateStr}</div>
+    <div class="cert-counter">📝 Решаване №${solveNum}</div>
+    ${wrongTopics.length>0?`<div style="margin-top:1rem;font-size:.8rem;color:rgba(255,255,255,.55);">Прегледай: ${wrongTopics.slice(0,3).join(', ')}${wrongTopics.length>3?'...':''}</div>`:''}
+  `;
+
+  document.getElementById('certWrap').classList.add('show');
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('progressBar').style.width = '100%';
+
+  setTimeout(()=>{
+    document.getElementById('certWrap').scrollIntoView({behavior:'smooth',block:'start'});
+  },400);
+}
+
+function retryTest(){
+  generateTest();
+}
+
+// ── Reveal анимация ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+},{threshold:0.05});
+function observeAll(){ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el)); }
+
+// ── Старт ──
+generateTest();
+setTimeout(observeAll, 100);
+</script>
+</body>
+</html>

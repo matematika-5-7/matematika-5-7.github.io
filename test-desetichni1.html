@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Тест: Събиране и изваждане на десетични дроби. Математика 5 клас.">
+<title>Тест: Събиране и изваждане на десетични дроби | Математика 5 клас</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --main:#2563eb;--main-dark:#1e40af;--main-light:#eff6ff;--main-mid:#bfdbfe;
+  --green:#16a34a;--green-light:#dcfce7;--red:#ef4444;--red-light:#fef2f2;
+  --yellow:#d97706;--yellow-light:#fef9c3;
+  --ink:#1a1a2e;--ink2:#3d3d5c;--bg:#f5f7ff;--white:#fff;--border:#dbeafe;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.7;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,243,.96);backdrop-filter:blur(12px);
+  border-bottom:2px solid var(--border);padding:.7rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Baloo 2',sans-serif;font-size:1.1rem;font-weight:900;color:var(--ink);text-decoration:none;}
+.nav-logo em{color:var(--main);font-style:normal;}
+.nav-back{font-size:.85rem;font-weight:700;color:var(--main-dark);text-decoration:none;
+  background:var(--main-light);border:1.5px solid var(--main-mid);padding:.35rem 1rem;border-radius:18px;transition:all .2s;}
+.nav-back:hover{background:var(--main);color:#fff;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--main-dark),var(--main));
+  padding:2.5rem 1.5rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:44px;
+  background:var(--bg);clip-path:ellipse(55% 100% at 50% 100%);}
+.hero h1{font-family:'Baloo 2',sans-serif;font-size:clamp(1.7rem,5vw,2.8rem);font-weight:900;color:#fff;margin-bottom:.4rem;}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.82);margin-bottom:1.2rem;}
+.hero-chips{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;}
+.hchip{background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.28);
+  border-radius:18px;padding:.22rem .9rem;font-size:.82rem;font-weight:700;color:#fff;}
+
+/* COUNTER BADGE */
+.counter-badge{
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);
+  border-radius:20px;padding:.3rem 1rem;font-size:.82rem;font-weight:800;color:#fff;
+  display:inline-flex;align-items:center;gap:.4rem;margin-bottom:.8rem;
+}
+
+/* MAIN WRAP */
+.wrap{max-width:820px;margin:0 auto;padding:2rem 1.2rem 5rem;}
+
+/* INFO BAR */
+.info-bar{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.8rem;}
+.info-pill{background:var(--white);border:2px solid var(--border);border-radius:12px;
+  padding:.45rem 1rem;font-size:.85rem;font-weight:700;color:var(--ink2);
+  display:flex;align-items:center;gap:.4rem;}
+.info-pill strong{color:var(--main);}
+
+/* ЗАДАЧИ */
+.q-block{background:var(--white);border:2px solid var(--border);border-radius:20px;
+  overflow:hidden;margin-bottom:1.2rem;box-shadow:0 2px 12px rgba(0,0,0,.05);
+  transition:border-color .2s;}
+.q-block.answered{border-color:var(--main-mid);}
+.q-head{background:linear-gradient(135deg,var(--main-dark),var(--main));
+  padding:.75rem 1.2rem;display:flex;align-items:center;gap:.7rem;}
+.q-num{font-family:'Baloo 2',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;
+  background:rgba(255,255,255,.2);width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.q-type{font-size:.72rem;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.07em;}
+.q-title-text{font-size:.92rem;font-weight:800;color:#fff;}
+.q-body{padding:1.1rem 1.2rem;}
+.q-text{font-size:.97rem;font-weight:700;color:var(--ink);margin-bottom:.9rem;line-height:1.65;}
+.q-text .hl{color:var(--main-dark);font-weight:900;}
+
+/* MCQ варианти */
+.opts{display:flex;flex-direction:column;gap:.4rem;}
+.opt{display:flex;align-items:center;gap:.65rem;background:#f5f7ff;border:2px solid var(--border);
+  border-radius:12px;padding:.55rem .95rem;cursor:pointer;transition:all .18s;
+  font-size:.95rem;font-weight:700;user-select:none;}
+.opt:hover{border-color:var(--main-mid);background:var(--main-light);}
+.opt.selected{border-color:var(--main);background:var(--main-light);}
+.opt.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:var(--red-light);color:var(--red);}
+.opt.disabled{pointer-events:none;}
+.opt-letter{background:var(--main);color:#fff;font-weight:900;font-size:.78rem;
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.opt.correct .opt-letter{background:var(--green);}
+.opt.wrong .opt-letter{background:var(--red);}
+
+/* INPUT задачи */
+.input-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-bottom:.5rem;}
+.q-input{border:2px solid var(--border);border-radius:10px;padding:.4rem .8rem;
+  font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;
+  width:110px;background:#f5f7ff;color:var(--ink);transition:border-color .18s;}
+.q-input:focus{outline:none;border-color:var(--main);background:#fff;}
+.q-input.correct{border-color:var(--green);background:var(--green-light);color:var(--green);}
+.q-input.wrong{border-color:var(--red);background:var(--red-light);}
+.input-label{font-size:.92rem;font-weight:700;color:var(--ink2);}
+
+/* Feedback */
+.q-feedback{font-size:.85rem;font-weight:700;margin-top:.55rem;padding:.45rem .85rem;
+  border-radius:10px;display:none;}
+.q-feedback.show{display:block;}
+.q-feedback.ok{background:var(--green-light);color:var(--green);}
+.q-feedback.err{background:var(--red-light);color:var(--red);}
+
+/* БУТОНИ */
+.btn-submit{background:linear-gradient(135deg,var(--main-dark),var(--main));color:#fff;
+  border:none;border-radius:16px;padding:.9rem 2.5rem;font-family:'Nunito',sans-serif;
+  font-size:1.05rem;font-weight:800;cursor:pointer;transition:all .2s;
+  display:block;width:100%;margin-top:1.5rem;}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(37,99,235,.3);}
+.btn-submit:disabled{background:#94a3b8;cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-retry{background:var(--main-light);color:var(--main-dark);border:2px solid var(--main-mid);
+  border-radius:14px;padding:.7rem 2rem;font-family:'Nunito',sans-serif;
+  font-size:.95rem;font-weight:800;cursor:pointer;transition:all .2s;margin-top:.8rem;}
+.btn-retry:hover{background:var(--main);color:#fff;}
+
+/* СЕРТИФИКАТ */
+.cert-wrap{display:none;margin-top:2rem;}
+.cert-wrap.show{display:block;}
+.cert{background:linear-gradient(135deg,#1a1a2e,#2d1b4e);border-radius:24px;
+  padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.2);}
+.cert::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg,rgba(255,255,255,.015) 0,rgba(255,255,255,.015) 1px,transparent 1px,transparent 36px);}
+.cert-stars{font-size:2rem;margin-bottom:.5rem;position:relative;}
+.cert-title{font-family:'Baloo 2',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;
+  margin-bottom:.3rem;position:relative;}
+.cert-name{font-size:.95rem;color:rgba(255,255,255,.7);margin-bottom:1.4rem;position:relative;}
+.cert-score-big{font-family:'Baloo 2',sans-serif;font-size:3.2rem;font-weight:900;
+  color:#fbbf24;line-height:1;margin-bottom:.3rem;position:relative;}
+.cert-score-label{font-size:.88rem;color:rgba(255,255,255,.6);margin-bottom:1.2rem;position:relative;}
+.cert-grade-wrap{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:1.5rem;position:relative;}
+.cert-grade-card{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:16px;padding:.8rem 1.4rem;min-width:120px;}
+.cert-grade-num{font-family:'Baloo 2',sans-serif;font-size:2rem;font-weight:900;color:#fff;}
+.cert-grade-lbl{font-size:.75rem;color:rgba(255,255,255,.6);font-weight:700;text-transform:uppercase;}
+.cert-quality{font-family:'Baloo 2',sans-serif;font-size:1.15rem;font-weight:800;
+  padding:.5rem 1.5rem;border-radius:20px;display:inline-block;margin-bottom:1.2rem;
+  position:relative;}
+.cert-quality.q6{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#1a1a2e;}
+.cert-quality.q5{background:linear-gradient(135deg,#4ade80,#16a34a);color:#fff;}
+.cert-quality.q4{background:linear-gradient(135deg,#60a5fa,#2563eb);color:#fff;}
+.cert-quality.q3{background:linear-gradient(135deg,#fb923c,#ea580c);color:#fff;}
+.cert-quality.q2{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff;}
+.cert-date{font-size:.78rem;color:rgba(255,255,255,.4);position:relative;}
+.cert-counter{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.4rem;position:relative;}
+
+/* Progress bar */
+.progress-wrap{background:var(--border);border-radius:8px;height:8px;margin-bottom:1.5rem;overflow:hidden;}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--main-dark),var(--main));
+  border-radius:8px;transition:width .3s ease;width:0%;}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .5s,transform .5s;}
+.reveal.visible{opacity:1;transform:none;}
+
+  .sub-group{background:#eff6ff;border-radius:12px;padding:.8rem 1rem;margin-bottom:.5rem;}
+  .sub-group-label{font-size:.9rem;font-weight:800;color:var(--main-dark);margin-bottom:.5rem;}
+  .q-note{font-size:.85rem;font-style:italic;color:var(--ink2);margin-bottom:.7rem;}
+  .q-input.wide{width:260px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="klas-5.html" class="nav-logo">Мат<em>5</em></a>
+  <a href="klas-5.html#tema3" class="nav-back">← Десетични дроби</a>
+</nav>
+
+<div class="hero">
+  <div class="counter-badge" id="counterBadge">📝 Решавания: <span id="solveCount">0</span></div>
+  <h1>🔢 Събиране и изваждане на десетични дроби</h1>
+  <p class="hero-sub">14 задачи · Всеки път различни числа</p>
+  <div class="hero-chips">
+    <span class="hchip">Четене и записване</span>
+    <span class="hchip">Закръгляване</span>
+    <span class="hchip">Събиране и изваждане</span>
+    <span class="hchip">Уравнения</span>
+    <span class="hchip">Текстови задачи</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="info-bar">
+    <div class="info-pill">📋 Въпроси: <strong>14</strong></div>
+    <div class="info-pill">⭐ Точки: <strong>14</strong></div>
+    <div class="info-pill">📊 Оценка: <strong>Оц = 2 + (т/14)×4</strong></div>
+  </div>
+  <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div id="testContainer"></div>
+  <button class="btn-submit" id="submitBtn" onclick="submitTest()">🔍 Провери отговорите</button>
+  <div class="cert-wrap" id="certWrap">
+    <div class="cert" id="certDiv"></div>
+    <div style="text-align:center;margin-top:1rem;">
+      <button class="btn-retry" onclick="retryTest()">🔄 Нов тест с различни числа</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function shuffle(arr){return [...arr].sort(()=>Math.random()-.5);}
+function r1(n){return Math.round(n*10)/10;}
+function r2(n){return Math.round(n*100)/100;}
+function r3(n){return Math.round(n*1000)/1000;}
+function fmt(n,dec){return n.toFixed(dec);}
+function bg(n){return String(n).replace('.',',');}
+
+function getSC(){return parseInt(localStorage.getItem('desetichni1_count')||'0');}
+function incSC(){const n=getSC()+1;localStorage.setItem('desetichni1_count',n);return n;}
+document.getElementById('solveCount').textContent=getSC();
+
+// ══ З.1 — Четене на десетична дроб ══
+function gen1(){
+  const t=[
+    {num:'4,703',opts:['4 цяло и 703 хиляди','4 цяло и 703 десети','4 цяло и 703 хилядни','4 цяло и 703 стотни'],ans:2},
+    {num:'5,048',opts:['5 цяло и 48 стотини','5 цяло и 48 хилядни','5 цяло и 48 десети','5 цяло и 48 хиляди'],ans:1},
+    {num:'3,205',opts:['3 цяло и 205 десети','3 цяло и 205 хиляди','3 цяло и 205 стотни','3 цяло и 205 хилядни'],ans:3},
+    {num:'7,06', opts:['7 цяло и 6 десети','7 цяло и 6 стотни','7 цяло и 60 стотни','7 цяло и 6 хилядни'],ans:1},
+    {num:'2,400',opts:['2 цяло и 400 стотни','2 цяло и 4 десети','2 цяло и 400 хилядни','2 цяло и 40 десети'],ans:2},
+    {num:'9,010',opts:['9 цяло и 10 стотни','9 цяло и 10 хилядни','9 цяло и 1 десета','9 цяло и 10 десети'],ans:1},
+    {num:'6,300',opts:['6 цяло и 3 стотни','6 цяло и 30 стотни','6 цяло и 3 десети','6 цяло и 300 хилядни'],ans:2},
+    {num:'1,050',opts:['1 цяло и 5 стотни','1 цяло и 50 хилядни','1 цяло и 5 десети','1 цяло и 50 стотни'],ans:3},
+  ];
+  const s=t[rand(0,t.length-1)];
+  return{type:'mcq',name:'Четене на десетична дроб',
+    text:`Числото <span class="hl">${s.num}</span> се чете:`,
+    opts:s.opts,ans:s.ans,correct:s.opts[s.ans],
+    hint:'Брой цифри след запетаята: 1=десети, 2=стотни, 3=хилядни.'};
+}
+
+// ══ З.2 — Записване с думи → цифри ══
+function gen2(){
+  const c=[
+    {text:'Числото <span class="hl">девет стотни</span> се записва:',opts:['0,009','0,09','0,9','900'],ans:1,hint:'Стотни → 2 места след запетаята → 0,09.'},
+    {text:'Числото <span class="hl">пет хилядни</span> се записва:',opts:['0,5','0,05','0,005','5000'],ans:2,hint:'Хилядни → 3 места след запетаята → 0,005.'},
+    {text:'Числото <span class="hl">седем десети</span> се записва:',opts:['0,07','7,0','0,7','700'],ans:2,hint:'Десети → 1 място след запетаята → 0,7.'},
+    {text:'Числото <span class="hl">петнадесет стотни</span> се записва:',opts:['0,015','0,15','1,5','150'],ans:1,hint:'15 стотни = 0,15.'},
+    {text:'Числото <span class="hl">двеста и три хилядни</span> се записва:',opts:['2,003','0,203','0,023','2,03'],ans:1,hint:'203 хилядни = 0,203.'},
+    {text:'Числото <span class="hl">шест цяло и осем стотни</span> се записва:',opts:['6,8','6,08','6,008','60,8'],ans:1,hint:'6 цяло, 8 стотни → 6,08.'},
+  ];
+  const s=c[rand(0,c.length-1)];
+  return{type:'mcq',name:'Записване на десетична дроб',text:s.text,opts:s.opts,ans:s.ans,correct:s.opts[s.ans],hint:s.hint};
+}
+
+// ══ З.3 — Намери НЕПРАВИЛНО закръгляне ══
+function gen3(){
+  function ro(n,d){return Math.round(n*Math.pow(10,d))/Math.pow(10,d);}
+  function fmtN(n,d){return n.toFixed(d).replace('.',',');}
+  const letters=['А','Б','В','Г'];
+  // Генерирай 4 примера — определи кой е грешен
+  const examples=[];
+  let wrongIdx=rand(0,3);
+  for(let i=0;i<4;i++){
+    const n=(rand(1000,9999))/1000;
+    const dec=Math.random()<.5?1:2;
+    const correct=ro(n,dec);
+    if(i===wrongIdx){
+      // Грешна стойност
+      const delta=dec===1?0.1:0.01;
+      const wrong=ro(correct+(Math.random()<.5?delta:-delta),dec);
+      examples.push({n:fmtN(n,3),approx:fmtN(wrong,dec),realApprox:fmtN(correct,dec),isWrong:true});
+    } else {
+      examples.push({n:fmtN(n,3),approx:fmtN(correct,dec),realApprox:fmtN(correct,dec),isWrong:false});
+    }
+  }
+  return{type:'mcq',name:'Неправилно закръгляне',
+    text:'В кой от примерите приближената стойност е намерена <span class="hl">НЕПРАВИЛНО</span>?',
+    opts:examples.map((e,i)=>`${letters[i]}) ${e.n} ≈ ${e.approx}`),
+    ans:wrongIdx,
+    correct:`${letters[wrongIdx]}) ${examples[wrongIdx].n} ≈ ${examples[wrongIdx].approx} (вярното е ≈ ${examples[wrongIdx].realApprox})`,
+    hint:'Закръглявай: ако следващата цифра ≥5 → нагоре; <5 → надолу.'};
+}
+
+// ══ З.4 — Кое е най-малко ══
+function gen4(){
+  const base=rand(10,90)/10+rand(1,9)/100;
+  const nums=new Set();
+  nums.add(r2(base));
+  while(nums.size<4){const n=r3(base+rand(-30,30)/1000);if(n>0)nums.add(n);}
+  const arr=shuffle([...nums]);
+  const minVal=Math.min(...arr);
+  const opts=arr.map(n=>bg(n));
+  return{type:'mcq',name:'Сравняване на десетични дроби',
+    text:'Кое от дадените числа е <span class="hl">най-малко</span>?',
+    opts,ans:opts.indexOf(bg(minVal)),correct:bg(minVal),
+    hint:'Сравнявай цифра по цифра след запетаята отляво надясно.'};
+}
+
+// ══ З.5 — Събиране ══
+function gen5(){
+  const a=rand(100,999)/10,b=rand(10,999)/100;
+  const c=r2(a+b);
+  const w=new Set();
+  while(w.size<3){const x=r2(c+rand(-5,5)/10);if(x!==c&&x>0)w.add(x);}
+  const opts=shuffle([c,...w]).map(bg);
+  return{type:'mcq',name:'Събиране на десетични дроби',
+    text:`Сборът <span class="hl">${fmt(a,1).replace('.',',')}</span> + <span class="hl">${fmt(b,2).replace('.',',')}</span> е равен на:`,
+    opts,ans:opts.indexOf(bg(c)),correct:bg(c),
+    hint:`Наредени по запетаята: ${fmt(a,2).replace('.',',')} + ${fmt(b,2).replace('.',',')} = ${bg(c)}`};
+}
+
+// ══ З.6 — Изваждане ══
+function gen6(){
+  const a=rand(200,500)/10,b=r2(rand(10,parseInt(a*10-10))/100);
+  const c=r2(a-b);
+  const w=new Set();
+  while(w.size<3){const x=r2(c+rand(-5,5)/100);if(x!==c&&x>0)w.add(x);}
+  const opts=shuffle([c,...w]).map(bg);
+  return{type:'mcq',name:'Изваждане на десетични дроби',
+    text:`Разликата <span class="hl">${fmt(a,1).replace('.',',')}</span> − <span class="hl">${fmt(b,2).replace('.',',')}</span> е равна на:`,
+    opts,ans:opts.indexOf(bg(c)),correct:bg(c),
+    hint:`${fmt(a,2).replace('.',',')} − ${fmt(b,2).replace('.',',')} = ${bg(c)}`};
+}
+
+// ══ З.7 — Стойност на израз — разместително и съдружително свойство ══
+// Генерира a + b + c + d където a+c = цяло число и b+d = цяло число
+// Ученикът трябва да забележи: (a+c) + (b+d) = цяло + цяло = цяло
+function gen7(){
+  // Генерирай две двойки с десетична сума = цяло число
+  // Двойка 1: a1 + a2 = n1 (цяло)
+  // Двойка 2: b1 + b2 = n2 (цяло)
+  function makePair(sum){
+    // a1 = случайна стойност с 2 дес. цифри, a2 = sum - a1
+    const dec = rand(10,89); // стотни 10..89
+    const a1 = r2(rand(1,sum-1) + dec/100);
+    const a2 = r2(sum - a1);
+    if(a2<=0) return makePair(sum);
+    return [a1,a2];
+  }
+  const n1=rand(2,9), n2=rand(2,9);
+  const [a1,a2]=makePair(n1);
+  const [b1,b2]=makePair(n2);
+  const total=n1+n2;
+  // Разбъркай реда: a1, b1, a2, b2 (не двойките заедно — нека ученикът ги намери)
+  const parts=shuffle([a1,b1,a2,b2]);
+  const c=total; // точно цяло число
+  // Грешни варианти — близки цели числа
+  const w=new Set();
+  [c-1,c+1,c-2,c+2].forEach(v=>{if(v>0)w.add(v);});
+  const pool=shuffle([c,...w]).slice(0,4);
+  const opts=pool.map(bg);
+  if(!opts.includes(bg(c)))opts[0]=bg(c);
+  return{type:'mcq',name:'Стойност на израз (свойства)',
+    text:`Стойността на израза <span class="hl">${parts.map(x=>fmt(x,2).replace('.',',')).join(' + ')}</span> е равна на:<br>
+    <small style="color:#1e40af;font-weight:600;">💡 Използвай разместителното и съдружителното свойство!</small>`,
+    opts,ans:opts.indexOf(bg(c)),correct:bg(c),
+    hint:`Потърси двойки с цяла сума: ${fmt(a1,2).replace('.',',')}+${fmt(a2,2).replace('.',',')}=${n1} и ${fmt(b1,2).replace('.',',')}+${fmt(b2,2).replace('.',',')}=${n2}. Сборът = ${n1}+${n2}=${c}.`};
+}
+
+// ══ З.8 — Уравнение x + a = b ══
+function gen8(){
+  const x=r2(rand(200,800)/10),a=r2(rand(100,500)/100),b=r2(x+a);
+  const w=new Set();
+  while(w.size<3){const v=r2(x+rand(-5,5)/100);if(v!==x&&v>0)w.add(v);}
+  const opts=shuffle([x,...w]).map(bg);
+  return{type:'mcq',name:'Уравнение x + a = b',
+    text:`Ако <span class="hl">x + ${fmt(a,2).replace('.',',')} = ${fmt(b,2).replace('.',',')}</span>, то x е равно на:`,
+    opts,ans:opts.indexOf(bg(x)),correct:bg(x),
+    hint:`x = ${fmt(b,2).replace('.',',')} − ${fmt(a,2).replace('.',',')} = ${bg(x)}`};
+}
+
+// ══ З.9 — Уравнение a − x = b ══
+function gen9(){
+  const x=r2(rand(100,500)/100),a=r2(rand(200,600)/10),b=r2(a-x);
+  const w=new Set();
+  while(w.size<3){const v=r2(x+rand(-5,5)/100);if(v!==x&&v>0)w.add(v);}
+  const opts=shuffle([x,...w]).map(bg);
+  return{type:'mcq',name:'Уравнение a − x = b',
+    text:`Ако <span class="hl">${fmt(a,2).replace('.',',')} − x = ${fmt(b,2).replace('.',',')}</span>, то x е равно на:`,
+    opts,ans:opts.indexOf(bg(x)),correct:bg(x),
+    hint:`x = ${fmt(a,2).replace('.',',')} − ${fmt(b,2).replace('.',',')} = ${bg(x)}`};
+}
+
+// ══ З.10 — Уравнение x − a = b − c ══
+function gen10(){
+  const c=r2(rand(100,500)/100),b=r2(rand(500,1500)/10),a=r2(rand(100,500)/100);
+  const rhs=r2(b-c),x=r2(rhs+a);
+  const w=new Set();
+  while(w.size<3){const v=r2(x+rand(-3,3)/100);if(v!==x&&v>0)w.add(v);}
+  const opts=shuffle([x,...w]).map(bg);
+  return{type:'mcq',name:'Уравнение x − a = b − c',
+    text:`Стойността на x от равенството <span class="hl">x − ${fmt(a,2).replace('.',',')} = ${fmt(b,2).replace('.',',')} − ${fmt(c,2).replace('.',',')}</span> е:`,
+    opts,ans:opts.indexOf(bg(x)),correct:bg(x),
+    hint:`Дясна страна = ${bg(rhs)}, x = ${bg(rhs)} + ${fmt(a,2).replace('.',',')} = ${bg(x)}`};
+}
+
+// ══ З.11 — Наредба на числа ══
+function gen11(){
+  const base=rand(2,8)+rand(0,9)/10;
+  const nums=[];
+  while(nums.length<4){
+    const n=r3(base+rand(-5,5)/1000+rand(-3,3)/100);
+    if(n>0&&!nums.some(x=>Math.abs(x-n)<0.0001))nums.push(n);
+  }
+  const sorted=[...nums].sort((a,b)=>a-b);
+  const shuffled=shuffle(nums).map(bg);
+  const correctStr=sorted.map(bg).join('; ');
+  return{type:'fill_single',name:'Наредба по големина',
+    text:`Наредете числата <span class="hl">${shuffled.join('; ')}</span> по големина, като започнете от най-малкото.`,
+    note:'Запишете числата разделени с точка и запетая (;)',
+    inputs:[{label:'Отговор:',placeholder:'напр. 2,40; 2,41; 2,43; 2,44',id:'q11a'}],
+    checkFn:(vals)=>{
+      const entered=vals[0].trim().replace(/\s/g,'').split(';').map(s=>parseFloat(s.replace(',','.')));
+      if(entered.length!==4||entered.some(isNaN))return false;
+      return JSON.stringify(entered)===JSON.stringify(sorted);
+    },
+    correct:correctStr,
+    hint:`Наредени от малко към голямо: ${correctStr}`};
+}
+
+// ══ З.12 — Дроб в интервал (3 подточки) ══
+function gen12(){
+  const allIv=[
+    {lo:0.51,hi:0.53},{lo:5.063,hi:5.064},{lo:3.12,hi:3.14},
+    {lo:0.071,hi:0.073},{lo:1.005,hi:1.006},{lo:8.99,hi:9.01},
+    {lo:4.201,hi:4.202},{lo:2.300,hi:2.305},{lo:7.09,hi:7.11}
+  ];
+  const chosen=shuffle(allIv).slice(0,3);
+  const answers=chosen.map(iv=>r3((iv.lo+iv.hi)/2));
+  return{
+    type:'fill_interval3',name:'Дроб в интервал',
+    text:'Запишете поне една дроб <span class="hl">a</span>, за която е изпълнено:',
+    intervals:chosen, answers,
+    checkFn:(vals)=>vals.every((v,i)=>{
+      const n=parseFloat(v.trim().replace(',','.'));
+      return !isNaN(n)&&n>chosen[i].lo&&n<chosen[i].hi;
+    }),
+    correct:chosen.map((iv,i)=>`${bg(iv.lo)} < a < ${bg(iv.hi)} → напр. ${bg(answers[i])}`).join(' | '),
+    hint:'Намери число точно между двете граници.'};
+}
+
+// ══ З.13 — Текстова задача: пари ══
+function gen13(){
+  const tmpl=[
+    ()=>{
+      const s=r2(rand(5,15)+rand(0,9)/10);
+      const m=r2(rand(1,5)+rand(10,99)/100);
+      const d=r2(rand(1,5)+rand(10,99)/100);
+      const g=r2(rand(1,4)+rand(10,99)/100);
+      const res=r2(s+m+d-g);
+      return{text:`Иван имал <span class="hl">${bg(s)} лв.</span> Получил от майка си още <span class="hl">${bg(m)} лв.</span>, а от баща си — още <span class="hl">${bg(d)} лв.</span> Дал на брат си <span class="hl">${bg(g)} лв.</span> Запишете с десетична дроб колко лева има Иван.`,
+        ans:res,hint:`${bg(s)} + ${bg(m)} + ${bg(d)} − ${bg(g)} = ${bg(res)} лв.`};
+    },
+    ()=>{
+      const p1=r2(rand(3,8)+rand(10,99)/100);
+      const p2=r2(rand(2,6)+rand(10,99)/100);
+      const paid=rand(10,20);
+      const ch=r2(paid-p1-p2);
+      if(ch<=0)return null;
+      return{text:`Мария купила тетрадка за <span class="hl">${bg(p1)} лв.</span> и молив за <span class="hl">${bg(p2)} лв.</span> Платила с банкнота от <span class="hl">${paid} лв.</span> Колко ресто получила?`,
+        ans:ch,hint:`${paid} − ${bg(p1)} − ${bg(p2)} = ${bg(ch)} лв.`};
+    },
+    ()=>{
+      const tm=r1(rand(5,15)+rand(0,9)/10);
+      const rise=r1(rand(5,15)+rand(1,9)/10);
+      const drop=r1(rand(3,10)+rand(1,9)/10);
+      const res=r1(tm+rise-drop);
+      return{text:`Сутринта температурата е <span class="hl">${bg(tm)}°C</span>. По обед се повишила с <span class="hl">${bg(rise)}°C</span>, а вечерта паднала с <span class="hl">${bg(drop)}°C</span>. Каква е вечерната температура?`,
+        ans:res,hint:`${bg(tm)} + ${bg(rise)} − ${bg(drop)} = ${bg(res)}°C`};
+    }
+  ];
+  let t=null;
+  while(!t){t=tmpl[rand(0,tmpl.length-1)]();}
+  return{type:'fill_single',name:'Текстова задача',
+    text:t.text,note:'Запишете само числения отговор',
+    inputs:[{label:'Отговор:',placeholder:'напр. 9,70',id:'q13a'}],
+    checkFn:([v])=>Math.abs(parseFloat(v.replace(',','.'))-t.ans)<0.01,
+    correct:bg(t.ans),hint:t.hint};
+}
+
+// ══ З.14 — По-сложна текстова задача ══
+function gen14(){
+  const tmpl=[
+    ()=>{
+      const f1=r2(rand(800,1500)/100);
+      const d12=r2(rand(100,400)/100);
+      const d23=r2(rand(200,500)/100);
+      const f2=r2(f1-d12);
+      const f3=r2(f2-d23);
+      if(f2<=0||f3<=0)return null;
+      const total=r2(f1+f2+f3);
+      return{text:`Фермер прибрал картофи от три полета. От първото поле събрал <span class="hl">${bg(f1)} т</span>, от второто — с <span class="hl">${bg(d12)} т по-малко</span> от първото, а от третото — с <span class="hl">${bg(d23)} т по-малко</span> от второто. Колко тона картофи общо е прибрал фермерът?`,
+        ans:total,hint:`Поле 2=${bg(f2)}, Поле 3=${bg(f3)}, Общо=${bg(f1)}+${bg(f2)}+${bg(f3)}=${bg(total)} т`};
+    },
+    ()=>{
+      const d1=r2(rand(500,1200)/100);
+      const d12=r2(rand(100,300)/100);
+      const d2=r2(d1-d12);
+      const d3=r2(rand(200,600)/100);
+      if(d2<=0)return null;
+      const total=r2(d1+d2+d3);
+      return{text:`Колоездач изминал три участъка. Първият е <span class="hl">${bg(d1)} km</span>, вторият е с <span class="hl">${bg(d12)} km по-малко</span> от първия, а третият е <span class="hl">${bg(d3)} km</span>. Колко километра изминал общо?`,
+        ans:total,hint:`Участък 2=${bg(d2)}, Общо=${bg(d1)}+${bg(d2)}+${bg(d3)}=${bg(total)} km`};
+    }
+  ];
+  let t=null;
+  while(!t){t=tmpl[rand(0,tmpl.length-1)]();}
+  return{type:'fill_single',name:'Текстова задача (решение)',
+    text:t.text,note:'Запишете само числения отговор',
+    inputs:[{label:'Отговор:',placeholder:'напр. 28,75',id:'q14a'}],
+    checkFn:([v])=>Math.abs(parseFloat(v.replace(',','.'))-t.ans)<0.01,
+    correct:bg(t.ans),hint:t.hint};
+}
+
+const GENS=[gen1,gen2,gen3,gen4,gen5,gen6,gen7,gen8,gen9,gen10,gen11,gen12,gen13,gen14];
+let currentQ=[],userAns=[],submitted=false;
+
+function generateTest(){
+  submitted=false;
+  currentQ=GENS.map((g,i)=>{try{return{...g(),idx:i};}catch(e){console.error(i,e);return gen5();}});
+  userAns=new Array(14).fill(null);
+  renderTest();
+  document.getElementById('submitBtn').disabled=false;
+  document.getElementById('certWrap').classList.remove('show');
+  document.getElementById('progressBar').style.width='0%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderTest(){
+  document.getElementById('testContainer').innerHTML=currentQ.map((q,i)=>renderQ(q,i)).join('');
+}
+
+function renderQ(q,i){
+  let body='';
+  if(q.type==='mcq'){
+    body=`<div class="opts">${q.opts.map((o,oi)=>`
+      <div class="opt" id="opt-${i}-${oi}" onclick="selOpt(${i},${oi})">
+        <div class="opt-letter">${'АБВГ'[oi]}</div><span>${o}</span>
+      </div>`).join('')}</div>`;
+  } else if(q.type==='fill_single'){
+    body=(q.note?`<div class="q-note">${q.note}</div>`:'')+
+      q.inputs.map(inp=>`<div class="input-row">
+        <span class="input-label">${inp.label}</span>
+        <input class="q-input wide" id="${inp.id}-${i}" type="text" placeholder="${inp.placeholder}" oninput="markFilled(${i})">
+      </div>`).join('');
+  } else if(q.type==='fill_interval3'){
+    body=(q.note?`<div class="q-note">${q.note}</div>`:'')+
+      q.intervals.map((iv,si)=>`<div class="sub-group">
+        <div class="sub-group-label">${['а)','б)','в)'][si]} ${bg(iv.lo)} &lt; a &lt; ${bg(iv.hi)}</div>
+        <div class="input-row"><span class="input-label">a =</span>
+          <input class="q-input" id="q12_${si}-${i}" type="text" placeholder="отговор" oninput="markFilled(${i})">
+        </div></div>`).join('');
+  }
+  return `<div class="q-block reveal" id="qblock-${i}">
+    <div class="q-head">
+      <div class="q-num">${i+1}</div>
+      <div><div class="q-type">${q.name}</div><div class="q-title-text">Задача ${i+1}</div></div>
+    </div>
+    <div class="q-body">
+      <div class="q-text">${q.text}</div>
+      ${body}
+      <div class="q-feedback" id="fb-${i}"></div>
+    </div>
+  </div>`;
+}
+
+function selOpt(qi,oi){
+  if(submitted)return;
+  currentQ[qi].opts.forEach((_,j)=>document.getElementById(`opt-${qi}-${j}`)?.classList.remove('selected'));
+  document.getElementById(`opt-${qi}-${oi}`)?.classList.add('selected');
+  userAns[qi]=oi;
+  document.getElementById(`qblock-${qi}`)?.classList.add('answered');
+  updateProg();
+}
+function markFilled(qi){
+  document.getElementById(`qblock-${qi}`)?.classList.add('answered');
+  userAns[qi]='__filled__';
+  updateProg();
+}
+function updateProg(){
+  const n=currentQ.filter((_,i)=>{
+    const q=currentQ[i];
+    if(q.type==='mcq')return userAns[i]!==null;
+    const inp=document.querySelector(`#qblock-${i} .q-input`);
+    return inp&&inp.value.trim()!=='';
+  }).length;
+  document.getElementById('progressBar').style.width=(n/14*100)+'%';
+}
+
+function submitTest(){
+  if(submitted)return;
+  submitted=true;
+  let correct=0;
+  currentQ.forEach((q,i)=>{
+    const fb=document.getElementById(`fb-${i}`);
+    let ok=false;
+    if(q.type==='mcq'){
+      const ch=userAns[i];
+      q.opts.forEach((_,oi)=>{
+        const el=document.getElementById(`opt-${i}-${oi}`);
+        if(!el)return;
+        el.classList.add('disabled');
+        if(oi===q.ans)el.classList.add('correct');
+        else if(oi===ch)el.classList.add('wrong');
+      });
+      ok=(ch===q.ans);
+    } else if(q.type==='fill_single'){
+      const vals=q.inputs.map(inp=>{const el=document.getElementById(`${inp.id}-${i}`);if(el){el.disabled=true;return el.value;}return'';});
+      ok=q.checkFn(vals);
+      q.inputs.forEach(inp=>{const el=document.getElementById(`${inp.id}-${i}`);if(el)el.classList.add(ok?'correct':'wrong');});
+    } else if(q.type==='fill_interval3'){
+      const vals=q.intervals.map((_,si)=>{const el=document.getElementById(`q12_${si}-${i}`);if(el){el.disabled=true;return el.value;}return'';});
+      ok=q.checkFn(vals);
+      q.intervals.forEach((_,si)=>{const el=document.getElementById(`q12_${si}-${i}`);if(el)el.classList.add(ok?'correct':'wrong');});
+    }
+    if(ok){correct++;fb.textContent='✅ Правилно!';fb.className='q-feedback show ok';}
+    else{fb.innerHTML=`❌ Грешно. Верен отговор: <strong>${q.correct}</strong>. 💡 ${q.hint}`;fb.className='q-feedback show err';}
+  });
+
+  const total=14;
+  const grade=Math.round((2+(correct/total)*4)*100)/100;
+  const quality=grade>=5.5?{t:'Отличен',c:'q6'}:grade>=4.5?{t:'Много добър',c:'q5'}:
+                grade>=3.5?{t:'Добър',c:'q4'}:grade>=3.0?{t:'Среден',c:'q3'}:{t:'Слаб',c:'q2'};
+  const emoji=grade>=5.5?'🏆':grade>=4.5?'🌟':grade>=3.5?'😊':grade>=3.0?'🙂':'😕';
+  const solveNum=incSC();
+  document.getElementById('solveCount').textContent=solveNum;
+  const date=new Date().toLocaleDateString('bg-BG',{day:'2-digit',month:'long',year:'numeric'});
+
+  document.getElementById('certDiv').innerHTML=`
+    <div class="cert-stars">${emoji}</div>
+    <div class="cert-title">Сертификат за резултат</div>
+    <div class="cert-name">Събиране и изваждане на десетични дроби · Математика 5 клас</div>
+    <div class="cert-score-big">${correct} / ${total}</div>
+    <div class="cert-score-label">верни отговора</div>
+    <div class="cert-grade-wrap">
+      <div class="cert-grade-card"><div class="cert-grade-num">${grade.toFixed(2)}</div><div class="cert-grade-lbl">Оценка</div></div>
+      <div class="cert-grade-card"><div class="cert-grade-num">${correct}</div><div class="cert-grade-lbl">Точки</div></div>
+    </div>
+    <div class="cert-quality ${quality.c}">${quality.t}</div>
+    <div class="cert-date">📅 ${date}</div>
+    <div class="cert-counter">📝 Решаване №${solveNum}</div>`;
+
+  document.getElementById('certWrap').classList.add('show');
+  document.getElementById('submitBtn').disabled=true;
+  document.getElementById('progressBar').style.width='100%';
+  setTimeout(()=>document.getElementById('certWrap').scrollIntoView({behavior:'smooth',block:'start'}),400);
+}
+
+function retryTest(){generateTest();}
+
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}})},{threshold:0.05});
+function obsAll(){document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));}
+generateTest();
+setTimeout(obsAll,100);
+</script>
+</body>
+</html>
